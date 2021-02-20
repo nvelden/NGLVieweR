@@ -1,0 +1,22 @@
+Package: NGLVieweR
+Title: Interact with protein databank files with the NGL.js JavaScript Library
+Version: 0.1
+Authors@R: c( 
+    person("Niels", "van der Velden", role = c("aut", "cre"), email = "n.s.j.vandervelden@gmail.com"),
+    person("Alexander", "Rose", role = "cph", comment = 'NGL.js library'))
+Description: Provides an 'htmlwidgets' interface to 'NGL.js'.
+    NGLvieweR can be used to visualize and interact with protein databank files in R and Shiny applications.
+    It includes a set of API functions to manipulate the viewer after creation in Shiny.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: htmlwidgets,
+    magrittr,
+    shiny
+URL: https://github.com/nvelden/NGLVieweR
+Suggests: 
+    knitr,
+    rmarkdown

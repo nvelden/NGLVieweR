@@ -1,0 +1,51 @@
+
+template:
+  params:
+    bootswatch: flatly
+
+navbar:
+  type: inverse
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+
+reference:
+- title: All functions
+  contents:
+  - '`addRepresentation`'
+  - '`addSelection`'
+  - '`NGLVieweR-shiny`'
+  - '`NGLVieweR`'
+  - '`NGLVieweR_example`'
+  - '`removeSelection`'
+  - '`setFocus`'
+  - '`setQuality`'
+  - '`setRock`'
+  - '`setSpin`'
+  - '`snapShot`'
+  - '`stageParameters`'
+  - '`updateColor`'
+  - '`updateFocus`'
+  - '`updateFullscreen`'
+  - '`updateRepresentation`'
+  - '`updateRock`'
+  - '`updateSelection`'
+  - '`updateSpin`'
+  - '`updateStage`'
+  - '`updateVisibility`'
+  - '`updateZoomMove`'
+  - '`zoomMove`'
+
