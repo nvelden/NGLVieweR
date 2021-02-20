@@ -28,7 +28,7 @@ addRepresentation("cartoon")
 NGLVieweR("7CID") %>%
 addRepresentation("cartoon")
 ```
-<img src="/man/figures/cartoon_representation.png" class="screenshot" width="50%">
+<img src="NGLVieweR/man/figures/cartoon_representation.png" class="screenshot" width="50%">
 
 ## Functionality 
 
