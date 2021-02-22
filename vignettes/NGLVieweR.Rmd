@@ -126,7 +126,6 @@ Contacts between residues can be added by setting the `addRepresentation()` type
 
 ```{r eval=FALSE}
 NGLVieweR("3RY2") %>% 
-  stageParameters(backgroundColor = "white") %>%
   addRepresentation("cartoon") %>%
   addRepresentation("ball+stick", param = list(name = "biotin", 
                                                colorvalue = "grey", 
