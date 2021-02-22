@@ -87,7 +87,6 @@ HTMLWidgets.widget({
       var writer = new NGL.PdbWriter(o.structure)
       var PDBdata = writer.getData()
       var PDBblob = writer.getBlob()
-      console.log(PDBblob)
 
      Shiny.onInputChange(`${el.id}_PDB`, PDBdata)  
      Shiny.onInputChange(`${el.id}_sequence`, sequence)

@@ -120,6 +120,67 @@ NGLVieweR("7CID") %>%
 knitr::include_graphics("../man/figures/label_representation.png")
 ```
 
+## Contact
+
+Contacts between residues can be added by setting the `addRepresentation()` type parameter to "contact". Using the `sele` parameter contacts for specific residues can be selected. The `filterSele` parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected `sele="5001 or 23 or 27 or 43 or 45 or 128"` and  contacts are only shown between the residues and biotin `filterSele=list("23 or 27 or 43 or 45 or 128", "5001")`. This prevents the display of contacts between residues or water molecules.
+
+```{r eval=FALSE}
+NGLVieweR("3RY2") %>% 
+  stageParameters(backgroundColor = "white") %>%
+  addRepresentation("cartoon") %>%
+  addRepresentation("ball+stick", param = list(name = "biotin", 
+                                               colorvalue = "grey", 
+                                               colorScheme="element", 
+                                               sele="5001")) %>%
+  addRepresentation("ball+stick", param = list(name = "interacting", 
+                                               colorvalue = "green", 
+                                               colorScheme="element", 
+                                               sele="23 or 27 or 43 or 45 or 128")) %>%
+  addRepresentation("contact", param = list(name="contact",
+                                            sele="5001 or 23 or 27 or 43 or 45 or 128",
+                                            filterSele=list("23 or 27 or 45 or 128", "5001"),
+                                            labelVisible=TRUE,
+                                            labelFixedSize=FALSE,
+                                            labelUnit="angstrom", #"", "angstrom", "nm"
+                                            labelSize=2
+                                           #hydrogenBond=TRUE,
+                                           #weakHydrogenBond=FALSE,
+                                           #waterHydrogenBond=FALSE,
+                                           #backboneHydrogenBond=TRUE,
+                                           #hydrophobic=FALSE,
+                                           #halogenBond=TRUE,
+                                           #ionicInteraction=TRUE,
+                                           #metalCoordination=TRUE,
+                                           #cationPi=TRUE,
+                                           #piStacking=TRUE,
+                                           #maxHydrophobicDist= 4.0,
+                                           #maxHbondDist= 3.5,
+                                           #maxHbondSulfurDist= 4.1,
+                                           #maxHbondAccAngle= 45,
+                                           #maxHbondDonAngle= 45,
+                                           #maxHbondAccPlaneAngle= 90,
+                                           #maxHbondDonPlaneAngle= 30,
+                                           #maxPiStackingDist= 5.5,
+                                           #maxPiStackingOffset= 2.0,
+                                           #maxPiStackingAngle= 30,
+                                           #maxCationPiDist= 6.0,
+                                           #maxCationPiOffset= 2.0,
+                                           #maxIonicDist= 5.0,
+                                           #maxHalogenBondDist= 3.5,
+                                           #maxHalogenBondAngle= 30,
+                                           #maxMetalDist= 3.0,
+                                           #refineSaltBridges= TRUE,
+                                           #masterModelIndex= -1,
+                                           #lineOfSightDistFactor= 1
+                                           )
+                    )
+  )
+``` 
+
+```{r, echo=FALSE, out.width="50%"}
+knitr::include_graphics("../man/figures/contact_representation.png")
+```
+
 ## Zoom
 
 You can zoom into specific residues using the `ZoomMove()` function.
@@ -253,7 +314,7 @@ knitr::include_graphics("../man/figures/API_Shiny.gif")
 
 ## Retrieving data from the widget
 
-In a Shiny application one can retrieve information from the widget as inputs based on the NGLVieweR `outputID`. Suppose the `outpudID` is "structure", then the following information can be retrieved:
+In a Shiny application one can retrieve information from the widget as inputs based on the NGLVieweR `outputID`. Suppose the `outputID` is "structure", then the following information can be retrieved:
 
 - input$structure_selection - Get details on the clicked residue.
 - input$structure_sequence - will return the sequence of the PDB file as a character vector.

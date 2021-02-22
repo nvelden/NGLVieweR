@@ -40,4 +40,4 @@ There are functions provided to:
 - Auto rotate/rock
 
 In Shiny apps, you can manipulate the **NGLVieweR** widget after creation using specific "API" calls. Users can for instance add/remove representations, make 
-snapshots, add labels or highlight specific regions. See the [Get started](articles/NGLVieweR.html) section for a complete overview.
+snapshots, add labels or highlight specific regions. See the [Get started](https://nvelden.github.io/NGLVieweR/articles/NGLVieweR.html) section for a complete overview.

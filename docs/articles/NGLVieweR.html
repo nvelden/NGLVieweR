@@ -165,11 +165,67 @@
 <span id="cb7-21"><a href="#cb7-21"></a>  )</span></code></pre></div>
 <p><img src="../man/figures/label_representation.png" width="50%"></p>
 </div>
+<div id="contact" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contact" class="anchor"></a>Contact</h2>
+<p>Contacts between residues can be added by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “contact”. Using the <code>sele</code> parameter contacts for specific residues can be selected. The <code>filterSele</code> parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected <code>sele="5001 or 23 or 27 or 43 or 45 or 128"</code> and contacts are only shown between the residues and biotin <code>filterSele=list("23 or 27 or 43 or 45 or 128", "5001")</code>. This prevents the display of contacts between residues or water molecules.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">NGLVieweR</span>(<span class="st">"3RY2"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">stageParameters</span>(<span class="dt">backgroundColor =</span> <span class="st">"white"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"cartoon"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"ball+stick"</span>, <span class="dt">param =</span> <span class="kw">list</span>(<span class="dt">name =</span> <span class="st">"biotin"</span>, </span>
+<span id="cb8-5"><a href="#cb8-5"></a>                                               <span class="dt">colorvalue =</span> <span class="st">"grey"</span>, </span>
+<span id="cb8-6"><a href="#cb8-6"></a>                                               <span class="dt">colorScheme=</span><span class="st">"element"</span>, </span>
+<span id="cb8-7"><a href="#cb8-7"></a>                                               <span class="dt">sele=</span><span class="st">"5001"</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"ball+stick"</span>, <span class="dt">param =</span> <span class="kw">list</span>(<span class="dt">name =</span> <span class="st">"interacting"</span>, </span>
+<span id="cb8-9"><a href="#cb8-9"></a>                                               <span class="dt">colorvalue =</span> <span class="st">"green"</span>, </span>
+<span id="cb8-10"><a href="#cb8-10"></a>                                               <span class="dt">colorScheme=</span><span class="st">"element"</span>, </span>
+<span id="cb8-11"><a href="#cb8-11"></a>                                               <span class="dt">sele=</span><span class="st">"23 or 27 or 43 or 45 or 128"</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"contact"</span>, <span class="dt">param =</span> <span class="kw">list</span>(<span class="dt">name=</span><span class="st">"contact"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13"></a>                                            <span class="dt">sele=</span><span class="st">"5001 or 23 or 27 or 43 or 45 or 128"</span>,</span>
+<span id="cb8-14"><a href="#cb8-14"></a>                                            <span class="dt">filterSele=</span><span class="kw">list</span>(<span class="st">"23 or 27 or 45 or 128"</span>, <span class="st">"5001"</span>),</span>
+<span id="cb8-15"><a href="#cb8-15"></a>                                            <span class="dt">labelVisible=</span><span class="ot">TRUE</span>,</span>
+<span id="cb8-16"><a href="#cb8-16"></a>                                            <span class="dt">labelFixedSize=</span><span class="ot">FALSE</span>,</span>
+<span id="cb8-17"><a href="#cb8-17"></a>                                            <span class="dt">labelUnit=</span><span class="st">"angstrom"</span>, <span class="co">#"", "angstrom", "nm"</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>                                            <span class="dt">labelSize=</span><span class="dv">2</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>                                           <span class="co">#hydrogenBond=TRUE,</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>                                           <span class="co">#weakHydrogenBond=FALSE,</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a>                                           <span class="co">#waterHydrogenBond=FALSE,</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>                                           <span class="co">#backboneHydrogenBond=TRUE,</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a>                                           <span class="co">#hydrophobic=FALSE,</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a>                                           <span class="co">#halogenBond=TRUE,</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a>                                           <span class="co">#ionicInteraction=TRUE,</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a>                                           <span class="co">#metalCoordination=TRUE,</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>                                           <span class="co">#cationPi=TRUE,</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a>                                           <span class="co">#piStacking=TRUE,</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a>                                           <span class="co">#maxHydrophobicDist= 4.0,</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a>                                           <span class="co">#maxHbondDist= 3.5,</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a>                                           <span class="co">#maxHbondSulfurDist= 4.1,</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a>                                           <span class="co">#maxHbondAccAngle= 45,</span></span>
+<span id="cb8-33"><a href="#cb8-33"></a>                                           <span class="co">#maxHbondDonAngle= 45,</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a>                                           <span class="co">#maxHbondAccPlaneAngle= 90,</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a>                                           <span class="co">#maxHbondDonPlaneAngle= 30,</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a>                                           <span class="co">#maxPiStackingDist= 5.5,</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a>                                           <span class="co">#maxPiStackingOffset= 2.0,</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a>                                           <span class="co">#maxPiStackingAngle= 30,</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a>                                           <span class="co">#maxCationPiDist= 6.0,</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a>                                           <span class="co">#maxCationPiOffset= 2.0,</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a>                                           <span class="co">#maxIonicDist= 5.0,</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a>                                           <span class="co">#maxHalogenBondDist= 3.5,</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a>                                           <span class="co">#maxHalogenBondAngle= 30,</span></span>
+<span id="cb8-44"><a href="#cb8-44"></a>                                           <span class="co">#maxMetalDist= 3.0,</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a>                                           <span class="co">#refineSaltBridges= TRUE,</span></span>
+<span id="cb8-46"><a href="#cb8-46"></a>                                           <span class="co">#masterModelIndex= -1,</span></span>
+<span id="cb8-47"><a href="#cb8-47"></a>                                           <span class="co">#lineOfSightDistFactor= 1</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a>                                           )</span>
+<span id="cb8-49"><a href="#cb8-49"></a>                    )</span>
+<span id="cb8-50"><a href="#cb8-50"></a>  <span class="er">)</span></span></code></pre></div>
+<p><img src="../man/figures/contact_representation.png" width="50%"></p>
+</div>
 <div id="zoom" class="section level2">
 <h2 class="hasAnchor">
 <a href="#zoom" class="anchor"></a>Zoom</h2>
 <p>You can zoom into specific residues using the <code>ZoomMove()</code> function.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colorScheme <span class="op">=</span> <span class="st">"element"</span>,
@@ -195,7 +251,7 @@
 <h2 class="hasAnchor">
 <a href="#shiny" class="anchor"></a>Shiny</h2>
 <p>The <code><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput()</a></code> and <code><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR()</a></code> functions enable you to visualize PDB files within Shiny applications. See the <code><a href="../reference/NGLVieweR_example.html">NGLVieweR_example("basic")</a></code> and “API” for live examples.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
 
@@ -224,7 +280,7 @@
 <h2 class="hasAnchor">
 <a href="#api" class="anchor"></a>API</h2>
 <p>In Shiny apps, you can manipulate the <strong>NGLVieweR</strong> widget after creation using specific “API” calls. You can for instance add or remove representations by refering to their name using the <code><a href="../reference/addSelection.html">addSelection()</a></code> or <code><a href="../reference/removeSelection.html">removeSelection()</a></code> functions.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
 
@@ -291,7 +347,7 @@
 <div id="retrieving-data-from-the-widget" class="section level2">
 <h2 class="hasAnchor">
 <a href="#retrieving-data-from-the-widget" class="anchor"></a>Retrieving data from the widget</h2>
-<p>In a Shiny application one can retrieve information from the widget as inputs based on the NGLVieweR <code>outputID</code>. Suppose the <code>outpudID</code> is “structure”, then the following information can be retrieved:</p>
+<p>In a Shiny application one can retrieve information from the widget as inputs based on the NGLVieweR <code>outputID</code>. Suppose the <code>outputID</code> is “structure”, then the following information can be retrieved:</p>
 <ul>
 <li>input$structure_selection - Get details on the clicked residue.</li>
 <li>input$structure_sequence - will return the sequence of the PDB file as a character vector.</li>
