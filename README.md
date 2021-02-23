@@ -1,6 +1,6 @@
 **NGLVieweR** - Visualize and interact with Protein Data Bank (PDB) files in R and Shiny
 =========================================================
-[Click here](https://nielsvandervelden.com) to view a Shiny application integrating most features of **NGLVieweR**.
+[Click here](https://www.nvelden.com/shiny/shiny_NGLVieweR/) to view a Shiny application integrating most features of **NGLVieweR**.
 
 
 ## Description

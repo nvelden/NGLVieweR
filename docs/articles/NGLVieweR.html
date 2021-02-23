@@ -111,7 +111,7 @@
 <div id="representations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#representations" class="anchor"></a>Representations</h2>
-<p>You can load the structure as a “cartoon”, “ball+stick”, “line”, “surface”, “ribbon”, or any other representation listed in the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual under “StructureRepresentation”. Multiple representations of the same structure can be overlaid by chaining the <code><a href="../reference/addSelection.html">addSelection()</a></code> function. Also see the “structure” tab in the <a href="https://nielsvandervelden.com">demo</a> app for a list of possible representations.</p>
+<p>You can load the structure as a “cartoon”, “ball+stick”, “line”, “surface”, “ribbon”, or any other representation listed in the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual under “StructureRepresentation”. Multiple representations of the same structure can be overlaid by chaining the <code><a href="../reference/addSelection.html">addSelection()</a></code> function. Also see the “structure” tab in the <a href="https://www.nvelden.com/shiny/shiny_NGLVieweR/">demo</a> app for a list of possible representations.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -141,7 +141,7 @@
 <div id="labels" class="section level2">
 <h2 class="hasAnchor">
 <a href="#labels" class="anchor"></a>Labels</h2>
-<p>Labels can be addded by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “label”. For a full list of of options, see the LabelRepresentationParameters section in the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual. Also see the “label” tab in the <a href="https://nielsvandervelden.com">demo</a> app for possible label settings.</p>
+<p>Labels can be addded by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “label”. For a full list of of options, see the LabelRepresentationParameters section in the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual. Also see the “label” tab in the <a href="https://www.nvelden.com/shiny/shiny_NGLVieweR/">demo</a> app for possible label settings.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">NGLVieweR</span>(<span class="st">"7CID"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"cartoon"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"ball+stick"</span>, <span class="dt">param=</span><span class="kw">list</span>(<span class="dt">colorScheme =</span> <span class="st">"element"</span>,</span>
