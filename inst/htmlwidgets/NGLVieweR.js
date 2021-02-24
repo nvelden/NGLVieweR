@@ -15,7 +15,7 @@ HTMLWidgets.widget({
       //In case of Rerendering remove all components
       stage.removeAllComponents();
 
-       //Hande resizing
+      //Hande resizing
       if (HTMLWidgets.shinyMode) {
       $(window).resize(function(){
       stage.handleResize();
@@ -40,7 +40,7 @@ HTMLWidgets.widget({
       }
       if (opts.type == "file"){
         structure = stage.loadFile(new Blob([opts.data], {type: 'text/plain'}), {
-         ext:'pdb'});
+         ext:opts.file_ext});
       }
       
       //Load representation inputs

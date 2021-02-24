@@ -1,4 +1,8 @@
 #
+#' @importFrom tools file_ext
+#' @export
+tools::file_ext
+
 #' Create a NGL viewer
 #'@description
 #' NGLvieweR can be used to visualize and interact with protein structural files in R and Shiny applications.
@@ -7,6 +11,8 @@
 #'The package is based on the \href{http://nglviewer.org/ngl/api/}{NGL.js} Javascript library.
 #'To see the full set of features please read the official manual of NGL.js.
 #'@param data PDB file or PDB entry code
+#'@param format Input format ('.mmcif', '.cif', '.mcif', '.pdb', '.ent', '.pqr', 
+#''.gro', '.sdf', '.sd', '.mol2', '.mmtf'). Needed when no file extension is provided.
 #'@param width,height Must be a valid CSS unit (like \code{'100\%'},
 #' \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #' string and have \code{'px'} appended.
@@ -114,30 +120,38 @@
 #'@importFrom htmlwidgets createWidget
 #'
 #'@export
-NGLVieweR <- function(data, width = NULL, height = NULL, elementId = NULL) {
+NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementId = NULL) {
 
   # Validate data input
   if(missing(data)){
-    stop("NGLVieweR: Please specify a PDB entry code or file location",
+    stop("NGLVieweR: Please specify a PDB entry code or file",
          call. = FALSE)
   }
-  # Validate data input
-  if(!file.exists(data) && grepl("[./:]", data)){
-    stop("NGLVieweR: File does not exist",
+  if(nchar(data) > 8 && tools::file_ext(data) == "" && is.null(format)){
+    stop("NGLVieweR: Please specify the file format",
          call. = FALSE)
   }
+  
   type <- NULL
-  # read PDB file
-  if(file.exists(data)){
+  #Read PDB file
+  if(file.exists(data) && nchar(data) > 8){
+    file_ext <- tools::file_ext(data)
     data <- paste(readLines(data), collapse = "\n")
     type <- "file"
-  } else {
+  #Read directly from R editor  
+  } else if(nchar(data) > 8 && tools::file_ext(data) == ""){
+    type <- "file"
+    file_ext <- format
+    data <- paste(data, collapse = "\n")
+  #Read from PDB code  
+  }  else {
     type <- "code"
     data <- sprintf('rcsb://%s', data)
   }
 
   # forward options using x
   x = list()
+  x$file_ext <- file_ext
   x$data <- data
   x$type <- type
 
