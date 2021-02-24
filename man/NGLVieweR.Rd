@@ -4,10 +4,13 @@
 \alias{NGLVieweR}
 \title{Create a NGL viewer}
 \usage{
-NGLVieweR(data, width = NULL, height = NULL, elementId = NULL)
+NGLVieweR(data, format = NULL, width = NULL, height = NULL, elementId = NULL)
 }
 \arguments{
 \item{data}{PDB file or PDB entry code}
+
+\item{format}{Input format ('.mmcif', '.cif', '.mcif', '.pdb', '.ent', '.pqr',
+'.gro', '.sdf', '.sd', '.mol2', '.mmtf'). Needed when no file extension is provided.}
 
 \item{width, height}{Must be a valid CSS unit (like \code{'100\%'},
 \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
@@ -16,7 +19,7 @@ string and have \code{'px'} appended.}
 \item{elementId}{optional element Id}
 }
 \description{
-NGLvieweR can be used to visualize and interact with protein structural files in R and Shiny applications.
+NGLvieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
 It includes a set of API functions to manipulate the viewer after creation in Shiny.
 }
 \details{

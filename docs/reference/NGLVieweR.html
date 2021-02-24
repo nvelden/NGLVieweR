@@ -42,7 +42,7 @@
   <script src="../extra.js"></script>
 
 <meta property="og:title" content="Create a NGL viewer — NGLVieweR" />
-<meta property="og:description" content="NGLvieweR can be used to visualize and interact with protein structural files in R and Shiny applications.
+<meta property="og:description" content="NGLvieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
 It includes a set of API functions to manipulate the viewer after creation in Shiny." />
 
 
@@ -120,11 +120,11 @@ It includes a set of API functions to manipulate the viewer after creation in Sh
     </div>
 
     <div class="ref-description">
-    <p>NGLvieweR can be used to visualize and interact with protein structural files in R and Shiny applications.
+    <p>NGLvieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
 It includes a set of API functions to manipulate the viewer after creation in Shiny.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>NGLVieweR</span><span class='op'>(</span><span class='va'>data</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, height <span class='op'>=</span> <span class='cn'>NULL</span>, elementId <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>NGLVieweR</span><span class='op'>(</span><span class='va'>data</span>, format <span class='op'>=</span> <span class='cn'>NULL</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, height <span class='op'>=</span> <span class='cn'>NULL</span>, elementId <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,6 +132,11 @@ It includes a set of API functions to manipulate the viewer after creation in Sh
     <tr>
       <th>data</th>
       <td><p>PDB file or PDB entry code</p></td>
+    </tr>
+    <tr>
+      <th>format</th>
+      <td><p>Input format ('.mmcif', '.cif', '.mcif', '.pdb', '.ent', '.pqr',
+'.gro', '.sdf', '.sd', '.mol2', '.mmtf'). Needed when no file extension is provided.</p></td>
     </tr>
     <tr>
       <th>width, height</th>

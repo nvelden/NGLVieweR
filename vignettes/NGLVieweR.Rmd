@@ -20,7 +20,7 @@ remotes::install_github("nvelden/NGLVieweR")
 
 ## Loading PDB files
 
-You can load a PDB file directly or use a PDB code of a structure on [RCSB.org](https://www.rcsb.org/). The below minimal example loads the PDB file and displays the structure in a "cartoon" representation.
+You can load a PDB (or and other supported format) directly or use a PDB code of a structure on [RCSB.org](https://www.rcsb.org/). The below minimal example loads the PDB file and displays the structure in a "cartoon" representation.
 
 ```{r eval=FALSE}
 #Load local pdb file
@@ -32,10 +32,12 @@ NGLVieweR("7CID") %>%
 addRepresentation("cartoon")
 ```
 
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("../man/figures/cartoon_representation.png")
+```{r Loading, echo=FALSE}
+library(NGLVieweR)
+#Load local pdb file
+NGLVieweR("7CID") %>%
+addRepresentation("cartoon")
 ```
-
 You can view a "basic" **NGLVieweR** Shiny application by running the below code. Use "API" for an example using API calls or any of the function names (e.g "addSelection"") for function specific examples.
 
 ```{r eval=FALSE}
@@ -54,13 +56,9 @@ addRepresentation("cartoon") %>%
 addRepresentation("ball+stick")
 ```
 
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("../man/figures/overlay_representation.png")
-```
-
 You can alter the appearance of select residues using the `param` argument. For a full list of options see the [NGL.js](http://nglviewer.org/ngl/api/) "RepresentationParameters" and the "Selection language" section.
 
-```{r eval=FALSE}
+```{r representations}
 NGLVieweR("7CID") %>%
   addRepresentation("cartoon", param=list(colorScheme = "residueindex")) %>%
   addRepresentation("ball+stick", param=list(sele="233-248", 
@@ -70,29 +68,27 @@ NGLVieweR("7CID") %>%
                                           opacity=0.1))
 ``` 
 
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("../man/figures/cartoon_parameters.png")
-```
-
 ## Stage
 
-You can alter the background color or set the zoom or rotation speed using the `stageParameters()` function. For a full list of options, see the "StageParameters" method in the official NGL.js manual. **Note**: Changes in background color are not visible in the RStudio viewer. 
+You can alter the background color or set the zoom or rotation speed using the `stageParameters()` function. For a full list of options, see the "StageParameters" method in the official NGL.js manual. In additions there are specific functions to set:
 
-```{r eval=FALSE}
+- **Animation**: `setRock()` or `setSpin()` 
+- **Focus**: `setFocus()`
+- **Quality**: `setQuality()`
+
+**Note**: Changes in background color are not visible in the RStudio viewer. 
+
+```{r stage}
 NGLVieweR("7CID") %>%
  stageParameters(backgroundColor = "white", zoomSpeed = 1) %>%
- addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
+ addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex")) %>%
+ setSpin()
 ``` 
-
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("../man/figures/stage_parameters.png")
-```
-
 ## Labels
 
 Labels can be addded by setting the `addRepresentation()` type parameter to "label". For a full list of of options, see the LabelRepresentationParameters section in the [NGL.js](http://nglviewer.org/ngl/api/) manual. Also see the "label" tab in the [demo](https://www.nvelden.com/shiny/shiny_NGLVieweR/) app for possible label settings.  
 
-```{r eval=FALSE}
+```{r labels}
 NGLVieweR("7CID") %>%
   addRepresentation("cartoon") %>%
   addRepresentation("ball+stick", param=list(colorScheme = "element",
@@ -112,29 +108,54 @@ NGLVieweR("7CID") %>%
                                         radiusSize = 1.5, #Label size
                                         showBackground=FALSE
                                         #backgroundColor="black",
-                                        #backgroundOpacity=0.5,)
+                                        #backgroundOpacity=0.5
+                                        )
   )
 ``` 
+## Zoom
 
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("../man/figures/label_representation.png")
-```
+You can zoom into specific residues using the `ZoomMove()` function.
+
+```{r zoom}
+NGLVieweR("7CID") %>%
+  addRepresentation("cartoon") %>%
+  addRepresentation("ball+stick", param=list(colorScheme = "element",
+                                             colorValue = "yellow",
+                                             sele = "20")) %>%
+  addRepresentation("label", param=list(sele="20",
+                                        labelType="format",
+                                        labelFormat='[%(resname)s]%(resno)s', #or enter custom text
+                                        labelGrouping="residue", #or "atom" (eg. sele = "20:A.CB")
+                                        color="white",
+                                        xOffset = 1,
+                                        fixedSize = TRUE,
+                                        radiusType = 1,
+                                        radiusSize = 1.5) #Label size
+  ) %>%
+  zoomMove(center = "20", 
+           zoom = "20", 
+           duration = 0, #animation time in ms 
+           z_offSet = -20)
+``` 
 
 ## Contact
 
 Contacts between residues can be added by setting the `addRepresentation()` type parameter to "contact". Using the `sele` parameter contacts for specific residues can be selected. The `filterSele` parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected `sele="5001 or 23 or 27 or 43 or 45 or 128"` and  contacts are only shown between the residues and biotin `filterSele=list("23 or 27 or 43 or 45 or 128", "5001")`. This prevents the display of contacts between residues or water molecules.
 
-```{r eval=FALSE}
+```{r contact}
 NGLVieweR("3RY2") %>% 
   addRepresentation("cartoon") %>%
-  addRepresentation("ball+stick", param = list(name = "biotin", 
+    addRepresentation("ball+stick", param = list(name = "biotin", 
                                                colorvalue = "grey", 
                                                colorScheme="element", 
                                                sele="5001")) %>%
   addRepresentation("ball+stick", param = list(name = "interacting", 
-                                               colorvalue = "green", 
                                                colorScheme="element", 
+                                               colorValue = "green", 
                                                sele="23 or 27 or 43 or 45 or 128")) %>%
+  zoomMove(center = "27:B", 
+           zoom = "27:B", 
+           z_offSet = -20) %>%
   addRepresentation("contact", param = list(name="contact",
                                             sele="5001 or 23 or 27 or 43 or 45 or 128",
                                             filterSele=list("23 or 27 or 45 or 128", "5001"),
@@ -172,44 +193,8 @@ NGLVieweR("3RY2") %>%
                                            #masterModelIndex= -1,
                                            #lineOfSightDistFactor= 1
                                            )
-                    )
-  )
+                   )
 ``` 
-
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("../man/figures/contact_representation.png")
-```
-
-## Zoom
-
-You can zoom into specific residues using the `ZoomMove()` function.
-
-```{r eval=FALSE}
-NGLVieweR("7CID") %>%
-  addRepresentation("cartoon") %>%
-  addRepresentation("ball+stick", param=list(colorScheme = "element",
-                                             colorValue = "yellow",
-                                             sele = "20")) %>%
-  addRepresentation("label", param=list(sele="20",
-                                        labelType="format",
-                                        labelFormat='[%(resname)s]%(resno)s', #or enter custom text
-                                        labelGrouping="residue", #or "atom" (eg. sele = "20:A.CB")
-                                        color="white",
-                                        xOffset = 1,
-                                        fixedSize = TRUE,
-                                        radiusType = 1,
-                                        radiusSize = 1.5) #Label size
-  ) %>%
-  zoomMove(center = "20", 
-           zoom = "20", 
-           duration = 0, #animation time in ms 
-           z_offSet = -20)
-``` 
-
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("../man/figures/zoomMove.png")
-```
-
 ## Shiny
 
 The `NGLVieweROutput()` and `renderNGLVieweR()` functions enable you to visualize PDB files within Shiny applications. See the `NGLVieweR_example("basic")` and "API" for live examples.
@@ -239,7 +224,7 @@ server = function(input, output) {
 shinyApp(ui, server)
 ``` 
 
-```{r, echo=FALSE, out.width="50%"}
+```{r, echo=FALSE}
 knitr::include_graphics("../man/figures/basic_shiny.gif")
 ```
 
@@ -292,7 +277,7 @@ server = function(input, output) {
 shinyApp(ui, server)
 ```
 
-```{r, echo=FALSE, out.width="50%"}
+```{r, echo=FALSE}
 knitr::include_graphics("../man/figures/API_Shiny.gif")
 ```
 

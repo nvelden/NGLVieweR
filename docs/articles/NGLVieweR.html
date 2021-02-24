@@ -68,7 +68,7 @@
 
       
 
-      </header><script src="NGLVieweR_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="NGLVieweR_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="NGLVieweR_files/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="NGLVieweR_files/NGLVieweR-2.0.0/./lib/NGL-2.0.0/ngl.js"></script><script src="NGLVieweR_files/helperFunctions-1/./lib/helperFunctions.js"></script><script src="NGLVieweR_files/NGLVieweR-binding-0.1/NGLVieweR.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>NGLVieweR</h1>
@@ -92,7 +92,7 @@
 <div id="loading-pdb-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#loading-pdb-files" class="anchor"></a>Loading PDB files</h2>
-<p>You can load a PDB file directly or use a PDB code of a structure on <a href="https://www.rcsb.org/">RCSB.org</a>. The below minimal example loads the PDB file and displays the structure in a “cartoon” representation.</p>
+<p>You can load a PDB (or and other supported format) directly or use a PDB code of a structure on <a href="https://www.rcsb.org/">RCSB.org</a>. The below minimal example loads the PDB file and displays the structure in a “cartoon” representation.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Load local pdb file</span>
 <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"C:/7CID.pdb"</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -101,8 +101,8 @@
 <span class="co">#Load protein by PDB code</span>
 <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/cartoon_representation.png" width="50%"></p>
-<p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application by running the below code. Use “API” for an example using API calls or any of the function names (e.g “addSelection”") for function specific examples.</p>
+<div id="htmlwidget-b080884bd79ae9d5df66" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b080884bd79ae9d5df66">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script><p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application by running the below code. Use “API” for an example using API calls or any of the function names (e.g “addSelection”") for function specific examples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
@@ -116,7 +116,6 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/overlay_representation.png" width="50%"></p>
 <p>You can alter the appearance of select residues using the <code>param</code> argument. For a full list of options see the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> “RepresentationParameters” and the “Selection language” section.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -126,105 +125,68 @@
                                              colorScheme<span class="op">=</span><span class="st">"element"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"surface"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colorValue <span class="op">=</span> <span class="st">"white"</span>, 
                                           opacity<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/cartoon_parameters.png" width="50%"></p>
+<div id="htmlwidget-96d237fdfab8e16a4dfc" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-96d237fdfab8e16a4dfc">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","surface"],"values":[{"colorScheme":"residueindex"},{"sele":"233-248","colorValue":"red","colorScheme":"element"},{"colorValue":"white","opacity":0.1}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="stage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stage" class="anchor"></a>Stage</h2>
-<p>You can alter the background color or set the zoom or rotation speed using the <code><a href="../reference/stageParameters.html">stageParameters()</a></code> function. For a full list of options, see the “StageParameters” method in the official NGL.js manual. <strong>Note</strong>: Changes in background color are not visible in the RStudio viewer.</p>
+<p>You can alter the background color or set the zoom or rotation speed using the <code><a href="../reference/stageParameters.html">stageParameters()</a></code> function. For a full list of options, see the “StageParameters” method in the official NGL.js manual. In additions there are specific functions to set:</p>
+<ul>
+<li>
+<strong>Animation</strong>: <code><a href="../reference/setRock.html">setRock()</a></code> or <code><a href="../reference/setSpin.html">setSpin()</a></code>
+</li>
+<li>
+<strong>Focus</strong>: <code><a href="../reference/setFocus.html">setFocus()</a></code>
+</li>
+<li>
+<strong>Quality</strong>: <code><a href="../reference/setQuality.html">setQuality()</a></code>
+</li>
+</ul>
+<p><strong>Note</strong>: Changes in background color are not visible in the RStudio viewer.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
  <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="st">"white"</span>, zoomSpeed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
- <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme<span class="op">=</span><span class="st">"residueindex"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/stage_parameters.png" width="50%"></p>
+ <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme<span class="op">=</span><span class="st">"residueindex"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+ <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div id="htmlwidget-7910f547958a962f39e3" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7910f547958a962f39e3">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":{"backgroundColor":"white","zoomSpeed":1},"addRepresentation":{"type":["cartoon"],"values":[{"name":"cartoon","colorScheme":"residueindex"}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":true,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="labels" class="section level2">
 <h2 class="hasAnchor">
 <a href="#labels" class="anchor"></a>Labels</h2>
 <p>Labels can be addded by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “label”. For a full list of of options, see the LabelRepresentationParameters section in the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual. Also see the “label” tab in the <a href="https://www.nvelden.com/shiny/shiny_NGLVieweR/">demo</a> app for possible label settings.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">NGLVieweR</span>(<span class="st">"7CID"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"cartoon"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"ball+stick"</span>, <span class="dt">param=</span><span class="kw">list</span>(<span class="dt">colorScheme =</span> <span class="st">"element"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4"></a>                                             <span class="dt">colorValue =</span> <span class="st">"yellow"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5"></a>                                             <span class="dt">sele =</span> <span class="st">"20"</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"label"</span>, <span class="dt">param=</span><span class="kw">list</span>(<span class="dt">sele=</span><span class="st">"20"</span>,</span>
-<span id="cb7-7"><a href="#cb7-7"></a>                                        <span class="dt">labelType=</span><span class="st">"format"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8"></a>                                        <span class="dt">labelFormat=</span><span class="st">'[%(resname)s]%(resno)s'</span>, <span class="co">#or enter custom text</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>                                        <span class="dt">labelGrouping=</span><span class="st">"residue"</span>, <span class="co">#or "atom" (eg. sele = "20:A.CB")</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>                                        <span class="dt">color=</span><span class="st">"white"</span>,</span>
-<span id="cb7-11"><a href="#cb7-11"></a>                                        <span class="dt">fontFamiliy=</span><span class="st">"sans-serif"</span>,</span>
-<span id="cb7-12"><a href="#cb7-12"></a>                                        <span class="dt">xOffset =</span> <span class="dv">1</span>,</span>
-<span id="cb7-13"><a href="#cb7-13"></a>                                        <span class="dt">yOffset =</span> <span class="dv">0</span>,</span>
-<span id="cb7-14"><a href="#cb7-14"></a>                                        <span class="dt">zOffset =</span> <span class="dv">0</span>,</span>
-<span id="cb7-15"><a href="#cb7-15"></a>                                        <span class="dt">fixedSize =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb7-16"><a href="#cb7-16"></a>                                        <span class="dt">radiusType =</span> <span class="dv">1</span>,</span>
-<span id="cb7-17"><a href="#cb7-17"></a>                                        <span class="dt">radiusSize =</span> <span class="fl">1.5</span>, <span class="co">#Label size</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a>                                        <span class="dt">showBackground=</span><span class="ot">FALSE</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a>                                        <span class="co">#backgroundColor="black",</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a>                                        <span class="co">#backgroundOpacity=0.5,)</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a>  )</span></code></pre></div>
-<p><img src="../man/figures/label_representation.png" width="50%"></p>
-</div>
-<div id="contact" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contact" class="anchor"></a>Contact</h2>
-<p>Contacts between residues can be added by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “contact”. Using the <code>sele</code> parameter contacts for specific residues can be selected. The <code>filterSele</code> parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected <code>sele="5001 or 23 or 27 or 43 or 45 or 128"</code> and contacts are only shown between the residues and biotin <code>filterSele=list("23 or 27 or 43 or 45 or 128", "5001")</code>. This prevents the display of contacts between residues or water molecules.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">NGLVieweR</span>(<span class="st">"3RY2"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"cartoon"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"ball+stick"</span>, <span class="dt">param =</span> <span class="kw">list</span>(<span class="dt">name =</span> <span class="st">"biotin"</span>, </span>
-<span id="cb8-4"><a href="#cb8-4"></a>                                               <span class="dt">colorvalue =</span> <span class="st">"grey"</span>, </span>
-<span id="cb8-5"><a href="#cb8-5"></a>                                               <span class="dt">colorScheme=</span><span class="st">"element"</span>, </span>
-<span id="cb8-6"><a href="#cb8-6"></a>                                               <span class="dt">sele=</span><span class="st">"5001"</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"ball+stick"</span>, <span class="dt">param =</span> <span class="kw">list</span>(<span class="dt">name =</span> <span class="st">"interacting"</span>, </span>
-<span id="cb8-8"><a href="#cb8-8"></a>                                               <span class="dt">colorvalue =</span> <span class="st">"green"</span>, </span>
-<span id="cb8-9"><a href="#cb8-9"></a>                                               <span class="dt">colorScheme=</span><span class="st">"element"</span>, </span>
-<span id="cb8-10"><a href="#cb8-10"></a>                                               <span class="dt">sele=</span><span class="st">"23 or 27 or 43 or 45 or 128"</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="st">  </span><span class="kw">addRepresentation</span>(<span class="st">"contact"</span>, <span class="dt">param =</span> <span class="kw">list</span>(<span class="dt">name=</span><span class="st">"contact"</span>,</span>
-<span id="cb8-12"><a href="#cb8-12"></a>                                            <span class="dt">sele=</span><span class="st">"5001 or 23 or 27 or 43 or 45 or 128"</span>,</span>
-<span id="cb8-13"><a href="#cb8-13"></a>                                            <span class="dt">filterSele=</span><span class="kw">list</span>(<span class="st">"23 or 27 or 45 or 128"</span>, <span class="st">"5001"</span>),</span>
-<span id="cb8-14"><a href="#cb8-14"></a>                                            <span class="dt">labelVisible=</span><span class="ot">TRUE</span>,</span>
-<span id="cb8-15"><a href="#cb8-15"></a>                                            <span class="dt">labelFixedSize=</span><span class="ot">FALSE</span>,</span>
-<span id="cb8-16"><a href="#cb8-16"></a>                                            <span class="dt">labelUnit=</span><span class="st">"angstrom"</span>, <span class="co">#"", "angstrom", "nm"</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a>                                            <span class="dt">labelSize=</span><span class="dv">2</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a>                                           <span class="co">#hydrogenBond=TRUE,</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a>                                           <span class="co">#weakHydrogenBond=FALSE,</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a>                                           <span class="co">#waterHydrogenBond=FALSE,</span></span>
-<span id="cb8-21"><a href="#cb8-21"></a>                                           <span class="co">#backboneHydrogenBond=TRUE,</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a>                                           <span class="co">#hydrophobic=FALSE,</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a>                                           <span class="co">#halogenBond=TRUE,</span></span>
-<span id="cb8-24"><a href="#cb8-24"></a>                                           <span class="co">#ionicInteraction=TRUE,</span></span>
-<span id="cb8-25"><a href="#cb8-25"></a>                                           <span class="co">#metalCoordination=TRUE,</span></span>
-<span id="cb8-26"><a href="#cb8-26"></a>                                           <span class="co">#cationPi=TRUE,</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a>                                           <span class="co">#piStacking=TRUE,</span></span>
-<span id="cb8-28"><a href="#cb8-28"></a>                                           <span class="co">#maxHydrophobicDist= 4.0,</span></span>
-<span id="cb8-29"><a href="#cb8-29"></a>                                           <span class="co">#maxHbondDist= 3.5,</span></span>
-<span id="cb8-30"><a href="#cb8-30"></a>                                           <span class="co">#maxHbondSulfurDist= 4.1,</span></span>
-<span id="cb8-31"><a href="#cb8-31"></a>                                           <span class="co">#maxHbondAccAngle= 45,</span></span>
-<span id="cb8-32"><a href="#cb8-32"></a>                                           <span class="co">#maxHbondDonAngle= 45,</span></span>
-<span id="cb8-33"><a href="#cb8-33"></a>                                           <span class="co">#maxHbondAccPlaneAngle= 90,</span></span>
-<span id="cb8-34"><a href="#cb8-34"></a>                                           <span class="co">#maxHbondDonPlaneAngle= 30,</span></span>
-<span id="cb8-35"><a href="#cb8-35"></a>                                           <span class="co">#maxPiStackingDist= 5.5,</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a>                                           <span class="co">#maxPiStackingOffset= 2.0,</span></span>
-<span id="cb8-37"><a href="#cb8-37"></a>                                           <span class="co">#maxPiStackingAngle= 30,</span></span>
-<span id="cb8-38"><a href="#cb8-38"></a>                                           <span class="co">#maxCationPiDist= 6.0,</span></span>
-<span id="cb8-39"><a href="#cb8-39"></a>                                           <span class="co">#maxCationPiOffset= 2.0,</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a>                                           <span class="co">#maxIonicDist= 5.0,</span></span>
-<span id="cb8-41"><a href="#cb8-41"></a>                                           <span class="co">#maxHalogenBondDist= 3.5,</span></span>
-<span id="cb8-42"><a href="#cb8-42"></a>                                           <span class="co">#maxHalogenBondAngle= 30,</span></span>
-<span id="cb8-43"><a href="#cb8-43"></a>                                           <span class="co">#maxMetalDist= 3.0,</span></span>
-<span id="cb8-44"><a href="#cb8-44"></a>                                           <span class="co">#refineSaltBridges= TRUE,</span></span>
-<span id="cb8-45"><a href="#cb8-45"></a>                                           <span class="co">#masterModelIndex= -1,</span></span>
-<span id="cb8-46"><a href="#cb8-46"></a>                                           <span class="co">#lineOfSightDistFactor= 1</span></span>
-<span id="cb8-47"><a href="#cb8-47"></a>                                           )</span>
-<span id="cb8-48"><a href="#cb8-48"></a>                    )</span>
-<span id="cb8-49"><a href="#cb8-49"></a>  <span class="er">)</span></span></code></pre></div>
-<p><img src="../man/figures/contact_representation.png" width="50%"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colorScheme <span class="op">=</span> <span class="st">"element"</span>,
+                                             colorValue <span class="op">=</span> <span class="st">"yellow"</span>,
+                                             sele <span class="op">=</span> <span class="st">"20"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"label"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sele<span class="op">=</span><span class="st">"20"</span>,
+                                        labelType<span class="op">=</span><span class="st">"format"</span>,
+                                        labelFormat<span class="op">=</span><span class="st">'[%(resname)s]%(resno)s'</span>, <span class="co">#or enter custom text</span>
+                                        labelGrouping<span class="op">=</span><span class="st">"residue"</span>, <span class="co">#or "atom" (eg. sele = "20:A.CB")</span>
+                                        color<span class="op">=</span><span class="st">"white"</span>,
+                                        fontFamiliy<span class="op">=</span><span class="st">"sans-serif"</span>,
+                                        xOffset <span class="op">=</span> <span class="fl">1</span>,
+                                        yOffset <span class="op">=</span> <span class="fl">0</span>,
+                                        zOffset <span class="op">=</span> <span class="fl">0</span>,
+                                        fixedSize <span class="op">=</span> <span class="cn">TRUE</span>,
+                                        radiusType <span class="op">=</span> <span class="fl">1</span>,
+                                        radiusSize <span class="op">=</span> <span class="fl">1.5</span>, <span class="co">#Label size</span>
+                                        showBackground<span class="op">=</span><span class="cn">FALSE</span>
+                                        <span class="co">#backgroundColor="black",</span>
+                                        <span class="co">#backgroundOpacity=0.5</span>
+                                        <span class="op">)</span>
+  <span class="op">)</span></code></pre></div>
+<div id="htmlwidget-5bea75dd0ba85281eb4f" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5bea75dd0ba85281eb4f">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","fontFamiliy":"sans-serif","xOffset":1,"yOffset":0,"zOffset":0,"fixedSize":true,"radiusType":1,"radiusSize":1.5,"showBackground":false}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="zoom" class="section level2">
 <h2 class="hasAnchor">
 <a href="#zoom" class="anchor"></a>Zoom</h2>
 <p>You can zoom into specific residues using the <code>ZoomMove()</code> function.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colorScheme <span class="op">=</span> <span class="st">"element"</span>,
@@ -244,7 +206,67 @@
            zoom <span class="op">=</span> <span class="st">"20"</span>, 
            duration <span class="op">=</span> <span class="fl">0</span>, <span class="co">#animation time in ms </span>
            z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/zoomMove.png" width="50%"></p>
+<div id="htmlwidget-b7923b63785ba4dc512b" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b7923b63785ba4dc512b">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","xOffset":1,"fixedSize":true,"radiusType":1,"radiusSize":1.5}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"20","zoom":"20","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="contact" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contact" class="anchor"></a>Contact</h2>
+<p>Contacts between residues can be added by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “contact”. Using the <code>sele</code> parameter contacts for specific residues can be selected. The <code>filterSele</code> parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected <code>sele="5001 or 23 or 27 or 43 or 45 or 128"</code> and contacts are only shown between the residues and biotin <code>filterSele=list("23 or 27 or 43 or 45 or 128", "5001")</code>. This prevents the display of contacts between residues or water molecules.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"3RY2"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"biotin"</span>, 
+                                               colorvalue <span class="op">=</span> <span class="st">"grey"</span>, 
+                                               colorScheme<span class="op">=</span><span class="st">"element"</span>, 
+                                               sele<span class="op">=</span><span class="st">"5001"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"interacting"</span>, 
+                                               colorScheme<span class="op">=</span><span class="st">"element"</span>, 
+                                               colorValue <span class="op">=</span> <span class="st">"green"</span>, 
+                                               sele<span class="op">=</span><span class="st">"23 or 27 or 43 or 45 or 128"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/zoomMove.html">zoomMove</a></span><span class="op">(</span>center <span class="op">=</span> <span class="st">"27:B"</span>, 
+           zoom <span class="op">=</span> <span class="st">"27:B"</span>, 
+           z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"contact"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"contact"</span>,
+                                            sele<span class="op">=</span><span class="st">"5001 or 23 or 27 or 43 or 45 or 128"</span>,
+                                            filterSele<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"23 or 27 or 45 or 128"</span>, <span class="st">"5001"</span><span class="op">)</span>,
+                                            labelVisible<span class="op">=</span><span class="cn">TRUE</span>,
+                                            labelFixedSize<span class="op">=</span><span class="cn">FALSE</span>,
+                                            labelUnit<span class="op">=</span><span class="st">"angstrom"</span>, <span class="co">#"", "angstrom", "nm"</span>
+                                            labelSize<span class="op">=</span><span class="fl">2</span>
+                                           <span class="co">#hydrogenBond=TRUE,</span>
+                                           <span class="co">#weakHydrogenBond=FALSE,</span>
+                                           <span class="co">#waterHydrogenBond=FALSE,</span>
+                                           <span class="co">#backboneHydrogenBond=TRUE,</span>
+                                           <span class="co">#hydrophobic=FALSE,</span>
+                                           <span class="co">#halogenBond=TRUE,</span>
+                                           <span class="co">#ionicInteraction=TRUE,</span>
+                                           <span class="co">#metalCoordination=TRUE,</span>
+                                           <span class="co">#cationPi=TRUE,</span>
+                                           <span class="co">#piStacking=TRUE,</span>
+                                           <span class="co">#maxHydrophobicDist= 4.0,</span>
+                                           <span class="co">#maxHbondDist= 3.5,</span>
+                                           <span class="co">#maxHbondSulfurDist= 4.1,</span>
+                                           <span class="co">#maxHbondAccAngle= 45,</span>
+                                           <span class="co">#maxHbondDonAngle= 45,</span>
+                                           <span class="co">#maxHbondAccPlaneAngle= 90,</span>
+                                           <span class="co">#maxHbondDonPlaneAngle= 30,</span>
+                                           <span class="co">#maxPiStackingDist= 5.5,</span>
+                                           <span class="co">#maxPiStackingOffset= 2.0,</span>
+                                           <span class="co">#maxPiStackingAngle= 30,</span>
+                                           <span class="co">#maxCationPiDist= 6.0,</span>
+                                           <span class="co">#maxCationPiOffset= 2.0,</span>
+                                           <span class="co">#maxIonicDist= 5.0,</span>
+                                           <span class="co">#maxHalogenBondDist= 3.5,</span>
+                                           <span class="co">#maxHalogenBondAngle= 30,</span>
+                                           <span class="co">#maxMetalDist= 3.0,</span>
+                                           <span class="co">#refineSaltBridges= TRUE,</span>
+                                           <span class="co">#masterModelIndex= -1,</span>
+                                           <span class="co">#lineOfSightDistFactor= 1</span>
+                                           <span class="op">)</span>
+                   <span class="op">)</span></code></pre></div>
+<div id="htmlwidget-d16692536f6eb5689ae6" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d16692536f6eb5689ae6">{"x":{"data":"rcsb://3RY2","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","ball+stick","contact"],"values":[[],{"name":"biotin","colorvalue":"grey","colorScheme":"element","sele":"5001"},{"name":"interacting","colorScheme":"element","colorValue":"green","sele":"23 or 27 or 43 or 45 or 128"},{"name":"contact","sele":"5001 or 23 or 27 or 43 or 45 or 128","filterSele":["23 or 27 or 45 or 128","5001"],"labelVisible":true,"labelFixedSize":false,"labelUnit":"angstrom","labelSize":2}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"27:B","zoom":"27:B","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="shiny" class="section level2">
 <h2 class="hasAnchor">
@@ -273,7 +295,7 @@
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/basic_shiny.gif" width="50%"></p>
+<p><img src="../man/figures/basic_shiny.gif"><!-- --></p>
 </div>
 <div id="api" class="section level2">
 <h2 class="hasAnchor">
@@ -322,7 +344,7 @@
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/API_Shiny.gif" width="50%"></p>
+<p><img src="../man/figures/API_Shiny.gif"><!-- --></p>
 <div id="possible-api-functions-are" class="section level3">
 <h3 class="hasAnchor">
 <a href="#possible-api-functions-are" class="anchor"></a>Possible API functions are:</h3>

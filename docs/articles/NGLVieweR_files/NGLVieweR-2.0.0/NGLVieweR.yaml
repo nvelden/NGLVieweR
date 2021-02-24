@@ -1,0 +1,12 @@
+# (uncomment to add a dependency)
+ dependencies:
+  - name: NGLVieweR
+    version: 2.0.0
+    src: htmlwidgets
+    script: ./lib/NGL-2.0.0/ngl.js
+    stylesheet:
+  - name: helperFunctions
+    version: 1.0
+    src: htmlwidgets
+    script: ./lib/helperFunctions.js
+    stylesheet:

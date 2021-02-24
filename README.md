@@ -1,11 +1,11 @@
-**NGLVieweR** - Visualize and interact with Protein Data Bank (PDB) files in R and Shiny
+**NGLVieweR** - Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny
 =========================================================
 [Click here](https://www.nvelden.com/shiny/shiny_NGLVieweR/) to view a Shiny application integrating most features of **NGLVieweR**.
 
 
 ## Description
 
-**NGLvieweR** provides an R interface to the [NGL.js](http://nglviewer.org/ngl/api/) JavaScript library. It can be used to visualize and interact with protein data bank files (PDB) in R and Shiny applications. It includes a set of API functions to manipulate the viewer after creation and makes it possible to retrieve data from the visualization into R.   
+**NGLvieweR** provides an R interface to the [NGL.js](http://nglviewer.org/ngl/api/) JavaScript library. It can be used to visualize and interact with protein data bank (PDB) and structural files in R and Shiny applications. It includes a set of API functions to manipulate the viewer after creation and makes it possible to retrieve data from the visualization into R.   
 
 ## Installation
 
@@ -17,7 +17,7 @@ remotes::install_github("nvelden/NGLVieweR")
 
 ## Basics
 
-You can load a PDB file directly or use a PDB code of a structure on [RCSB.org](https://www.rcsb.org/). The below minimal example loads the PDB file and displays the structure in a "cartoon" representation.
+You can load a PDB (or any other supported structural file) directly or use a PDB code of a structure on [RCSB.org](https://www.rcsb.org/). The below minimal example loads the PDB file and displays the structure in a "cartoon" representation.
 
 ``` r
 #Load local pdb file
