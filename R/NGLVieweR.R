@@ -133,9 +133,12 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
   }
   
   type <- NULL
+  file_ext <- format
   #Read PDB file
   if(file.exists(data) && nchar(data) > 8){
+   if(is.null(format)){  
     file_ext <- tools::file_ext(data)
+   }
     data <- paste(readLines(data), collapse = "\n")
     type <- "file"
   #Read directly from R editor  
@@ -148,7 +151,6 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
     type <- "code"
     data <- sprintf('rcsb://%s', data)
   }
-
   # forward options using x
   x = list()
   x$file_ext <- file_ext
