@@ -9,8 +9,8 @@ NGLVieweR(data, format = NULL, width = NULL, height = NULL, elementId = NULL)
 \arguments{
 \item{data}{PDB file or PDB entry code}
 
-\item{format}{Input format ('.mmcif', '.cif', '.mcif', '.pdb', '.ent', '.pqr',
-'.gro', '.sdf', '.sd', '.mol2', '.mmtf'). Needed when no file extension is provided.}
+\item{format}{Input format (.mmcif, .cif, .mcif, .pdb, .ent, .pqr,
+.gro, .sdf, .sd, .mol2, .mmtf). Needed when no file extension is provided.}
 
 \item{width, height}{Must be a valid CSS unit (like \code{'100\%'},
 \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a

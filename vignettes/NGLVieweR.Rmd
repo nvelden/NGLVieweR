@@ -46,6 +46,48 @@ library(shiny)
 NGLVieweR_example("basic") 
 ```
 
+## Loading other structural files
+
+This package has been developed and tested using PDB files but supports loading of any of the following structural files: .mmcif, .cif, .mcif, .ent, .pqr, .gro, .sdf, .sd, .mol2 and .mmtf.
+
+By default **NGLVieweR** guesses the file format from the file extension. Use the `format` parameter in case no or the wrong file extension is provided.
+
+```{r fileformat}
+benz <- "702
+  -OEChem-02271511112D
+
+  9  8  0     0  0  0  0  0  0999 V2000
+    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  1  0  0  0  0
+  1  9  1  0  0  0  0
+  2  3  1  0  0  0  0
+  2  4  1  0  0  0  0
+  2  5  1  0  0  0  0
+  3  6  1  0  0  0  0
+  3  7  1  0  0  0  0
+  3  8  1  0  0  0  0
+M  END
+> <ID>
+00001
+
+> <DESCRIPTION>
+Solvent produced by yeast-based fermentation of sugars.
+
+$$$$
+"
+
+NGLVieweR(benz, format="sdf") %>%
+  addRepresentation("ball+stick")
+  
+```
 ## Representations
 
 You can load the structure as a "cartoon", "ball+stick", "line", "surface", "ribbon", or any other representation listed in the [NGL.js](http://nglviewer.org/ngl/api/) manual under "StructureRepresentation". Multiple representations of the same structure can be overlaid by chaining the `addSelection()` function. Also see the "structure" tab in the [demo](https://www.nvelden.com/shiny/shiny_NGLVieweR/) app for a list of possible representations.  
@@ -70,7 +112,7 @@ NGLVieweR("7CID") %>%
 
 ## Stage
 
-You can alter the background color or set the zoom or rotation speed using the `stageParameters()` function. For a full list of options, see the "StageParameters" method in the official NGL.js manual. In additions there are specific functions to set:
+You can alter the background color or set the zoom or rotation speed using the `stageParameters()` function. For a full list of options, see the "StageParameters" method in the official [NGL.js](http://nglviewer.org/ngl/api/) manual. In additions there are specific functions to set:
 
 - **Animation**: `setRock()` or `setSpin()` 
 - **Focus**: `setFocus()`

@@ -101,23 +101,65 @@
 <span class="co">#Load protein by PDB code</span>
 <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-b080884bd79ae9d5df66" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b080884bd79ae9d5df66">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script><p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application by running the below code. Use “API” for an example using API calls or any of the function names (e.g “addSelection”") for function specific examples.</p>
+<div id="htmlwidget-c8aac26961a913d8ca9f" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c8aac26961a913d8ca9f">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script><p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application by running the below code. Use “API” for an example using API calls or any of the function names (e.g “addSelection”") for function specific examples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/NGLVieweR_example.html">NGLVieweR_example</a></span><span class="op">(</span><span class="st">"basic"</span><span class="op">)</span> </code></pre></div>
 </div>
+<div id="loading-other-structural-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#loading-other-structural-files" class="anchor"></a>Loading other structural files</h2>
+<p>This package has been developed and tested using PDB files but supports loading of any of the following structural files: .mmcif, .cif, .mcif, .ent, .pqr, .gro, .sdf, .sd, .mol2 and .mmtf.</p>
+<p>By default <strong>NGLVieweR</strong> guesses the file format from the file extension. Use the <code>format</code> parameter in case no or the wrong file extension is provided.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">benz</span> <span class="op">&lt;-</span> <span class="st">"702
+  -OEChem-02271511112D
+
+  9  8  0     0  0  0  0  0  0999 V2000
+    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  1  0  0  0  0
+  1  9  1  0  0  0  0
+  2  3  1  0  0  0  0
+  2  4  1  0  0  0  0
+  2  5  1  0  0  0  0
+  3  6  1  0  0  0  0
+  3  7  1  0  0  0  0
+  3  8  1  0  0  0  0
+M  END
+&gt; &lt;ID&gt;
+00001
+
+&gt; &lt;DESCRIPTION&gt;
+Solvent produced by yeast-based fermentation of sugars.
+
+$$$$
+"</span>
+
+<span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="va">benz</span>, format<span class="op">=</span><span class="st">"sdf"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span><span class="op">)</span></code></pre></div>
+<div id="htmlwidget-d236fdabc6776fc3dc4f" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d236fdabc6776fc3dc4f">{"x":{"file_ext":"sdf","data":"702\n  -OEChem-02271511112D\n\n  9  8  0     0  0  0  0  0  0999 V2000\n    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  1  9  1  0  0  0  0\n  2  3  1  0  0  0  0\n  2  4  1  0  0  0  0\n  2  5  1  0  0  0  0\n  3  6  1  0  0  0  0\n  3  7  1  0  0  0  0\n  3  8  1  0  0  0  0\nM  END\n> <ID>\n00001\n\n> <DESCRIPTION>\nSolvent produced by yeast-based fermentation of sugars.\n\n$$$$\n","type":"file","stageParameters":[],"addRepresentation":{"type":["ball+stick"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+</div>
 <div id="representations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#representations" class="anchor"></a>Representations</h2>
 <p>You can load the structure as a “cartoon”, “ball+stick”, “line”, “surface”, “ribbon”, or any other representation listed in the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual under “StructureRepresentation”. Multiple representations of the same structure can be overlaid by chaining the <code><a href="../reference/addSelection.html">addSelection()</a></code> function. Also see the “structure” tab in the <a href="https://www.nvelden.com/shiny/shiny_NGLVieweR/">demo</a> app for a list of possible representations.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span><span class="op">)</span></code></pre></div>
 <p>You can alter the appearance of select residues using the <code>param</code> argument. For a full list of options see the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> “RepresentationParameters” and the “Selection language” section.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sele<span class="op">=</span><span class="st">"233-248"</span>, 
@@ -125,13 +167,13 @@
                                              colorScheme<span class="op">=</span><span class="st">"element"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"surface"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colorValue <span class="op">=</span> <span class="st">"white"</span>, 
                                           opacity<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-96d237fdfab8e16a4dfc" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-96d237fdfab8e16a4dfc">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","surface"],"values":[{"colorScheme":"residueindex"},{"sele":"233-248","colorValue":"red","colorScheme":"element"},{"colorValue":"white","opacity":0.1}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4688463a205b595a52ad" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4688463a205b595a52ad">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","surface"],"values":[{"colorScheme":"residueindex"},{"sele":"233-248","colorValue":"red","colorScheme":"element"},{"colorValue":"white","opacity":0.1}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="stage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stage" class="anchor"></a>Stage</h2>
-<p>You can alter the background color or set the zoom or rotation speed using the <code><a href="../reference/stageParameters.html">stageParameters()</a></code> function. For a full list of options, see the “StageParameters” method in the official NGL.js manual. In additions there are specific functions to set:</p>
+<p>You can alter the background color or set the zoom or rotation speed using the <code><a href="../reference/stageParameters.html">stageParameters()</a></code> function. For a full list of options, see the “StageParameters” method in the official <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual. In additions there are specific functions to set:</p>
 <ul>
 <li>
 <strong>Animation</strong>: <code><a href="../reference/setRock.html">setRock()</a></code> or <code><a href="../reference/setSpin.html">setSpin()</a></code>
@@ -144,19 +186,19 @@
 </li>
 </ul>
 <p><strong>Note</strong>: Changes in background color are not visible in the RStudio viewer.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
  <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="st">"white"</span>, zoomSpeed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme<span class="op">=</span><span class="st">"residueindex"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
  <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-7910f547958a962f39e3" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7910f547958a962f39e3">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":{"backgroundColor":"white","zoomSpeed":1},"addRepresentation":{"type":["cartoon"],"values":[{"name":"cartoon","colorScheme":"residueindex"}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":true,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-1b5e134ce09298b8b742" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1b5e134ce09298b8b742">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":{"backgroundColor":"white","zoomSpeed":1},"addRepresentation":{"type":["cartoon"],"values":[{"name":"cartoon","colorScheme":"residueindex"}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":true,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="labels" class="section level2">
 <h2 class="hasAnchor">
 <a href="#labels" class="anchor"></a>Labels</h2>
 <p>Labels can be addded by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “label”. For a full list of of options, see the LabelRepresentationParameters section in the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual. Also see the “label” tab in the <a href="https://www.nvelden.com/shiny/shiny_NGLVieweR/">demo</a> app for possible label settings.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colorScheme <span class="op">=</span> <span class="st">"element"</span>,
@@ -179,14 +221,14 @@
                                         <span class="co">#backgroundOpacity=0.5</span>
                                         <span class="op">)</span>
   <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-5bea75dd0ba85281eb4f" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5bea75dd0ba85281eb4f">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","fontFamiliy":"sans-serif","xOffset":1,"yOffset":0,"zOffset":0,"fixedSize":true,"radiusType":1,"radiusSize":1.5,"showBackground":false}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-798aa010e868f2df6f63" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-798aa010e868f2df6f63">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","fontFamiliy":"sans-serif","xOffset":1,"yOffset":0,"zOffset":0,"fixedSize":true,"radiusType":1,"radiusSize":1.5,"showBackground":false}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="zoom" class="section level2">
 <h2 class="hasAnchor">
 <a href="#zoom" class="anchor"></a>Zoom</h2>
 <p>You can zoom into specific residues using the <code>ZoomMove()</code> function.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colorScheme <span class="op">=</span> <span class="st">"element"</span>,
@@ -206,14 +248,14 @@
            zoom <span class="op">=</span> <span class="st">"20"</span>, 
            duration <span class="op">=</span> <span class="fl">0</span>, <span class="co">#animation time in ms </span>
            z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-b7923b63785ba4dc512b" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b7923b63785ba4dc512b">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","xOffset":1,"fixedSize":true,"radiusType":1,"radiusSize":1.5}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"20","zoom":"20","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-adc543cb4416fdd6e8a5" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-adc543cb4416fdd6e8a5">{"x":{"data":"rcsb://7CID","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","xOffset":1,"fixedSize":true,"radiusType":1,"radiusSize":1.5}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"20","zoom":"20","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="contact" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contact" class="anchor"></a>Contact</h2>
 <p>Contacts between residues can be added by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “contact”. Using the <code>sele</code> parameter contacts for specific residues can be selected. The <code>filterSele</code> parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected <code>sele="5001 or 23 or 27 or 43 or 45 or 128"</code> and contacts are only shown between the residues and biotin <code>filterSele=list("23 or 27 or 43 or 45 or 128", "5001")</code>. This prevents the display of contacts between residues or water molecules.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"3RY2"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"biotin"</span>, 
@@ -265,14 +307,14 @@
                                            <span class="co">#lineOfSightDistFactor= 1</span>
                                            <span class="op">)</span>
                    <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-d16692536f6eb5689ae6" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d16692536f6eb5689ae6">{"x":{"data":"rcsb://3RY2","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","ball+stick","contact"],"values":[[],{"name":"biotin","colorvalue":"grey","colorScheme":"element","sele":"5001"},{"name":"interacting","colorScheme":"element","colorValue":"green","sele":"23 or 27 or 43 or 45 or 128"},{"name":"contact","sele":"5001 or 23 or 27 or 43 or 45 or 128","filterSele":["23 or 27 or 45 or 128","5001"],"labelVisible":true,"labelFixedSize":false,"labelUnit":"angstrom","labelSize":2}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"27:B","zoom":"27:B","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-83a8e2e5497a6e33bfb9" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-83a8e2e5497a6e33bfb9">{"x":{"data":"rcsb://3RY2","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","ball+stick","contact"],"values":[[],{"name":"biotin","colorvalue":"grey","colorScheme":"element","sele":"5001"},{"name":"interacting","colorScheme":"element","colorValue":"green","sele":"23 or 27 or 43 or 45 or 128"},{"name":"contact","sele":"5001 or 23 or 27 or 43 or 45 or 128","filterSele":["23 or 27 or 45 or 128","5001"],"labelVisible":true,"labelFixedSize":false,"labelUnit":"angstrom","labelSize":2}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"27:B","zoom":"27:B","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="shiny" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shiny" class="anchor"></a>Shiny</h2>
 <p>The <code><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput()</a></code> and <code><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR()</a></code> functions enable you to visualize PDB files within Shiny applications. See the <code><a href="../reference/NGLVieweR_example.html">NGLVieweR_example("basic")</a></code> and “API” for live examples.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
 
@@ -301,7 +343,7 @@
 <h2 class="hasAnchor">
 <a href="#api" class="anchor"></a>API</h2>
 <p>In Shiny apps, you can manipulate the <strong>NGLVieweR</strong> widget after creation using specific “API” calls. You can for instance add or remove representations by refering to their name using the <code><a href="../reference/addSelection.html">addSelection()</a></code> or <code><a href="../reference/removeSelection.html">removeSelection()</a></code> functions.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
 

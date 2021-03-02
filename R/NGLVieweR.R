@@ -11,8 +11,8 @@ tools::file_ext
 #'The package is based on the \href{http://nglviewer.org/ngl/api/}{NGL.js} Javascript library.
 #'To see the full set of features please read the official manual of NGL.js.
 #'@param data PDB file or PDB entry code
-#'@param format Input format ('.mmcif', '.cif', '.mcif', '.pdb', '.ent', '.pqr', 
-#''.gro', '.sdf', '.sd', '.mol2', '.mmtf'). Needed when no file extension is provided.
+#'@param format Input format (.mmcif, .cif, .mcif, .pdb, .ent, .pqr, 
+#'.gro, .sdf, .sd, .mol2, .mmtf). Needed when no file extension is provided.
 #'@param width,height Must be a valid CSS unit (like \code{'100\%'},
 #' \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #' string and have \code{'px'} appended.
