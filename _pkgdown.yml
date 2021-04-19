@@ -1,4 +1,3 @@
-
 template:
   params:
     bootswatch: flatly
@@ -48,4 +47,6 @@ reference:
   - '`updateVisibility`'
   - '`updateZoomMove`'
   - '`zoomMove`'
+
+
 

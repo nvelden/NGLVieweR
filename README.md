@@ -1,16 +1,10 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
 
 <img src="man/figures/logo.PNG" class="logo" align="right" height="150px"/>
 
 # **NGLVieweR** - Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny
-<hr>
 
 ### [Click here](https://www.nvelden.com/shiny/shiny_NGLVieweR/) to view a Shiny application integrating most features of **NGLVieweR**.
-<hr>
+
 ## Description
 
 **NGLvieweR** provides an R interface to the
@@ -24,7 +18,7 @@ to retrieve data from the visualization into R.
 
 **NGLVieweR** is available through GitHub
 
-``` {.r}
+``` r
 install.packages("remotes")
 remotes::install_github("nvelden/NGLVieweR")
 ```
@@ -34,9 +28,9 @@ remotes::install_github("nvelden/NGLVieweR")
 You can load a PDB (or any other supported structural file) directly or
 use a PDB code of a structure on [RCSB.org](https://www.rcsb.org/). The
 below minimal example loads the PDB file and displays the structure in a
-"cartoon" representation.
+“cartoon” representation.
 
-``` {.r}
+``` r
 #Load local pdb file
 NGLVieweR("C:/7CID.pdb") %>%
 addRepresentation("cartoon")
@@ -64,7 +58,7 @@ There are functions provided to:
 -   Auto rotate/rock
 
 In Shiny apps, you can manipulate the **NGLVieweR** widget after
-creation using specific "API" calls. Users can for instance add/remove
+creation using specific “API”" calls. Users can for instance add/remove
 representations, make snapshots, add labels or highlight specific
 regions. See the [Get
 started](https://nvelden.github.io/NGLVieweR/articles/NGLVieweR.html)

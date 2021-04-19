@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 create_widget.R
+inst/doc

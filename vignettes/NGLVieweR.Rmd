@@ -28,7 +28,6 @@ You can load a PDB (or and other supported format) directly or use a PDB code of
 #Load local pdb file
 NGLVieweR("C:/7CID.pdb") %>%
 addRepresentation("cartoon")
-
 #Load protein by PDB code
 NGLVieweR("7CID") %>%
 addRepresentation("cartoon")
@@ -56,9 +55,11 @@ This package has been developed and tested using PDB files but supports loading 
 By default **NGLVieweR** guesses the file format from the file extension. Use the `format` parameter in case no or the wrong file extension is provided.
 
 ```{r fileformat}
-benz <- "702
-  -OEChem-02271511112D
 
+#Note that line formatting needs to be exact when reading from console!
+benz <- "
+702
+  -OEChem-02271511112D
   9  8  0     0  0  0  0  0  0999 V2000
     0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
     1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
@@ -80,16 +81,12 @@ benz <- "702
 M  END
 > <ID>
 00001
-
 > <DESCRIPTION>
 Solvent produced by yeast-based fermentation of sugars.
-
 $$$$
 "
-
 NGLVieweR(benz, format="sdf") %>%
   addRepresentation("ball+stick")
-  
 ```
 
 ## Representations
@@ -251,7 +248,6 @@ The `NGLVieweROutput()` and `renderNGLVieweR()` functions enable you to visualiz
 ```{r eval=FALSE}
 library(shiny)
 library(NGLVieweR)
-
 ui = fluidPage(NGLVieweROutput("structure"))
 server = function(input, output) {
   output$structure <- renderNGLVieweR({
@@ -284,7 +280,6 @@ In Shiny apps, you can manipulate the **NGLVieweR** widget after creation using 
 ```{r eval=FALSE}
 library(shiny)
 library(NGLVieweR)
-
 ui = fluidPage(
   titlePanel("Viewer with API inputs"),
   sidebarLayout(
@@ -317,7 +312,6 @@ server = function(input, output) {
                           sele=isolate(input$selection),
                           colorValue=isolate(input$color)))
   })
-
   observeEvent(input$remove, {
     NGLVieweR_proxy("structure") %>%
       removeSelection("sel1")
