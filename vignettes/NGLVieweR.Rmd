@@ -6,9 +6,11 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
 ```{r setup, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
 ```
+
 ## Installation
 
 **NGLVieweR** is available through GitHub
@@ -38,6 +40,7 @@ library(NGLVieweR)
 NGLVieweR("7CID") %>%
 addRepresentation("cartoon")
 ```
+
 You can view a "basic" **NGLVieweR** Shiny application by running the below code. Use "API" for an example using API calls or any of the function names (e.g "addSelection"") for function specific examples.
 
 ```{r eval=FALSE}
@@ -88,9 +91,10 @@ NGLVieweR(benz, format="sdf") %>%
   addRepresentation("ball+stick")
   
 ```
+
 ## Representations
 
-You can load the structure as a "cartoon", "ball+stick", "line", "surface", "ribbon", or any other representation listed in the [NGL.js](http://nglviewer.org/ngl/api/) manual under "StructureRepresentation". Multiple representations of the same structure can be overlaid by chaining the `addSelection()` function. Also see the "structure" tab in the [demo](https://www.nvelden.com/shiny/shiny_NGLVieweR/) app for a list of possible representations.  
+You can load the structure as a "cartoon", "ball+stick", "line", "surface", "ribbon", or any other representation listed in the [NGL.js](http://nglviewer.org/ngl/api/) manual under "StructureRepresentation". Multiple representations of the same structure can be overlaid by chaining the `addSelection()` function. Also see the "structure" tab in the [demo](https://www.nvelden.com/shiny/shiny_NGLVieweR/) app for a list of possible representations.
 
 ```{r eval=FALSE}
 NGLVieweR("7CID") %>%
@@ -108,27 +112,28 @@ NGLVieweR("7CID") %>%
                                              colorScheme="element")) %>%
   addRepresentation("surface", param=list(colorValue = "white", 
                                           opacity=0.1))
-``` 
+```
 
 ## Stage
 
 You can alter the background color or set the zoom or rotation speed using the `stageParameters()` function. For a full list of options, see the "StageParameters" method in the official [NGL.js](http://nglviewer.org/ngl/api/) manual. In additions there are specific functions to set:
 
-- **Animation**: `setRock()` or `setSpin()` 
-- **Focus**: `setFocus()`
-- **Quality**: `setQuality()`
+-   **Animation**: `setRock()` or `setSpin()`
+-   **Focus**: `setFocus()`
+-   **Quality**: `setQuality()`
 
-**Note**: Changes in background color are not visible in the RStudio viewer. 
+**Note**: Changes in background color are not visible in the RStudio viewer.
 
 ```{r stage}
 NGLVieweR("7CID") %>%
  stageParameters(backgroundColor = "white", zoomSpeed = 1) %>%
  addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex")) %>%
  setSpin()
-``` 
+```
+
 ## Labels
 
-Labels can be addded by setting the `addRepresentation()` type parameter to "label". For a full list of of options, see the LabelRepresentationParameters section in the [NGL.js](http://nglviewer.org/ngl/api/) manual. Also see the "label" tab in the [demo](https://www.nvelden.com/shiny/shiny_NGLVieweR/) app for possible label settings.  
+Labels can be addded by setting the `addRepresentation()` type parameter to "label". For a full list of of options, see the LabelRepresentationParameters section in the [NGL.js](http://nglviewer.org/ngl/api/) manual. Also see the "label" tab in the [demo](https://www.nvelden.com/shiny/shiny_NGLVieweR/) app for possible label settings.
 
 ```{r labels}
 NGLVieweR("7CID") %>%
@@ -153,7 +158,8 @@ NGLVieweR("7CID") %>%
                                         #backgroundOpacity=0.5
                                         )
   )
-``` 
+```
+
 ## Zoom
 
 You can zoom into specific residues using the `ZoomMove()` function.
@@ -178,11 +184,11 @@ NGLVieweR("7CID") %>%
            zoom = "20", 
            duration = 0, #animation time in ms 
            z_offSet = -20)
-``` 
+```
 
 ## Contact
 
-Contacts between residues can be added by setting the `addRepresentation()` type parameter to "contact". Using the `sele` parameter contacts for specific residues can be selected. The `filterSele` parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected `sele="5001 or 23 or 27 or 43 or 45 or 128"` and  contacts are only shown between the residues and biotin `filterSele=list("23 or 27 or 43 or 45 or 128", "5001")`. This prevents the display of contacts between residues or water molecules.
+Contacts between residues can be added by setting the `addRepresentation()` type parameter to "contact". Using the `sele` parameter contacts for specific residues can be selected. The `filterSele` parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected `sele="5001 or 23 or 27 or 43 or 45 or 128"` and contacts are only shown between the residues and biotin `filterSele=list("23 or 27 or 43 or 45 or 128", "5001")`. This prevents the display of contacts between residues or water molecules.
 
 ```{r contact}
 NGLVieweR("3RY2") %>% 
@@ -236,7 +242,8 @@ NGLVieweR("3RY2") %>%
                                            #lineOfSightDistFactor= 1
                                            )
                    )
-``` 
+```
+
 ## Shiny
 
 The `NGLVieweROutput()` and `renderNGLVieweR()` functions enable you to visualize PDB files within Shiny applications. See the `NGLVieweR_example("basic")` and "API" for live examples.
@@ -264,7 +271,7 @@ server = function(input, output) {
   })
 }
 shinyApp(ui, server)
-``` 
+```
 
 ```{r, echo=FALSE}
 knitr::include_graphics("../man/figures/basic_shiny.gif")
@@ -324,29 +331,28 @@ knitr::include_graphics("../man/figures/API_Shiny.gif")
 ```
 
 ### Possible API functions are:
-- `addSelection()`
-- `removeSelection()`
-- `snapShot()`
-- `updateColor()`
-- `updateFocus()`
-- `updateFullscreen()`
-- `updateRepresentation()`
-- `updateRock()`
-- `updateSelection()`
-- `updateSpin()`
-- `updateStage()`
-- `updateVisibility()`
-- `updateZoomMove()`
+
+-   `addSelection()`
+-   `removeSelection()`
+-   `snapShot()`
+-   `updateColor()`
+-   `updateFocus()`
+-   `updateFullscreen()`
+-   `updateRepresentation()`
+-   `updateRock()`
+-   `updateSelection()`
+-   `updateSpin()`
+-   `updateStage()`
+-   `updateVisibility()`
+-   `updateZoomMove()`
 
 ## Retrieving data from the widget
 
 In a Shiny application one can retrieve information from the widget as inputs based on the NGLVieweR `outputID`. Suppose the `outputID` is "structure", then the following information can be retrieved:
 
-- input$structure_selection - Get details on the clicked residue.
-- input$structure_sequence - will return the sequence of the PDB file as a character vector.
-- input$structure_resno - will return all the sequence numbers as a numeric vector.
-- input$structure_chainname - will return the chainname of each amino acid as a character vector,
-- input$structure_rendering - will return `TRUE` if the widget is loading or `FALSE` when completed. 
-- input$structure_PDB - will return the PDB file as a text string.
-
-
+-   input\$structure_selection - Get details on the clicked residue.
+-   input\$structure_sequence - will return the sequence of the PDB file as a character vector.
+-   input\$structure_resno - will return all the sequence numbers as a numeric vector.
+-   input\$structure_chainname - will return the chainname of each amino acid as a character vector,
+-   input\$structure_rendering - will return `TRUE` if the widget is loading or `FALSE` when completed.
+-   input\$structure_PDB - will return the PDB file as a text string.
