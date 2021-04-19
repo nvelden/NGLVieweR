@@ -1,5 +1,5 @@
 
-<img src="man/figures/logo.PNG" class="logo" align="right" height="150px"/>
+<img src="man/figures/logo.png" class="logo" align="right" height="150px"/>
 
 # **NGLVieweR** - Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny
 
