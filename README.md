@@ -3,7 +3,7 @@
 
 # **NGLVieweR** - Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny
 
-### [Click here](https://www.nvelden.com/shiny/shiny_NGLVieweR/) to view a Shiny application integrating most features of **NGLVieweR**.
+### [Click here](https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/) to view a Shiny application integrating most features of **NGLVieweR**.
 
 ## Description
 
@@ -47,14 +47,11 @@ addRepresentation("cartoon")
 There are functions provided to:
 
 -   Overlay different representation styles
-
 -   Alter the stage parameters (eg. background, zoom- and rotation
     speed)
-
 -   Zoom to specific selections
-
 -   Add labels
-
+-   Add contacts between residues
 -   Auto rotate/rock
 
 In Shiny apps, you can manipulate the **NGLVieweR** widget after

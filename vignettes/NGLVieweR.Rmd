@@ -91,7 +91,7 @@ NGLVieweR(benz, format="sdf") %>%
 
 ## Representations
 
-You can load the structure as a "cartoon", "ball+stick", "line", "surface", "ribbon", or any other representation listed in the [NGL.js](http://nglviewer.org/ngl/api/) manual under "StructureRepresentation". Multiple representations of the same structure can be overlaid by chaining the `addSelection()` function. Also see the "structure" tab in the [demo](https://www.nvelden.com/shiny/shiny_NGLVieweR/) app for a list of possible representations.
+You can load the structure as a "cartoon", "ball+stick", "line", "surface", "ribbon", or any other representation listed in the [NGL.js](http://nglviewer.org/ngl/api/) manual under "StructureRepresentation". Multiple representations of the same structure can be overlaid by chaining the `addSelection()` function. Also see the "structure" tab in the [demo](https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/) app for a list of possible representations.
 
 ```{r eval=FALSE}
 NGLVieweR("7CID") %>%
@@ -130,7 +130,7 @@ NGLVieweR("7CID") %>%
 
 ## Labels
 
-Labels can be addded by setting the `addRepresentation()` type parameter to "label". For a full list of of options, see the LabelRepresentationParameters section in the [NGL.js](http://nglviewer.org/ngl/api/) manual. Also see the "label" tab in the [demo](https://www.nvelden.com/shiny/shiny_NGLVieweR/) app for possible label settings.
+Labels can be addded by setting the `addRepresentation()` type parameter to "label". For a full list of of options, see the LabelRepresentationParameters section in the [NGL.js](http://nglviewer.org/ngl/api/) manual. Also see the "label" tab in the [demo](https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/) app for possible label settings.
 
 ```{r labels}
 NGLVieweR("7CID") %>%
