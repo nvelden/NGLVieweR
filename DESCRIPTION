@@ -1,6 +1,6 @@
 Package: NGLVieweR
 Title: Interact with protein databank (PDB) and structural files with the NGL.js JavaScript Library
-Version: 0.1
+Version: 0.2
 Authors@R: c( 
     person("Niels", "van der Velden", role = c("aut", "cre"), email = "n.s.j.vandervelden@gmail.com"),
     person("Alexander", "Rose", role = "cph", comment = 'NGL.js library'))

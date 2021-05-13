@@ -149,7 +149,7 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
   #Read from PDB code  
   }  else {
     type <- "code"
-    data <- sprintf('rcsb://%s', data)
+    data <- sprintf('rcsb://%s.pdb', data)
   }
   # forward options using x
   x = list()
