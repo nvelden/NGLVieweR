@@ -33,7 +33,7 @@ NGLVieweR("7CID") %>%
 addRepresentation("cartoon")
 ```
 
-```{r Loading, echo=FALSE}
+```{r Loading, echo=FALSE, screenshot.force=FALSE}
 library(NGLVieweR)
 #Load local pdb file
 NGLVieweR("7CID") %>%

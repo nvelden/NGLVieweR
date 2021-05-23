@@ -19,6 +19,7 @@ Imports:
     shiny
 Suggests:
     knitr,
+    webshot,
     markdown,
     rmarkdown
 VignetteBuilder: knitr
