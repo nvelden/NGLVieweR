@@ -37,22 +37,38 @@ NGLVieweR("7CID") \%>\%
   stageParameters(backgroundColor = "white") \%>\%
   setQuality("high") \%>\%
   setSpin(FALSE) \%>\%
-  addRepresentation("cartoon", param = list(name = "cartoon",
-                                            colorScheme="residueindex")) \%>\%
-  addRepresentation("ball+stick", param = list(name = "ball+stick",
-                                               colorValue="red",
-                                               colorScheme="element",
-                                               sele="200")) \%>\%
-  addRepresentation("label", param = list(name = "label", sele="200:A.O",
-                                          showBackground=TRUE,
-                                          backgroundColor="black",
-                                          backgroundMargin=2,
-                                          backgroundOpacity=0.5,
-                                          showBorder=TRUE,
-                                          colorValue="white")) \%>\%
-  addRepresentation("surface", param = list(name = "surface",
-                                            colorValue="white",
-                                            opacity=0.1)) \%>\%
+  addRepresentation("cartoon",
+    param = list(
+      name = "cartoon",
+      colorScheme = "residueindex"
+    )
+  ) \%>\%
+  addRepresentation("ball+stick",
+    param = list(
+      name = "ball+stick",
+      colorValue = "red",
+      colorScheme = "element",
+      sele = "200"
+    )
+  ) \%>\%
+  addRepresentation("label",
+    param = list(
+      name = "label", sele = "200:A.O",
+      showBackground = TRUE,
+      backgroundColor = "black",
+      backgroundMargin = 2,
+      backgroundOpacity = 0.5,
+      showBorder = TRUE,
+      colorValue = "white"
+    )
+  ) \%>\%
+  addRepresentation("surface",
+    param = list(
+      name = "surface",
+      colorValue = "white",
+      opacity = 0.1
+    )
+  ) \%>\%
   zoomMove("200", "200", 2000, -20)
 
 #---------------------Using Shiny-------------------------
@@ -60,66 +76,79 @@ NGLVieweR("7CID") \%>\%
 # App 1: Basic Example
 if (interactive()) {
   library(shiny)
-    ui = fluidPage(NGLVieweROutput("structure"))
-    server = function(input, output) {
-      output$structure <- renderNGLVieweR({
-        NGLVieweR("7CID") \%>\%
-          addRepresentation("cartoon", param = list(name = "cartoon",
-                                                    colorScheme="residueindex")) \%>\%
-          addRepresentation("ball+stick", param = list(name = "cartoon",
-                                                       sele='1-20',
-                                                       colorScheme="element")) \%>\%
-          stageParameters(backgroundColor = "black") \%>\%
-          setQuality("high") \%>\%
-          setFocus(0) \%>\%
-          setSpin(TRUE)
-      })
-    }
-shinyApp(ui, server)
+  ui <- fluidPage(NGLVieweROutput("structure"))
+  server <- function(input, output) {
+    output$structure <- renderNGLVieweR({
+      NGLVieweR("7CID") \%>\%
+        addRepresentation("cartoon",
+          param = list(
+            name = "cartoon",
+            colorScheme = "residueindex"
+          )
+        ) \%>\%
+        addRepresentation("ball+stick",
+          param = list(
+            name = "cartoon",
+            sele = "1-20",
+            colorScheme = "element"
+          )
+        ) \%>\%
+        stageParameters(backgroundColor = "black") \%>\%
+        setQuality("high") \%>\%
+        setFocus(0) \%>\%
+        setSpin(TRUE)
+    })
+  }
+  shinyApp(ui, server)
 }
 
 # App 2: Example with API calls
 if (interactive()) {
 library(shiny)
 
- ui = fluidPage(
-   titlePanel("Viewer with API inputs"),
-   sidebarLayout(
-     sidebarPanel(
-       textInput("selection", "Selection", "1-20"),
-       selectInput("type", "Type", c("ball+stick", "cartoon", "backbone")),
-       selectInput("color", "Color", c("orange", "grey", "white")),
-       actionButton("add", "Add"),
-       actionButton("remove", "Remove")
-     ),
-     mainPanel(
-       NGLVieweROutput("structure")
-     )
-   )
- )
- server = function(input, output) {
-   output$structure <- renderNGLVieweR({
-     NGLVieweR("7CID") \%>\%
-       addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex")) \%>\%
-       stageParameters(backgroundColor = input$backgroundColor) \%>\%
-       setQuality("high") \%>\%
-       setFocus(0) \%>\%
-       setSpin(TRUE)
-   })
-   observeEvent(input$add, {
-     NGLVieweR_proxy("structure") \%>\%
-     addSelection(isolate(input$type),
-                  param =
-                  list(name="sel1",
-                  sele=isolate(input$selection),
-                  colorValue=isolate(input$color)))
-   })
+ui <- fluidPage(
+  titlePanel("Viewer with API inputs"),
+  sidebarLayout(
+    sidebarPanel(
+      textInput("selection", "Selection", "1-20"),
+      selectInput("type", "Type", c("ball+stick", "cartoon", "backbone")),
+      selectInput("color", "Color", c("orange", "grey", "white")),
+      actionButton("add", "Add"),
+      actionButton("remove", "Remove")
+    ),
+    mainPanel(
+      NGLVieweROutput("structure")
+    )
+  )
+)
+server <- function(input, output) {
+  output$structure <- renderNGLVieweR({
+    NGLVieweR("7CID") \%>\%
+      addRepresentation("cartoon",
+        param = list(name = "cartoon", colorScheme = "residueindex")
+      ) \%>\%
+      stageParameters(backgroundColor = input$backgroundColor) \%>\%
+      setQuality("high") \%>\%
+      setFocus(0) \%>\%
+      setSpin(TRUE)
+  })
+  observeEvent(input$add, {
+    NGLVieweR_proxy("structure") \%>\%
+      addSelection(isolate(input$type),
+        param =
+          list(
+            name = "sel1",
+            sele = isolate(input$selection),
+            colorValue = isolate(input$color)
+          )
+      )
+  })
 
-   observeEvent(input$remove, {
-     NGLVieweR_proxy("structure") \%>\%
-     removeSelection("sel1")
-   })
- }
+  observeEvent(input$remove, {
+    NGLVieweR_proxy("structure") \%>\%
+      removeSelection("sel1")
+  })
+}
 shinyApp(ui, server)
 }
 

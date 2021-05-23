@@ -83,7 +83,7 @@ It includes a set of API functions to manipulate the viewer after creation in Sh
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NGLVieweR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -100,6 +100,9 @@ It includes a set of API functions to manipulate the viewer after creation in Sh
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -182,22 +185,38 @@ To see the full set of features please read the official manual of NGL.js.</p>
   <span class='fu'><a href='stageParameters.html'>stageParameters</a></span><span class='op'>(</span>backgroundColor <span class='op'>=</span> <span class='st'>"white"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='setQuality.html'>setQuality</a></span><span class='op'>(</span><span class='st'>"high"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='setSpin.html'>setSpin</a></span><span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"cartoon"</span>, param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"cartoon"</span>,
-                                            colorScheme<span class='op'>=</span><span class='st'>"residueindex"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"ball+stick"</span>, param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"ball+stick"</span>,
-                                               colorValue<span class='op'>=</span><span class='st'>"red"</span>,
-                                               colorScheme<span class='op'>=</span><span class='st'>"element"</span>,
-                                               sele<span class='op'>=</span><span class='st'>"200"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"label"</span>, param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"label"</span>, sele<span class='op'>=</span><span class='st'>"200:A.O"</span>,
-                                          showBackground<span class='op'>=</span><span class='cn'>TRUE</span>,
-                                          backgroundColor<span class='op'>=</span><span class='st'>"black"</span>,
-                                          backgroundMargin<span class='op'>=</span><span class='fl'>2</span>,
-                                          backgroundOpacity<span class='op'>=</span><span class='fl'>0.5</span>,
-                                          showBorder<span class='op'>=</span><span class='cn'>TRUE</span>,
-                                          colorValue<span class='op'>=</span><span class='st'>"white"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"surface"</span>, param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"surface"</span>,
-                                            colorValue<span class='op'>=</span><span class='st'>"white"</span>,
-                                            opacity<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"cartoon"</span>,
+    param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+      name <span class='op'>=</span> <span class='st'>"cartoon"</span>,
+      colorScheme <span class='op'>=</span> <span class='st'>"residueindex"</span>
+    <span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"ball+stick"</span>,
+    param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+      name <span class='op'>=</span> <span class='st'>"ball+stick"</span>,
+      colorValue <span class='op'>=</span> <span class='st'>"red"</span>,
+      colorScheme <span class='op'>=</span> <span class='st'>"element"</span>,
+      sele <span class='op'>=</span> <span class='st'>"200"</span>
+    <span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"label"</span>,
+    param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+      name <span class='op'>=</span> <span class='st'>"label"</span>, sele <span class='op'>=</span> <span class='st'>"200:A.O"</span>,
+      showBackground <span class='op'>=</span> <span class='cn'>TRUE</span>,
+      backgroundColor <span class='op'>=</span> <span class='st'>"black"</span>,
+      backgroundMargin <span class='op'>=</span> <span class='fl'>2</span>,
+      backgroundOpacity <span class='op'>=</span> <span class='fl'>0.5</span>,
+      showBorder <span class='op'>=</span> <span class='cn'>TRUE</span>,
+      colorValue <span class='op'>=</span> <span class='st'>"white"</span>
+    <span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"surface"</span>,
+    param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+      name <span class='op'>=</span> <span class='st'>"surface"</span>,
+      colorValue <span class='op'>=</span> <span class='st'>"white"</span>,
+      opacity <span class='op'>=</span> <span class='fl'>0.1</span>
+    <span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='zoomMove.html'>zoomMove</a></span><span class='op'>(</span><span class='st'>"200"</span>, <span class='st'>"200"</span>, <span class='fl'>2000</span>, <span class='op'>-</span><span class='fl'>20</span><span class='op'>)</span>
 
 <span class='co'>#---------------------Using Shiny-------------------------</span>
@@ -205,66 +224,79 @@ To see the full set of features please read the official manual of NGL.js.</p>
 <span class='co'># App 1: Basic Example</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://shiny.rstudio.com/'>shiny</a></span><span class='op'>)</span>
-    <span class='va'>ui</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span><span class='op'>(</span><span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweROutput</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span><span class='op'>)</span>
-    <span class='va'>server</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span><span class='op'>)</span> <span class='op'>{</span>
-      <span class='va'>output</span><span class='op'>$</span><span class='va'>structure</span> <span class='op'>&lt;-</span> <span class='fu'><a href='NGLVieweR-shiny.html'>renderNGLVieweR</a></span><span class='op'>(</span><span class='op'>{</span>
-        <span class='fu'>NGLVieweR</span><span class='op'>(</span><span class='st'>"7CID"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-          <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"cartoon"</span>, param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"cartoon"</span>,
-                                                    colorScheme<span class='op'>=</span><span class='st'>"residueindex"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-          <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"ball+stick"</span>, param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"cartoon"</span>,
-                                                       sele<span class='op'>=</span><span class='st'>'1-20'</span>,
-                                                       colorScheme<span class='op'>=</span><span class='st'>"element"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-          <span class='fu'><a href='stageParameters.html'>stageParameters</a></span><span class='op'>(</span>backgroundColor <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-          <span class='fu'><a href='setQuality.html'>setQuality</a></span><span class='op'>(</span><span class='st'>"high"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-          <span class='fu'><a href='setFocus.html'>setFocus</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-          <span class='fu'><a href='setSpin.html'>setSpin</a></span><span class='op'>(</span><span class='cn'>TRUE</span><span class='op'>)</span>
-      <span class='op'>}</span><span class='op'>)</span>
-    <span class='op'>}</span>
-<span class='fu'><a href='https://rdrr.io/pkg/shiny/man/shinyApp.html'>shinyApp</a></span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>server</span><span class='op'>)</span>
+  <span class='va'>ui</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span><span class='op'>(</span><span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweROutput</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='va'>output</span><span class='op'>$</span><span class='va'>structure</span> <span class='op'>&lt;-</span> <span class='fu'><a href='NGLVieweR-shiny.html'>renderNGLVieweR</a></span><span class='op'>(</span><span class='op'>{</span>
+      <span class='fu'>NGLVieweR</span><span class='op'>(</span><span class='st'>"7CID"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+        <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"cartoon"</span>,
+          param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+            name <span class='op'>=</span> <span class='st'>"cartoon"</span>,
+            colorScheme <span class='op'>=</span> <span class='st'>"residueindex"</span>
+          <span class='op'>)</span>
+        <span class='op'>)</span> <span class='op'>%&gt;%</span>
+        <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"ball+stick"</span>,
+          param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+            name <span class='op'>=</span> <span class='st'>"cartoon"</span>,
+            sele <span class='op'>=</span> <span class='st'>"1-20"</span>,
+            colorScheme <span class='op'>=</span> <span class='st'>"element"</span>
+          <span class='op'>)</span>
+        <span class='op'>)</span> <span class='op'>%&gt;%</span>
+        <span class='fu'><a href='stageParameters.html'>stageParameters</a></span><span class='op'>(</span>backgroundColor <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+        <span class='fu'><a href='setQuality.html'>setQuality</a></span><span class='op'>(</span><span class='st'>"high"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+        <span class='fu'><a href='setFocus.html'>setFocus</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+        <span class='fu'><a href='setSpin.html'>setSpin</a></span><span class='op'>(</span><span class='cn'>TRUE</span><span class='op'>)</span>
+    <span class='op'>}</span><span class='op'>)</span>
+  <span class='op'>}</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/shinyApp.html'>shinyApp</a></span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>server</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 <span class='co'># App 2: Example with API calls</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://shiny.rstudio.com/'>shiny</a></span><span class='op'>)</span>
 
- <span class='va'>ui</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span><span class='op'>(</span>
-   <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/titlePanel.html'>titlePanel</a></span><span class='op'>(</span><span class='st'>"Viewer with API inputs"</span><span class='op'>)</span>,
-   <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/sidebarLayout.html'>sidebarLayout</a></span><span class='op'>(</span>
-     <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/sidebarLayout.html'>sidebarPanel</a></span><span class='op'>(</span>
-       <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/textInput.html'>textInput</a></span><span class='op'>(</span><span class='st'>"selection"</span>, <span class='st'>"Selection"</span>, <span class='st'>"1-20"</span><span class='op'>)</span>,
-       <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/selectInput.html'>selectInput</a></span><span class='op'>(</span><span class='st'>"type"</span>, <span class='st'>"Type"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ball+stick"</span>, <span class='st'>"cartoon"</span>, <span class='st'>"backbone"</span><span class='op'>)</span><span class='op'>)</span>,
-       <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/selectInput.html'>selectInput</a></span><span class='op'>(</span><span class='st'>"color"</span>, <span class='st'>"Color"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"orange"</span>, <span class='st'>"grey"</span>, <span class='st'>"white"</span><span class='op'>)</span><span class='op'>)</span>,
-       <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"add"</span>, <span class='st'>"Add"</span><span class='op'>)</span>,
-       <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"remove"</span>, <span class='st'>"Remove"</span><span class='op'>)</span>
-     <span class='op'>)</span>,
-     <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/sidebarLayout.html'>mainPanel</a></span><span class='op'>(</span>
-       <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweROutput</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span>
-     <span class='op'>)</span>
-   <span class='op'>)</span>
- <span class='op'>)</span>
- <span class='va'>server</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span><span class='op'>)</span> <span class='op'>{</span>
-   <span class='va'>output</span><span class='op'>$</span><span class='va'>structure</span> <span class='op'>&lt;-</span> <span class='fu'><a href='NGLVieweR-shiny.html'>renderNGLVieweR</a></span><span class='op'>(</span><span class='op'>{</span>
-     <span class='fu'>NGLVieweR</span><span class='op'>(</span><span class='st'>"7CID"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-       <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"cartoon"</span>, param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"cartoon"</span>, colorScheme<span class='op'>=</span><span class='st'>"residueindex"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-       <span class='fu'><a href='stageParameters.html'>stageParameters</a></span><span class='op'>(</span>backgroundColor <span class='op'>=</span> <span class='va'>input</span><span class='op'>$</span><span class='va'>backgroundColor</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-       <span class='fu'><a href='setQuality.html'>setQuality</a></span><span class='op'>(</span><span class='st'>"high"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-       <span class='fu'><a href='setFocus.html'>setFocus</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-       <span class='fu'><a href='setSpin.html'>setSpin</a></span><span class='op'>(</span><span class='cn'>TRUE</span><span class='op'>)</span>
-   <span class='op'>}</span><span class='op'>)</span>
-   <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>add</span>, <span class='op'>{</span>
-     <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-     <span class='fu'><a href='addSelection.html'>addSelection</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/isolate.html'>isolate</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>type</span><span class='op'>)</span>,
-                  param <span class='op'>=</span>
-                  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name<span class='op'>=</span><span class='st'>"sel1"</span>,
-                  sele<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/isolate.html'>isolate</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>selection</span><span class='op'>)</span>,
-                  colorValue<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/isolate.html'>isolate</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>color</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-   <span class='op'>}</span><span class='op'>)</span>
+<span class='va'>ui</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/fluidPage.html'>fluidPage</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/titlePanel.html'>titlePanel</a></span><span class='op'>(</span><span class='st'>"Viewer with API inputs"</span><span class='op'>)</span>,
+  <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/sidebarLayout.html'>sidebarLayout</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/sidebarLayout.html'>sidebarPanel</a></span><span class='op'>(</span>
+      <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/textInput.html'>textInput</a></span><span class='op'>(</span><span class='st'>"selection"</span>, <span class='st'>"Selection"</span>, <span class='st'>"1-20"</span><span class='op'>)</span>,
+      <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/selectInput.html'>selectInput</a></span><span class='op'>(</span><span class='st'>"type"</span>, <span class='st'>"Type"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ball+stick"</span>, <span class='st'>"cartoon"</span>, <span class='st'>"backbone"</span><span class='op'>)</span><span class='op'>)</span>,
+      <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/selectInput.html'>selectInput</a></span><span class='op'>(</span><span class='st'>"color"</span>, <span class='st'>"Color"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"orange"</span>, <span class='st'>"grey"</span>, <span class='st'>"white"</span><span class='op'>)</span><span class='op'>)</span>,
+      <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"add"</span>, <span class='st'>"Add"</span><span class='op'>)</span>,
+      <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/actionButton.html'>actionButton</a></span><span class='op'>(</span><span class='st'>"remove"</span>, <span class='st'>"Remove"</span><span class='op'>)</span>
+    <span class='op'>)</span>,
+    <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/sidebarLayout.html'>mainPanel</a></span><span class='op'>(</span>
+      <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweROutput</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span>
+    <span class='op'>)</span>
+  <span class='op'>)</span>
+<span class='op'>)</span>
+<span class='va'>server</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>output</span><span class='op'>$</span><span class='va'>structure</span> <span class='op'>&lt;-</span> <span class='fu'><a href='NGLVieweR-shiny.html'>renderNGLVieweR</a></span><span class='op'>(</span><span class='op'>{</span>
+    <span class='fu'>NGLVieweR</span><span class='op'>(</span><span class='st'>"7CID"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"cartoon"</span>,
+        param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"cartoon"</span>, colorScheme <span class='op'>=</span> <span class='st'>"residueindex"</span><span class='op'>)</span>
+      <span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'><a href='stageParameters.html'>stageParameters</a></span><span class='op'>(</span>backgroundColor <span class='op'>=</span> <span class='va'>input</span><span class='op'>$</span><span class='va'>backgroundColor</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'><a href='setQuality.html'>setQuality</a></span><span class='op'>(</span><span class='st'>"high"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'><a href='setFocus.html'>setFocus</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'><a href='setSpin.html'>setSpin</a></span><span class='op'>(</span><span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>add</span>, <span class='op'>{</span>
+    <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'><a href='addSelection.html'>addSelection</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/isolate.html'>isolate</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>type</span><span class='op'>)</span>,
+        param <span class='op'>=</span>
+          <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+            name <span class='op'>=</span> <span class='st'>"sel1"</span>,
+            sele <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/isolate.html'>isolate</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>selection</span><span class='op'>)</span>,
+            colorValue <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/isolate.html'>isolate</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>color</span><span class='op'>)</span>
+          <span class='op'>)</span>
+      <span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
 
-   <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>remove</span>, <span class='op'>{</span>
-     <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-     <span class='fu'><a href='removeSelection.html'>removeSelection</a></span><span class='op'>(</span><span class='st'>"sel1"</span><span class='op'>)</span>
-   <span class='op'>}</span><span class='op'>)</span>
- <span class='op'>}</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>remove</span>, <span class='op'>{</span>
+    <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'><a href='removeSelection.html'>removeSelection</a></span><span class='op'>(</span><span class='st'>"sel1"</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='op'>}</span>
 <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/shinyApp.html'>shinyApp</a></span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>server</span><span class='op'>)</span>
 <span class='op'>}</span>
 

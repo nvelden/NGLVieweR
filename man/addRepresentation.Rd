@@ -20,42 +20,55 @@ Add a representation and its parameters.
 }
 \examples{
 NGLVieweR("7CID") \%>\%
- stageParameters(backgroundColor = "black") \%>\%
- addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) \%>\%
- addRepresentation("ball+stick", param=list(name="ball+stick", sele="241",
-   colorScheme="element", colorValue="yellow")) \%>\%
- addRepresentation("label",
-                   param = list(name = "label",
-                                showBackground=TRUE,
-                                labelType="res",
-                                color="black",
-                                backgroundColor="white",
-                                backgroundOpacity=0.8,
-                                sele=":A and 241 and .CG"))
+  stageParameters(backgroundColor = "black") \%>\%
+  addRepresentation("cartoon", param = list(name = "cartoon", colorValue = "blue")) \%>\%
+  addRepresentation("ball+stick", param = list(
+    name = "ball+stick", sele = "241",
+    colorScheme = "element", colorValue = "yellow"
+  )) \%>\%
+  addRepresentation("label",
+    param = list(
+      name = "label",
+      showBackground = TRUE,
+      labelType = "res",
+      color = "black",
+      backgroundColor = "white",
+      backgroundOpacity = 0.8,
+      sele = ":A and 241 and .CG"
+    )
+  )
 
-#Shiny context
+# Shiny context
 if (interactive()) {
- library(shiny)
- ui = fluidPage(NGLVieweROutput("structure"))
- server = function(input, output) {
-   output$structure <- renderNGLVieweR({
-     NGLVieweR("7CID") \%>\%
-       stageParameters(backgroundColor = "black") \%>\%
-       addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) \%>\%
-       addRepresentation("ball+stick", param=list(name="ball+stick", sele="241",
-         colorScheme="element")) \%>\%
-       addRepresentation("label",
-                         param = list(name = "label",
-                                      showBackground=TRUE,
-                                      labelType="res",
-                                      colorValue="black",
-                                      backgroundColor="white",
-                                      backgroundOpacity=0.8,
-                                      sele=":A and 241 and .CG"))
-
-   })
- }
- shinyApp(ui, server)
+  library(shiny)
+  ui <- fluidPage(NGLVieweROutput("structure"))
+  server <- function(input, output) {
+    output$structure <- renderNGLVieweR({
+      NGLVieweR("7CID") \%>\%
+        stageParameters(backgroundColor = "black") \%>\%
+        addRepresentation("cartoon",
+          param = list(name = "cartoon", colorValue = "blue")
+        ) \%>\%
+        addRepresentation("ball+stick",
+          param = list(
+            name = "ball+stick", sele = "241",
+            colorScheme = "element"
+          )
+        ) \%>\%
+        addRepresentation("label",
+          param = list(
+            name = "label",
+            showBackground = TRUE,
+            labelType = "res",
+            colorValue = "black",
+            backgroundColor = "white",
+            backgroundOpacity = 0.8,
+            sele = ":A and 241 and .CG"
+          )
+        )
+    })
+  }
+  shinyApp(ui, server)
 }
 }
 \seealso{

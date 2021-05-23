@@ -36,7 +36,8 @@ if (interactive()) {
   server = function(input, output) {
     output$structure <- renderNGLVieweR({
       NGLVieweR("7CID") \%>\%
-        addRepresentation("cartoon", param = list(name = "cartoon", color= "red"))
+        addRepresentation("cartoon", 
+        param = list(name = "cartoon", color= "red"))
     })
     observeEvent(input$focus, {
       NGLVieweR_proxy("structure") \%>\%

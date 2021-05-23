@@ -36,16 +36,21 @@ ui = fluidPage(
 server = function(input, output) {
   output$structure <- renderNGLVieweR({
     NGLVieweR("7CID") \%>\%
-      addRepresentation("cartoon", param = list(name = "cartoon", color="red"))
+      addRepresentation("cartoon", 
+      param = list(name = "cartoon", color="red"))
   })
 
   observeEvent(input$animate,{
     if(input$animate == "Rock"){
-      NGLVieweR_proxy("structure") \%>\% updateRock(TRUE)
+      NGLVieweR_proxy("structure") \%>\%
+       updateRock(TRUE)
     } else if(input$animate == "Spin") {
-      NGLVieweR_proxy("structure") \%>\% updateSpin(TRUE)
+      NGLVieweR_proxy("structure") \%>\%
+       updateSpin(TRUE)
     } else{
-      NGLVieweR_proxy("structure") \%>\% updateRock(FALSE) \%>\% updateSpin(FALSE)
+      NGLVieweR_proxy("structure") \%>\%
+       updateRock(FALSE) \%>\%
+       updateSpin(FALSE)
     }
   })
  }

@@ -12,53 +12,58 @@
 #'* [NGLVieweR_example()] See example "addSelection".
 #'@examples
 #'\dontrun{
-#'NGLVieweR_proxy("7CID") %>%
+#' NGLVieweR_proxy("7CID") %>%
 #'  addSelection("ball+stick", param = list(name="sel1",
 #'                                          sele="1-20",
 #'                                          colorValue="yellow",
 #'                                          colorScheme="element"
 #'                                          ))
-#'}
-#'
-#'if (interactive()) {
-#'library(shiny)
-#'
-#'  ui = fluidPage(
-#'    titlePanel("Viewer with API inputs"),
-#'    sidebarLayout(
-#'      sidebarPanel(
-#'        textInput("selection", "Selection", "1-20"),
-#'        selectInput("type", "Type", c("ball+stick", "cartoon", "backbone")),
-#'        selectInput("color", "Color", c("orange", "grey", "white")),
-#'        actionButton("add", "Add"),
-#'        actionButton("remove", "Remove")
-#'      ),
-#'      mainPanel(
-#'        NGLVieweROutput("structure")
-#'      )
-#'    )
-#'  )
-#'  server = function(input, output) {
-#'    output$structure <- renderNGLVieweR({
-#'      NGLVieweR("7CID") %>%
-#'        addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
-#'    })
-#'    observeEvent(input$add, {
-#'      NGLVieweR_proxy("structure") %>%
-#'        addSelection(isolate(input$type),
-#'                     param =
-#'                     list(name="sel1",
-#'                     sele=isolate(input$selection),
-#'                     colorValue=isolate(input$color)))
-#'    })
-#'
-#'    observeEvent(input$remove, {
-#'      NGLVieweR_proxy("structure") %>%
-#'        removeSelection("sel1")
-#'    })
-#'  }
-#'shinyApp(ui, server)
-#'}
+#' }
+#' 
+#' if (interactive()) {
+#' library(shiny)
+#' 
+#' ui <- fluidPage(
+#'   titlePanel("Viewer with API inputs"),
+#'   sidebarLayout(
+#'     sidebarPanel(
+#'       textInput("selection", "Selection", "1-20"),
+#'       selectInput("type", "Type", c("ball+stick", "cartoon", "backbone")),
+#'       selectInput("color", "Color", c("orange", "grey", "white")),
+#'       actionButton("add", "Add"),
+#'       actionButton("remove", "Remove")
+#'     ),
+#'     mainPanel(
+#'       NGLVieweROutput("structure")
+#'     )
+#'   )
+#' )
+#' server <- function(input, output) {
+#'   output$structure <- renderNGLVieweR({
+#'     NGLVieweR("7CID") %>%
+#'       addRepresentation("cartoon",
+#'         param = list(name = "cartoon", colorScheme = "residueindex")
+#'       )
+#'   })
+#'   observeEvent(input$add, {
+#'     NGLVieweR_proxy("structure") %>%
+#'       addSelection(isolate(input$type),
+#'         param =
+#'           list(
+#'             name = "sel1",
+#'             sele = isolate(input$selection),
+#'             colorValue = isolate(input$color)
+#'           )
+#'       )
+#'   })
+#' 
+#'   observeEvent(input$remove, {
+#'     NGLVieweR_proxy("structure") %>%
+#'       removeSelection("sel1")
+#'   })
+#' }
+#' shinyApp(ui, server)
+#' }
 #'@export
 addSelection <- function(NGLVieweR_proxy, type, param = list()) {
 
@@ -81,47 +86,52 @@ addSelection <- function(NGLVieweR_proxy, type, param = list()) {
 #'\dontrun{
 #' NGLVieweR_proxy("structure") %>%
 #'      removeSelection("sel1")
-#'}
-#'
-#'if (interactive()) {
-#'library(shiny)
-#'
-#'  ui = fluidPage(
-#'    titlePanel("Viewer with API inputs"),
-#'    sidebarLayout(
-#'      sidebarPanel(
-#'        textInput("selection", "Selection", "1-20"),
-#'        selectInput("type", "Type", c("ball+stick", "cartoon", "backbone")),
-#'        selectInput("color", "Color", c("orange", "grey", "white")),
-#'        actionButton("add", "Add"),
-#'        actionButton("remove", "Remove")
-#'      ),
-#'      mainPanel(
-#'        NGLVieweROutput("structure")
-#'      )
-#'    )
-#'  )
-#'  server = function(input, output) {
-#'    output$structure <- renderNGLVieweR({
-#'      NGLVieweR("7CID") %>%
-#'        addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
-#'    })
-#'    observeEvent(input$add, {
-#'      NGLVieweR_proxy("structure") %>%
-#'        addSelection(isolate(input$type),
-#'                     param =
-#'                     list(name="sel1",
-#'                     sele=isolate(input$selection),
-#'                     colorValue=isolate(input$color)))
-#'    })
-#'
-#'    observeEvent(input$remove, {
-#'      NGLVieweR_proxy("structure") %>%
-#'        removeSelection("sel1")
-#'    })
-#'  }
-#'shinyApp(ui, server)
-#'}
+#' }
+#' 
+#' if (interactive()) {
+#'   library(shiny)
+#' 
+#'   ui <- fluidPage(
+#'     titlePanel("Viewer with API inputs"),
+#'     sidebarLayout(
+#'       sidebarPanel(
+#'         textInput("selection", "Selection", "1-20"),
+#'         selectInput("type", "Type", c("ball+stick", "cartoon", "backbone")),
+#'         selectInput("color", "Color", c("orange", "grey", "white")),
+#'         actionButton("add", "Add"),
+#'         actionButton("remove", "Remove")
+#'       ),
+#'       mainPanel(
+#'         NGLVieweROutput("structure")
+#'       )
+#'     )
+#'   )
+#'   server <- function(input, output) {
+#'     output$structure <- renderNGLVieweR({
+#'       NGLVieweR("7CID") %>%
+#'         addRepresentation("cartoon",
+#'           param = list(name = "cartoon", colorScheme = "residueindex")
+#'         )
+#'     })
+#'     observeEvent(input$add, {
+#'       NGLVieweR_proxy("structure") %>%
+#'         addSelection(isolate(input$type),
+#'           param =
+#'             list(
+#'               name = "sel1",
+#'               sele = isolate(input$selection),
+#'               colorValue = isolate(input$color)
+#'             )
+#'         )
+#'     })
+#' 
+#'     observeEvent(input$remove, {
+#'       NGLVieweR_proxy("structure") %>%
+#'         removeSelection("sel1")
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @export
 removeSelection <- function(NGLVieweR_proxy, name) {
 
@@ -146,38 +156,44 @@ removeSelection <- function(NGLVieweR_proxy, name) {
 #'\dontrun{
 #' NGLVieweR_proxy("structure") %>%
 #'   updateSelection("ball+stick", sele = "1-20")
-#'}
-#'
-#'if (interactive()) {
-#' library(shiny)
-#' ui = fluidPage(
-#'   titlePanel("Viewer with API inputs"),
-#'   sidebarLayout(
-#'     sidebarPanel(
-#'       textInput("selection", "Selection", "1-20"),
-#'       actionButton("update", "Update")
-#'     ),
-#'     mainPanel(
-#'       NGLVieweROutput("structure")
+#' }
+#' 
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- fluidPage(
+#'     titlePanel("Viewer with API inputs"),
+#'     sidebarLayout(
+#'       sidebarPanel(
+#'         textInput("selection", "Selection", "1-20"),
+#'         actionButton("update", "Update")
+#'       ),
+#'       mainPanel(
+#'         NGLVieweROutput("structure")
+#'       )
 #'     )
 #'   )
-#' )
-#' server = function(input, output) {
-#'   output$structure <- renderNGLVieweR({
-#'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(name = "cartoon", color="red")) %>%
-#'       addRepresentation("ball+stick", param = list(name = "ball+stick",
-#'                                                    colorValue="yellow",
-#'                                                    colorScheme="element",
-#'                                                    sele="1-20"))
-#'   })
-#'   observeEvent(input$update, {
-#'     NGLVieweR_proxy("structure") %>%
-#'       updateSelection("ball+stick", sele =isolate(input$selection))
-#'   })
+#'   server <- function(input, output) {
+#'     output$structure <- renderNGLVieweR({
+#'       NGLVieweR("7CID") %>%
+#'         addRepresentation("cartoon",
+#'           param = list(name = "cartoon", color = "red")
+#'         ) %>%
+#'         addRepresentation("ball+stick",
+#'           param = list(
+#'             name = "ball+stick",
+#'             colorValue = "yellow",
+#'             colorScheme = "element",
+#'             sele = "1-20"
+#'           )
+#'         )
+#'     })
+#'     observeEvent(input$update, {
+#'       NGLVieweR_proxy("structure") %>%
+#'         updateSelection("ball+stick", sele = isolate(input$selection))
+#'     })
+#'   }
+#'   shinyApp(ui, server)
 #' }
-#' shinyApp(ui, server)
-#'}
 #'@export
 updateSelection <- function(NGLVieweR_proxy, name = name, sele = "none"){
 
@@ -203,36 +219,37 @@ updateSelection <- function(NGLVieweR_proxy, name = name, sele = "none"){
 #'\dontrun{
 #' NGLVieweR_proxy("structure") %>%
 #'      updateColor("cartoon", "red")
-#'}
+#' }
 #'
-#'if (interactive()) {
-#' library(shiny)
-#'
-#' ui = fluidPage(
-#'   titlePanel("Viewer with API inputs"),
-#'   sidebarLayout(
-#'     sidebarPanel(
-#'       colourInput("color", "red", "red"),
-#'       actionButton("update", "Update"),
-#'     ),
-#'     mainPanel(
-#'       NGLVieweROutput("structure")
+#' if (interactive()) {
+#'   library(shiny)
+#' 
+#'   ui <- fluidPage(
+#'     titlePanel("Viewer with API inputs"),
+#'     sidebarLayout(
+#'       sidebarPanel(
+#'         colourInput("color", "red", "red"),
+#'         actionButton("update", "Update"),
+#'       ),
+#'       mainPanel(
+#'         NGLVieweROutput("structure")
+#'       )
 #'     )
 #'   )
-#' )
-#' server = function(input, output) {
-#'   output$structure <- renderNGLVieweR({
-#'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(name = "cartoon", color="residueindex"))
-#'   })
-#'   observeEvent(input$update, {
-#'     NGLVieweR_proxy("structure") %>%
-#'       updateColor("cartoon", isolate(input$color))
-#'
-#'   })
+#'   server <- function(input, output) {
+#'     output$structure <- renderNGLVieweR({
+#'       NGLVieweR("7CID") %>%
+#'         addRepresentation("cartoon",
+#'           param = list(name = "cartoon", color = "residueindex")
+#'         )
+#'     })
+#'     observeEvent(input$update, {
+#'       NGLVieweR_proxy("structure") %>%
+#'         updateColor("cartoon", isolate(input$color))
+#'     })
+#'   }
+#'   shinyApp(ui, server)
 #' }
-#' shinyApp(ui, server)
-#'}
 #' @export
 updateColor <- function(NGLVieweR_proxy, name, color) {
 
@@ -263,37 +280,44 @@ updateColor <- function(NGLVieweR_proxy, name, color) {
 #'                                scale = 1))
 #'}
 #'
-#'if (interactive()) {
-#' library(shiny)
-#'
-#'   ui = fluidPage(
-#'   titlePanel("Viewer with API inputs"),
-#'   sidebarLayout(
-#'     sidebarPanel(
-#'       actionButton("snapshot", "Snapshot"),
-#'     ),
-#'     mainPanel(
-#'       NGLVieweROutput("structure")
+#' if (interactive()) {
+#'   library(shiny)
+#' 
+#'   ui <- fluidPage(
+#'     titlePanel("Viewer with API inputs"),
+#'     sidebarLayout(
+#'       sidebarPanel(
+#'         actionButton("snapshot", "Snapshot"),
+#'       ),
+#'       mainPanel(
+#'         NGLVieweROutput("structure")
+#'       )
 #'     )
 #'   )
-#' )
-#' server = function(input, output) {
-#'   output$structure <- renderNGLVieweR({
-#'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(
-#'                                                name = "cartoon",
-#'                                                color= "residueindex"))
-#'   })
-#'   observeEvent(input$snapshot, {
-#'     NGLVieweR_proxy("structure") %>%
-#'       snapShot("Snapshot", param = list(antialias = TRUE,
-#'                                         trim = TRUE,
-#'                                         transparent = TRUE,
-#'                                         scale = 1))
+#'   server <- function(input, output) {
+#'     output$structure <- renderNGLVieweR({
+#'       NGLVieweR("7CID") %>%
+#'         addRepresentation("cartoon",
+#'           param = list(
+#'             name = "cartoon",
+#'             color = "residueindex"
+#'           )
+#'         )
 #'     })
+#'     observeEvent(input$snapshot, {
+#'       NGLVieweR_proxy("structure") %>%
+#'         snapShot("Snapshot",
+#'           param = list(
+#'             antialias = TRUE,
+#'             trim = TRUE,
+#'             transparent = TRUE,
+#'             scale = 1
+#'           )
+#'         )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
 #' }
-#' shinyApp(ui, server)
-#'}
 #'@export
 snapShot <- function(NGLVieweR_proxy, fileName = "Snapshot", param = list()) {
 
@@ -317,13 +341,13 @@ snapShot <- function(NGLVieweR_proxy, fileName = "Snapshot", param = list()) {
 #'[NGLVieweR_example()] See example "updateVisibility".
 #'@examples
 #'\dontrun{
-#'NGLVieweR_proxy("structure") %>%
+#' NGLVieweR_proxy("structure") %>%
 #'  updateVisibility("cartoon", value = TRUE)
-#'}
-#'
-#'if (interactive()) {
-#'library(shiny)
-#'
+#' }
+#' 
+#' if (interactive()) {
+#' library(shiny)
+#' 
 #' ui = fluidPage(
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
@@ -339,21 +363,22 @@ snapShot <- function(NGLVieweR_proxy, fileName = "Snapshot", param = list()) {
 #' server = function(input, output) {
 #'   output$structure <- renderNGLVieweR({
 #'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(name = "cartoon", color="residueindex"))
+#'       addRepresentation("cartoon", 
+#'                         param = list(name = "cartoon", color="residueindex"))
 #'   })
 #'   observeEvent(input$show, {
 #'     NGLVieweR_proxy("structure") %>%
 #'       updateVisibility("cartoon", value = TRUE)
-#'
+#' 
 #'   })
 #'   observeEvent(input$hide, {
 #'     NGLVieweR_proxy("structure") %>%
 #'       updateVisibility("cartoon", value = FALSE)
-#'
+#' 
 #'   })
 #' }
 #' shinyApp(ui, server)
-#'}
+#' }
 #'@export
 updateVisibility <- function(NGLVieweR_proxy, name, value = FALSE) {
 
@@ -378,16 +403,19 @@ updateVisibility <- function(NGLVieweR_proxy, name, value = FALSE) {
 #'* [NGLVieweR_example()] See example "updateRepresentation".
 #'@examples
 #'\dontrun{
-#'NGLVieweR_proxy("structure") %>%
-#'  updateRepresentation("cartoon", param = list(
-#'                                          name="cartoon",
-#'                                          color=isolate(input$color),
-#'                                          opacity=isolate(input$opacity)))
-#'}
-#'
-#'if (interactive()) {
+#' NGLVieweR_proxy("structure") %>%
+#'   updateRepresentation("cartoon",
+#'     param = list(
+#'       name = "cartoon",
+#'       color = isolate(input$color),
+#'       opacity = isolate(input$opacity)
+#'     )
+#'   )
+#' }
+#' 
+#' if (interactive()) {
 #' library(shiny)
-#'
+#' 
 #' ui = fluidPage(
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
@@ -404,17 +432,21 @@ updateVisibility <- function(NGLVieweR_proxy, name, value = FALSE) {
 #' server = function(input, output) {
 #'   output$structure <- renderNGLVieweR({
 #'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(name = "cartoon", color="red"))
+#'       addRepresentation("cartoon", 
+#'                         param = list(name = "cartoon", color="red"))
 #'   })
-#'   observeEvent(input$update, {
-#'     NGLVieweR_proxy("structure") %>%
-#'       updateRepresentation("cartoon", param = list(
-#'                                                color=isolate(input$color),
-#'                                                opacity=isolate(input$opacity)))
-#'    })
+#' observeEvent(input$update, {
+#'   NGLVieweR_proxy("structure") %>%
+#'     updateRepresentation("cartoon",
+#'       param = list(
+#'         color = isolate(input$color),
+#'         opacity = isolate(input$opacity)
+#'       )
+#'     )
+#' })
 #'  }
 #' shinyApp(ui, server)
-#'}
+#' }
 #' @export
 updateRepresentation <- function(NGLVieweR_proxy, name, param = list()) {
 
@@ -437,14 +469,15 @@ updateRepresentation <- function(NGLVieweR_proxy, name, param = list()) {
 #'* [NGLVieweR_example()] See example "updateStage".
 #'@examples
 #'\dontrun{
-#'NGLVieweR("7CID") %>%
-#'  addRepresentation("cartoon", param = list(name = "cartoon", color="red")) %>%
+#' NGLVieweR("7CID") %>%
+#'  addRepresentation("cartoon", 
+#'                    param = list(name = "cartoon", color="red")) %>%
 #'  stageParameters(backgroundColor = "black")
-#'}
-#'
-#'if (interactive()) {
+#' }
+#' 
+#' if (interactive()) {
 #' library(shiny)
-#'
+#' 
 #' ui = fluidPage(
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
@@ -457,19 +490,22 @@ updateRepresentation <- function(NGLVieweR_proxy, name, param = list()) {
 #'     )
 #'   )
 #' )
-#' server = function(input, output) {
+#' server <- function(input, output) {
 #'   output$structure <- renderNGLVieweR({
 #'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(name = "cartoon", color="red")) %>%
+#'       addRepresentation("cartoon",
+#'         param = list(name = "cartoon", color = "red")
+#'       ) %>%
 #'       stageParameters(backgroundColor = "black")
 #'   })
 #'   observeEvent(input$update, {
 #'     NGLVieweR_proxy("structure") %>%
-#'       updateStage(param = list("backgroundColor" = isolate(input$background)))
+#'       updateStage(
+#'       param = list("backgroundColor" = isolate(input$background)))
 #'   })
 #' }
 #' shinyApp(ui, server)
-#'}
+#' }
 #' @export
 updateStage <- function(NGLVieweR_proxy, param = list()) {
 
@@ -511,7 +547,8 @@ updateStage <- function(NGLVieweR_proxy, param = list()) {
 #'   server = function(input, output) {
 #'     output$structure <- renderNGLVieweR({
 #'       NGLVieweR("7CID") %>%
-#'         addRepresentation("cartoon", param = list(name = "cartoon", color= "red"))
+#'         addRepresentation("cartoon", 
+#'         param = list(name = "cartoon", color= "red"))
 #'     })
 #'     observeEvent(input$focus, {
 #'       NGLVieweR_proxy("structure") %>%
@@ -563,16 +600,21 @@ updateFocus <- function(NGLVieweR_proxy, focus = 0){
 #' server = function(input, output) {
 #'   output$structure <- renderNGLVieweR({
 #'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(name = "cartoon", color="red"))
+#'       addRepresentation("cartoon", 
+#'       param = list(name = "cartoon", color="red"))
 #'   })
 #'
 #'   observeEvent(input$animate,{
 #'     if(input$animate == "Rock"){
-#'       NGLVieweR_proxy("structure") %>% updateRock(TRUE)
+#'       NGLVieweR_proxy("structure") %>% 
+#'       updateRock(TRUE)
 #'     } else if(input$animate == "Spin") {
-#'       NGLVieweR_proxy("structure") %>% updateSpin(TRUE)
+#'       NGLVieweR_proxy("structure") %>% 
+#'       updateSpin(TRUE)
 #'     } else{
-#'       NGLVieweR_proxy("structure") %>% updateRock(FALSE) %>% updateSpin(FALSE)
+#'       NGLVieweR_proxy("structure") %>% 
+#'       updateRock(FALSE) %>% 
+#'       updateSpin(FALSE)
 #'     }
 #'   })
 #'  }
@@ -619,16 +661,21 @@ updateRock <- function(NGLVieweR_proxy, rock = TRUE){
 #' server = function(input, output) {
 #'   output$structure <- renderNGLVieweR({
 #'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(name = "cartoon", color="red"))
+#'       addRepresentation("cartoon", 
+#'       param = list(name = "cartoon", color="red"))
 #'   })
 #'
 #'   observeEvent(input$animate,{
 #'     if(input$animate == "Rock"){
-#'       NGLVieweR_proxy("structure") %>% updateRock(TRUE)
+#'       NGLVieweR_proxy("structure") %>%
+#'        updateRock(TRUE)
 #'     } else if(input$animate == "Spin") {
-#'       NGLVieweR_proxy("structure") %>% updateSpin(TRUE)
+#'       NGLVieweR_proxy("structure") %>%
+#'        updateSpin(TRUE)
 #'     } else{
-#'       NGLVieweR_proxy("structure") %>% updateRock(FALSE) %>% updateSpin(FALSE)
+#'       NGLVieweR_proxy("structure") %>%
+#'        updateRock(FALSE) %>%
+#'        updateSpin(FALSE)
 #'     }
 #'   })
 #'  }
@@ -654,13 +701,13 @@ updateSpin <- function(NGLVieweR_proxy, spin = TRUE){
 #'[NGLVieweR_example()] See example "updateFullscreen".
 #'@examples
 #'\dontrun{
-#'NGLVieweR_proxy("structure") %>% updateFullscreen()
-#'}
-#'
-#'if (interactive()) {
+#' NGLVieweR_proxy("structure") %>% updateFullscreen()
+#' }
+#' 
+#' if (interactive()) {
 #' library(shiny)
-#'
-#' ui = fluidPage(
+#' 
+#' ui <- fluidPage(
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
 #'     sidebarPanel(
@@ -672,24 +719,26 @@ updateSpin <- function(NGLVieweR_proxy, spin = TRUE){
 #'   )
 #' )
 #' server = function(input, output) {
-#'   output$structure <- renderNGLVieweR({
-#'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(name = "cartoon", color="red"))
-#'   })
-#'
-#'   observeEvent(input$fullscreen,{
-#'
-#'     NGLVieweR_proxy("structure") %>% updateFullscreen()
-#'
-#'   })
+#'  output$structure <- renderNGLVieweR({
+#'   NGLVieweR("7CID") %>%
+#'     addRepresentation("cartoon",
+#'       param = list(name = "cartoon", color = "red")
+#'     )
+#' })
+#' 
+#'   observeEvent(input$fullscreen, {
+#'   NGLVieweR_proxy("structure") %>%
+#'     updateFullscreen()
+#' })
 #' }
 #'   shinyApp(ui, server)
-#'}
+#' }
 #'@export
 updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE){
 
   message <- list(id = NGLVieweR_proxy$id, fullscreen = fullscreen)
-  NGLVieweR_proxy$session$sendCustomMessage("NGLVieweR:updateFullscreen", message)
+  NGLVieweR_proxy$session$sendCustomMessage("NGLVieweR:updateFullscreen", 
+                                            message)
 
   return(NGLVieweR_proxy)
 }
@@ -711,15 +760,15 @@ updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE){
 #'* [NGLVieweR_example()] See example "updatezoomMove".
 #'@examples
 #'\dontrun{
-#'NGLVieweR_proxy("structure") %>% updateZoomMove(center = "200",
+#' NGLVieweR_proxy("structure") %>% updateZoomMove(center = "200",
 #'                                                zoom = "200",
 #'                                                z_offSet = 80,
 #'                                                duration = 2000)
-#'}
-#'
-#'if (interactive()) {
+#' }
+#' 
+#' if (interactive()) {
 #' library(shiny)
-#'
+#' 
 #' ui = fluidPage(
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
@@ -739,30 +788,34 @@ updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE){
 #' server = function(input, output) {
 #'   output$structure <- renderNGLVieweR({
 #'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", param = list(name = "cartoon", color="red")) %>%
-#'       addRepresentation("ball+stick", param = list(name = "ball+stick", sele="200"))
+#'       addRepresentation("cartoon",
+#'       param = list(name = "cartoon", color="red")) %>%
+#'       addRepresentation("ball+stick",
+#'       param = list(name = "ball+stick", sele="200"))
 #'   })
-#'
-#'   observeEvent(input$zoom,{
-#'
-#'     NGLVieweR_proxy("structure") %>% updateZoomMove(center = isolate(input$center),
-#'                                                     zoom = isolate(input$zoom),
-#'                                                     z_offSet = isolate(input$zoomOffset),
-#'                                                     duration = isolate(input$duration))
-#'
-#'   })
-#'
-#'   observeEvent(input$reset,{
-#'
-#'     NGLVieweR_proxy("structure") %>% updateZoomMove(center = "*",
-#'                                                     zoom = "*",
-#'                                                     z_offSet = 0,
-#'                                                     duration = 1000)
-#'
-#'   })
+#' 
+#' observeEvent(input$zoom, {
+#'   NGLVieweR_proxy("structure") %>%
+#'     updateZoomMove(
+#'       center = isolate(input$center),
+#'       zoom = isolate(input$zoom),
+#'       z_offSet = isolate(input$zoomOffset),
+#'       duration = isolate(input$duration)
+#'     )
+#' })
+#' 
+#' observeEvent(input$reset, {
+#'   NGLVieweR_proxy("structure") %>%
+#'     updateZoomMove(
+#'       center = "*",
+#'       zoom = "*",
+#'       z_offSet = 0,
+#'       duration = 1000
+#'     )
+#' })
 #' }
 #' shinyApp(ui, server)
-#'}
+#' }
 #' @export
 updateZoomMove <- function(NGLVieweR_proxy, center, zoom, duration = 0, z_offSet = 0){
   message <- list(id = NGLVieweR_proxy$id, center = center, zoom = zoom, duration = duration, z_offSet = z_offSet)

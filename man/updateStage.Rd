@@ -18,7 +18,8 @@ Update an existing NGLVieweR stage in Shinymode.
 \examples{
 \dontrun{
 NGLVieweR("7CID") \%>\%
- addRepresentation("cartoon", param = list(name = "cartoon", color="red")) \%>\%
+ addRepresentation("cartoon", 
+                   param = list(name = "cartoon", color="red")) \%>\%
  stageParameters(backgroundColor = "black")
 }
 
@@ -37,15 +38,18 @@ ui = fluidPage(
     )
   )
 )
-server = function(input, output) {
+server <- function(input, output) {
   output$structure <- renderNGLVieweR({
     NGLVieweR("7CID") \%>\%
-      addRepresentation("cartoon", param = list(name = "cartoon", color="red")) \%>\%
+      addRepresentation("cartoon",
+        param = list(name = "cartoon", color = "red")
+      ) \%>\%
       stageParameters(backgroundColor = "black")
   })
   observeEvent(input$update, {
     NGLVieweR_proxy("structure") \%>\%
-      updateStage(param = list("backgroundColor" = isolate(input$background)))
+      updateStage(
+      param = list("backgroundColor" = isolate(input$background)))
   })
 }
 shinyApp(ui, server)

@@ -23,15 +23,17 @@ NGLVieweR("7CID") \%>\%
 
 if (interactive()) {
   library(shiny)
-    ui = fluidPage(NGLVieweROutput("structure"))
-    server = function(input, output) {
-      output$structure <- renderNGLVieweR({
-        NGLVieweR("7CID") \%>\%
-          stageParameters(backgroundColor = "white", zoomSpeed = 1) \%>\%
-          addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
-      })
-    }
-shinyApp(ui, server)
+  ui <- fluidPage(NGLVieweROutput("structure"))
+  server <- function(input, output) {
+    output$structure <- renderNGLVieweR({
+      NGLVieweR("7CID") \%>\%
+        stageParameters(backgroundColor = "white", zoomSpeed = 1) \%>\%
+        addRepresentation("cartoon",
+          param = list(name = "cartoon", colorScheme = "residueindex")
+        )
+    })
+  }
+  shinyApp(ui, server)
 }
 
 }

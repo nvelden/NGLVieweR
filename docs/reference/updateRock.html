@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NGLVieweR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -99,6 +99,9 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -183,16 +186,21 @@
 <span class='va'>server</span> <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>output</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>output</span><span class='op'>$</span><span class='va'>structure</span> <span class='op'>&lt;-</span> <span class='fu'><a href='NGLVieweR-shiny.html'>renderNGLVieweR</a></span><span class='op'>(</span><span class='op'>{</span>
     <span class='fu'><a href='NGLVieweR.html'>NGLVieweR</a></span><span class='op'>(</span><span class='st'>"7CID"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-      <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"cartoon"</span>, param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"cartoon"</span>, color<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span><span class='op'>)</span>
+      <span class='fu'><a href='addRepresentation.html'>addRepresentation</a></span><span class='op'>(</span><span class='st'>"cartoon"</span>, 
+      param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"cartoon"</span>, color<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span><span class='op'>)</span>
   <span class='op'>}</span><span class='op'>)</span>
 
   <span class='fu'><a href='https://rdrr.io/pkg/shiny/man/observeEvent.html'>observeEvent</a></span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>animate</span>,<span class='op'>{</span>
     <span class='kw'>if</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>animate</span> <span class='op'>==</span> <span class='st'>"Rock"</span><span class='op'>)</span><span class='op'>{</span>
-      <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>updateRock</span><span class='op'>(</span><span class='cn'>TRUE</span><span class='op'>)</span>
+      <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'>updateRock</span><span class='op'>(</span><span class='cn'>TRUE</span><span class='op'>)</span>
     <span class='op'>}</span> <span class='kw'>else</span> <span class='kw'>if</span><span class='op'>(</span><span class='va'>input</span><span class='op'>$</span><span class='va'>animate</span> <span class='op'>==</span> <span class='st'>"Spin"</span><span class='op'>)</span> <span class='op'>{</span>
-      <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='updateSpin.html'>updateSpin</a></span><span class='op'>(</span><span class='cn'>TRUE</span><span class='op'>)</span>
+      <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='updateSpin.html'>updateSpin</a></span><span class='op'>(</span><span class='cn'>TRUE</span><span class='op'>)</span>
     <span class='op'>}</span> <span class='kw'>else</span><span class='op'>{</span>
-      <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>updateRock</span><span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='updateSpin.html'>updateSpin</a></span><span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span>
+      <span class='fu'><a href='NGLVieweR-shiny.html'>NGLVieweR_proxy</a></span><span class='op'>(</span><span class='st'>"structure"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'>updateRock</span><span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='updateSpin.html'>updateSpin</a></span><span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span>
     <span class='op'>}</span>
   <span class='op'>}</span><span class='op'>)</span>
  <span class='op'>}</span>

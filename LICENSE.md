@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # MIT License
 
 Copyright (c) 2021 Niels van der Velden

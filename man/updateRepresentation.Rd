@@ -20,10 +20,13 @@ Update an existing NGLVieweR representation in Shinymode.
 \examples{
 \dontrun{
 NGLVieweR_proxy("structure") \%>\%
- updateRepresentation("cartoon", param = list(
-                                         name="cartoon",
-                                         color=isolate(input$color),
-                                         opacity=isolate(input$opacity)))
+  updateRepresentation("cartoon",
+    param = list(
+      name = "cartoon",
+      color = isolate(input$color),
+      opacity = isolate(input$opacity)
+    )
+  )
 }
 
 if (interactive()) {
@@ -45,14 +48,18 @@ ui = fluidPage(
 server = function(input, output) {
   output$structure <- renderNGLVieweR({
     NGLVieweR("7CID") \%>\%
-      addRepresentation("cartoon", param = list(name = "cartoon", color="red"))
+      addRepresentation("cartoon", 
+                        param = list(name = "cartoon", color="red"))
   })
-  observeEvent(input$update, {
-    NGLVieweR_proxy("structure") \%>\%
-      updateRepresentation("cartoon", param = list(
-                                               color=isolate(input$color),
-                                               opacity=isolate(input$opacity)))
-   })
+observeEvent(input$update, {
+  NGLVieweR_proxy("structure") \%>\%
+    updateRepresentation("cartoon",
+      param = list(
+        color = isolate(input$color),
+        opacity = isolate(input$opacity)
+      )
+    )
+})
  }
 shinyApp(ui, server)
 }

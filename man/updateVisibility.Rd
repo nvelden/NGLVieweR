@@ -41,7 +41,8 @@ ui = fluidPage(
 server = function(input, output) {
   output$structure <- renderNGLVieweR({
     NGLVieweR("7CID") \%>\%
-      addRepresentation("cartoon", param = list(name = "cartoon", color="residueindex"))
+      addRepresentation("cartoon", 
+                        param = list(name = "cartoon", color="residueindex"))
   })
   observeEvent(input$show, {
     NGLVieweR_proxy("structure") \%>\%

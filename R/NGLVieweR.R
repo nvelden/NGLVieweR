@@ -27,26 +27,42 @@ tools::file_ext
 #'  addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
 #'
 #' # Example 2: Advanced
-#'NGLVieweR("7CID") %>%
+#' NGLVieweR("7CID") %>%
 #'   stageParameters(backgroundColor = "white") %>%
 #'   setQuality("high") %>%
 #'   setSpin(FALSE) %>%
-#'   addRepresentation("cartoon", param = list(name = "cartoon",
-#'                                             colorScheme="residueindex")) %>%
-#'   addRepresentation("ball+stick", param = list(name = "ball+stick",
-#'                                                colorValue="red",
-#'                                                colorScheme="element",
-#'                                                sele="200")) %>%
-#'   addRepresentation("label", param = list(name = "label", sele="200:A.O",
-#'                                           showBackground=TRUE,
-#'                                           backgroundColor="black",
-#'                                           backgroundMargin=2,
-#'                                           backgroundOpacity=0.5,
-#'                                           showBorder=TRUE,
-#'                                           colorValue="white")) %>%
-#'   addRepresentation("surface", param = list(name = "surface",
-#'                                             colorValue="white",
-#'                                             opacity=0.1)) %>%
+#'   addRepresentation("cartoon",
+#'     param = list(
+#'       name = "cartoon",
+#'       colorScheme = "residueindex"
+#'     )
+#'   ) %>%
+#'   addRepresentation("ball+stick",
+#'     param = list(
+#'       name = "ball+stick",
+#'       colorValue = "red",
+#'       colorScheme = "element",
+#'       sele = "200"
+#'     )
+#'   ) %>%
+#'   addRepresentation("label",
+#'     param = list(
+#'       name = "label", sele = "200:A.O",
+#'       showBackground = TRUE,
+#'       backgroundColor = "black",
+#'       backgroundMargin = 2,
+#'       backgroundOpacity = 0.5,
+#'       showBorder = TRUE,
+#'       colorValue = "white"
+#'     )
+#'   ) %>%
+#'   addRepresentation("surface",
+#'     param = list(
+#'       name = "surface",
+#'       colorValue = "white",
+#'       opacity = 0.1
+#'     )
+#'   ) %>%
 #'   zoomMove("200", "200", 2000, -20)
 #'
 #' #---------------------Using Shiny-------------------------
@@ -54,68 +70,81 @@ tools::file_ext
 #' # App 1: Basic Example
 #' if (interactive()) {
 #'   library(shiny)
-#'     ui = fluidPage(NGLVieweROutput("structure"))
-#'     server = function(input, output) {
-#'       output$structure <- renderNGLVieweR({
-#'         NGLVieweR("7CID") %>%
-#'           addRepresentation("cartoon", param = list(name = "cartoon",
-#'                                                     colorScheme="residueindex")) %>%
-#'           addRepresentation("ball+stick", param = list(name = "cartoon",
-#'                                                        sele='1-20',
-#'                                                        colorScheme="element")) %>%
-#'           stageParameters(backgroundColor = "black") %>%
-#'           setQuality("high") %>%
-#'           setFocus(0) %>%
-#'           setSpin(TRUE)
-#'       })
-#'     }
-#' shinyApp(ui, server)
+#'   ui <- fluidPage(NGLVieweROutput("structure"))
+#'   server <- function(input, output) {
+#'     output$structure <- renderNGLVieweR({
+#'       NGLVieweR("7CID") %>%
+#'         addRepresentation("cartoon",
+#'           param = list(
+#'             name = "cartoon",
+#'             colorScheme = "residueindex"
+#'           )
+#'         ) %>%
+#'         addRepresentation("ball+stick",
+#'           param = list(
+#'             name = "cartoon",
+#'             sele = "1-20",
+#'             colorScheme = "element"
+#'           )
+#'         ) %>%
+#'         stageParameters(backgroundColor = "black") %>%
+#'         setQuality("high") %>%
+#'         setFocus(0) %>%
+#'         setSpin(TRUE)
+#'     })
+#'   }
+#'   shinyApp(ui, server)
 #' }
 #'
 #'# App 2: Example with API calls
 #'if (interactive()) {
-#'library(shiny)
-#'
-#'  ui = fluidPage(
-#'    titlePanel("Viewer with API inputs"),
-#'    sidebarLayout(
-#'      sidebarPanel(
-#'        textInput("selection", "Selection", "1-20"),
-#'        selectInput("type", "Type", c("ball+stick", "cartoon", "backbone")),
-#'        selectInput("color", "Color", c("orange", "grey", "white")),
-#'        actionButton("add", "Add"),
-#'        actionButton("remove", "Remove")
-#'      ),
-#'      mainPanel(
-#'        NGLVieweROutput("structure")
-#'      )
-#'    )
-#'  )
-#'  server = function(input, output) {
-#'    output$structure <- renderNGLVieweR({
-#'      NGLVieweR("7CID") %>%
-#'        addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex")) %>%
-#'        stageParameters(backgroundColor = input$backgroundColor) %>%
-#'        setQuality("high") %>%
-#'        setFocus(0) %>%
-#'        setSpin(TRUE)
-#'    })
-#'    observeEvent(input$add, {
-#'      NGLVieweR_proxy("structure") %>%
-#'      addSelection(isolate(input$type),
-#'                   param =
-#'                   list(name="sel1",
-#'                   sele=isolate(input$selection),
-#'                   colorValue=isolate(input$color)))
-#'    })
-#'
-#'    observeEvent(input$remove, {
-#'      NGLVieweR_proxy("structure") %>%
-#'      removeSelection("sel1")
-#'    })
-#'  }
-#'shinyApp(ui, server)
-#'}
+#' library(shiny)
+#' 
+#' ui <- fluidPage(
+#'   titlePanel("Viewer with API inputs"),
+#'   sidebarLayout(
+#'     sidebarPanel(
+#'       textInput("selection", "Selection", "1-20"),
+#'       selectInput("type", "Type", c("ball+stick", "cartoon", "backbone")),
+#'       selectInput("color", "Color", c("orange", "grey", "white")),
+#'       actionButton("add", "Add"),
+#'       actionButton("remove", "Remove")
+#'     ),
+#'     mainPanel(
+#'       NGLVieweROutput("structure")
+#'     )
+#'   )
+#' )
+#' server <- function(input, output) {
+#'   output$structure <- renderNGLVieweR({
+#'     NGLVieweR("7CID") %>%
+#'       addRepresentation("cartoon",
+#'         param = list(name = "cartoon", colorScheme = "residueindex")
+#'       ) %>%
+#'       stageParameters(backgroundColor = input$backgroundColor) %>%
+#'       setQuality("high") %>%
+#'       setFocus(0) %>%
+#'       setSpin(TRUE)
+#'   })
+#'   observeEvent(input$add, {
+#'     NGLVieweR_proxy("structure") %>%
+#'       addSelection(isolate(input$type),
+#'         param =
+#'           list(
+#'             name = "sel1",
+#'             sele = isolate(input$selection),
+#'             colorValue = isolate(input$color)
+#'           )
+#'       )
+#'   })
+#' 
+#'   observeEvent(input$remove, {
+#'     NGLVieweR_proxy("structure") %>%
+#'       removeSelection("sel1")
+#'   })
+#' }
+#' shinyApp(ui, server)
+#' }
 #'
 #'@importFrom htmlwidgets createWidget
 #'
@@ -123,41 +152,43 @@ tools::file_ext
 NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementId = NULL) {
 
   # Validate data input
-  if(missing(data)){
+  if (missing(data)) {
     stop("NGLVieweR: Please specify a PDB entry code or file",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
-  if(nchar(data) > 8 && tools::file_ext(data) == "" && is.null(format)){
+  if (nchar(data) > 8 && tools::file_ext(data) == "" && is.null(format)) {
     stop("NGLVieweR: Please specify the file format",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
-  
+
   type <- NULL
   file_ext <- format
-  #Read PDB file
-  if(file.exists(data) && nchar(data) > 8){
-   if(is.null(format)){  
-    file_ext <- tools::file_ext(data)
-   }
+  # Read PDB file
+  if (file.exists(data) && nchar(data) > 8) {
+    if (is.null(format)) {
+      file_ext <- tools::file_ext(data)
+    }
     data <- paste(readLines(data), collapse = "\n")
     type <- "file"
-  #Read directly from R editor  
-  } else if(nchar(data) > 8 && tools::file_ext(data) == ""){
+    # Read directly from R editor
+  } else if (nchar(data) > 8 && tools::file_ext(data) == "") {
     type <- "file"
     file_ext <- format
     data <- paste(data, collapse = "\n")
-  #Read from PDB code  
-  }  else {
+    # Read from PDB code
+  } else {
     type <- "code"
-    data <- sprintf('rcsb://%s.pdb', data)
+    data <- sprintf("rcsb://%s.pdb", data)
   }
   # forward options using x
-  x = list()
+  x <- list()
   x$file_ext <- file_ext
   x$data <- data
   x$type <- type
 
-  #Data from functions
+  # Data from functions
   x$stageParameters <- list()
   x$addRepresentation <- list()
   x$addRepresentation$type <- list()
@@ -172,11 +203,11 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
 
   # create widget
   htmlwidgets::createWidget(
-    name = 'NGLVieweR',
+    name = "NGLVieweR",
     x,
     width = width,
     height = height,
-    package = 'NGLVieweR',
+    package = "NGLVieweR",
     elementId = elementId
   )
 }
@@ -199,15 +230,17 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
 #'
 #' if (interactive()) {
 #'   library(shiny)
-#'     ui = fluidPage(NGLVieweROutput("structure"))
-#'     server = function(input, output) {
-#'       output$structure <- renderNGLVieweR({
-#'         NGLVieweR("7CID") %>%
-#'           stageParameters(backgroundColor = "white", zoomSpeed = 1) %>%
-#'           addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
-#'       })
-#'     }
-#' shinyApp(ui, server)
+#'   ui <- fluidPage(NGLVieweROutput("structure"))
+#'   server <- function(input, output) {
+#'     output$structure <- renderNGLVieweR({
+#'       NGLVieweR("7CID") %>%
+#'         stageParameters(backgroundColor = "white", zoomSpeed = 1) %>%
+#'         addRepresentation("cartoon",
+#'           param = list(name = "cartoon", colorScheme = "residueindex")
+#'         )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
 #' }
 #'
 #'@export
@@ -232,44 +265,57 @@ stageParameters <- function(NGLVieweR, ...) {
 #'* [addSelection()]
 #'* [NGLVieweR_example()] See example "basic".
 #'@examples
-#'NGLVieweR("7CID") %>%
-#'  stageParameters(backgroundColor = "black") %>%
-#'  addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) %>%
-#'  addRepresentation("ball+stick", param=list(name="ball+stick", sele="241",
-#'    colorScheme="element", colorValue="yellow")) %>%
-#'  addRepresentation("label",
-#'                    param = list(name = "label",
-#'                                 showBackground=TRUE,
-#'                                 labelType="res",
-#'                                 color="black",
-#'                                 backgroundColor="white",
-#'                                 backgroundOpacity=0.8,
-#'                                 sele=":A and 241 and .CG"))
-#'
-#' #Shiny context
-#'if (interactive()) {
-#'  library(shiny)
-#'  ui = fluidPage(NGLVieweROutput("structure"))
-#'  server = function(input, output) {
-#'    output$structure <- renderNGLVieweR({
-#'      NGLVieweR("7CID") %>%
-#'        stageParameters(backgroundColor = "black") %>%
-#'        addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) %>%
-#'        addRepresentation("ball+stick", param=list(name="ball+stick", sele="241",
-#'          colorScheme="element")) %>%
-#'        addRepresentation("label",
-#'                          param = list(name = "label",
-#'                                       showBackground=TRUE,
-#'                                       labelType="res",
-#'                                       colorValue="black",
-#'                                       backgroundColor="white",
-#'                                       backgroundOpacity=0.8,
-#'                                       sele=":A and 241 and .CG"))
-#'
-#'    })
-#'  }
-#'  shinyApp(ui, server)
-#'}
+#' NGLVieweR("7CID") %>%
+#'   stageParameters(backgroundColor = "black") %>%
+#'   addRepresentation("cartoon", param = list(name = "cartoon", colorValue = "blue")) %>%
+#'   addRepresentation("ball+stick", param = list(
+#'     name = "ball+stick", sele = "241",
+#'     colorScheme = "element", colorValue = "yellow"
+#'   )) %>%
+#'   addRepresentation("label",
+#'     param = list(
+#'       name = "label",
+#'       showBackground = TRUE,
+#'       labelType = "res",
+#'       color = "black",
+#'       backgroundColor = "white",
+#'       backgroundOpacity = 0.8,
+#'       sele = ":A and 241 and .CG"
+#'     )
+#'   )
+#' 
+#' # Shiny context
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- fluidPage(NGLVieweROutput("structure"))
+#'   server <- function(input, output) {
+#'     output$structure <- renderNGLVieweR({
+#'       NGLVieweR("7CID") %>%
+#'         stageParameters(backgroundColor = "black") %>%
+#'         addRepresentation("cartoon",
+#'           param = list(name = "cartoon", colorValue = "blue")
+#'         ) %>%
+#'         addRepresentation("ball+stick",
+#'           param = list(
+#'             name = "ball+stick", sele = "241",
+#'             colorScheme = "element"
+#'           )
+#'         ) %>%
+#'         addRepresentation("label",
+#'           param = list(
+#'             name = "label",
+#'             showBackground = TRUE,
+#'             labelType = "res",
+#'             colorValue = "black",
+#'             backgroundColor = "white",
+#'             backgroundOpacity = 0.8,
+#'             sele = ":A and 241 and .CG"
+#'           )
+#'         )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #'@export
 addRepresentation <- function(NGLVieweR, type, param = list()) {
 
