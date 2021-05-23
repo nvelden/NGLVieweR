@@ -2,6 +2,7 @@
 <img src="man/figures/logo.png" class="logo" align="right" height="150px"/>
 
 # **NGLVieweR** - Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny
+[![R-CMD-check](https://github.com/nvelden/NGLVieweR/workflows/R-CMD-check/badge.svg)](https://github.com/nvelden/NGLVieweR/actions)
 
 ### [Click here](https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/) to view a Shiny application integrating most features of **NGLVieweR**.
 
