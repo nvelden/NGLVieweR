@@ -54,7 +54,7 @@ This package has been developed and tested using PDB files but supports loading 
 
 By default **NGLVieweR** guesses the file format from the file extension. Use the `format` parameter in case no or the wrong file extension is provided.
 
-```{r fileformat}
+```{r fileformat, screenshot.force=FALSE}
 
 #Note that line formatting needs to be exact when reading from console!
 benz <- "
@@ -101,7 +101,7 @@ addRepresentation("ball+stick")
 
 You can alter the appearance of select residues using the `param` argument. For a full list of options see the [NGL.js](http://nglviewer.org/ngl/api/) "RepresentationParameters" and the "Selection language" section.
 
-```{r representations}
+```{r representations, screenshot.force=FALSE}
 NGLVieweR("7CID") %>%
   addRepresentation("cartoon",
     param = list(colorScheme = "residueindex")
@@ -131,7 +131,7 @@ You can alter the background color or set the zoom or rotation speed using the `
 
 **Note**: Changes in background color are not visible in the RStudio viewer.
 
-```{r stage}
+```{r stage, screenshot.force=FALSE}
 NGLVieweR("7CID") %>%
   stageParameters(backgroundColor = "white", zoomSpeed = 1) %>%
   addRepresentation("cartoon",
@@ -144,7 +144,7 @@ NGLVieweR("7CID") %>%
 
 Labels can be addded by setting the `addRepresentation()` type parameter to "label". For a full list of of options, see the LabelRepresentationParameters section in the [NGL.js](http://nglviewer.org/ngl/api/) manual. Also see the "label" tab in the [demo](https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/) app for possible label settings.
 
-```{r labels}
+```{r labels, screenshot.force=FALSE}
 NGLVieweR("7CID") %>%
   addRepresentation("cartoon") %>%
   addRepresentation("ball+stick", param = list(
@@ -177,7 +177,7 @@ NGLVieweR("7CID") %>%
 
 You can zoom into specific residues using the `ZoomMove()` function.
 
-```{r zoom}
+```{r zoom, screenshot.force=FALSE}
 NGLVieweR("7CID") %>%
   addRepresentation("cartoon") %>%
   addRepresentation("ball+stick",
@@ -212,7 +212,7 @@ NGLVieweR("7CID") %>%
 
 Contacts between residues can be added by setting the `addRepresentation()` type parameter to "contact". Using the `sele` parameter contacts for specific residues can be selected. The `filterSele` parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected `sele="5001 or 23 or 27 or 43 or 45 or 128"` and contacts are only shown between the residues and biotin `filterSele=list("23 or 27 or 43 or 45 or 128", "5001")`. This prevents the display of contacts between residues or water molecules.
 
-```{r contact}
+```{r contact, screenshot.force=FALSE}
 NGLVieweR("3RY2") %>%
   addRepresentation("cartoon") %>%
   addRepresentation("ball+stick",
