@@ -19,7 +19,8 @@ Imports:
     shiny
 Suggests:
     knitr,
-    rmarkdown
+    markdown
+    rmarkdown,
 VignetteBuilder: knitr
 URL: https://github.com/nvelden/NGLVieweR
 BugReports: https://github.com/nvelden/NGLVieweR/issues
