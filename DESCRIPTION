@@ -21,3 +21,5 @@ URL: https://github.com/nvelden/NGLVieweR
 Suggests: 
     knitr,
     rmarkdown
+VignetteBuilder: knitr
+BugReports: https://github.com/nvelden/NGLVieweR/issues
