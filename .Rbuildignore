@@ -8,3 +8,4 @@
 ^create_widget\.R$
 ^LICENSE\.md
 ^\.github$
+^cran-comments\.md$
