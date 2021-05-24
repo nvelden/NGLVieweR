@@ -314,7 +314,7 @@ shinyApp(ui, server)
 ```
 
 ```{r, echo=FALSE}
-knitr::include_graphics("../man/figures/basic_shiny.png")
+knitr::include_graphics("../man/figures/basic_shiny.PNG")
 ```
 
 ## API
@@ -370,7 +370,7 @@ shinyApp(ui, server)
 ```
 
 ```{r, echo=FALSE}
-knitr::include_graphics("../man/figures/API_Shiny.png")
+knitr::include_graphics("../man/figures/API_shiny.PNG")
 ```
 
 ### Possible API functions are:
