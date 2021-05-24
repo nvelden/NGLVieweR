@@ -20,7 +20,7 @@ NGLVieweR_proxy(id, session = shiny::getDefaultReactiveDomain())
 \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 string and have \code{'px'} appended.}
 
-\item{expr}{An expression that generates a NGLViewer.}
+\item{expr}{An expression that generates a NGLVieweR.}
 
 \item{env}{The environment in which to evaluate \code{expr}.}
 

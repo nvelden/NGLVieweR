@@ -42,7 +42,7 @@ addRepresentation("cartoon")
 There are functions provided to:
 
 -   Overlay different representation styles
--   Alter the stage parameters (eg. background, zoom- and rotation speed)
+-   Alter the stage parameters (e.g. background, zoom- and rotation speed)
 -   Zoom to specific selections
 -   Add labels
 -   Add contacts between residues

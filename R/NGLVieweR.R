@@ -3,9 +3,9 @@
 #' @export
 tools::file_ext
 
-#' Create a NGL viewer
+#' Create a NGLVieweR
 #'@description
-#' NGLvieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
+#' NGLVieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
 #' It includes a set of API functions to manipulate the viewer after creation in Shiny.
 #'@details
 #'The package is based on the \href{http://nglviewer.org/ngl/api/}{NGL.js} Javascript library.
@@ -18,7 +18,7 @@ tools::file_ext
 #' string and have \code{'px'} appended.
 #'@param elementId optional element Id
 #'@seealso
-#'* [NGLVieweR_proxy()] for handeling of API calls after rendering.
+#'* [NGLVieweR_proxy()] for handling of API calls after rendering.
 #'* [NGLVieweR_example()] See example "API" and "basic".
 #'@examples
 #'

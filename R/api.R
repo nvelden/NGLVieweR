@@ -331,7 +331,7 @@ snapShot <- function(NGLVieweR_proxy, fileName = "Snapshot", param = list()) {
 #'Update visibility
 #'
 #'@description
-#'Hide or show an excisting NGLVieweR selection in Shinymode.
+#'Hide or show an existing NGLVieweR selection in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param name Name of selection to alter the color.
 #'@param value Hide \code{FALSE} or show \code{TRUE} selection.

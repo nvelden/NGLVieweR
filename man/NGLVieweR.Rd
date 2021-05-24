@@ -2,7 +2,7 @@
 % Please edit documentation in R/NGLVieweR.R
 \name{NGLVieweR}
 \alias{NGLVieweR}
-\title{Create a NGL viewer}
+\title{Create a NGLVieweR}
 \usage{
 NGLVieweR(data, format = NULL, width = NULL, height = NULL, elementId = NULL)
 }
@@ -19,7 +19,7 @@ string and have \code{'px'} appended.}
 \item{elementId}{optional element Id}
 }
 \description{
-NGLvieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
+NGLVieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
 It includes a set of API functions to manipulate the viewer after creation in Shiny.
 }
 \details{
@@ -155,7 +155,7 @@ shinyApp(ui, server)
 }
 \seealso{
 \itemize{
-\item \code{\link[=NGLVieweR_proxy]{NGLVieweR_proxy()}} for handeling of API calls after rendering.
+\item \code{\link[=NGLVieweR_proxy]{NGLVieweR_proxy()}} for handling of API calls after rendering.
 \item \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "API" and "basic".
 }
 }

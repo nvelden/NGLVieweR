@@ -319,7 +319,7 @@ knitr::include_graphics("../man/figures/basic_shiny.png")
 
 ## API
 
-In Shiny apps, you can manipulate the **NGLVieweR** widget after creation using specific "API" calls. You can for instance add or remove representations by refering to their name using the `addSelection()` or `removeSelection()` functions.
+In Shiny apps, you can manipulate the **NGLVieweR** widget after creation using specific "API" calls. You can for instance add or remove representations by referring to their name using the `addSelection()` or `removeSelection()` functions.
 
 ```{r eval=FALSE}
 library(shiny)

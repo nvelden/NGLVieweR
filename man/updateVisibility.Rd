@@ -15,7 +15,7 @@ updateVisibility(NGLVieweR_proxy, name, value = FALSE)
 For a full description see "setVisibility" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
 \description{
-Hide or show an excisting NGLVieweR selection in Shinymode.
+Hide or show an existing NGLVieweR selection in Shinymode.
 }
 \examples{
 \dontrun{
