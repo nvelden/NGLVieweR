@@ -57,6 +57,9 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -107,8 +110,9 @@
 <span class="co">#Load protein by PDB code</span>
 <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-17a74f8ae02c06162287" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-17a74f8ae02c06162287">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script><p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application by running the below code. Use “API” for an example using API calls or any of the function names (e.g “addSelection”") for function specific examples.</p>
+<p><strong>Note:</strong> Use mouse for selection (left-click), rotate/move (left/right-click hold) and zooming (scroll wheel).</p>
+<div id="htmlwidget-a840c1146d47c1015a40" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a840c1146d47c1015a40">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script><p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application by running the below code. Use “API” for an example using API calls or any of the function names (e.g “addSelection”") for function specific examples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
@@ -151,8 +155,8 @@ $$$$
 "</span>
 <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="va">benz</span>, format<span class="op">=</span><span class="st">"sdf"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-179816ffefdcbfc8d1d5" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-179816ffefdcbfc8d1d5">{"x":{"file_ext":"sdf","data":"\n702\n  -OEChem-02271511112D\n  9  8  0     0  0  0  0  0  0999 V2000\n    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  1  9  1  0  0  0  0\n  2  3  1  0  0  0  0\n  2  4  1  0  0  0  0\n  2  5  1  0  0  0  0\n  3  6  1  0  0  0  0\n  3  7  1  0  0  0  0\n  3  8  1  0  0  0  0\nM  END\n> <ID>\n00001\n> <DESCRIPTION>\nSolvent produced by yeast-based fermentation of sugars.\n$$$$\n","type":"file","stageParameters":[],"addRepresentation":{"type":["ball+stick"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f32638c819b433d8f5ca" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f32638c819b433d8f5ca">{"x":{"file_ext":"sdf","data":"\n702\n  -OEChem-02271511112D\n  9  8  0     0  0  0  0  0  0999 V2000\n    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  1  9  1  0  0  0  0\n  2  3  1  0  0  0  0\n  2  4  1  0  0  0  0\n  2  5  1  0  0  0  0\n  3  6  1  0  0  0  0\n  3  7  1  0  0  0  0\n  3  8  1  0  0  0  0\nM  END\n> <ID>\n00001\n> <DESCRIPTION>\nSolvent produced by yeast-based fermentation of sugars.\n$$$$\n","type":"file","stageParameters":[],"addRepresentation":{"type":["ball+stick"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="representations" class="section level2">
 <h2 class="hasAnchor">
@@ -181,8 +185,8 @@ $$$$
       opacity <span class="op">=</span> <span class="fl">0.1</span>
     <span class="op">)</span>
   <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-04745f6a37888df17dbf" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-04745f6a37888df17dbf">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","surface"],"values":[{"colorScheme":"residueindex"},{"sele":"233-248","colorValue":"red","colorScheme":"element"},{"colorValue":"white","opacity":0.1}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-af6ecbbe1b456a7446af" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-af6ecbbe1b456a7446af">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","surface"],"values":[{"colorScheme":"residueindex"},{"sele":"233-248","colorValue":"red","colorScheme":"element"},{"colorValue":"white","opacity":0.1}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="stage" class="section level2">
 <h2 class="hasAnchor">
@@ -207,8 +211,8 @@ $$$$
     param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span>
   <span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-fec9e38ace2d48086882" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fec9e38ace2d48086882">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":{"backgroundColor":"white","zoomSpeed":1},"addRepresentation":{"type":["cartoon"],"values":[{"name":"cartoon","colorScheme":"residueindex"}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":true,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9b2db5bc6a7b3ce0161d" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9b2db5bc6a7b3ce0161d">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":{"backgroundColor":"white","zoomSpeed":1},"addRepresentation":{"type":["cartoon"],"values":[{"name":"cartoon","colorScheme":"residueindex"}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":true,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="labels" class="section level2">
 <h2 class="hasAnchor">
@@ -241,8 +245,8 @@ $$$$
       <span class="co"># backgroundOpacity=0.5</span>
     <span class="op">)</span>
   <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-57e815d93ec2ea7898a1" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-57e815d93ec2ea7898a1">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","fontFamiliy":"sans-serif","xOffset":1,"yOffset":0,"zOffset":0,"fixedSize":true,"radiusType":1,"radiusSize":1.5,"showBackground":false}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4073040733eb812a035f" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4073040733eb812a035f">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","fontFamiliy":"sans-serif","xOffset":1,"yOffset":0,"zOffset":0,"fixedSize":true,"radiusType":1,"radiusSize":1.5,"showBackground":false}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="zoom" class="section level2">
 <h2 class="hasAnchor">
@@ -277,8 +281,8 @@ $$$$
     duration <span class="op">=</span> <span class="fl">0</span>, <span class="co"># animation time in ms</span>
     z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span>
   <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-994ebaf92efad17750cd" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-994ebaf92efad17750cd">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","xOffset":1,"fixedSize":true,"radiusType":1,"radiusSize":1.5}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"20","zoom":"20","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ee7d191ab57d8ced8673" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ee7d191ab57d8ced8673">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","xOffset":1,"fixedSize":true,"radiusType":1,"radiusSize":1.5}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"20","zoom":"20","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="contact" class="section level2">
 <h2 class="hasAnchor">
@@ -348,8 +352,8 @@ $$$$
       <span class="co"># lineOfSightDistFactor= 1</span>
     <span class="op">)</span>
   <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-37fa9d3ec10f6f1a71c0" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-37fa9d3ec10f6f1a71c0">{"x":{"data":"rcsb://3RY2.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","ball+stick","contact"],"values":[[],{"name":"biotin","colorvalue":"grey","colorScheme":"element","sele":"5001"},{"name":"interacting","colorScheme":"element","colorValue":"green","sele":"23 or 27 or 43 or 45 or 128"},{"name":"contact","sele":"5001 or 23 or 27 or 43 or 45 or 128","filterSele":["23 or 27 or 45 or 128","5001"],"labelVisible":true,"labelFixedSize":false,"labelUnit":"angstrom","labelSize":2}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"27:B","zoom":"27:B","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2eed4c7b2c4aac17747e" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2eed4c7b2c4aac17747e">{"x":{"data":"rcsb://3RY2.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","ball+stick","contact"],"values":[[],{"name":"biotin","colorvalue":"grey","colorScheme":"element","sele":"5001"},{"name":"interacting","colorScheme":"element","colorValue":"green","sele":"23 or 27 or 43 or 45 or 128"},{"name":"contact","sele":"5001 or 23 or 27 or 43 or 45 or 128","filterSele":["23 or 27 or 45 or 128","5001"],"labelVisible":true,"labelFixedSize":false,"labelUnit":"angstrom","labelSize":2}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"27:B","zoom":"27:B","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="shiny" class="section level2">
 <h2 class="hasAnchor">

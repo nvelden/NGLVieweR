@@ -33,6 +33,8 @@ NGLVieweR("7CID") %>%
 addRepresentation("cartoon")
 ```
 
+**Note:** Use mouse for selection (left-click), rotate/move (left/right-click hold) and zooming (scroll wheel).
+
 ```{r Loading, echo=FALSE, screenshot.force=FALSE}
 library(NGLVieweR)
 #Load local pdb file

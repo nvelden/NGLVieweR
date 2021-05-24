@@ -87,6 +87,7 @@
 <div id="nglviewer---visualize-and-interact-with-protein-data-bank-pdb-and-structural-files-in-r-and-shiny" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#nglviewer---visualize-and-interact-with-protein-data-bank-pdb-and-structural-files-in-r-and-shiny" class="anchor"></a><strong>NGLVieweR</strong> - Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny</h1></div>
+
 <div id="click-here-to-view-a-shiny-application-integrating-most-features-of-nglviewer" class="section level3">
 <h3 class="hasAnchor">
 <a href="#click-here-to-view-a-shiny-application-integrating-most-features-of-nglviewer" class="anchor"></a><a href="https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/">Click here</a> to view a Shiny application integrating most features of <strong>NGLVieweR</strong>.</h3>
@@ -100,22 +101,20 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><strong>NGLVieweR</strong> is available through GitHub</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"nvelden/NGLVieweR"</span><span class="op">)</span></code></pre></div>
+<pre class="{.r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("remotes")
+remotes::install_github("nvelden/NGLVieweR")</a></code></pre>
 </div>
 <div id="basics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basics" class="anchor"></a>Basics</h2>
 <p>You can load a PDB (or any other supported structural file) directly or use a PDB code of a structure on <a href="https://www.rcsb.org/">RCSB.org</a>. The below minimal example loads the PDB file and displays the structure in a “cartoon” representation.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Load local pdb file</span>
-<span class="fu"><a href="reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"C:/7CID.pdb"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-<span class="fu"><a href="reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span>
+<pre class="{.r}"><code>#Load local pdb file
+NGLVieweR("C:/7CID.pdb") %&gt;%
+addRepresentation("cartoon")
 
-<span class="co">#Load protein by PDB code</span>
-<span class="fu"><a href="reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-<span class="fu"><a href="reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span></code></pre></div>
+#Load protein by PDB code
+NGLVieweR("7CID") %&gt;%
+addRepresentation("cartoon")</code></pre>
 <p><img src="reference/figures/cartoon_representation.PNG" class="screenshot" width="50%"></p>
 </div>
 <div id="functionality" class="section level2">
@@ -142,6 +141,8 @@
 <ul class="list-unstyled">
 <li>Browse source code at <br><a href="https://github.com/nvelden/NGLVieweR/">https://​github.com/​nvelden/​NGLVieweR/​</a>
 </li>
+<li>Report a bug at <br><a href="https://github.com/nvelden/NGLVieweR/issues">https://​github.com/​nvelden/​NGLVieweR/​issues</a>
+</li>
 </ul>
 </div>
 <div class="license">
@@ -159,7 +160,13 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/nvelden/NGLVieweR/actions"><img src="https://github.com/nvelden/NGLVieweR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
