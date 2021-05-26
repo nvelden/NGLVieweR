@@ -26,7 +26,7 @@ NGLVieweR can be used to visualize and interact with Protein Data Bank (PDB) and
 It includes a set of API functions to manipulate the viewer after creation in Shiny.
 }
 \details{
-The package is based on the \href{http://nglviewer.org/ngl/api/}{NGL.js} Javascript library.
+The package is based on the \href{http://nglviewer.org/ngl/api/}{NGL.js} JavaScript library.
 To see the full set of features please read the official manual of NGL.js.
 }
 \examples{

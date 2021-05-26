@@ -8,7 +8,7 @@ tools::file_ext
 #' NGLVieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
 #' It includes a set of API functions to manipulate the viewer after creation in Shiny.
 #'@details
-#'The package is based on the \href{http://nglviewer.org/ngl/api/}{NGL.js} Javascript library.
+#'The package is based on the \href{http://nglviewer.org/ngl/api/}{NGL.js} JavaScript library.
 #'To see the full set of features please read the official manual of NGL.js.
 #'@param data PDB file or PDB entry code
 #'@param format Input format (.mmcif, .cif, .mcif, .pdb, .ent, .pqr, 
