@@ -11,6 +11,9 @@ removeSelection(NGLVieweR_proxy, name)
 
 \item{name}{Name of selection to be removed.}
 }
+\value{
+API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+}
 \description{
 Remove an existing NGLVieweR selection in Shinymode.
 }

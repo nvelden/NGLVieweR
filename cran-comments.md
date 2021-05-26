@@ -1,3 +1,47 @@
+# Round 2
+## Test environments
+-   local R installation, R 4.0.4
+-   ubuntu 16.04 (on travis-ci), R 4.0.4
+-   win-builder (devel)
+
+## Submission comments
+
+-   Reduced the length of the title
+-   Provided \\value to applicable methods
+-   Added single quotes if applicable in description
+-   Added link to htmlwidgets and NGL website in description
+
+## Reviewer comments
+
+-   Please reduce the length of the tile to less than 65 characters
+                             .
+-   Please add \\value to .Rd files regarding exported methods and explain
+the functions results in the documentation. Please write about the
+structure of the output (class) and also what the output means. (If a
+function does not return a value, please document that too, e.g.
+\\value{No return value, called for side effects} or similar)
+Missing Rd-tags in up to 23 .Rd files, e.g.:
+      addRepresentation.Rd: \\value
+      addSelection.Rd: \\value
+      NGLVieweR_example.Rd: \\value
+      NGLVieweR-shiny.Rd: \\value
+      NGLVieweR.Rd: \\value
+      removeSelection.Rd: \\value
+      ...
+
+-   Please always write package names, software names and API (application
+programming interface) names in single quotes in title and description.
+e.g: --> 'NGLvieweR'
+
+-   Please provide a link to the used webservices to the description field
+of your DESCRIPTION file in the form
+'<http:...>' or '<https:...>'
+with angle brackets for auto-linking and no space after 'http:' and
+'https:'.
+
+# Round 1
+25.05.2021
+
 ## Test environments
 
 -   local R installation, R 4.0.4

@@ -12,6 +12,9 @@ updateStage(NGLVieweR_proxy, param = list())
 \item{param}{Of type list. Most common options are \code{backgroundColor}, \code{rotateSpeed}, \code{zoomSpeed},
 \code{hoverTimeout} and \code{lightIntensity}. For a full list of options, see the "StageParameters" method in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
+\value{
+API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+}
 \description{
 Update an existing NGLVieweR stage in Shinymode.
 }

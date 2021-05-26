@@ -34,6 +34,9 @@ automatically)}
 \item{session}{The Shiny session object to which the map belongs; usually
 the default value will suffice.}
 }
+\value{
+\code{NGLVieweR} object that can be placed in the UI.
+}
 \description{
 Output and render functions for using NGLVieweR within Shiny
 applications and interactive Rmd documents.

@@ -14,6 +14,9 @@ updateColor(NGLVieweR_proxy, name, color)
 \item{color}{Can be a colorValue (color name or HEX code) or colorScheme (e.g. "element", "resname", "random" or "residueindex").
 For a full list of options, see the "Colormaker" section in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
+\value{
+API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+}
 \description{
 Update color of an existing NGLVieweR selection in Shinymode.
 }

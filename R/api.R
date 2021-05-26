@@ -6,6 +6,7 @@
 #'@param type Type of representation. Most common options are "cartoon", "ball+stick", "surface", "ribbon" and "label".
 #'@param param Options for the different types of representations. Most common options are \code{name}, \code{opacity}, \code{colorScheme}, \code{sele}, \code{colorValue} and \code{visibility}.
 #'For a full list of options, see the general "RepresentationParameters" method and type specific Label-, Structure- and Surface- RepresentationParameters in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family selections
 #'@seealso
 #'* [updateRepresentation()] Update an existing NGLVieweR representation.
@@ -79,6 +80,7 @@ addSelection <- function(NGLVieweR_proxy, type, param = list()) {
 #'Remove an existing NGLVieweR selection in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param name Name of selection to be removed.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family selections
 #'@seealso
 #'* [NGLVieweR_example()] See example "removeSelection".
@@ -149,6 +151,7 @@ removeSelection <- function(NGLVieweR_proxy, name) {
 #'@param name Name of selection.
 #'@param sele Selected atoms/residues.
 #'See the section "selection-language" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family selections
 #'@seealso
 #'* [NGLVieweR_example()] See example "updateSelection".
@@ -212,6 +215,7 @@ updateSelection <- function(NGLVieweR_proxy, name = name, sele = "none"){
 #'@param name Name of selection to alter the color.
 #'@param color Can be a colorValue (color name or HEX code) or colorScheme (e.g. "element", "resname", "random" or "residueindex").
 #'For a full list of options, see the "Colormaker" section in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family updates
 #'@seealso
 #'* [NGLVieweR_example()] See example "updateColor".
@@ -267,6 +271,7 @@ updateColor <- function(NGLVieweR_proxy, name, color) {
 #'@param fileName Optional name for Snapshot (default = "Snapshot").
 #'@param param Of type list, can be; antialias \code{TRUE/FALSE}, trim \code{TRUE/FALSE}, transparent \code{TRUE/FALSE} or scale \code{numeric}.
 #'For a full list of options, see "makeImage" and "ImageParameters" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family options
 #'@seealso
 #'[NGLVieweR_example()] See example "snapshot".
@@ -336,6 +341,7 @@ snapShot <- function(NGLVieweR_proxy, fileName = "Snapshot", param = list()) {
 #'@param name Name of selection to alter the color.
 #'@param value Hide \code{FALSE} or show \code{TRUE} selection.
 #'For a full description see "setVisibility" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family updates
 #'@seealso
 #'[NGLVieweR_example()] See example "updateVisibility".
@@ -396,6 +402,7 @@ updateVisibility <- function(NGLVieweR_proxy, name, value = FALSE) {
 #'@param name Name of representation to alter the color.
 #'@param param Options for the different types of representations. Most common options are \code{name}, \code{opacity}, \code{colorScheme}, \code{colorValue} and \code{visibility}.
 #'For a full list of options, see the general "RepresentationParameters" method and type specific Label-, Structure- and Surface- RepresentationParameters in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family updates
 #'@seealso
 #'* [addSelection()] Add a new selection to a NGLVieweR object.
@@ -463,6 +470,7 @@ updateRepresentation <- function(NGLVieweR_proxy, name, param = list()) {
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param param Of type list. Most common options are \code{backgroundColor}, \code{rotateSpeed}, \code{zoomSpeed},
 #'\code{hoverTimeout} and \code{lightIntensity}. For a full list of options, see the "StageParameters" method in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family updates
 #'@seealso
 #'* [stageParameters()]
@@ -521,6 +529,7 @@ updateStage <- function(NGLVieweR_proxy, param = list()) {
 #'Update the focus of an existing NGLVieweR object in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param focus Numeric value between 0-100 (default = 0).
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family options
 #'@seealso
 #'* [setFocus()]
@@ -573,6 +582,7 @@ updateFocus <- function(NGLVieweR_proxy, focus = 0){
 #'Start rock animation and stop spinning. Works on an existing NGLVieweR object in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param rock  If \code{TRUE} (default), start rocking and stop spinning.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family animations
 #'@seealso
 #'* [setRock()]
@@ -635,6 +645,7 @@ updateRock <- function(NGLVieweR_proxy, rock = TRUE){
 #'Start spin animation and stop rocking. Works on an existing NGLVieweR object in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param spin  If \code{TRUE} (default), start spinning and stop rocking.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family animations
 #'@seealso
 #'* [setSpin()]
@@ -696,6 +707,7 @@ updateSpin <- function(NGLVieweR_proxy, spin = TRUE){
 #'Put viewer in fullscreen. Works in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param fullscreen If \code{TRUE} put viewer in fullscreen.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family options
 #'@seealso
 #'[NGLVieweR_example()] See example "updateFullscreen".
@@ -754,6 +766,7 @@ updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE){
 #'See the section "selection-language" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
 #'@param duration Optional animation time in milliseconds (default = 0).
 #'@param z_offSet Optional zoom offset value (default = 0).
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
 #'@family animations
 #'@seealso
 #'* [zoomMove()]

@@ -18,6 +18,9 @@ string and have \code{'px'} appended.}
 
 \item{elementId}{optional element Id}
 }
+\value{
+A \code{NGLVieweR} \code{htmlwidgets} object.
+}
 \description{
 NGLVieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
 It includes a set of API functions to manipulate the viewer after creation in Shiny.

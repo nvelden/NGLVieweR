@@ -9,6 +9,7 @@
 #' "updateAnimation", "updateColor", "updateFocus", "updateFullscreen",
 #' "updateRepresentation", "updateSelection", "updateStage", "updateVisibility" and
 #' "updateZoomMove".
+#' @return Call to load Shiny example.
 #' @examples
 #'
 #' if (interactive()) {

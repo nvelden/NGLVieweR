@@ -17,6 +17,7 @@ tools::file_ext
 #' \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #' string and have \code{'px'} appended.
 #'@param elementId optional element Id
+#'@return A \code{NGLVieweR} \code{htmlwidgets} object.
 #'@seealso
 #'* [NGLVieweR_proxy()] for handling of API calls after rendering.
 #'* [NGLVieweR_example()] See example "API" and "basic".

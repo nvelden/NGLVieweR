@@ -11,6 +11,9 @@ updateRock(NGLVieweR_proxy, rock = TRUE)
 
 \item{rock}{If \code{TRUE} (default), start rocking and stop spinning.}
 }
+\value{
+API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+}
 \description{
 Start rock animation and stop spinning. Works on an existing NGLVieweR object in Shinymode.
 }

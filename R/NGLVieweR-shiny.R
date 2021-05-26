@@ -14,6 +14,7 @@
 #' @param id single-element character vector indicating the output ID of the
 #'   chart to modify (if invoked from a Shiny module, the namespace will be added
 #'   automatically)
+#' @return \code{NGLVieweR} object that can be placed in the UI.   
 #' @param session The Shiny session object to which the map belongs; usually
 #' the default value will suffice.
 #' @name NGLVieweR-shiny

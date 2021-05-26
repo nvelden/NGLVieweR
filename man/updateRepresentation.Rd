@@ -14,6 +14,9 @@ updateRepresentation(NGLVieweR_proxy, name, param = list())
 \item{param}{Options for the different types of representations. Most common options are \code{name}, \code{opacity}, \code{colorScheme}, \code{colorValue} and \code{visibility}.
 For a full list of options, see the general "RepresentationParameters" method and type specific Label-, Structure- and Surface- RepresentationParameters in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
+\value{
+API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+}
 \description{
 Update an existing NGLVieweR representation in Shinymode.
 }

@@ -14,6 +14,9 @@ updateVisibility(NGLVieweR_proxy, name, value = FALSE)
 \item{value}{Hide \code{FALSE} or show \code{TRUE} selection.
 For a full description see "setVisibility" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
+\value{
+API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+}
 \description{
 Hide or show an existing NGLVieweR selection in Shinymode.
 }

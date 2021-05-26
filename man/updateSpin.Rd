@@ -11,6 +11,9 @@ updateSpin(NGLVieweR_proxy, spin = TRUE)
 
 \item{spin}{If \code{TRUE} (default), start spinning and stop rocking.}
 }
+\value{
+API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+}
 \description{
 Start spin animation and stop rocking. Works on an existing NGLVieweR object in Shinymode.
 }

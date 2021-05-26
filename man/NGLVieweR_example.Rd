@@ -13,6 +13,9 @@ NGLVieweR_example(example = "basic")
 "updateRepresentation", "updateSelection", "updateStage", "updateVisibility" and
 "updateZoomMove".}
 }
+\value{
+Call to load Shiny example.
+}
 \description{
 Launch an example to demonstrate how to use \code{NGLvieweR} in Shiny.
 }

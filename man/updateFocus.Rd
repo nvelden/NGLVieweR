@@ -11,6 +11,9 @@ updateFocus(NGLVieweR_proxy, focus = 0)
 
 \item{focus}{Numeric value between 0-100 (default = 0).}
 }
+\value{
+API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+}
 \description{
 Update the focus of an existing NGLVieweR object in Shinymode.
 }

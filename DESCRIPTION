@@ -1,11 +1,12 @@
 Package: NGLVieweR
-Title: Interact with Protein Databank (PDB) and Structural Files with the NGL.js JavaScript Library
+Title: Interactive 3D Visualization of Molecular Structures
 Version: 1.3.0
 Authors@R: c( 
     person("Niels", "van der Velden", role = c("aut", "cre"), email = "n.s.j.vandervelden@gmail.com"),
     person("Alexander", "Rose", role = "cph", comment = 'NGL.js library'))
-Description: Provides an 'htmlwidgets' interface to 'NGL.js'.
-    NGLvieweR can be used to visualize and interact with protein databank (PDB) and structural files in R and Shiny applications.
+Maintainer: Niels van der Velden <n.s.j.vandervelden@gmail.com>
+Description: Provides an 'htmlwidgets' <https://www.htmlwidgets.org/> interface to 'NGL.js' <http://nglviewer.org/ngl/api/>.
+    'NGLvieweR' can be used to visualize and interact with protein databank ('PDB') and structural files in R and Shiny applications.
     It includes a set of API functions to manipulate the viewer after creation in Shiny.
 License: MIT + file LICENSE
 Encoding: UTF-8
