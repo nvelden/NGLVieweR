@@ -19,6 +19,9 @@ See the section "selection-language" in the official \href{https://nglviewer.org
 
 \item{z_offSet}{Optional zoom offset value (default = 0).}
 }
+\value{
+List of zoomMove parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+}
 \description{
 Add a zoom animation
 }

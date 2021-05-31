@@ -144,7 +144,7 @@ NGLVieweR("7CID") %>%
 
 ## Labels
 
-Labels can be addded by setting the `addRepresentation()` type parameter to "label". For a full list of of options, see the LabelRepresentationParameters section in the [NGL.js](http://nglviewer.org/ngl/api/) manual. Also see the "label" tab in the [demo](https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/) app for possible label settings.
+Labels can be added by setting the `addRepresentation()` type parameter to "label". For a full list of of options, see the LabelRepresentationParameters section in the [NGL.js](http://nglviewer.org/ngl/api/) manual. Also see the "label" tab in the [demo](https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/) app for possible label settings.
 
 ```{r labels, screenshot.force=FALSE}
 NGLVieweR("7CID") %>%

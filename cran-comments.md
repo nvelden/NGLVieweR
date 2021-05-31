@@ -1,4 +1,32 @@
+# Round 3
+
+## Test environments
+-   local R installation, R 4.0.4
+-   ubuntu 16.04 (on travis-ci), R 4.0.4
+-   win-builder (devel)
+
+## Submission comments
+-   Provided \\value to remaining functions
+
+## Reviewer comments
+
+-   Please add \\value to .Rd files regarding exported methods and explain
+the functions results in the documentation. Please write about the
+structure of the output (class) and also what the output means. (If a
+function does not return a value, please document that too, e.g.
+\\value{No return value, called for side effects} or similar)
+Missing Rd-tags:
+      addRepresentation.Rd: \\value
+      setFocus.Rd: \\value
+      setQuality.Rd: \\value
+      setRock.Rd: \\value
+      setSpin.Rd: \\value
+      stageParameters.Rd: \\value
+      zoomMove.Rd: \\value
+
 # Round 2
+26.05.21
+
 ## Test environments
 -   local R installation, R 4.0.4
 -   ubuntu 16.04 (on travis-ci), R 4.0.4

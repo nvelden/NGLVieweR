@@ -219,8 +219,9 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
 #'Set stage parameters.
 #'@param NGLVieweR A NGLVieweR object.
 #'@param ... Options controlling the stage. Most common options are \code{backgroundColor}, \code{rotateSpeed}, \code{zoomSpeed},
-#'\code{hoverTimeout} and \code{lightIntensity}. For a full list of options, see the "StageParameters" method in the official
+#'\code{hoverTimeout} and \code{lightIntensity}. For a full list of options, see the "stageParameters" method in the official
 #'\href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return Returns list of stage parameters to \code{NGLVieweR} \code{htmlwidgets} object.
 #'@seealso
 #'* [updateStage()]
 #'* [NGLVieweR_example()] See example "basic".
@@ -259,9 +260,10 @@ stageParameters <- function(NGLVieweR, ...) {
 #'
 #'@param NGLVieweR A NGLVieweR object.
 #'@param type Type of representation. Most common options are "cartoon", "ball+stick", "line", "surface", "ribbon" and "label".
-#'For a full list of options, see the "StructureRepresentation" method in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'For a full list of options, see the "structureRepresentation" method in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
 #'@param param Options for the different types of representations. Most common options are \code{name}, \code{opacity}, \code{colorScheme}, \code{sele}, \code{colorValue} and \code{visibility}.
 #'For a full list of options, see the general "RepresentationParameters" method and type specific Label-, Structure- and Surface- RepresentationParameters in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return List of representation parameters to \code{NGLVieweR} \code{htmlwidgets} object.
 #'@seealso
 #'* [addSelection()]
 #'* [NGLVieweR_example()] See example "basic".
@@ -331,6 +333,7 @@ addRepresentation <- function(NGLVieweR, type, param = list()) {
 #'Set rock animation
 #'@param NGLVieweR A NGLVieweR object.
 #'@param rock If \code{TRUE} (default), start rocking and stop spinning.
+#'@return setRock parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR} \code{htmlwidgets} object.
 #'@family animations
 #'@seealso
 #'* [setSpin()]
@@ -352,6 +355,7 @@ setRock <- function(NGLVieweR, rock = TRUE) {
 #'Set Spin animation
 #'@param NGLVieweR A NGLVieweR object.
 #'@param spin If \code{TRUE} (default), start spinning and stop rocking
+#'@return setSpin parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR} \code{htmlwidgets} object.
 #'@family animations
 #'@seealso
 #'* [setRock()]
@@ -373,6 +377,7 @@ setSpin <- function(NGLVieweR, spin = TRUE) {
 #'Set Quality
 #'@param NGLVieweR A NGLVieweR object.
 #'@param quality Set rendering quality. Can be "low", "medium" (default) or "high".
+#'@return setQuality parameter in \code{NGLVieweR} \code{htmlwidgets} object.
 #'@family options
 #'@examples
 #'NGLVieweR("7CID") %>%
@@ -390,6 +395,7 @@ setQuality <- function(NGLVieweR, quality = "medium") {
 #'Set Focus
 #'@param NGLVieweR A NGLVieweR object.
 #'@param focus Set focus between 0 (default) to 100.
+#'@return setFocus parameter in \code{NGLVieweR} \code{htmlwidgets} object.
 #'@seealso [updateFocus()]
 #'@family options
 #'@examples
@@ -413,6 +419,7 @@ setFocus <- function(NGLVieweR, focus = 0) {
 #'See the section "selection-language" in the official \href{https://nglviewer.org/}{NGL.js} manual.
 #'@param duration Optional animation time in milliseconds (default = 0).
 #'@param z_offSet Optional zoom offset value (default = 0).
+#'@return List of zoomMove parameters to \code{NGLVieweR} \code{htmlwidgets} object.
 #'@family animations
 #'@examples
 #'NGLVieweR("7CID") %>%

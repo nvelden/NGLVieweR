@@ -11,6 +11,9 @@ setFocus(NGLVieweR, focus = 0)
 
 \item{focus}{Set focus between 0 (default) to 100.}
 }
+\value{
+setFocus parameter in \code{NGLVieweR} \code{htmlwidgets} object.
+}
 \description{
 Set Focus
 }

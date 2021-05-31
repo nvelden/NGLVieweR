@@ -10,8 +10,11 @@ stageParameters(NGLVieweR, ...)
 \item{NGLVieweR}{A NGLVieweR object.}
 
 \item{...}{Options controlling the stage. Most common options are \code{backgroundColor}, \code{rotateSpeed}, \code{zoomSpeed},
-\code{hoverTimeout} and \code{lightIntensity}. For a full list of options, see the "StageParameters" method in the official
+\code{hoverTimeout} and \code{lightIntensity}. For a full list of options, see the "stageParameters" method in the official
 \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+}
+\value{
+Returns list of stage parameters to \code{NGLVieweR} \code{htmlwidgets} object.
 }
 \description{
 Set stage parameters.

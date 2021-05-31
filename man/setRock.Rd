@@ -11,6 +11,9 @@ setRock(NGLVieweR, rock = TRUE)
 
 \item{rock}{If \code{TRUE} (default), start rocking and stop spinning.}
 }
+\value{
+setRock parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR} \code{htmlwidgets} object.
+}
 \description{
 Set rock animation
 }
