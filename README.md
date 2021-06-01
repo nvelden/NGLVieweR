@@ -15,7 +15,13 @@
 
 ## Installation
 
-**NGLVieweR** is available through GitHub
+You can install the released version of **NGLVieweR** from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("NGLVieweR")
+```
+
+And the development version from [GitHub](https://github.com/) with:
 
 ``` {.r}
 install.packages("remotes")
