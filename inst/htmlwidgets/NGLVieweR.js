@@ -256,12 +256,20 @@ Shiny.addCustomMessageHandler('NGLVieweR:removeSelection', function(message){
 Shiny.addCustomMessageHandler('NGLVieweR:addSelection', function(message){
 
   var structure = getNGLStructure(message.id);
+  
+      var param = message.param;
+      var color = param['color'];
+      
+      //Convert color values
+      if(typeof color === 'object' && color !== null){
+      param['color'] = colorMaker(param['color']);
+      }
 
  if(typeof(structure) !== "undefined"){
 
   structure.then(function(o){
 
-  o.addRepresentation(message.type, message.param);
+  o.addRepresentation(message.type, param);
 
   });
  }

@@ -1,4 +1,8 @@
-# NGLVieweR 1.3.0
+# NGLVieweR 1.3.2
+
+* Updated `addSelection` to handle color arrays
+
+# NGLVieweR 1.3.1
 
 * Added a `NEWS.md` file to track changes to the package.
 * Made package ready for CRAN release
