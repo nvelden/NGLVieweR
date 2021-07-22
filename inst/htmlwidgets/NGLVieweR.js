@@ -316,6 +316,14 @@ Shiny.onInputChange(`${message.id}_rendering`, false);
 Shiny.addCustomMessageHandler('NGLVieweR:updateRepresentation', function(message){
 
     var stage = getNGLStage(message.id);
+    
+    var param = message.param;
+    var color = param['color'];
+      
+      //Convert color values
+      if(typeof color === 'object' && color !== null){
+      param['color'] = colorMaker(param['color']);
+      }
 
 Shiny.onInputChange(`${message.id}_rendering`, true);
 setTimeout(function() {

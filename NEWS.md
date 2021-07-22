@@ -1,6 +1,6 @@
 # NGLVieweR 1.3.2
 
-* Updated `addSelection` to handle color arrays
+* Updated `addSelection` and `updateRepresentation` to handle color arrays
 
 # NGLVieweR 1.3.1
 
