@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interact with Protein Databank (PDB) and Structural Files with the NGL.js JavaScript Library • NGLVieweR</title>
+<title>Interactive 3D Visualization of Molecular Structures • NGLVieweR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -18,8 +18,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<script src="extra.js"></script><meta property="og:title" content="Interact with Protein Databank (PDB) and Structural Files with the NGL.js JavaScript Library">
-<meta property="og:description" content="Provides an htmlwidgets interface to NGL.js.
+<script src="extra.js"></script><meta property="og:title" content="Interactive 3D Visualization of Molecular Structures">
+<meta property="og:description" content="Provides an htmlwidgets &lt;https://www.htmlwidgets.org/&gt; interface to NGL.js &lt;http://nglviewer.org/ngl/api/&gt;.
     NGLvieweR can be used to visualize and interact with protein databank (PDB) and structural files in R and Shiny applications.
     It includes a set of API functions to manipulate the viewer after creation in Shiny.">
 <meta property="og:image" content="/logo.png">
@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">NGLVieweR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -87,7 +87,6 @@
 <a href="#nglviewer----visualize-and-interact-with-protein-data-bank-pdb-and-structural-files-in-r-and-shiny" class="anchor"></a><strong>NGLVieweR</strong> - <img src="reference/figures/logo.png" class="logo" align="right" height="150px"> Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny</h1></div>
 <!-- badges: start -->
 
-<!-- badges: end -->
 <div id="click-here-to-view-a-shiny-application-integrating-most-features-of-nglviewer" class="section level3">
 <h3 class="hasAnchor">
 <a href="#click-here-to-view-a-shiny-application-integrating-most-features-of-nglviewer" class="anchor"></a><a href="https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/">Click here</a> to view a Shiny application integrating most features of <strong>NGLVieweR</strong>.</h3>
@@ -100,7 +99,10 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p><strong>NGLVieweR</strong> is available through GitHub</p>
+<p>You can install the released version of <strong>NGLVieweR</strong> from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"NGLVieweR"</span><span class="op">)</span></code></pre></div>
+<p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <pre class="{.r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("remotes")
 remotes::install_github("nvelden/NGLVieweR")</a></code></pre>
 </div>
@@ -123,7 +125,7 @@ addRepresentation("cartoon")</code></pre>
 <p>There are functions provided to:</p>
 <ul>
 <li>Overlay different representation styles</li>
-<li>Alter the stage parameters (eg. background, zoom- and rotation speed)</li>
+<li>Alter the stage parameters (e.g. background, zoom- and rotation speed)</li>
 <li>Zoom to specific selections</li>
 <li>Add labels</li>
 <li>Add contacts between residues</li>
@@ -138,6 +140,8 @@ addRepresentation("cartoon")</code></pre>
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=NGLVieweR">https://​cloud.r-project.org/​package=NGLVieweR</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/nvelden/NGLVieweR/">https://​github.com/​nvelden/​NGLVieweR/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/nvelden/NGLVieweR/issues">https://​github.com/​nvelden/​NGLVieweR/​issues</a>
@@ -165,6 +169,7 @@ addRepresentation("cartoon")</code></pre>
 <li><a href="https://github.com/nvelden/NGLVieweR/actions"><img src="https://github.com/nvelden/NGLVieweR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://CRAN.R-project.org/package=NGLVieweR"><img src="https://www.r-pkg.org/badges/version/NGLVieweR" alt="CRAN status"></a></li>
+<li><a href="https://cran.r-project.org/package=NGLVieweR"><img src="https://cranlogs.r-pkg.org/badges/grand-total/NGLVieweR" alt="Metacran downloads"></a></li>
 </ul>
 </div>
 </div>
