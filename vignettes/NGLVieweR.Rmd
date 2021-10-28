@@ -408,8 +408,6 @@ library(shiny)
 library(NGLVieweR)
 library(stringr)
 
-# SEE: https://github.com/nglviewer/ngl/issues/615
-
 ui <- fluidPage(
   titlePanel("Viewer with click interaction"),
   sidebarLayout(
