@@ -399,78 +399,94 @@ In a Shiny application one can retrieve information from the widget as inputs ba
 -   input\$structure_chainname - will return the chainname of each amino acid as a character vector,
 -   input\$structure_rendering - will return `TRUE` if the widget is loading or `FALSE` when completed.
 -   input\$structure_PDB - will return the PDB file as a text string.
+-   input\$structure_selAround - will return a list of atoms surrounding a clicked residue.
 
-In the below example a label and all contacts are displayed when a user clicks a residue.
+In the below example a label, all contacts and residues in proximity of the clicked residue are displayed.
 
 ```{r eval=FALSE}
 library(shiny)
 library(NGLVieweR)
 library(stringr)
 
-ui <- fluidPage(titlePanel("Viewer with click interaction"),
-                sidebarLayout(
-                  sidebarPanel(
-                    verbatimTextOutput('selection')
-                    ),
-                  mainPanel(NGLVieweROutput("structure"))
-                ))
+# SEE: https://github.com/nglviewer/ngl/issues/615
+
+ui <- fluidPage(
+  titlePanel("Viewer with click interaction"),
+  sidebarLayout(
+    sidebarPanel(verbatimTextOutput('selection')),
+    mainPanel(NGLVieweROutput("structure"))
+  )
+)
 
 server <- function(input, output) {
-  
   output$structure <- renderNGLVieweR({
     NGLVieweR("3RY2") %>%
       addRepresentation("cartoon") %>%
-      addRepresentation("ball+stick",
-                        param = list(
-                          name = "biotin",
-                          colorvalue = "grey",
-                          colorScheme = "element",
-                          sele = "5001"
-                        )
+      addRepresentation(
+        "ball+stick",
+        param = list(
+          name = "biotin",
+          colorvalue = "grey",
+          colorScheme = "element",
+          sele = "5001"
+        )
       ) %>%
-      addRepresentation("ball+stick",
-                        param = list(
-                          name = "interacting",
-                          colorScheme = "element",
-                          colorValue = "green",
-                          sele = "23 or 27 or 43 or 45 or 128"
-                        )
-      ) %>%
-      zoomMove(
-        center = "27:B",
-        zoom = "27:B",
-        z_offSet = -20
-      )
+      zoomMove(center = "27:B",
+               zoom = "27:B",
+               z_offSet = -20) %>%
+      selectionParameters(3, "residue") #"atom"
   })
   
   #Save click selections
   sele <- reactiveValues()
   
   observe({
-    sele$aa <- str_extract(input$structure_selection, "(?<=[\\[])(.*?)(?=\\])")
-    sele$aa_bond <- str_extract(input$structure_selection, "(?<=[\\]])(.*?)(?=[:space:])")
-    sele$resi <- str_extract(input$structure_selection, "(?<=[]])(.*?)(?=[:])")
-    sele$fileName <- str_extract(input$structure_selection, "(?<=[(])(.*?)(?=[.])")
+    sele$aa <-
+      str_extract(input$structure_selection, "(?<=[\\[])(.*?)(?=\\])")
+    sele$aa_bond <-
+      str_extract(input$structure_selection, "(?<=[\\]])(.*?)(?=[:space:])")
+    sele$resiChain <-
+      str_extract(input$structure_selection, "(?<=[]])(.*?)(?=[.])")
+    sele$resi <-
+      str_extract(input$structure_selection, "(?<=[]])(.*?)(?=[:])")
+    sele$fileName <-
+      str_extract(input$structure_selection, "(?<=[(])(.*?)(?=[.])")
   })
-
+  
   output$selection = renderPrint({
-    
     #Full selection
-    print(input$structure_selection) 
+    print(input$structure_selection)
     #Amino Acid
     print(sele$aa)
     #Bond
     print(sele$aa_bond)
+    #Residue number + ChainNAme
+    print(sele$resiChain)
     #Residue number
     print(sele$resi)
     #PDB name
     print(sele$fileName)
+    #SelAround
+    print(input$structure_selAround)
+  })
+  
+  observeEvent(input$structure_selAround, {
+    NGLVieweR_proxy("structure") %>% removeSelection("selAround")
+    
+    NGLVieweR_proxy("structure") %>%
+      addSelection(
+        "ball+stick",
+        param =
+          list(
+            name = "selAround",
+            sele = input$structure_selAround,
+            colorValue = "grey"
+          )
+      )
     
   })
   
-
-  observeEvent(sele$resi, {
-    
+  observeEvent(sele$resiChain, {
     #Remove any selections
     NGLVieweR_proxy("structure") %>% removeSelection("label")
     NGLVieweR_proxy("structure") %>% removeSelection("contact")
@@ -478,13 +494,16 @@ server <- function(input, output) {
     #Add label and contacts
     NGLVieweR_proxy("structure") %>%
       
-      addSelection("label",
+      addSelection(
+        "label",
         param = list(
           name = "label",
-          sele = sele$aa_bond,
+          sele = sele$resiChain,
           labelType = "format",
-          labelFormat = "[%(resname)s]%(resno)s", # or enter custom text
-          labelGrouping = "residue", # or "atom" (eg. sele = "20:A.CB")
+          labelFormat = "[%(resname)s]%(resno)s",
+          # or enter custom text
+          labelGrouping = "residue",
+          # or "atom" (eg. sele = "20:A.CB")
           color = "white",
           xOffset = 1,
           fixedSize = TRUE,
@@ -492,20 +511,25 @@ server <- function(input, output) {
           radiusSize = 1.5
         )
       ) %>%
-      addSelection("contact",
-                   param = list(
-                     name = "contact",
-                     sele = "*", #Select all residues
-                     filterSele = 
-                       list(sele$resi, # Show bonds between selected residue  
-                            "*"),      # and all other residues  
-                     labelVisible = TRUE,
-                     labelFixedSize = FALSE,
-                     labelUnit = "angstrom", # "", "angstrom", "nm"
-                     labelSize = 2)
+      addSelection(
+        "contact",
+        param = list(
+          name = "contact",
+          sele = "*",
+          #Select all residues
+          filterSele =
+            list(sele$resiChain, # Show bonds between selected residue
+                 "*"),
+          # and all other residues
+          labelVisible = TRUE,
+          labelFixedSize = FALSE,
+          labelUnit = "angstrom",
+          # "", "angstrom", "nm"
+          labelSize = 2
+        )
       )
   })
-
+  
 }
 shinyApp(ui, server)
 ```

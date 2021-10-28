@@ -1,3 +1,10 @@
+# NGLVieweR 1.3.3
+
+* Added API call that returns a list of atoms surrounding a selection.
+* Added `selectionParameters` function to control proximity and level for selection. 
+
+* Updated `addSelection` and `updateRepresentation` to handle color arrays
+
 # NGLVieweR 1.3.2
 
 * Updated `addSelection` and `updateRepresentation` to handle color arrays

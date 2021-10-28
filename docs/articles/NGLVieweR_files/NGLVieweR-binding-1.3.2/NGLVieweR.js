@@ -119,26 +119,18 @@ HTMLWidgets.widget({
       //Get list of surrounding atoms
       if(pickingProxy.atom){
         structure.then(function(o){
-          
+      
           var proximity = 3;
-          var proxlevel = "residue";
-          
-          if(typeof(opts.selectionParameters) !== 'undefined'){
-          var proximity = opts.selectionParameters["proximity"];
-          var proxlevel = opts.selectionParameters["level"];
-          }
-
           var atom = pickingProxy.atom;
           var atomName = atom.qualifiedName().split("]").pop()
           var resiName = atomName.split('.')[0]
-          if(proxlevel == "residue"){
           var selection = new NGL.Selection(resiName);
-          } else {
-          var selection = new NGL.Selection(atomName);  
-          }
-          
           var atomSet = o.structure.getAtomSetWithinSelection(selection, proximity);
           var atomSet2 = o.structure.getAtomSetWithinGroup( atomSet );
+
+/*          o.structure.eachAtom(function(ap) {
+            console.log(ap.index) // The "ap" argument provided here is an AtomProxy instance
+            }, atomSet2.toSeleString())*/
          
         Shiny.onInputChange(`${el.id}_selAround`, atomSet2.toSeleString());  
         

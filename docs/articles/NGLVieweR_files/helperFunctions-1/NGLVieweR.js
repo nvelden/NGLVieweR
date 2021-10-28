@@ -25,7 +25,7 @@ HTMLWidgets.widget({
       stage.handleResize();
       }, false );
       }
-
+   
       //Load timer for rendering
       //console.time("load-to-render");
 
@@ -109,10 +109,41 @@ HTMLWidgets.widget({
         }
       });
 
-      //Get AA selection details
+      
       stage.signals.clicked.add(function(pickingProxy){
         if(pickingProxy) {
+          
+      //Get AA selection details
         Shiny.onInputChange(`${el.id}_selection`, pickingProxy.getLabel());
+        
+      //Get list of surrounding atoms
+      if(pickingProxy.atom){
+        structure.then(function(o){
+          
+          var proximity = 3;
+          var proxlevel = "residue";
+          
+          if(typeof(opts.selectionParameters) !== 'undefined'){
+          var proximity = opts.selectionParameters["proximity"];
+          var proxlevel = opts.selectionParameters["level"];
+          }
+
+          var atom = pickingProxy.atom;
+          var atomName = atom.qualifiedName().split("]").pop()
+          var resiName = atomName.split('.')[0]
+          if(proxlevel == "residue"){
+          var selection = new NGL.Selection(resiName);
+          } else {
+          var selection = new NGL.Selection(atomName);  
+          }
+          
+          var atomSet = o.structure.getAtomSetWithinSelection(selection, proximity);
+          var atomSet2 = o.structure.getAtomSetWithinGroup( atomSet );
+         
+        Shiny.onInputChange(`${el.id}_selAround`, atomSet2.toSeleString());  
+        
+        })
+      }
         }
       });
      }
@@ -256,12 +287,20 @@ Shiny.addCustomMessageHandler('NGLVieweR:removeSelection', function(message){
 Shiny.addCustomMessageHandler('NGLVieweR:addSelection', function(message){
 
   var structure = getNGLStructure(message.id);
+  
+      var param = message.param;
+      var color = param['color'];
+      
+      //Convert color values
+      if(typeof color === 'object' && color !== null){
+      param['color'] = colorMaker(param['color']);
+      }
 
  if(typeof(structure) !== "undefined"){
 
   structure.then(function(o){
 
-  o.addRepresentation(message.type, message.param);
+  o.addRepresentation(message.type, param);
 
   });
  }
@@ -308,6 +347,14 @@ Shiny.onInputChange(`${message.id}_rendering`, false);
 Shiny.addCustomMessageHandler('NGLVieweR:updateRepresentation', function(message){
 
     var stage = getNGLStage(message.id);
+    
+    var param = message.param;
+    var color = param['color'];
+      
+      //Convert color values
+      if(typeof color === 'object' && color !== null){
+      param['color'] = colorMaker(param['color']);
+      }
 
 Shiny.onInputChange(`${message.id}_rendering`, true);
 setTimeout(function() {

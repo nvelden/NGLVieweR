@@ -253,6 +253,53 @@ stageParameters <- function(NGLVieweR, ...) {
 
 }
 
+#' Set selection parameters
+#'
+#'@description
+#'Set selection parameters.
+#'@param NGLVieweR A NGLVieweR object.
+#'@param proximity Set distance in angstrom for atoms to return in proximity of selection. Default = \code{3}. 
+#'@param level Set level on which atoms in proximity of selection are returned. Options are "residue" (default) or atom".
+#'@return Returns list of selection parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+#'@examples
+#'NGLVieweR("7CID") %>%
+#'  addRepresentation("cartoon") %>%
+#'  selectionParameters(3, "residue")
+#'
+#' # Shiny context
+#' if (interactive()) {
+#'    library(shiny)
+#'    ui <- fluidPage(NGLVieweROutput("structure"))
+#'    server <- function(input, output) {
+#'     output$structure <- renderNGLVieweR({
+#'       NGLVieweR("7CID") %>%
+#'         addRepresentation("cartoon") %>%
+#'         selectionParameters(3, "residue")
+#'     })
+#'     observeEvent(input$structure_selAround, {
+#'       NGLVieweR_proxy("structure") %>% removeSelection("selAround")
+#'       NGLVieweR_proxy("structure") %>%
+#'         addSelection(
+#'           "ball+stick",
+#'           param =
+#'             list(
+#'               name = "selAround",
+#'               sele = input$structure_selAround,
+#'               colorValue = "grey"
+#'             )
+#'         )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
+#'
+#'@export
+selectionParameters <- function(NGLVieweR, proximity = 3, level = "residue") {
+  opts <- list(proximity = proximity, level = level)
+  NGLVieweR$x$selectionParameters <- opts
+  NGLVieweR
+}
+
 #'Add representation
 #'
 #'@description
