@@ -410,7 +410,6 @@ setRock <- function(NGLVieweR, rock = TRUE) {
 #'@seealso
 #'* [setRock()]
 #'* [updateSpin()]
-#'* [setPosition()]
 #'@examples
 #'NGLVieweR("7CID") %>%
 #'  addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) %>%
@@ -433,6 +432,7 @@ setSpin <- function(NGLVieweR, spin = TRUE) {
 #' @seealso
 #' * [zoomMove()]
 #' * [setRotation()]
+#' * [setPosition()]
 #' @examples
 #' NGLVieweR("7CID") %>%
 #' addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) %>%

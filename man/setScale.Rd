@@ -26,6 +26,7 @@ setScale(2)
 \itemize{
 \item \code{\link[=zoomMove]{zoomMove()}}
 \item \code{\link[=setRotation]{setRotation()}}
+\item \code{\link[=setPosition]{setPosition()}}
 }
 
 Other transformations: 
