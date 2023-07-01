@@ -26,6 +26,7 @@ NGLVieweR("7CID") \%>\%
 \itemize{
 \item \code{\link[=setRock]{setRock()}}
 \item \code{\link[=updateSpin]{updateSpin()}}
+\item \code{\link[=setPosition]{setPosition()}}
 }
 
 Other animations: 
