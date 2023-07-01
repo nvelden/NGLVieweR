@@ -1,3 +1,7 @@
+# NGLVieweR 1.3.4
+
+* Added `setScale`, `setRotation`, and `setPosition` functions for controlling scale, rotation, and position of representations.
+
 # NGLVieweR 1.3.3
 
 * Added API call that returns a list of atoms surrounding a selection.

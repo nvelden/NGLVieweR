@@ -198,10 +198,13 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
   x$setRock <- FALSE
   x$toggleRock <- FALSE
   x$setSpin <- FALSE
+  x$setScale <- 1
+  x$setRotation <- list()
+  x$setPosition <- list()
   x$setFocus <- 0
   x$toggleSpin <- FALSE
   x$zoomMove <- list()
-
+  
   # create widget
   htmlwidgets::createWidget(
     name = "NGLVieweR",
@@ -418,6 +421,133 @@ setSpin <- function(NGLVieweR, spin = TRUE) {
   NGLVieweR
 }
 
+#' Set Scale
+#'
+#' @description
+#' Set the scale factor for the representation
+#' @param NGLVieweR A NGLVieweR object.
+#' @param scale A numeric value indicating the scale factor (default is 1).
+#' @return Updated \code{NGLVieweR} object with new scale parameter.
+#' @family transformations
+#' @seealso
+#' * [zoomMove()]
+#' * [setRotation()]
+#' @examples
+#' NGLVieweR("7CID") %>%
+#' addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) %>%
+#' setScale(2)
+#' @export
+setScale <- function(NGLVieweR, scale = 1) {
+  
+  NGLVieweR$x$setScale <- scale
+  NGLVieweR
+}
+
+#' Set zoomMove
+#'
+#' @description
+#' Add a zoom animation
+#' @param NGLVieweR A NGLVieweR object.
+#' @param center Target distance of selected atoms/residues.
+#' See the section "selection-language" in the official \href{https://nglviewer.org/}{NGL.js} manual.
+#' @param zoom Target zoom of selected atoms/residues.
+#' See the section "selection-language" in the official \href{https://nglviewer.org/}{NGL.js} manual.
+#' @param duration Optional animation time in milliseconds (default = 0).
+#' @param z_offSet Optional zoom offset value (default = 0).
+#' @return List of zoomMove parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+#' @family transformations
+#' @seealso
+#' * [setScale()]
+#' * [setRotation()]
+#' * [setPosition()]
+#' @examples
+#' NGLVieweR("7CID") %>%
+#' stageParameters(backgroundColor = "white") %>%
+#'   addRepresentation("cartoon", param=list(name="cartoon", colorValue="red")) %>%
+#'   addRepresentation("ball+stick", param=list(name="ball+stick",
+#'                                              colorValue="yellow",
+#'                                              colorScheme="element",
+#'                                              sele="200")) %>%
+#'   zoomMove("200:A.C", "200:A.C", 2000, -20)
+#' @export
+zoomMove <- function(NGLVieweR, center, zoom, duration = 0, z_offSet = 0){
+  opts <- list(center = center, zoom = zoom, duration = duration, z_offSet = z_offSet)
+  NGLVieweR$x$zoomMove <- opts
+  NGLVieweR
+}
+
+#' Rotate View
+#'
+#' @description
+#' Set rotation for the representation
+#' @param NGLVieweR A NGLVieweR object.
+#' @param x Rotation angle around the x-axis. Default is 0.
+#' @param y Rotation angle around the y-axis. Default is 0.
+#' @param z Rotation angle around the z-axis. Default is 0.
+#' @param degrees A logical value. If TRUE (default), the input angles are assumed to be in degrees and will be converted to radians. If FALSE, the angles are assumed to be in radians.
+#' @return NGLVieweR object with updated rotateView parameters.
+#' @family transformations
+#' @seealso
+#' * [setScale()]
+#' * [zoomMove()]
+#' * [setPosition()]
+#' @examples
+#' NGLVieweR("7CID") %>%
+#' stageParameters(backgroundColor = "white") %>%
+#' addRepresentation("cartoon", param=list(name="cartoon", colorValue="red")) %>%
+#' addRepresentation("ball+stick", param=list(name="ball+stick",
+#' colorValue="yellow",
+#' colorScheme="element",
+#' sele="200")) %>%
+#' setRotation(30, 45, 60, degrees = TRUE)
+#' @export
+setRotation <- function(NGLVieweR, x=0, y=0, z=0, degrees=TRUE){
+  
+  if(degrees) {
+    # Convert degrees to radians
+    x <- x * (pi / 180)
+    y <- y * (pi / 180)
+    z <- z * (pi / 180)
+  }
+  
+  opts <- list(x = x, y = y, z = z)
+  
+  NGLVieweR$x$setRotation <- opts 
+  return(NGLVieweR)
+}
+
+#' Set Position
+#'
+#' @description
+#' Set position for the representation
+#' @param NGLVieweR A NGLVieweR object.
+#' @param x Position along the x-axis in angstroms. Default is 0.
+#' @param y Position along the y-axis in angstroms. Default is 0.
+#' @param z Position along the z-axis in angstroms. Default is 0.
+#' @return NGLVieweR object with updated setPosition parameters.
+#' @family transformations
+#' @seealso
+#' * [setScale()]
+#' * [zoomMove()]
+#' * [setRotation()]
+#' @examples
+#' NGLVieweR("7CID") %>%
+#' stageParameters(backgroundColor = "white") %>%
+#' addRepresentation("cartoon", param=list(name="cartoon", colorValue="red")) %>%
+#' addRepresentation("ball+stick", param=list(name="ball+stick",
+#' colorValue="yellow",
+#' colorScheme="element",
+#' sele="200")) %>%
+#' setPosition(25, 0, 0)
+#' @export
+setPosition <- function(NGLVieweR, x=0, y=0, z=0){
+  
+  opts <- list(x = x, y = y, z = z)
+  
+  NGLVieweR$x$setPosition <- opts 
+  NGLVieweR
+}
+
 #'Set Quality
 #'
 #'@description
@@ -436,6 +566,7 @@ setQuality <- function(NGLVieweR, quality = "medium") {
   NGLVieweR$x$setQuality <- quality
   NGLVieweR
 }
+
 #'Set Focus
 #'
 #'@description
@@ -453,33 +584,5 @@ setQuality <- function(NGLVieweR, quality = "medium") {
 setFocus <- function(NGLVieweR, focus = 0) {
 
   NGLVieweR$x$setFocus <- focus
-  NGLVieweR
-}
-#'Set zoomMove
-#'
-#'@description
-#'Add a zoom animation
-#'@param NGLVieweR A NGLVieweR object.
-#'@param center Target distance of selected atoms/residues.
-#'See the section "selection-language" in the official \href{https://nglviewer.org/}{NGL.js} manual.
-#'@param zoom Target zoom of selected atoms/residues.
-#'See the section "selection-language" in the official \href{https://nglviewer.org/}{NGL.js} manual.
-#'@param duration Optional animation time in milliseconds (default = 0).
-#'@param z_offSet Optional zoom offset value (default = 0).
-#'@return List of zoomMove parameters to \code{NGLVieweR} \code{htmlwidgets} object.
-#'@family animations
-#'@examples
-#'NGLVieweR("7CID") %>%
-#'stageParameters(backgroundColor = "white") %>%
-#'  addRepresentation("cartoon", param=list(name="cartoon", colorValue="red")) %>%
-#'  addRepresentation("ball+stick", param=list(name="ball+stick",
-#'                                             colorValue="yellow",
-#'                                             colorScheme="element",
-#'                                             sele="200")) %>%
-#'  zoomMove("200:A.C", "200:A.C", 2000, -20)
-#'@export
-zoomMove <- function(NGLVieweR, center, zoom, duration = 0, z_offSet = 0){
-  opts <- list(center = center, zoom = zoom, duration = duration, z_offSet = z_offSet)
-  NGLVieweR$x$zoomMove <- opts
   NGLVieweR
 }
