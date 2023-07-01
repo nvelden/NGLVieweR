@@ -28,19 +28,23 @@ Add a zoom animation
 \examples{
 NGLVieweR("7CID") \%>\%
 stageParameters(backgroundColor = "white") \%>\%
- addRepresentation("cartoon", param=list(name="cartoon", colorValue="red")) \%>\%
- addRepresentation("ball+stick", param=list(name="ball+stick",
-                                            colorValue="yellow",
-                                            colorScheme="element",
-                                            sele="200")) \%>\%
- zoomMove("200:A.C", "200:A.C", 2000, -20)
+  addRepresentation("cartoon", param=list(name="cartoon", colorValue="red")) \%>\%
+  addRepresentation("ball+stick", param=list(name="ball+stick",
+                                             colorValue="yellow",
+                                             colorScheme="element",
+                                             sele="200")) \%>\%
+  zoomMove("200:A.C", "200:A.C", 2000, -20)
 }
 \seealso{
-Other animations: 
-\code{\link{setRock}()},
-\code{\link{setSpin}()},
-\code{\link{updateRock}()},
-\code{\link{updateSpin}()},
-\code{\link{updateZoomMove}()}
+\itemize{
+\item \code{\link[=setScale]{setScale()}}
+\item \code{\link[=setRotation]{setRotation()}}
+\item \code{\link[=setPosition]{setPosition()}}
 }
-\concept{animations}
+
+Other transformations: 
+\code{\link{setPosition}()},
+\code{\link{setRotation}()},
+\code{\link{setScale}()}
+}
+\concept{transformations}

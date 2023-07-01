@@ -94,7 +94,6 @@ Other animations:
 \code{\link{setRock}()},
 \code{\link{setSpin}()},
 \code{\link{updateRock}()},
-\code{\link{updateSpin}()},
-\code{\link{zoomMove}()}
+\code{\link{updateSpin}()}
 }
 \concept{animations}

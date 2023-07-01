@@ -71,7 +71,6 @@ Other animations:
 \code{\link{setRock}()},
 \code{\link{setSpin}()},
 \code{\link{updateSpin}()},
-\code{\link{updateZoomMove}()},
-\code{\link{zoomMove}()}
+\code{\link{updateZoomMove}()}
 }
 \concept{animations}

@@ -32,7 +32,6 @@ Other animations:
 \code{\link{setSpin}()},
 \code{\link{updateRock}()},
 \code{\link{updateSpin}()},
-\code{\link{updateZoomMove}()},
-\code{\link{zoomMove}()}
+\code{\link{updateZoomMove}()}
 }
 \concept{animations}
