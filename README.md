@@ -1,5 +1,7 @@
-# **NGLVieweR** - <img src="man/figures/logo.png" class="logo" align="right" height="150px"/> Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny
-
+<p align="center">
+  <img src="man/figures/logo.png" height="150px" width="150px" align="right">
+  <h1><strong>NGLVieweR</strong> - Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny</h1>
+</p>
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/nvelden/NGLVieweR/workflows/R-CMD-check/badge.svg)](https://github.com/nvelden/NGLVieweR/actions) [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) 

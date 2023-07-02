@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<script src="extra.js"></script><meta property="og:title" content="Interactive 3D Visualization of Molecular Structures">
+<meta property="og:title" content="Interactive 3D Visualization of Molecular Structures">
 <meta property="og:description" content="Provides an htmlwidgets &lt;https://www.htmlwidgets.org/&gt; interface to NGL.js &lt;http://nglviewer.org/ngl/api/&gt;.
     NGLvieweR can be used to visualize and interact with protein databank (PDB) and structural files in R and Shiny applications.
     It includes a set of API functions to manipulate the viewer after creation in Shiny.">
@@ -29,6 +29,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -41,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">NGLVieweR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.4</span>
       </span>
     </div>
 
@@ -65,7 +67,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/nvelden/NGLVieweR/">
+  <a href="https://github.com/nvelden/NGLVieweR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -82,46 +84,53 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="nglviewer----visualize-and-interact-with-protein-data-bank-pdb-and-structural-files-in-r-and-shiny" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#nglviewer----visualize-and-interact-with-protein-data-bank-pdb-and-structural-files-in-r-and-shiny" class="anchor"></a><strong>NGLVieweR</strong> - <img src="reference/figures/logo.png" class="logo" align="right" height="150px"> Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny</h1></div>
+
+<p align="center">
+<img src="reference/figures/logo.png" height="150px" width="150px" align="right"></p>
+<div class="page-header"><h1>
+<strong>NGLVieweR</strong> - Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny
+</h1></div>
+
 <!-- badges: start -->
 
-<div id="click-here-to-view-a-shiny-application-integrating-most-features-of-nglviewer" class="section level3">
-<h3 class="hasAnchor">
-<a href="#click-here-to-view-a-shiny-application-integrating-most-features-of-nglviewer" class="anchor"></a><a href="https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/">Click here</a> to view a Shiny application integrating most features of <strong>NGLVieweR</strong>.</h3>
+<div class="section level3">
+<h3 id="click-here-to-view-a-shiny-application-integrating-most-features-of-nglviewer">
+<a href="https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/" class="external-link">Click here</a> to view a Shiny application integrating most features of <strong>NGLVieweR</strong>.<a class="anchor" aria-label="anchor" href="#click-here-to-view-a-shiny-application-integrating-most-features-of-nglviewer"></a>
+</h3>
 </div>
-<div id="description" class="section level2">
-<h2 class="hasAnchor">
-<a href="#description" class="anchor"></a>Description</h2>
-<p><strong>NGLvieweR</strong> provides an R interface to the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> JavaScript library. It can be used to visualize and interact with protein data bank (PDB) and structural files in R and Shiny applications. It includes a set of API functions to manipulate the viewer after creation and makes it possible to retrieve data from the visualization into R.</p>
+<div class="section level2">
+<h2 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
+</h2>
+<p><strong>NGLvieweR</strong> provides an R interface to the <a href="http://nglviewer.org/ngl/api/" class="external-link">NGL.js</a> JavaScript library. It can be used to visualize and interact with protein data bank (PDB) and structural files in R and Shiny applications. It includes a set of API functions to manipulate the viewer after creation and makes it possible to retrieve data from the visualization into R.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of <strong>NGLVieweR</strong> from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the released version of <strong>NGLVieweR</strong> from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"NGLVieweR"</span><span class="op">)</span></code></pre></div>
-<p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<pre class="{.r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("remotes")
-remotes::install_github("nvelden/NGLVieweR")</a></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"NGLVieweR"</span><span class="op">)</span></span></code></pre></div>
+<p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"nvelden/NGLVieweR"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="basics" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basics" class="anchor"></a>Basics</h2>
-<p>You can load a PDB (or any other supported structural file) directly or use a PDB code of a structure on <a href="https://www.rcsb.org/">RCSB.org</a>. The below minimal example loads the PDB file and displays the structure in a “cartoon” representation.</p>
-<pre class="{.r}"><code>#Load local pdb file
-NGLVieweR("C:/7CID.pdb") %&gt;%
-addRepresentation("cartoon")
-
-#Load protein by PDB code
-NGLVieweR("7CID") %&gt;%
-addRepresentation("cartoon")</code></pre>
+<div class="section level2">
+<h2 id="basics">Basics<a class="anchor" aria-label="anchor" href="#basics"></a>
+</h2>
+<p>You can load a PDB (or any other supported structural file) directly or use a PDB code of a structure on <a href="https://www.rcsb.org/" class="external-link">RCSB.org</a>. The below minimal example loads the PDB file and displays the structure in a “cartoon” representation.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Load local pdb file</span></span>
+<span><span class="fu"><a href="reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"C:/7CID.pdb"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Load protein by PDB code</span></span>
+<span><span class="fu"><a href="reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/cartoon_representation.PNG" class="screenshot" width="50%"></p>
 </div>
-<div id="functionality" class="section level2">
-<h2 class="hasAnchor">
-<a href="#functionality" class="anchor"></a>Functionality</h2>
+<div class="section level2">
+<h2 id="functionality">Functionality<a class="anchor" aria-label="anchor" href="#functionality"></a>
+</h2>
 <p>There are functions provided to:</p>
 <ul>
 <li>Overlay different representation styles</li>
@@ -131,57 +140,67 @@ addRepresentation("cartoon")</code></pre>
 <li>Add contacts between residues</li>
 <li>Auto rotate/rock</li>
 </ul>
-<p>In Shiny apps, you can manipulate the <strong>NGLVieweR</strong> widget after creation using specific “API”" calls. Users can for instance add/remove representations, make snapshots, add labels or highlight specific regions. See the <a href="https://nvelden.github.io/NGLVieweR/articles/NGLVieweR.html">Get started</a> section for a complete overview.</p>
+<p>In Shiny apps, you can manipulate the <strong>NGLVieweR</strong> widget after creation using specific “API”” calls. Users can for instance add/remove representations, make snapshots, add labels or highlight specific regions. See the <a href="https://nvelden.github.io/NGLVieweR/articles/NGLVieweR.html" class="external-link">Get started</a> section for a complete overview.</p>
 </div>
-</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=NGLVieweR">https://​cloud.r-project.org/​package=NGLVieweR</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/nvelden/NGLVieweR/">https://​github.com/​nvelden/​NGLVieweR/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/nvelden/NGLVieweR/issues">https://​github.com/​nvelden/​NGLVieweR/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Niels van der Velden <br><small class="roles"> Author, maintainer </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://cloud.r-project.org/package=NGLVieweR" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/nvelden/NGLVieweR/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/nvelden/NGLVieweR/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/nvelden/NGLVieweR/actions"><img src="https://github.com/nvelden/NGLVieweR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://CRAN.R-project.org/package=NGLVieweR"><img src="https://www.r-pkg.org/badges/version/NGLVieweR" alt="CRAN status"></a></li>
-<li><a href="https://cran.r-project.org/package=NGLVieweR"><img src="https://cranlogs.r-pkg.org/badges/grand-total/NGLVieweR" alt="Metacran downloads"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing NGLVieweR</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Niels van der Velden <br><small class="roles"> Author, maintainer </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/nvelden/NGLVieweR/actions" class="external-link"><img src="https://github.com/nvelden/NGLVieweR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://CRAN.R-project.org/package=NGLVieweR" class="external-link"><img src="https://www.r-pkg.org/badges/version/NGLVieweR" alt="CRAN status"></a></li>
+<li><a href="https://cran.r-project.org/package=NGLVieweR" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/NGLVieweR" alt="Metacran downloads"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Niels van der Velden.</p>
+  <p></p>
+<p>Developed by Niels van der Velden.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -189,6 +208,8 @@ addRepresentation("cartoon")</code></pre>
 
   
 
+
+  
 
   </body>
 </html>

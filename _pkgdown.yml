@@ -24,6 +24,10 @@ navbar:
 reference:
 - title: All functions
   contents:
+  - '`selectionParameters`'
+  - '`setPosition`'
+  - '`setRotation`'
+  - '`setScale`'
   - '`addRepresentation`'
   - '`addSelection`'
   - '`NGLVieweR-shiny`'

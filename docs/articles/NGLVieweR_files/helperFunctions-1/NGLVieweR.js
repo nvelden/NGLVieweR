@@ -58,6 +58,20 @@ HTMLWidgets.widget({
        });
       
       o.autoView();
+      
+      //Set Scale
+      o.setScale(opts.setScale)
+  
+      //Set Rotation
+      if(Object.keys(opts.setRotation).length > 0) {
+      o.setRotation([opts.setRotation.x,opts.setRotation.y,opts.setRotation.z])
+      }
+      
+      //Set position
+      if(Object.keys(opts.setPosition).length > 0) {
+      o.setPosition([opts.setPosition.x,opts.setPosition.y,opts.setPosition.z])
+      }
+      
       //Set zoomMove
       var zoomMoveOpts = opts.zoomMove
       if(typeof(zoomMoveOpts.zoom) !== 'undefined'){
@@ -66,7 +80,7 @@ HTMLWidgets.widget({
 
       stage.animationControls.zoomMove(center, zoom, zoomMoveOpts.duration);
       }
-
+      
      //Send AA sequence to Shiny
      //var aa = o.structure.getSequence()
      //Shiny.onInputChange(`${el.id}_sequence`, aa);

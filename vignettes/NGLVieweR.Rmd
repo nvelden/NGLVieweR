@@ -175,6 +175,40 @@ NGLVieweR("7CID") %>%
   )
 ```
 
+## Transformation functions
+
+The package provides a set of transformation functions that allow for adjusting the scale, rotation, and position of the visualized structures.
+
+### Scaling Structures
+
+The `setScale()` function allows you to adjust the scale of the visualized structure:
+
+```
+NGLVieweR("7CID") %>%
+addRepresentation("cartoon") %>%
+setScale(2) # Doubles the size of the structure
+```
+
+### Rotating Structures
+
+You can rotate the visualized structures using the `setRotation()` function:
+
+```
+NGLVieweR("7CID") %>%
+addRepresentation("cartoon") %>%
+setRotation(30, 45, 60) # Rotates the structure 30 degrees around x-axis, 45 degrees around y-axis and 60 degrees around z-axis.
+```
+
+### Positioning Structures
+
+The `setPosition()` function allows you to change the position of the visualized structure:
+
+```
+NGLVieweR("7CID") %>%
+addRepresentation("cartoon") %>%
+setPosition(25, 0, 0) # Moves the structure 25 units along the x-axis.
+```
+
 ## Zoom
 
 You can zoom into specific residues using the `ZoomMove()` function.

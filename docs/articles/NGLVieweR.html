@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<script src="../extra.js"></script><meta property="og:title" content="NGLVieweR">
+<meta property="og:title" content="NGLVieweR">
 <meta property="og:description" content="NGLVieweR">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NGLVieweR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.4</span>
       </span>
     </div>
 
@@ -63,7 +65,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/nvelden/NGLVieweR/">
+  <a href="https://github.com/nvelden/NGLVieweR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -78,123 +80,145 @@
 
       
 
-      </header><script src="NGLVieweR_files/header-attrs-2.10/header-attrs.js"></script><script src="NGLVieweR_files/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="NGLVieweR_files/NGLVieweR-2.0.0/./lib/NGL-2.0.0/ngl.js"></script><script src="NGLVieweR_files/helperFunctions-1/./lib/helperFunctions.js"></script><script src="NGLVieweR_files/NGLVieweR-binding-1.3.3/NGLVieweR.js"></script><div class="row">
+      </header><script src="NGLVieweR_files/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="NGLVieweR_files/NGLVieweR-2.0.0/./lib/NGL-2.0.0/ngl.js"></script><script src="NGLVieweR_files/helperFunctions-1/./lib/helperFunctions.js"></script><script src="NGLVieweR_files/NGLVieweR-binding-1.3.4/NGLVieweR.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>NGLVieweR</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/nvelden/NGLVieweR/blob/master/vignettes/NGLVieweR.Rmd"><code>vignettes/NGLVieweR.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/nvelden/NGLVieweR/blob/HEAD/vignettes/NGLVieweR.Rmd" class="external-link"><code>vignettes/NGLVieweR.Rmd</code></a></small>
       <div class="hidden name"><code>NGLVieweR.Rmd</code></div>
 
     </div>
 
     
     
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p><strong>NGLVieweR</strong> is available through GitHub</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"nvelden/NGLVieweR"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"nvelden/NGLVieweR"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="loading-pdb-files" class="section level2">
-<h2 class="hasAnchor">
-<a href="#loading-pdb-files" class="anchor"></a>Loading PDB files</h2>
-<p>You can load a PDB (or and other supported format) directly or use a PDB code of a structure on <a href="https://www.rcsb.org/">RCSB.org</a>. The below minimal example loads the PDB file and displays the structure in a “cartoon” representation.</p>
+<div class="section level2">
+<h2 id="loading-pdb-files">Loading PDB files<a class="anchor" aria-label="anchor" href="#loading-pdb-files"></a>
+</h2>
+<p>You can load a PDB (or and other supported format) directly or use a
+PDB code of a structure on <a href="https://www.rcsb.org/" class="external-link">RCSB.org</a>.
+The below minimal example loads the PDB file and displays the structure
+in a “cartoon” representation.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Load local pdb file</span>
-<span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"C:/7CID.pdb"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-<span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span>
-<span class="co">#Load protein by PDB code</span>
-<span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-<span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span></code></pre></div>
-<p><strong>Note:</strong> Use mouse for selection (left-click), rotate/move (left/right-click hold) and zooming (scroll wheel).</p>
-<div id="htmlwidget-d82190b0a84beea4aa88" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d82190b0a84beea4aa88">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script><p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application by running the below code. Use “API” for an example using API calls or any of the function names (e.g “addSelection”") for function specific examples.</p>
+<code class="sourceCode R"><span><span class="co">#Load local pdb file</span></span>
+<span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"C:/7CID.pdb"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span></span>
+<span><span class="co">#Load protein by PDB code</span></span>
+<span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Note:</strong> Use mouse for selection (left-click),
+rotate/move (left/right-click hold) and zooming (scroll wheel).</p>
+<div class="NGLVieweR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cbcebcfbcb356734ae17" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-cbcebcfbcb356734ae17">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setScale":1,"setRotation":[],"setPosition":[],"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script><p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application
+by running the below code. Use “API” for an example using API calls or
+any of the function names (e.g “addSelection”“) for function specific
+examples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/NGLVieweR_example.html">NGLVieweR_example</a></span><span class="op">(</span><span class="st">"basic"</span><span class="op">)</span> </code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR" class="external-link">NGLVieweR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/NGLVieweR_example.html">NGLVieweR_example</a></span><span class="op">(</span><span class="st">"basic"</span><span class="op">)</span> </span></code></pre></div>
 </div>
-<div id="loading-other-structural-files" class="section level2">
-<h2 class="hasAnchor">
-<a href="#loading-other-structural-files" class="anchor"></a>Loading other structural files</h2>
-<p>This package has been developed and tested using PDB files but supports loading of any of the following structural files: .mmcif, .cif, .mcif, .ent, .pqr, .gro, .sdf, .sd, .mol2 and .mmtf.</p>
-<p>By default <strong>NGLVieweR</strong> guesses the file format from the file extension. Use the <code>format</code> parameter in case no or the wrong file extension is provided.</p>
+<div class="section level2">
+<h2 id="loading-other-structural-files">Loading other structural files<a class="anchor" aria-label="anchor" href="#loading-other-structural-files"></a>
+</h2>
+<p>This package has been developed and tested using PDB files but
+supports loading of any of the following structural files: .mmcif, .cif,
+.mcif, .ent, .pqr, .gro, .sdf, .sd, .mol2 and .mmtf.</p>
+<p>By default <strong>NGLVieweR</strong> guesses the file format from
+the file extension. Use the <code>format</code> parameter in case no or
+the wrong file extension is provided.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Note that line formatting needs to be exact when reading from console!</span>
-<span class="va">benz</span> <span class="op">&lt;-</span> <span class="st">"
-702
-  -OEChem-02271511112D
-  9  8  0     0  0  0  0  0  0999 V2000
-    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
-    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
-    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
-    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
-    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
-    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
-    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
-    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
-    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
-  1  2  1  0  0  0  0
-  1  9  1  0  0  0  0
-  2  3  1  0  0  0  0
-  2  4  1  0  0  0  0
-  2  5  1  0  0  0  0
-  3  6  1  0  0  0  0
-  3  7  1  0  0  0  0
-  3  8  1  0  0  0  0
-M  END
-&gt; &lt;ID&gt;
-00001
-&gt; &lt;DESCRIPTION&gt;
-Solvent produced by yeast-based fermentation of sugars.
-$$$$
-"</span>
-<span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="va">benz</span>, format<span class="op">=</span><span class="st">"sdf"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-0ce1ddf60e827308e4db" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0ce1ddf60e827308e4db">{"x":{"file_ext":"sdf","data":"\n702\n  -OEChem-02271511112D\n  9  8  0     0  0  0  0  0  0999 V2000\n    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  1  9  1  0  0  0  0\n  2  3  1  0  0  0  0\n  2  4  1  0  0  0  0\n  2  5  1  0  0  0  0\n  3  6  1  0  0  0  0\n  3  7  1  0  0  0  0\n  3  8  1  0  0  0  0\nM  END\n> <ID>\n00001\n> <DESCRIPTION>\nSolvent produced by yeast-based fermentation of sugars.\n$$$$\n","type":"file","stageParameters":[],"addRepresentation":{"type":["ball+stick"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="co">#Note that line formatting needs to be exact when reading from console!</span></span>
+<span><span class="va">benz</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
+<span><span class="st">702</span></span>
+<span><span class="st">  -OEChem-02271511112D</span></span>
+<span><span class="st">  9  8  0     0  0  0  0  0  0999 V2000</span></span>
+<span><span class="st">    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span><span class="st">    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span><span class="st">    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span><span class="st">    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span><span class="st">    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span><span class="st">    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span><span class="st">    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span><span class="st">    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span><span class="st">    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0</span></span>
+<span><span class="st">  1  2  1  0  0  0  0</span></span>
+<span><span class="st">  1  9  1  0  0  0  0</span></span>
+<span><span class="st">  2  3  1  0  0  0  0</span></span>
+<span><span class="st">  2  4  1  0  0  0  0</span></span>
+<span><span class="st">  2  5  1  0  0  0  0</span></span>
+<span><span class="st">  3  6  1  0  0  0  0</span></span>
+<span><span class="st">  3  7  1  0  0  0  0</span></span>
+<span><span class="st">  3  8  1  0  0  0  0</span></span>
+<span><span class="st">M  END</span></span>
+<span><span class="st">&gt; &lt;ID&gt;</span></span>
+<span><span class="st">00001</span></span>
+<span><span class="st">&gt; &lt;DESCRIPTION&gt;</span></span>
+<span><span class="st">Solvent produced by yeast-based fermentation of sugars.</span></span>
+<span><span class="st">$$$$</span></span>
+<span><span class="st">"</span></span>
+<span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="va">benz</span>, format<span class="op">=</span><span class="st">"sdf"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span><span class="op">)</span></span></code></pre></div>
+<div class="NGLVieweR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a39390492d5453059c39" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-a39390492d5453059c39">{"x":{"file_ext":"sdf","data":"\n702\n  -OEChem-02271511112D\n  9  8  0     0  0  0  0  0  0999 V2000\n    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  1  9  1  0  0  0  0\n  2  3  1  0  0  0  0\n  2  4  1  0  0  0  0\n  2  5  1  0  0  0  0\n  3  6  1  0  0  0  0\n  3  7  1  0  0  0  0\n  3  8  1  0  0  0  0\nM  END\n> <ID>\n00001\n> <DESCRIPTION>\nSolvent produced by yeast-based fermentation of sugars.\n$$$$\n","type":"file","stageParameters":[],"addRepresentation":{"type":["ball+stick"],"values":[[]]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setScale":1,"setRotation":[],"setPosition":[],"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="representations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#representations" class="anchor"></a>Representations</h2>
-<p>You can load the structure as a “cartoon”, “ball+stick”, “line”, “surface”, “ribbon”, or any other representation listed in the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual under “StructureRepresentation”. Multiple representations of the same structure can be overlaid by chaining the <code><a href="../reference/addSelection.html">addSelection()</a></code> function. Also see the “structure” tab in the <a href="https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/">demo</a> app for a list of possible representations.</p>
+<div class="section level2">
+<h2 id="representations">Representations<a class="anchor" aria-label="anchor" href="#representations"></a>
+</h2>
+<p>You can load the structure as a “cartoon”, “ball+stick”, “line”,
+“surface”, “ribbon”, or any other representation listed in the <a href="http://nglviewer.org/ngl/api/" class="external-link">NGL.js</a> manual under
+“StructureRepresentation”. Multiple representations of the same
+structure can be overlaid by chaining the <code><a href="../reference/addSelection.html">addSelection()</a></code>
+function. Also see the “structure” tab in the <a href="https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/" class="external-link">demo</a>
+app for a list of possible representations.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-<span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-<span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span><span class="op">)</span></code></pre></div>
-<p>You can alter the appearance of select residues using the <code>param</code> argument. For a full list of options see the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> “RepresentationParameters” and the “Selection language” section.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span><span class="op">)</span></span></code></pre></div>
+<p>You can alter the appearance of select residues using the
+<code>param</code> argument. For a full list of options see the <a href="http://nglviewer.org/ngl/api/" class="external-link">NGL.js</a>
+“RepresentationParameters” and the “Selection language” section.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      sele <span class="op">=</span> <span class="st">"233-248"</span>,
-      colorValue <span class="op">=</span> <span class="st">"red"</span>,
-      colorScheme <span class="op">=</span> <span class="st">"element"</span>
-    <span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"surface"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      colorValue <span class="op">=</span> <span class="st">"white"</span>,
-      opacity <span class="op">=</span> <span class="fl">0.1</span>
-    <span class="op">)</span>
-  <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-095e3d6e45458c28d96a" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-095e3d6e45458c28d96a">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","surface"],"values":[{"colorScheme":"residueindex"},{"sele":"233-248","colorValue":"red","colorScheme":"element"},{"colorValue":"white","opacity":0.1}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      sele <span class="op">=</span> <span class="st">"233-248"</span>,</span>
+<span>      colorValue <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>      colorScheme <span class="op">=</span> <span class="st">"element"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"surface"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      colorValue <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>      opacity <span class="op">=</span> <span class="fl">0.1</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="NGLVieweR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bf43b311e03ecb79400e" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-bf43b311e03ecb79400e">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","surface"],"values":[{"colorScheme":"residueindex"},{"sele":"233-248","colorValue":"red","colorScheme":"element"},{"colorValue":"white","opacity":0.1}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setScale":1,"setRotation":[],"setPosition":[],"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="stage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#stage" class="anchor"></a>Stage</h2>
-<p>You can alter the background color or set the zoom or rotation speed using the <code><a href="../reference/stageParameters.html">stageParameters()</a></code> function. For a full list of options, see the “StageParameters” method in the official <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual. In additions there are specific functions to set:</p>
+<div class="section level2">
+<h2 id="stage">Stage<a class="anchor" aria-label="anchor" href="#stage"></a>
+</h2>
+<p>You can alter the background color or set the zoom or rotation speed
+using the <code><a href="../reference/stageParameters.html">stageParameters()</a></code> function. For a full list of
+options, see the “StageParameters” method in the official <a href="http://nglviewer.org/ngl/api/" class="external-link">NGL.js</a> manual. In additions
+there are specific functions to set:</p>
 <ul>
 <li>
-<strong>Animation</strong>: <code><a href="../reference/setRock.html">setRock()</a></code> or <code><a href="../reference/setSpin.html">setSpin()</a></code>
+<strong>Animation</strong>: <code><a href="../reference/setRock.html">setRock()</a></code> or
+<code><a href="../reference/setSpin.html">setSpin()</a></code>
 </li>
 <li>
 <strong>Focus</strong>: <code><a href="../reference/setFocus.html">setFocus()</a></code>
@@ -203,245 +227,302 @@ $$$$
 <strong>Quality</strong>: <code><a href="../reference/setQuality.html">setQuality()</a></code>
 </li>
 </ul>
-<p><strong>Note</strong>: Changes in background color are not visible in the RStudio viewer.</p>
+<p><strong>Note</strong>: Changes in background color are not visible in
+the RStudio viewer.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="st">"white"</span>, zoomSpeed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-dd1d02d825a5d1106c7a" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dd1d02d825a5d1106c7a">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":{"backgroundColor":"white","zoomSpeed":1},"addRepresentation":{"type":["cartoon"],"values":[{"name":"cartoon","colorScheme":"residueindex"}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":true,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="st">"white"</span>, zoomSpeed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="NGLVieweR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-e2a3e3ba99fdf5aa2fe3" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-e2a3e3ba99fdf5aa2fe3">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":{"backgroundColor":"white","zoomSpeed":1},"addRepresentation":{"type":["cartoon"],"values":[{"name":"cartoon","colorScheme":"residueindex"}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":true,"setScale":1,"setRotation":[],"setPosition":[],"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="labels" class="section level2">
-<h2 class="hasAnchor">
-<a href="#labels" class="anchor"></a>Labels</h2>
-<p>Labels can be added by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “label”. For a full list of of options, see the LabelRepresentationParameters section in the <a href="http://nglviewer.org/ngl/api/">NGL.js</a> manual. Also see the “label” tab in the <a href="https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/">demo</a> app for possible label settings.</p>
+<div class="section level2">
+<h2 id="labels">Labels<a class="anchor" aria-label="anchor" href="#labels"></a>
+</h2>
+<p>Labels can be added by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code>
+type parameter to “label”. For a full list of of options, see the
+LabelRepresentationParameters section in the <a href="http://nglviewer.org/ngl/api/" class="external-link">NGL.js</a> manual. Also see the
+“label” tab in the <a href="https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/" class="external-link">demo</a>
+app for possible label settings.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-    colorScheme <span class="op">=</span> <span class="st">"element"</span>,
-    colorValue <span class="op">=</span> <span class="st">"yellow"</span>,
-    sele <span class="op">=</span> <span class="st">"20"</span>
-  <span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"label"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      sele <span class="op">=</span> <span class="st">"20"</span>,
-      labelType <span class="op">=</span> <span class="st">"format"</span>,
-      labelFormat <span class="op">=</span> <span class="st">"[%(resname)s]%(resno)s"</span>, <span class="co"># or enter custom text</span>
-      labelGrouping <span class="op">=</span> <span class="st">"residue"</span>, <span class="co"># or "atom" (eg. sele = "20:A.CB")</span>
-      color <span class="op">=</span> <span class="st">"white"</span>,
-      fontFamiliy <span class="op">=</span> <span class="st">"sans-serif"</span>,
-      xOffset <span class="op">=</span> <span class="fl">1</span>,
-      yOffset <span class="op">=</span> <span class="fl">0</span>,
-      zOffset <span class="op">=</span> <span class="fl">0</span>,
-      fixedSize <span class="op">=</span> <span class="cn">TRUE</span>,
-      radiusType <span class="op">=</span> <span class="fl">1</span>,
-      radiusSize <span class="op">=</span> <span class="fl">1.5</span>, <span class="co"># Label size</span>
-      showBackground <span class="op">=</span> <span class="cn">FALSE</span>
-      <span class="co"># backgroundColor="black",</span>
-      <span class="co"># backgroundOpacity=0.5</span>
-    <span class="op">)</span>
-  <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-80726521352b2932a5b8" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-80726521352b2932a5b8">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","fontFamiliy":"sans-serif","xOffset":1,"yOffset":0,"zOffset":0,"fixedSize":true,"radiusType":1,"radiusSize":1.5,"showBackground":false}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    colorScheme <span class="op">=</span> <span class="st">"element"</span>,</span>
+<span>    colorValue <span class="op">=</span> <span class="st">"yellow"</span>,</span>
+<span>    sele <span class="op">=</span> <span class="st">"20"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"label"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      sele <span class="op">=</span> <span class="st">"20"</span>,</span>
+<span>      labelType <span class="op">=</span> <span class="st">"format"</span>,</span>
+<span>      labelFormat <span class="op">=</span> <span class="st">"[%(resname)s]%(resno)s"</span>, <span class="co"># or enter custom text</span></span>
+<span>      labelGrouping <span class="op">=</span> <span class="st">"residue"</span>, <span class="co"># or "atom" (eg. sele = "20:A.CB")</span></span>
+<span>      color <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>      fontFamiliy <span class="op">=</span> <span class="st">"sans-serif"</span>,</span>
+<span>      xOffset <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>      yOffset <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>      zOffset <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>      fixedSize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>      radiusType <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>      radiusSize <span class="op">=</span> <span class="fl">1.5</span>, <span class="co"># Label size</span></span>
+<span>      showBackground <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>      <span class="co"># backgroundColor="black",</span></span>
+<span>      <span class="co"># backgroundOpacity=0.5</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="NGLVieweR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3c4b89390fcab1b53d24" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-3c4b89390fcab1b53d24">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","fontFamiliy":"sans-serif","xOffset":1,"yOffset":0,"zOffset":0,"fixedSize":true,"radiusType":1,"radiusSize":1.5,"showBackground":false}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setScale":1,"setRotation":[],"setPosition":[],"setFocus":0,"toggleSpin":false,"zoomMove":[]},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="zoom" class="section level2">
-<h2 class="hasAnchor">
-<a href="#zoom" class="anchor"></a>Zoom</h2>
-<p>You can zoom into specific residues using the <code>ZoomMove()</code> function.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      colorScheme <span class="op">=</span> <span class="st">"element"</span>,
-      colorValue <span class="op">=</span> <span class="st">"yellow"</span>,
-      sele <span class="op">=</span> <span class="st">"20"</span>
-    <span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"label"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      sele <span class="op">=</span> <span class="st">"20"</span>,
-      labelType <span class="op">=</span> <span class="st">"format"</span>,
-      labelFormat <span class="op">=</span> <span class="st">"[%(resname)s]%(resno)s"</span>, <span class="co"># or enter custom text</span>
-      labelGrouping <span class="op">=</span> <span class="st">"residue"</span>, <span class="co"># or "atom" (eg. sele = "20:A.CB")</span>
-      color <span class="op">=</span> <span class="st">"white"</span>,
-      xOffset <span class="op">=</span> <span class="fl">1</span>,
-      fixedSize <span class="op">=</span> <span class="cn">TRUE</span>,
-      radiusType <span class="op">=</span> <span class="fl">1</span>,
-      radiusSize <span class="op">=</span> <span class="fl">1.5</span>
-    <span class="op">)</span> <span class="co"># Label size</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/zoomMove.html">zoomMove</a></span><span class="op">(</span>
-    center <span class="op">=</span> <span class="st">"20"</span>,
-    zoom <span class="op">=</span> <span class="st">"20"</span>,
-    duration <span class="op">=</span> <span class="fl">0</span>, <span class="co"># animation time in ms</span>
-    z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span>
-  <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-344aeee6bc9ac563418c" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-344aeee6bc9ac563418c">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","xOffset":1,"fixedSize":true,"radiusType":1,"radiusSize":1.5}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"20","zoom":"20","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
+<div class="section level2">
+<h2 id="transformation-functions">Transformation functions<a class="anchor" aria-label="anchor" href="#transformation-functions"></a>
+</h2>
+<p>The package provides a set of transformation functions that allow for
+adjusting the scale, rotation, and position of the visualized
+structures.</p>
+<div class="section level3">
+<h3 id="scaling-structures">Scaling Structures<a class="anchor" aria-label="anchor" href="#scaling-structures"></a>
+</h3>
+<p>The <code><a href="../reference/setScale.html">setScale()</a></code> function allows you to adjust the scale
+of the visualized structure:</p>
+<pre><code><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/setScale.html">setScale</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="co"># Doubles the size of the structure</span></span></code></pre>
 </div>
-<div id="contact" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contact" class="anchor"></a>Contact</h2>
-<p>Contacts between residues can be added by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “contact”. Using the <code>sele</code> parameter contacts for specific residues can be selected. The <code>filterSele</code> parameter can be used to only show contacts between two selections. In the below example Biotin and residues 23, 27, 43, 45, and 128 are selected <code>sele="5001 or 23 or 27 or 43 or 45 or 128"</code> and contacts are only shown between the residues and biotin <code>filterSele=list("23 or 27 or 43 or 45 or 128", "5001")</code>. This prevents the display of contacts between residues or water molecules.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"3RY2"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      name <span class="op">=</span> <span class="st">"biotin"</span>,
-      colorvalue <span class="op">=</span> <span class="st">"grey"</span>,
-      colorScheme <span class="op">=</span> <span class="st">"element"</span>,
-      sele <span class="op">=</span> <span class="st">"5001"</span>
-    <span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      name <span class="op">=</span> <span class="st">"interacting"</span>,
-      colorScheme <span class="op">=</span> <span class="st">"element"</span>,
-      colorValue <span class="op">=</span> <span class="st">"green"</span>,
-      sele <span class="op">=</span> <span class="st">"23 or 27 or 43 or 45 or 128"</span>
-    <span class="op">)</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/zoomMove.html">zoomMove</a></span><span class="op">(</span>
-    center <span class="op">=</span> <span class="st">"27:B"</span>,
-    zoom <span class="op">=</span> <span class="st">"27:B"</span>,
-    z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"contact"</span>,
-    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      name <span class="op">=</span> <span class="st">"contact"</span>,
-      sele <span class="op">=</span> <span class="st">"5001 or 23 or 27 or 43 or 45 or 128"</span>,
-      filterSele <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"23 or 27 or 45 or 128"</span>, <span class="st">"5001"</span><span class="op">)</span>,
-      labelVisible <span class="op">=</span> <span class="cn">TRUE</span>,
-      labelFixedSize <span class="op">=</span> <span class="cn">FALSE</span>,
-      labelUnit <span class="op">=</span> <span class="st">"angstrom"</span>, <span class="co"># "", "angstrom", "nm"</span>
-      labelSize <span class="op">=</span> <span class="fl">2</span>
-      <span class="co"># hydrogenBond=TRUE,</span>
-      <span class="co"># weakHydrogenBond=FALSE,</span>
-      <span class="co"># waterHydrogenBond=FALSE,</span>
-      <span class="co"># backboneHydrogenBond=TRUE,</span>
-      <span class="co"># hydrophobic=FALSE,</span>
-      <span class="co"># halogenBond=TRUE,</span>
-      <span class="co"># ionicInteraction=TRUE,</span>
-      <span class="co"># metalCoordination=TRUE,</span>
-      <span class="co"># cationPi=TRUE,</span>
-      <span class="co"># piStacking=TRUE,</span>
-      <span class="co"># maxHydrophobicDist= 4.0,</span>
-      <span class="co"># maxHbondDist= 3.5,</span>
-      <span class="co"># maxHbondSulfurDist= 4.1,</span>
-      <span class="co"># maxHbondAccAngle= 45,</span>
-      <span class="co"># maxHbondDonAngle= 45,</span>
-      <span class="co"># maxHbondAccPlaneAngle= 90,</span>
-      <span class="co"># maxHbondDonPlaneAngle= 30,</span>
-      <span class="co"># maxPiStackingDist= 5.5,</span>
-      <span class="co"># maxPiStackingOffset= 2.0,</span>
-      <span class="co"># maxPiStackingAngle= 30,</span>
-      <span class="co"># maxCationPiDist= 6.0,</span>
-      <span class="co"># maxCationPiOffset= 2.0,</span>
-      <span class="co"># maxIonicDist= 5.0,</span>
-      <span class="co"># maxHalogenBondDist= 3.5,</span>
-      <span class="co"># maxHalogenBondAngle= 30,</span>
-      <span class="co"># maxMetalDist= 3.0,</span>
-      <span class="co"># refineSaltBridges= TRUE,</span>
-      <span class="co"># masterModelIndex= -1,</span>
-      <span class="co"># lineOfSightDistFactor= 1</span>
-    <span class="op">)</span>
-  <span class="op">)</span></code></pre></div>
-<div id="htmlwidget-0652c54de69f66dd3e9a" style="width:700px;height:432.632880098888px;" class="NGLVieweR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0652c54de69f66dd3e9a">{"x":{"data":"rcsb://3RY2.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","ball+stick","contact"],"values":[[],{"name":"biotin","colorvalue":"grey","colorScheme":"element","sele":"5001"},{"name":"interacting","colorScheme":"element","colorValue":"green","sele":"23 or 27 or 43 or 45 or 128"},{"name":"contact","sele":"5001 or 23 or 27 or 43 or 45 or 128","filterSele":["23 or 27 or 45 or 128","5001"],"labelVisible":true,"labelFixedSize":false,"labelUnit":"angstrom","labelSize":2}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"27:B","zoom":"27:B","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
+<div class="section level3">
+<h3 id="rotating-structures">Rotating Structures<a class="anchor" aria-label="anchor" href="#rotating-structures"></a>
+</h3>
+<p>You can rotate the visualized structures using the
+<code><a href="../reference/setRotation.html">setRotation()</a></code> function:</p>
+<pre><code><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/setRotation.html">setRotation</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">45</span>, <span class="fl">60</span><span class="op">)</span> <span class="co"># Rotates the structure 30 degrees around x-axis, 45 degrees around y-axis and 60 degrees around z-axis.</span></span></code></pre>
 </div>
-<div id="shiny" class="section level2">
-<h2 class="hasAnchor">
-<a href="#shiny" class="anchor"></a>Shiny</h2>
-<p>The <code><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput()</a></code> and <code><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR()</a></code> functions enable you to visualize PDB files within Shiny applications. See the <code><a href="../reference/NGLVieweR_example.html">NGLVieweR_example("basic")</a></code> and “API” for live examples.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
-<span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span><span class="op">(</span><span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">output</span><span class="op">$</span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR</a></span><span class="op">(</span><span class="op">{</span>
-    <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,
-        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-          name <span class="op">=</span> <span class="st">"cartoon"</span>, color <span class="op">=</span>
-            <span class="st">"residueindex"</span>
-        <span class="op">)</span>
-      <span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,
-        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-          name <span class="op">=</span> <span class="st">"cartoon"</span>,
-          sele <span class="op">=</span> <span class="st">"1-20"</span>,
-          colorScheme <span class="op">=</span> <span class="st">"element"</span>
-        <span class="op">)</span>
-      <span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/setQuality.html">setQuality</a></span><span class="op">(</span><span class="st">"high"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/setFocus.html">setFocus</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/pkgdown/basic_shiny.gif" width="600"></p>
+<div class="section level3">
+<h3 id="positioning-structures">Positioning Structures<a class="anchor" aria-label="anchor" href="#positioning-structures"></a>
+</h3>
+<p>The <code><a href="../reference/setPosition.html">setPosition()</a></code> function allows you to change the
+position of the visualized structure:</p>
+<pre><code><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="fu"><a href="../reference/setPosition.html">setPosition</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span> <span class="co"># Moves the structure 25 units along the x-axis.</span></span></code></pre>
 </div>
-<div id="api" class="section level2">
-<h2 class="hasAnchor">
-<a href="#api" class="anchor"></a>API</h2>
-<p>In Shiny apps, you can manipulate the <strong>NGLVieweR</strong> widget after creation using specific “API” calls. You can for instance add or remove representations by referring to their name using the <code><a href="../reference/addSelection.html">addSelection()</a></code> or <code><a href="../reference/removeSelection.html">removeSelection()</a></code> functions.</p>
+</div>
+<div class="section level2">
+<h2 id="zoom">Zoom<a class="anchor" aria-label="anchor" href="#zoom"></a>
+</h2>
+<p>You can zoom into specific residues using the <code>ZoomMove()</code>
+function.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
-<span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/titlePanel.html">titlePanel</a></span><span class="op">(</span><span class="st">"Viewer with API inputs"</span><span class="op">)</span>,
-  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html">sidebarLayout</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html">sidebarPanel</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textInput.html">textInput</a></span><span class="op">(</span><span class="st">"selection"</span>, <span class="st">"Selection"</span>, <span class="st">"1-20"</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"type"</span>, <span class="st">"Type"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, <span class="st">"cartoon"</span>, <span class="st">"backbone"</span><span class="op">)</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"color"</span>, <span class="st">"Color"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"orange"</span>, <span class="st">"grey"</span>, <span class="st">"white"</span><span class="op">)</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html">actionButton</a></span><span class="op">(</span><span class="st">"add"</span>, <span class="st">"Add"</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html">actionButton</a></span><span class="op">(</span><span class="st">"remove"</span>, <span class="st">"Remove"</span><span class="op">)</span>
-    <span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html">mainPanel</a></span><span class="op">(</span>
-      <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span>
-    <span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">)</span>
-<span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">output</span><span class="op">$</span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR</a></span><span class="op">(</span><span class="op">{</span>
-    <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,
-        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span>
-      <span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="va">input</span><span class="op">$</span><span class="va">backgroundColor</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/setQuality.html">setQuality</a></span><span class="op">(</span><span class="st">"high"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/setFocus.html">setFocus</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">add</span>, <span class="op">{</span>
-    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">type</span><span class="op">)</span>,
-        param <span class="op">=</span>
-          <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-            name <span class="op">=</span> <span class="st">"sel1"</span>,
-            sele <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">selection</span><span class="op">)</span>,
-            colorValue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">color</span><span class="op">)</span>
-          <span class="op">)</span>
-      <span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">remove</span>, <span class="op">{</span>
-    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/removeSelection.html">removeSelection</a></span><span class="op">(</span><span class="st">"sel1"</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/pkgdown/API_shiny.gif" width="600"></p>
-<div id="possible-api-functions-are" class="section level3">
-<h3 class="hasAnchor">
-<a href="#possible-api-functions-are" class="anchor"></a>Possible API functions are:</h3>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      colorScheme <span class="op">=</span> <span class="st">"element"</span>,</span>
+<span>      colorValue <span class="op">=</span> <span class="st">"yellow"</span>,</span>
+<span>      sele <span class="op">=</span> <span class="st">"20"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"label"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      sele <span class="op">=</span> <span class="st">"20"</span>,</span>
+<span>      labelType <span class="op">=</span> <span class="st">"format"</span>,</span>
+<span>      labelFormat <span class="op">=</span> <span class="st">"[%(resname)s]%(resno)s"</span>, <span class="co"># or enter custom text</span></span>
+<span>      labelGrouping <span class="op">=</span> <span class="st">"residue"</span>, <span class="co"># or "atom" (eg. sele = "20:A.CB")</span></span>
+<span>      color <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>      xOffset <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>      fixedSize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>      radiusType <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>      radiusSize <span class="op">=</span> <span class="fl">1.5</span></span>
+<span>    <span class="op">)</span> <span class="co"># Label size</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/zoomMove.html">zoomMove</a></span><span class="op">(</span></span>
+<span>    center <span class="op">=</span> <span class="st">"20"</span>,</span>
+<span>    zoom <span class="op">=</span> <span class="st">"20"</span>,</span>
+<span>    duration <span class="op">=</span> <span class="fl">0</span>, <span class="co"># animation time in ms</span></span>
+<span>    z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="NGLVieweR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-34ae34d1f02d3a6ca28f" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-34ae34d1f02d3a6ca28f">{"x":{"data":"rcsb://7CID.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","xOffset":1,"fixedSize":true,"radiusType":1,"radiusSize":1.5}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setScale":1,"setRotation":[],"setPosition":[],"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"20","zoom":"20","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="section level2">
+<h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
+</h2>
+<p>Contacts between residues can be added by setting the
+<code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> type parameter to “contact”. Using the
+<code>sele</code> parameter contacts for specific residues can be
+selected. The <code>filterSele</code> parameter can be used to only show
+contacts between two selections. In the below example Biotin and
+residues 23, 27, 43, 45, and 128 are selected
+<code>sele="5001 or 23 or 27 or 43 or 45 or 128"</code> and contacts are
+only shown between the residues and biotin
+<code>filterSele=list("23 or 27 or 43 or 45 or 128", "5001")</code>.
+This prevents the display of contacts between residues or water
+molecules.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"3RY2"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      name <span class="op">=</span> <span class="st">"biotin"</span>,</span>
+<span>      colorvalue <span class="op">=</span> <span class="st">"grey"</span>,</span>
+<span>      colorScheme <span class="op">=</span> <span class="st">"element"</span>,</span>
+<span>      sele <span class="op">=</span> <span class="st">"5001"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      name <span class="op">=</span> <span class="st">"interacting"</span>,</span>
+<span>      colorScheme <span class="op">=</span> <span class="st">"element"</span>,</span>
+<span>      colorValue <span class="op">=</span> <span class="st">"green"</span>,</span>
+<span>      sele <span class="op">=</span> <span class="st">"23 or 27 or 43 or 45 or 128"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/zoomMove.html">zoomMove</a></span><span class="op">(</span></span>
+<span>    center <span class="op">=</span> <span class="st">"27:B"</span>,</span>
+<span>    zoom <span class="op">=</span> <span class="st">"27:B"</span>,</span>
+<span>    z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"contact"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      name <span class="op">=</span> <span class="st">"contact"</span>,</span>
+<span>      sele <span class="op">=</span> <span class="st">"5001 or 23 or 27 or 43 or 45 or 128"</span>,</span>
+<span>      filterSele <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"23 or 27 or 45 or 128"</span>, <span class="st">"5001"</span><span class="op">)</span>,</span>
+<span>      labelVisible <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>      labelFixedSize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>      labelUnit <span class="op">=</span> <span class="st">"angstrom"</span>, <span class="co"># "", "angstrom", "nm"</span></span>
+<span>      labelSize <span class="op">=</span> <span class="fl">2</span></span>
+<span>      <span class="co"># hydrogenBond=TRUE,</span></span>
+<span>      <span class="co"># weakHydrogenBond=FALSE,</span></span>
+<span>      <span class="co"># waterHydrogenBond=FALSE,</span></span>
+<span>      <span class="co"># backboneHydrogenBond=TRUE,</span></span>
+<span>      <span class="co"># hydrophobic=FALSE,</span></span>
+<span>      <span class="co"># halogenBond=TRUE,</span></span>
+<span>      <span class="co"># ionicInteraction=TRUE,</span></span>
+<span>      <span class="co"># metalCoordination=TRUE,</span></span>
+<span>      <span class="co"># cationPi=TRUE,</span></span>
+<span>      <span class="co"># piStacking=TRUE,</span></span>
+<span>      <span class="co"># maxHydrophobicDist= 4.0,</span></span>
+<span>      <span class="co"># maxHbondDist= 3.5,</span></span>
+<span>      <span class="co"># maxHbondSulfurDist= 4.1,</span></span>
+<span>      <span class="co"># maxHbondAccAngle= 45,</span></span>
+<span>      <span class="co"># maxHbondDonAngle= 45,</span></span>
+<span>      <span class="co"># maxHbondAccPlaneAngle= 90,</span></span>
+<span>      <span class="co"># maxHbondDonPlaneAngle= 30,</span></span>
+<span>      <span class="co"># maxPiStackingDist= 5.5,</span></span>
+<span>      <span class="co"># maxPiStackingOffset= 2.0,</span></span>
+<span>      <span class="co"># maxPiStackingAngle= 30,</span></span>
+<span>      <span class="co"># maxCationPiDist= 6.0,</span></span>
+<span>      <span class="co"># maxCationPiOffset= 2.0,</span></span>
+<span>      <span class="co"># maxIonicDist= 5.0,</span></span>
+<span>      <span class="co"># maxHalogenBondDist= 3.5,</span></span>
+<span>      <span class="co"># maxHalogenBondAngle= 30,</span></span>
+<span>      <span class="co"># maxMetalDist= 3.0,</span></span>
+<span>      <span class="co"># refineSaltBridges= TRUE,</span></span>
+<span>      <span class="co"># masterModelIndex= -1,</span></span>
+<span>      <span class="co"># lineOfSightDistFactor= 1</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="NGLVieweR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-b043b5a94b2265a15249" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-b043b5a94b2265a15249">{"x":{"data":"rcsb://3RY2.pdb","type":"code","stageParameters":[],"addRepresentation":{"type":["cartoon","ball+stick","ball+stick","contact"],"values":[[],{"name":"biotin","colorvalue":"grey","colorScheme":"element","sele":"5001"},{"name":"interacting","colorScheme":"element","colorValue":"green","sele":"23 or 27 or 43 or 45 or 128"},{"name":"contact","sele":"5001 or 23 or 27 or 43 or 45 or 128","filterSele":["23 or 27 or 45 or 128","5001"],"labelVisible":true,"labelFixedSize":false,"labelUnit":"angstrom","labelSize":2}]},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"setScale":1,"setRotation":[],"setPosition":[],"setFocus":0,"toggleSpin":false,"zoomMove":{"center":"27:B","zoom":"27:B","duration":0,"z_offSet":-20}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="section level2">
+<h2 id="shiny">Shiny<a class="anchor" aria-label="anchor" href="#shiny"></a>
+</h2>
+<p>The <code><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput()</a></code> and <code><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR()</a></code>
+functions enable you to visualize PDB files within Shiny applications.
+See the <code>NGLVieweR_example("basic")</code> and “API” for live
+examples.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR" class="external-link">NGLVieweR</a></span><span class="op">)</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span><span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,</span>
+<span>        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>          name <span class="op">=</span> <span class="st">"cartoon"</span>, color <span class="op">=</span></span>
+<span>            <span class="st">"residueindex"</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,</span>
+<span>        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>          name <span class="op">=</span> <span class="st">"cartoon"</span>,</span>
+<span>          sele <span class="op">=</span> <span class="st">"1-20"</span>,</span>
+<span>          colorScheme <span class="op">=</span> <span class="st">"element"</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/setQuality.html">setQuality</a></span><span class="op">(</span><span class="st">"high"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/setFocus.html">setFocus</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../reference/figures/basic_shiny.PNG" width="300"></p>
+</div>
+<div class="section level2">
+<h2 id="api">API<a class="anchor" aria-label="anchor" href="#api"></a>
+</h2>
+<p>In Shiny apps, you can manipulate the <strong>NGLVieweR</strong>
+widget after creation using specific “API” calls. You can for instance
+add or remove representations by referring to their name using the
+<code><a href="../reference/addSelection.html">addSelection()</a></code> or <code><a href="../reference/removeSelection.html">removeSelection()</a></code>
+functions.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR" class="external-link">NGLVieweR</a></span><span class="op">)</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/titlePanel.html" class="external-link">titlePanel</a></span><span class="op">(</span><span class="st">"Viewer with API inputs"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html" class="external-link">sidebarLayout</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html" class="external-link">sidebarPanel</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textInput.html" class="external-link">textInput</a></span><span class="op">(</span><span class="st">"selection"</span>, <span class="st">"Selection"</span>, <span class="st">"1-20"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html" class="external-link">selectInput</a></span><span class="op">(</span><span class="st">"type"</span>, <span class="st">"Type"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, <span class="st">"cartoon"</span>, <span class="st">"backbone"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html" class="external-link">selectInput</a></span><span class="op">(</span><span class="st">"color"</span>, <span class="st">"Color"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"orange"</span>, <span class="st">"grey"</span>, <span class="st">"white"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"add"</span>, <span class="st">"Add"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span><span class="st">"remove"</span>, <span class="st">"Remove"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html" class="external-link">mainPanel</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,</span>
+<span>        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span></span>
+<span>      <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="va">input</span><span class="op">$</span><span class="va">backgroundColor</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/setQuality.html">setQuality</a></span><span class="op">(</span><span class="st">"high"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/setFocus.html">setFocus</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">add</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">type</span><span class="op">)</span>,</span>
+<span>        param <span class="op">=</span></span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>            name <span class="op">=</span> <span class="st">"sel1"</span>,</span>
+<span>            sele <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">selection</span><span class="op">)</span>,</span>
+<span>            colorValue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">color</span><span class="op">)</span></span>
+<span>          <span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">remove</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/removeSelection.html">removeSelection</a></span><span class="op">(</span><span class="st">"sel1"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../reference/figures/API_shiny.PNG" width="300"></p>
+<div class="section level3">
+<h3 id="possible-api-functions-are">Possible API functions are:<a class="anchor" aria-label="anchor" href="#possible-api-functions-are"></a>
+</h3>
 <ul>
 <li><code><a href="../reference/addSelection.html">addSelection()</a></code></li>
 <li><code><a href="../reference/removeSelection.html">removeSelection()</a></code></li>
@@ -459,148 +540,158 @@ $$$$
 </ul>
 </div>
 </div>
-<div id="retrieving-data-from-the-widget" class="section level2">
-<h2 class="hasAnchor">
-<a href="#retrieving-data-from-the-widget" class="anchor"></a>Retrieving data from the widget</h2>
-<p>In a Shiny application one can retrieve information from the widget as inputs based on the NGLVieweR <code>outputID</code>. Suppose the <code>outputID</code> is “structure”, then the following information can be retrieved:</p>
+<div class="section level2">
+<h2 id="retrieving-data-from-the-widget">Retrieving data from the widget<a class="anchor" aria-label="anchor" href="#retrieving-data-from-the-widget"></a>
+</h2>
+<p>In a Shiny application one can retrieve information from the widget
+as inputs based on the NGLVieweR <code>outputID</code>. Suppose the
+<code>outputID</code> is “structure”, then the following information can
+be retrieved:</p>
 <ul>
 <li>input$structure_selection - Get details on the clicked residue.</li>
-<li>input$structure_sequence - will return the sequence of the PDB file as a character vector.</li>
-<li>input$structure_resno - will return all the sequence numbers as a numeric vector.</li>
-<li>input$structure_chainname - will return the chainname of each amino acid as a character vector,</li>
-<li>input$structure_rendering - will return <code>TRUE</code> if the widget is loading or <code>FALSE</code> when completed.</li>
-<li>input$structure_PDB - will return the PDB file as a text string.</li>
-<li>input$structure_selAround - will return a list of atoms surrounding a clicked residue.</li>
+<li>input$structure_sequence - will return the sequence of the PDB file
+as a character vector.</li>
+<li>input$structure_resno - will return all the sequence numbers as a
+numeric vector.</li>
+<li>input$structure_chainname - will return the chainname of each amino
+acid as a character vector,</li>
+<li>input$structure_rendering - will return <code>TRUE</code> if the
+widget is loading or <code>FALSE</code> when completed.</li>
+<li>input$structure_PDB - will return the PDB file as a text
+string.</li>
+<li>input$structure_selAround - will return a list of atoms surrounding
+a clicked residue.</li>
 </ul>
-<p>In the below example a label, all contacts and residues in proximity of the clicked residue are displayed.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
-
-<span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidPage</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/titlePanel.html">titlePanel</a></span><span class="op">(</span><span class="st">"Viewer with click interaction"</span><span class="op">)</span>,
-  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html">sidebarLayout</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html">sidebarPanel</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html">verbatimTextOutput</a></span><span class="op">(</span><span class="st">'selection'</span><span class="op">)</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html">mainPanel</a></span><span class="op">(</span><span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">output</span><span class="op">$</span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR</a></span><span class="op">(</span><span class="op">{</span>
-    <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"3RY2"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span>
-        <span class="st">"ball+stick"</span>,
-        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-          name <span class="op">=</span> <span class="st">"biotin"</span>,
-          colorvalue <span class="op">=</span> <span class="st">"grey"</span>,
-          colorScheme <span class="op">=</span> <span class="st">"element"</span>,
-          sele <span class="op">=</span> <span class="st">"5001"</span>
-        <span class="op">)</span>
-      <span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/zoomMove.html">zoomMove</a></span><span class="op">(</span>center <span class="op">=</span> <span class="st">"27:B"</span>,
-               zoom <span class="op">=</span> <span class="st">"27:B"</span>,
-               z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/selectionParameters.html">selectionParameters</a></span><span class="op">(</span><span class="fl">3</span>, <span class="st">"residue"</span><span class="op">)</span> <span class="co">#"atom"</span>
-  <span class="op">}</span><span class="op">)</span>
-  
-  <span class="co">#Save click selections</span>
-  <span class="va">sele</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/reactiveValues.html">reactiveValues</a></span><span class="op">(</span><span class="op">)</span>
-  
-  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observe.html">observe</a></span><span class="op">(</span><span class="op">{</span>
-    <span class="va">sele</span><span class="op">$</span><span class="va">aa</span> <span class="op">&lt;-</span>
-      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[\\[])(.*?)(?=\\])"</span><span class="op">)</span>
-    <span class="va">sele</span><span class="op">$</span><span class="va">aa_bond</span> <span class="op">&lt;-</span>
-      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[\\]])(.*?)(?=[:space:])"</span><span class="op">)</span>
-    <span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span> <span class="op">&lt;-</span>
-      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[]])(.*?)(?=[.])"</span><span class="op">)</span>
-    <span class="va">sele</span><span class="op">$</span><span class="va">resi</span> <span class="op">&lt;-</span>
-      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[]])(.*?)(?=[:])"</span><span class="op">)</span>
-    <span class="va">sele</span><span class="op">$</span><span class="va">fileName</span> <span class="op">&lt;-</span>
-      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[(])(.*?)(?=[.])"</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-  
-  <span class="va">output</span><span class="op">$</span><span class="va">selection</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html">renderPrint</a></span><span class="op">(</span><span class="op">{</span>
-    <span class="co">#Full selection</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span><span class="op">)</span>
-    <span class="co">#Amino Acid</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">aa</span><span class="op">)</span>
-    <span class="co">#Bond</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">aa_bond</span><span class="op">)</span>
-    <span class="co">#Residue number + ChainNAme</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span><span class="op">)</span>
-    <span class="co">#Residue number</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">resi</span><span class="op">)</span>
-    <span class="co">#PDB name</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">fileName</span><span class="op">)</span>
-    <span class="co">#SelAround</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selAround</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-  
-  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selAround</span>, <span class="op">{</span>
-    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/removeSelection.html">removeSelection</a></span><span class="op">(</span><span class="st">"selAround"</span><span class="op">)</span>
-    
-    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span>
-        <span class="st">"ball+stick"</span>,
-        param <span class="op">=</span>
-          <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-            name <span class="op">=</span> <span class="st">"selAround"</span>,
-            sele <span class="op">=</span> <span class="va">input</span><span class="op">$</span><span class="va">structure_selAround</span>,
-            colorValue <span class="op">=</span> <span class="st">"grey"</span>
-          <span class="op">)</span>
-      <span class="op">)</span>
-    
-  <span class="op">}</span><span class="op">)</span>
-  
-  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html">observeEvent</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span>, <span class="op">{</span>
-    <span class="co">#Remove any selections</span>
-    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/removeSelection.html">removeSelection</a></span><span class="op">(</span><span class="st">"label"</span><span class="op">)</span>
-    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/removeSelection.html">removeSelection</a></span><span class="op">(</span><span class="st">"contact"</span><span class="op">)</span>
-    
-    <span class="co">#Add label and contacts</span>
-    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-      
-      <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span>
-        <span class="st">"label"</span>,
-        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-          name <span class="op">=</span> <span class="st">"label"</span>,
-          sele <span class="op">=</span> <span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span>,
-          labelType <span class="op">=</span> <span class="st">"format"</span>,
-          labelFormat <span class="op">=</span> <span class="st">"[%(resname)s]%(resno)s"</span>,
-          <span class="co"># or enter custom text</span>
-          labelGrouping <span class="op">=</span> <span class="st">"residue"</span>,
-          <span class="co"># or "atom" (eg. sele = "20:A.CB")</span>
-          color <span class="op">=</span> <span class="st">"white"</span>,
-          xOffset <span class="op">=</span> <span class="fl">1</span>,
-          fixedSize <span class="op">=</span> <span class="cn">TRUE</span>,
-          radiusType <span class="op">=</span> <span class="fl">1</span>,
-          radiusSize <span class="op">=</span> <span class="fl">1.5</span>
-        <span class="op">)</span>
-      <span class="op">)</span> <span class="op">%&gt;%</span>
-      <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span>
-        <span class="st">"contact"</span>,
-        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-          name <span class="op">=</span> <span class="st">"contact"</span>,
-          sele <span class="op">=</span> <span class="st">"*"</span>,
-          <span class="co">#Select all residues</span>
-          filterSele <span class="op">=</span>
-            <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span>, <span class="co"># Show bonds between selected residue</span>
-                 <span class="st">"*"</span><span class="op">)</span>,
-          <span class="co"># and all other residues</span>
-          labelVisible <span class="op">=</span> <span class="cn">TRUE</span>,
-          labelFixedSize <span class="op">=</span> <span class="cn">FALSE</span>,
-          labelUnit <span class="op">=</span> <span class="st">"angstrom"</span>,
-          <span class="co"># "", "angstrom", "nm"</span>
-          labelSize <span class="op">=</span> <span class="fl">2</span>
-        <span class="op">)</span>
-      <span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-  
-<span class="op">}</span>
-<span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/pkgdown/click_interaction.gif" width="600"></p>
+<p>In the below example a label, all contacts and residues in proximity
+of the clicked residue are displayed.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR" class="external-link">NGLVieweR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/titlePanel.html" class="external-link">titlePanel</a></span><span class="op">(</span><span class="st">"Viewer with click interaction"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html" class="external-link">sidebarLayout</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html" class="external-link">sidebarPanel</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/textOutput.html" class="external-link">verbatimTextOutput</a></span><span class="op">(</span><span class="st">'selection'</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html" class="external-link">mainPanel</a></span><span class="op">(</span><span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"3RY2"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span></span>
+<span>        <span class="st">"ball+stick"</span>,</span>
+<span>        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>          name <span class="op">=</span> <span class="st">"biotin"</span>,</span>
+<span>          colorvalue <span class="op">=</span> <span class="st">"grey"</span>,</span>
+<span>          colorScheme <span class="op">=</span> <span class="st">"element"</span>,</span>
+<span>          sele <span class="op">=</span> <span class="st">"5001"</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/zoomMove.html">zoomMove</a></span><span class="op">(</span>center <span class="op">=</span> <span class="st">"27:B"</span>,</span>
+<span>               zoom <span class="op">=</span> <span class="st">"27:B"</span>,</span>
+<span>               z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/selectionParameters.html">selectionParameters</a></span><span class="op">(</span><span class="fl">3</span>, <span class="st">"residue"</span><span class="op">)</span> <span class="co">#"atom"</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#Save click selections</span></span>
+<span>  <span class="va">sele</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/reactiveValues.html" class="external-link">reactiveValues</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observe.html" class="external-link">observe</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">sele</span><span class="op">$</span><span class="va">aa</span> <span class="op">&lt;-</span></span>
+<span>      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[\\[])(.*?)(?=\\])"</span><span class="op">)</span></span>
+<span>    <span class="va">sele</span><span class="op">$</span><span class="va">aa_bond</span> <span class="op">&lt;-</span></span>
+<span>      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[\\]])(.*?)(?=[:space:])"</span><span class="op">)</span></span>
+<span>    <span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span> <span class="op">&lt;-</span></span>
+<span>      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[]])(.*?)(?=[.])"</span><span class="op">)</span></span>
+<span>    <span class="va">sele</span><span class="op">$</span><span class="va">resi</span> <span class="op">&lt;-</span></span>
+<span>      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[]])(.*?)(?=[:])"</span><span class="op">)</span></span>
+<span>    <span class="va">sele</span><span class="op">$</span><span class="va">fileName</span> <span class="op">&lt;-</span></span>
+<span>      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">str_extract</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span>, <span class="st">"(?&lt;=[(])(.*?)(?=[.])"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">selection</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html" class="external-link">renderPrint</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="co">#Full selection</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selection</span><span class="op">)</span></span>
+<span>    <span class="co">#Amino Acid</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">aa</span><span class="op">)</span></span>
+<span>    <span class="co">#Bond</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">aa_bond</span><span class="op">)</span></span>
+<span>    <span class="co">#Residue number + ChainNAme</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span><span class="op">)</span></span>
+<span>    <span class="co">#Residue number</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">resi</span><span class="op">)</span></span>
+<span>    <span class="co">#PDB name</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">fileName</span><span class="op">)</span></span>
+<span>    <span class="co">#SelAround</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selAround</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">structure_selAround</span>, <span class="op">{</span></span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/removeSelection.html">removeSelection</a></span><span class="op">(</span><span class="st">"selAround"</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span></span>
+<span>        <span class="st">"ball+stick"</span>,</span>
+<span>        param <span class="op">=</span></span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>            name <span class="op">=</span> <span class="st">"selAround"</span>,</span>
+<span>            sele <span class="op">=</span> <span class="va">input</span><span class="op">$</span><span class="va">structure_selAround</span>,</span>
+<span>            colorValue <span class="op">=</span> <span class="st">"grey"</span></span>
+<span>          <span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    </span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span>, <span class="op">{</span></span>
+<span>    <span class="co">#Remove any selections</span></span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/removeSelection.html">removeSelection</a></span><span class="op">(</span><span class="st">"label"</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/removeSelection.html">removeSelection</a></span><span class="op">(</span><span class="st">"contact"</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#Add label and contacts</span></span>
+<span>    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      </span>
+<span>      <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span></span>
+<span>        <span class="st">"label"</span>,</span>
+<span>        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>          name <span class="op">=</span> <span class="st">"label"</span>,</span>
+<span>          sele <span class="op">=</span> <span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span>,</span>
+<span>          labelType <span class="op">=</span> <span class="st">"format"</span>,</span>
+<span>          labelFormat <span class="op">=</span> <span class="st">"[%(resname)s]%(resno)s"</span>,</span>
+<span>          <span class="co"># or enter custom text</span></span>
+<span>          labelGrouping <span class="op">=</span> <span class="st">"residue"</span>,</span>
+<span>          <span class="co"># or "atom" (eg. sele = "20:A.CB")</span></span>
+<span>          color <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>          xOffset <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>          fixedSize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>          radiusType <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>          radiusSize <span class="op">=</span> <span class="fl">1.5</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>      <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span></span>
+<span>        <span class="st">"contact"</span>,</span>
+<span>        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>          name <span class="op">=</span> <span class="st">"contact"</span>,</span>
+<span>          sele <span class="op">=</span> <span class="st">"*"</span>,</span>
+<span>          <span class="co">#Select all residues</span></span>
+<span>          filterSele <span class="op">=</span></span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sele</span><span class="op">$</span><span class="va">resiChain</span>, <span class="co"># Show bonds between selected residue</span></span>
+<span>                 <span class="st">"*"</span><span class="op">)</span>,</span>
+<span>          <span class="co"># and all other residues</span></span>
+<span>          labelVisible <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>          labelFixedSize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>          labelUnit <span class="op">=</span> <span class="st">"angstrom"</span>,</span>
+<span>          <span class="co"># "", "angstrom", "nm"</span></span>
+<span>          labelSize <span class="op">=</span> <span class="fl">2</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../reference/figures/click_interaction.PNG" width="300"></p>
 </div>
   </div>
 
@@ -615,11 +706,13 @@ $$$$
 
 
       <footer><div class="copyright">
-  <p>Developed by Niels van der Velden.</p>
+  <p></p>
+<p>Developed by Niels van der Velden.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -627,6 +720,8 @@ $$$$
 
   
 
+
+  
 
   </body>
 </html>
