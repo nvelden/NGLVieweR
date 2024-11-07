@@ -337,6 +337,41 @@ selectionParameters <- function(NGLVieweR, proximity = 3, level = "residue") {
   NGLVieweR
 }
 
+#'Add structure
+#'
+#'@description Add a structure to the NGLVieweR object, either from a PDB entry
+#'  code, a file, or directly from the R environment.
+#'
+#'@param NGLVieweR A NGLVieweR object.
+#'@param data Structure data to be added. Can be a PDB entry code (e.g. "7CID"),
+#'  a file path to a structure file, or a text representation of the structure.
+#'@param format Format of the structure file, if reading from a file. Supported
+#'  formats are "pdb", "cif", etc. If the file format cannot be inferred from
+#'  the file name, this parameter must be specified.
+#'
+#'@details This function allows you to add a structure to the NGLVieweR widget.
+#'  You can add the structure using a PDB entry code, by specifying a local
+#'  file, or by providing the structure data directly. If the format is not
+#'  clear from the input, you may need to specify it using the `format`
+#'  parameter.
+#'
+#'@return An updated NGLVieweR object with the added structure.
+#'
+#'
+#' @examples
+#' NGLVieweR("1CRN") %>%
+#'   addRepresentation("cartoon", param = list(color = "blue")) %>%
+#'   addStructure("1CRN") %>%
+#'   addRepresentation("cartoon", param = list(color = "orange")) %>%
+#'   setPosition(x=20, y=0, z=0) %>%
+#'   setRotation(x=2, y=0, z=0, degrees = FALSE) %>%
+#'   setScale(0.5)
+#'
+#' Note: The first "1CRN" structure is represented in blue, while the second 
+#' "1CRN" structure is represented in orange. Transformations such as 
+#' setPosition, setRotation, and setScale apply to the second 
+#' (most recently added) structure.
+#'
 #'@export
 addStructure <- function(NGLVieweR, data, format = NULL) {
 
@@ -400,15 +435,21 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
 
 #'Add representation
 #'
-#'@description
-#'Add a representation and its parameters.
+#'@description Add a representation and its parameters.
 #'
 #'@param NGLVieweR A NGLVieweR object.
-#'@param type Type of representation. Most common options are "cartoon", "ball+stick", "line", "surface", "ribbon" and "label".
-#'For a full list of options, see the "structureRepresentation" method in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#'@param param Options for the different types of representations. Most common options are \code{name}, \code{opacity}, \code{colorScheme}, \code{sele}, \code{colorValue} and \code{visibility}.
-#'For a full list of options, see the general "RepresentationParameters" method and type specific Label-, Structure- and Surface- RepresentationParameters in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#'@return List of representation parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+#'@param type Type of representation. Most common options are "cartoon",
+#'  "ball+stick", "line", "surface", "ribbon" and "label". For a full list of
+#'  options, see the "structureRepresentation" method in the official
+#'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@param param Options for the different types of representations. Most common
+#'  options are \code{name}, \code{opacity}, \code{colorScheme}, \code{sele},
+#'  \code{colorValue} and \code{visibility}. For a full list of options, see the
+#'  general "RepresentationParameters" method and type specific Label-,
+#'  Structure- and Surface- RepresentationParameters in the official
+#'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return List of representation parameters to \code{NGLVieweR}
+#'  \code{htmlwidgets} object.
 #'@seealso
 #'* [addSelection()]
 #'* [NGLVieweR_example()] See example "basic".

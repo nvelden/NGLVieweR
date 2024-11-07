@@ -1,12 +1,20 @@
 #'Add a selection
 #'
-#'@description
-#'Add a new selection to a NGLVieweR object in Shinymode.
+#'@description Add a new selection to a NGLVieweR object in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
-#'@param type Type of representation. Most common options are "cartoon", "ball+stick", "surface", "ribbon" and "label".
-#'@param param Options for the different types of representations. Most common options are \code{name}, \code{opacity}, \code{colorScheme}, \code{sele}, \code{colorValue} and \code{visibility}.
-#'For a full list of options, see the general "RepresentationParameters" method and type specific Label-, Structure- and Surface- RepresentationParameters in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+#'@param type Type of representation. Most common options are "cartoon",
+#'  "ball+stick", "surface", "ribbon" and "label".
+#'@param param Options for the different types of representations. Most common
+#'  options are \code{name}, \code{opacity}, \code{colorScheme}, \code{sele},
+#'  \code{colorValue} and \code{visibility}. For a full list of options, see the
+#'  general "RepresentationParameters" method and type specific Label-,
+#'  Structure- and Surface- RepresentationParameters in the official
+#'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#' @param structureIndex (optional) The index of the specific structure to which the
+#'   selection should be added. If not specified, the selection will be applied
+#'   to all loaded structures.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message
+#'  parameters.
 #'@family selections
 #'@seealso
 #'* [updateRepresentation()] Update an existing NGLVieweR representation.
@@ -20,10 +28,10 @@
 #'                                          colorScheme="element"
 #'                                          ))
 #' }
-#' 
+#'
 #' if (interactive()) {
 #' library(shiny)
-#' 
+#'
 #' ui <- fluidPage(
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
@@ -57,7 +65,7 @@
 #'           )
 #'       )
 #'   })
-#' 
+#'
 #'   observeEvent(input$remove, {
 #'     NGLVieweR_proxy("structure") %>%
 #'       removeSelection("sel1")
@@ -66,11 +74,15 @@
 #' shinyApp(ui, server)
 #' }
 #'@export
-addSelection <- function(NGLVieweR_proxy, type, param = list()) {
-
+addSelection <- function(NGLVieweR_proxy, type, param = list(), structureIndex = NULL) {
+  
+  if (!is.null(structureIndex)) {
+    param$structureIndex <- structureIndex
+  }
+  
   message <- list(id = NGLVieweR_proxy$id, type = type, param = param)
   NGLVieweR_proxy$session$sendCustomMessage("NGLVieweR:addSelection", message)
-
+  
   return(NGLVieweR_proxy)
 }
 

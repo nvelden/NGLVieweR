@@ -7,7 +7,7 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
 
       var stage = new NGL.Stage(el);
-      var structure = null;
+      var structures = null;
 
     return {
       renderValue: function(opts) {
@@ -35,78 +35,85 @@ HTMLWidgets.widget({
       stage.setFocus(opts.setFocus);
       
       // Iterate through all structures in the list
-      opts.structures.forEach(function(structureOpts) {
-
-        if(structureOpts.type == "code"){
-          structure = stage.loadFile(structureOpts.data);
-        }
-        if (structureOpts.type == "file"){
-          structure = stage.loadFile(new Blob([structureOpts.data], {type: 'text/plain'}), {
-           ext:structureOpts.file_ext});
-        }
-
-        // Load representation inputs
-        var representation = structureOpts.addRepresentation;
-        var arrType = representation.type;
-        var arrValues = representation.values;
-        // Convert array values
-        arrHandler(arrValues, "color");
-
-        structure.then(function(o){
-          // Apply to all values objects
-          arrValues.forEach((value, index) => {
-            let type = arrType[index];
-            o.addRepresentation(type, value)
-          });
-
-          o.autoView();
-
-          // Set Scale
-          o.setScale(structureOpts.setScale);
-
-          // Set Rotation
-          if(Object.keys(structureOpts.setRotation).length > 0) {
-            o.setRotation([structureOpts.setRotation.x, structureOpts.setRotation.y, structureOpts.setRotation.z]);
-          }
-
-          // Set Position
-          if(Object.keys(structureOpts.setPosition).length > 0) {
-            o.setPosition([structureOpts.setPosition.x, structureOpts.setPosition.y, structureOpts.setPosition.z]);
-          }
-
-          // Set zoomMove
-          var zoomMoveOpts = structureOpts.zoomMove;
-          if(typeof(zoomMoveOpts.zoom) !== 'undefined'){
-            var center = o.getCenter(zoomMoveOpts.center);
-            var zoom = o.getZoom(zoomMoveOpts.zoom) + zoomMoveOpts.z_offSet;
-            stage.animationControls.zoomMove(center, zoom, zoomMoveOpts.duration);
-          }
-
-          // If in Shiny mode, send AA sequence to Shiny
-          if (HTMLWidgets.shinyMode) {
-            var sequence = [];
-            var resno = [];
-            var chainname = [];
-            o.structure.eachResidue(rp => {
-              var code = rp.getResname1(); // The single-letter code, use `rp.resname` for 3-letter
-              if (code !== 'X') {
-                sequence.push(code);
-                resno.push(rp.resno);
-                chainname.push(rp.chainname);
-              }
+        Promise.all(opts.structures.map(function(structureOpts) {
+          if (structureOpts.type == "code") {
+            return stage.loadFile(structureOpts.data);
+          } else if (structureOpts.type == "file") {
+            return stage.loadFile(new Blob([structureOpts.data], { type: 'text/plain' }), {
+             ext: structureOpts.file_ext
             });
-            
-            // Write PDB  
-            var writer = new NGL.PdbWriter(o.structure);
-            var PDBdata = writer.getData();
-            
-            Shiny.onInputChange(`${el.id}_PDB`, PDBdata);  
-            Shiny.onInputChange(`${el.id}_sequence`, sequence);
-            Shiny.onInputChange(`${el.id}_resno`, resno);
-            Shiny.onInputChange(`${el.id}_chainname`, chainname);
           }
-        });
-      });      
+        })).then(function(loaded) {
+          
+          // Make globaly available
+          structures = loaded;
+          
+          structures.forEach(function(o, index) {
+                        var structureOpts = opts.structures[index];
+
+            // Load representation inputs
+            var representation = structureOpts.addRepresentation;
+            var arrType = representation.type;
+            var arrValues = representation.values;
+            arrHandler(arrValues, "color");
+
+            // Apply to all representation values objects
+            arrValues.forEach((value, repIndex) => {
+              let type = arrType[repIndex];
+              o.addRepresentation(type, value);
+            });
+
+            // Set Scale
+            if (structureOpts.setScale) {
+              o.setScale(structureOpts.setScale);
+            }
+
+            // Set Rotation
+            if (structureOpts.setRotation && Object.keys(structureOpts.setRotation).length > 0) {
+              o.setRotation([structureOpts.setRotation.x, structureOpts.setRotation.y, structureOpts.setRotation.z]);
+            }
+
+            // Set Position
+            if (structureOpts.setPosition && Object.keys(structureOpts.setPosition).length > 0) {
+              o.setPosition([structureOpts.setPosition.x, structureOpts.setPosition.y, structureOpts.setPosition.z]);
+            }
+
+            // Set zoomMove
+            var zoomMoveOpts = structureOpts.zoomMove;
+            if (zoomMoveOpts && typeof zoomMoveOpts.zoom !== 'undefined') {
+              var center = o.getCenter(zoomMoveOpts.center);
+              var zoom = o.getZoom(zoomMoveOpts.zoom) + zoomMoveOpts.z_offSet;
+              stage.animationControls.zoomMove(center, zoom, zoomMoveOpts.duration);
+            }
+
+            o.autoView();
+
+            // If in Shiny mode, send AA sequence to Shiny
+            if (HTMLWidgets.shinyMode) {
+              var sequence = [];
+              var resno = [];
+              var chainname = [];
+              o.structure.eachResidue(rp => {
+                var code = rp.getResname1(); // The single-letter code, use `rp.resname` for 3-letter
+                if (code !== 'X') {
+                  sequence.push(code);
+                  resno.push(rp.resno);
+                  chainname.push(rp.chainname);
+                }
+              });
+              
+              // Write PDB
+              var writer = new NGL.PdbWriter(o.structure);
+              var PDBdata = writer.getData();
+
+              Shiny.onInputChange(`${el.id}_PDB`, PDBdata);
+              Shiny.onInputChange(`${el.id}_sequence`, sequence);
+              Shiny.onInputChange(`${el.id}_resno`, resno);
+              Shiny.onInputChange(`${el.id}_chainname`, chainname);
+            }
+
+          });
+      });
       
      //<---------------------------// Shiny inputs // ---------------------------------->
      if (HTMLWidgets.shinyMode) {
@@ -143,12 +150,12 @@ HTMLWidgets.widget({
             }
 
             let selection = proxlevel === "residue" ? new NGL.Selection(resiName) : new NGL.Selection(atomName);
+            let selectedComponent = pickingProxy.component;
+            let selectedStructure = selectedComponent.structure;
             
-            structure.then(function(o){
-              let atomSet = o.structure.getAtomSetWithinSelection(selection, proximity);
-              let atomSet2 = o.structure.getAtomSetWithinGroup( atomSet );
-              Shiny.onInputChange(`${el.id}_selAround`, atomSet2.toSeleString());
-            });
+            let atomSet = selectedStructure.getAtomSetWithinSelection(selection, proximity);
+            let atomSet2 = selectedStructure.getAtomSetWithinGroup( atomSet );
+            Shiny.onInputChange(`${el.id}_selAround`, atomSet2.toSeleString());
           }
         }
       });
@@ -185,7 +192,7 @@ HTMLWidgets.widget({
       },
 
       getStructure: function(){
-        return structure;
+        return structures;
       }
 
     };
@@ -290,26 +297,38 @@ Shiny.addCustomMessageHandler('NGLVieweR:removeSelection', function(message){
 
 });
 
-Shiny.addCustomMessageHandler('NGLVieweR:addSelection', function(message){
+Shiny.addCustomMessageHandler('NGLVieweR:addSelection', function(message) {
 
-  var structure = getNGLStructure(message.id);
+  // Get the array of loaded structures
+  var structures = getNGLStructure(message.id);
 
-      var param = message.param;
-      var color = param['color'];
+  // Check if structures are loaded
+  if (structures && structures.length > 0) {
+
+    // Prepare the representation parameters
+    var param = message.param;
+    var color = param['color'];
+    var structureIndex = param['structureIndex'];
       
-      //Convert color values
-      if(typeof color === 'object' && color !== null){
+    // Convert color if necessary
+    if (typeof color === 'object' && color !== null) {
       param['color'] = colorMaker(param['color']);
-      }
+    }
+    
+    // Check if a specific structure index is provided
+    if (typeof structureIndex === 'number' && structureIndex >= 0 && structureIndex < structures.length) {
+      // Add representation to the specified structure
+      structures[structureIndex].addRepresentation(message.type, param);
+    } else {
+      // No specific index provided; add to all structures
+      structures.forEach(function(o) {
+        o.addRepresentation(message.type, param);
+      });
+    }
 
- if(typeof(structure) !== "undefined"){
-
-  structure.then(function(o){
-
-  o.addRepresentation(message.type, param);
-
-  });
- }
+  } else {
+    console.log("Structures not loaded or unavailable.");
+  }
 });
 
 Shiny.addCustomMessageHandler('NGLVieweR:updateColor', function(message){
