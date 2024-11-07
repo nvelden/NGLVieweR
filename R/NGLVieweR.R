@@ -183,27 +183,61 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
     type <- "code"
     data <- sprintf("rcsb://%s.pdb", data)
   }
+  
   # forward options using x
   x <- list()
-  x$file_ext <- file_ext
-  x$data <- data
-  x$type <- type
-
-  # Data from functions
-  x$stageParameters <- list()
-  x$addRepresentation <- list()
-  x$addRepresentation$type <- list()
-  x$addRepresentation$values <- list()
+  # Add structure data and parameters
+  x$structures <- list()
+  
+  new_structure <- list(
+    file_ext = file_ext,
+    data = data,
+    type = type,
+    addRepresentation = list(
+      type = list(),
+      values = list()
+    ),
+    setScale = 1,
+    setRotation = list(),
+    setPosition = list(),
+    zoomMove = list()
+  )
+  
+  x$structures <- c(x$structures, list(new_structure))
+ 
+  # Add stage parameters
   x$setQuality <- "medium"
   x$setRock <- FALSE
   x$toggleRock <- FALSE
   x$setSpin <- FALSE
-  x$setScale <- 1
-  x$setRotation <- list()
-  x$setPosition <- list()
-  x$setFocus <- 0
   x$toggleSpin <- FALSE
-  x$zoomMove <- list()
+  x$setFocus <- 0
+
+  x$stageParameters <- list()
+  
+  
+  # x$file_ext <- file_ext
+  # x$data <- data
+  # x$type <- type
+  # 
+  # # Data from functions
+  # x$stageParameters <- list()
+  # x$addRepresentation <- list()
+  # x$addRepresentation$type <- list()
+  # x$addRepresentation$values <- list()
+  # x$addStructure <- list()
+  # x$addStructure$data <- list()
+  # x$addStructure$format <- list()
+  # x$setQuality <- "medium"
+  # x$setRock <- FALSE
+  # x$toggleRock <- FALSE
+  # x$setSpin <- FALSE
+  # x$setScale <- 1
+  # x$setRotation <- list()
+  # x$setPosition <- list()
+  # x$setFocus <- 0
+  # x$toggleSpin <- FALSE
+  # x$zoomMove <- list()
   
   # create widget
   htmlwidgets::createWidget(
@@ -303,6 +337,67 @@ selectionParameters <- function(NGLVieweR, proximity = 3, level = "residue") {
   NGLVieweR
 }
 
+#'@export
+addStructure <- function(NGLVieweR, data, format = NULL) {
+
+  # Validate data input
+  if (missing(data)) {
+    stop("addStructure: Please specify a PDB entry code or file",
+         call. = FALSE
+    )
+  }
+  if (nchar(data) > 8 && tools::file_ext(data) == "" && is.null(format)) {
+    stop("addStructure: Please specify the file format",
+         call. = FALSE
+    )
+  }
+  
+  type <- NULL
+  file_ext <- format
+  # Read PDB file
+  if (file.exists(data) && nchar(data) > 8) {
+    if (is.null(format)) {
+      file_ext <- tools::file_ext(data)
+    }
+    data <- paste(readLines(data), collapse = "\n")
+    type <- "file"
+    # Read directly from R editor
+  } else if (nchar(data) > 8 && tools::file_ext(data) == "") {
+    type <- "file"
+    file_ext <- format
+    data <- paste(data, collapse = "\n")
+    # Read from PDB code
+  } else {
+    type <- "code"
+    data <- sprintf("rcsb://%s.pdb", data)
+  }
+  
+  # Add structure to the NGLVieweR object
+  new_structure <- list(
+    file_ext = file_ext,
+    data = data,
+    type = type,
+    addRepresentation = list(
+      type = list(),
+      values = list()
+    ),
+    setRock = FALSE,
+    toggleRock = FALSE,
+    setSpin = FALSE,
+    setScale = 1,
+    setRotation = list(),
+    setPosition = list(),
+    toggleSpin = FALSE,
+    zoomMove = list()
+  )
+  
+  NGLVieweR$x$structures <- append(NGLVieweR$x$structures, list(new_structure))
+  
+  NGLVieweR
+  
+}
+
+
 #'Add representation
 #'
 #'@description
@@ -372,8 +467,17 @@ selectionParameters <- function(NGLVieweR, proximity = 3, level = "residue") {
 #'@export
 addRepresentation <- function(NGLVieweR, type, param = list()) {
 
-  NGLVieweR$x$addRepresentation$type <- append(NGLVieweR$x$addRepresentation$type, type)
-  NGLVieweR$x$addRepresentation$values <- append(NGLVieweR$x$addRepresentation$values, list(param))
+  last_structure_index <- length(NGLVieweR$x$structures)
+  
+  NGLVieweR$x$structures[[last_structure_index]]$addRepresentation$type <- append(
+    NGLVieweR$x$structures[[last_structure_index]]$addRepresentation$type, 
+    type
+  )
+  NGLVieweR$x$structures[[last_structure_index]]$addRepresentation$values <- append(
+    NGLVieweR$x$structures[[last_structure_index]]$addRepresentation$values, 
+    list(param)
+  )
+  
   NGLVieweR
 }
 
@@ -394,7 +498,7 @@ addRepresentation <- function(NGLVieweR, type, param = list()) {
 #'  setRock(TRUE)
 #'@export
 setRock <- function(NGLVieweR, rock = TRUE) {
-
+  
   NGLVieweR$x$setRock <- rock
   NGLVieweR
 }
@@ -440,7 +544,9 @@ setSpin <- function(NGLVieweR, spin = TRUE) {
 #' @export
 setScale <- function(NGLVieweR, scale = 1) {
   
-  NGLVieweR$x$setScale <- scale
+  last_structure_index <- length(NGLVieweR$x$structures)
+  NGLVieweR$x$structures[[last_structure_index]]$setScale <- scale
+  
   NGLVieweR
 }
 
@@ -473,7 +579,10 @@ setScale <- function(NGLVieweR, scale = 1) {
 #' @export
 zoomMove <- function(NGLVieweR, center, zoom, duration = 0, z_offSet = 0){
   opts <- list(center = center, zoom = zoom, duration = duration, z_offSet = z_offSet)
-  NGLVieweR$x$zoomMove <- opts
+  
+  last_structure_index <- length(NGLVieweR$x$structures)
+  NGLVieweR$x$structures[[last_structure_index]]$zoomMove <- opts
+  
   NGLVieweR
 }
 
@@ -513,8 +622,10 @@ setRotation <- function(NGLVieweR, x=0, y=0, z=0, degrees=TRUE){
   
   opts <- list(x = x, y = y, z = z)
   
-  NGLVieweR$x$setRotation <- opts 
-  return(NGLVieweR)
+  last_structure_index <- length(NGLVieweR$x$structures)
+  NGLVieweR$x$structures[[last_structure_index]]$setRotation <- opts
+  
+  NGLVieweR
 }
 
 #' Set Position
@@ -545,7 +656,9 @@ setPosition <- function(NGLVieweR, x=0, y=0, z=0){
   
   opts <- list(x = x, y = y, z = z)
   
-  NGLVieweR$x$setPosition <- opts 
+  last_structure_index <- length(NGLVieweR$x$structures)
+  NGLVieweR$x$structures[[last_structure_index]]$setPosition <- opts
+  
   NGLVieweR
 }
 

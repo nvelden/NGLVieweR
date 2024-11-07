@@ -9,14 +9,21 @@ addRepresentation(NGLVieweR, type, param = list())
 \arguments{
 \item{NGLVieweR}{A NGLVieweR object.}
 
-\item{type}{Type of representation. Most common options are "cartoon", "ball+stick", "line", "surface", "ribbon" and "label".
-For a full list of options, see the "structureRepresentation" method in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+\item{type}{Type of representation. Most common options are "cartoon",
+"ball+stick", "line", "surface", "ribbon" and "label". For a full list of
+options, see the "structureRepresentation" method in the official
+\href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 
-\item{param}{Options for the different types of representations. Most common options are \code{name}, \code{opacity}, \code{colorScheme}, \code{sele}, \code{colorValue} and \code{visibility}.
-For a full list of options, see the general "RepresentationParameters" method and type specific Label-, Structure- and Surface- RepresentationParameters in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+\item{param}{Options for the different types of representations. Most common
+options are \code{name}, \code{opacity}, \code{colorScheme}, \code{sele},
+\code{colorValue} and \code{visibility}. For a full list of options, see the
+general "RepresentationParameters" method and type specific Label-,
+Structure- and Surface- RepresentationParameters in the official
+\href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
 \value{
-List of representation parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+List of representation parameters to \code{NGLVieweR}
+\code{htmlwidgets} object.
 }
 \description{
 Add a representation and its parameters.
