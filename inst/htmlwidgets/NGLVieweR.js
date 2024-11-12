@@ -120,6 +120,8 @@ HTMLWidgets.widget({
               
               if (sequences.length > 1) {
               sequences = sequences.map(seq => seq.join(''));
+              resnos = resnos.map(res => res.join(','));
+              chainnames = chainnames.map(chain => chain.join(''));
               }
               
               Shiny.onInputChange(`${el.id}_sequence`, sequences);
