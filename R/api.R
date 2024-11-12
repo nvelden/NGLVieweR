@@ -239,7 +239,8 @@ updateSelection <- function(NGLVieweR_proxy, name = name, sele = "none"){
 #'
 #' if (interactive()) {
 #'   library(shiny)
-#' 
+#'   library(colourpicker)
+#'   
 #'   ui <- fluidPage(
 #'     titlePanel("Viewer with API inputs"),
 #'     sidebarLayout(

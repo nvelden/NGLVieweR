@@ -48,6 +48,11 @@ HTMLWidgets.widget({
           // Make globaly available
           structures = loaded;
           
+          // Initialize arrays to collect data and send to Shiny
+          var sequences = [];
+          var resnos = [];
+          var chainnames = [];
+
           structures.forEach(function(o, index) {
                         var structureOpts = opts.structures[index];
 
@@ -87,29 +92,39 @@ HTMLWidgets.widget({
             }
 
             o.autoView();
-
-            // If in Shiny mode, send AA sequence to Shiny
+            
+            // If in Shiny mode, collect AA sequences and other data
             if (HTMLWidgets.shinyMode) {
               var sequence = [];
               var resno = [];
               var chainname = [];
               o.structure.eachResidue(rp => {
-                var code = rp.getResname1(); // The single-letter code, use `rp.resname` for 3-letter
-                if (code !== 'X') {
+                var code = rp.getResname1(); // The single-letter code
+                if (code !== 'X') {          // use `rp.resname` for 3-letter
                   sequence.push(code);
                   resno.push(rp.resno);
                   chainname.push(rp.chainname);
                 }
               });
-              
+
               // Write PDB
               var writer = new NGL.PdbWriter(o.structure);
               var PDBdata = writer.getData();
+              
+              // Collect data for all structures
+              sequences.push(sequence);
+              resnos.push(resno);
+              chainnames.push(chainname);
 
               Shiny.onInputChange(`${el.id}_PDB`, PDBdata);
-              Shiny.onInputChange(`${el.id}_sequence`, sequence);
-              Shiny.onInputChange(`${el.id}_resno`, resno);
-              Shiny.onInputChange(`${el.id}_chainname`, chainname);
+              
+              if (sequences.length > 1) {
+              sequences = sequences.map(seq => seq.join(''));
+              }
+              
+              Shiny.onInputChange(`${el.id}_sequence`, sequences);
+              Shiny.onInputChange(`${el.id}_resno`, resnos);
+              Shiny.onInputChange(`${el.id}_chainname`, chainnames);
             }
 
           });
