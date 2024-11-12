@@ -52,9 +52,10 @@ HTMLWidgets.widget({
           var sequences = [];
           var resnos = [];
           var chainnames = [];
+          var PDBdatas = [];
 
           structures.forEach(function(o, index) {
-                        var structureOpts = opts.structures[index];
+            var structureOpts = opts.structures[index];
 
             // Load representation inputs
             var representation = structureOpts.addRepresentation;
@@ -115,8 +116,9 @@ HTMLWidgets.widget({
               sequences.push(sequence);
               resnos.push(resno);
               chainnames.push(chainname);
+              PDBdatas.push(PDBdata);
 
-              Shiny.onInputChange(`${el.id}_PDB`, PDBdata);
+              Shiny.onInputChange(`${el.id}_PDB`, PDBdatas);
               
               if (sequences.length > 1) {
               sequences = sequences.map(seq => seq.join(''));
