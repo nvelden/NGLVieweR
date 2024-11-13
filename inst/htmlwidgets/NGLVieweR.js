@@ -118,6 +118,17 @@ HTMLWidgets.widget({
               resnos.push(resno);
               chainnames.push(chainname);
               PDBdatas.push(PDBdata);
+              
+            }
+
+          });
+          
+          if (structures.length > 1) {
+            stage.autoView();
+          }
+          
+          // Send data do shiny
+          if (HTMLWidgets.shinyMode) {
 
               Shiny.onInputChange(`${el.id}_PDB`, PDBdatas);
               
@@ -131,11 +142,7 @@ HTMLWidgets.widget({
               Shiny.onInputChange(`${el.id}_resno`, resnos);
               Shiny.onInputChange(`${el.id}_chainname`, chainnames);
             }
-
-          });
-          if (structures.length > 1) {
-            stage.autoView();
-          }
+          
       });
       
      //<---------------------------// Shiny inputs // ---------------------------------->
