@@ -68,6 +68,9 @@ HTMLWidgets.widget({
               let type = arrType[repIndex];
               o.addRepresentation(type, value);
             });
+            
+            o.autoView();
+            stage.autoView();
 
             // Set Scale
             if (structureOpts.setScale) {
@@ -83,7 +86,7 @@ HTMLWidgets.widget({
             if (structureOpts.setPosition && Object.keys(structureOpts.setPosition).length > 0) {
               o.setPosition([structureOpts.setPosition.x, structureOpts.setPosition.y, structureOpts.setPosition.z]);
             }
-
+ 
             // Set zoomMove
             var zoomMoveOpts = structureOpts.zoomMove;
             if (zoomMoveOpts && typeof zoomMoveOpts.zoom !== 'undefined') {
@@ -92,8 +95,6 @@ HTMLWidgets.widget({
               stage.animationControls.zoomMove(center, zoom, zoomMoveOpts.duration);
             }
 
-            o.autoView();
-            
             // If in Shiny mode, collect AA sequences and other data
             if (HTMLWidgets.shinyMode) {
               var sequence = [];
@@ -132,6 +133,9 @@ HTMLWidgets.widget({
             }
 
           });
+          if (structures.length > 1) {
+            stage.autoView();
+          }
       });
       
      //<---------------------------// Shiny inputs // ---------------------------------->
