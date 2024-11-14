@@ -123,6 +123,27 @@ HTMLWidgets.widget({
 
           });
           
+                      
+          if (structures.length > 1 && opts.superpose.superpose) {
+              var refIndex = opts.superpose.reference - 1; // Adjust for zero-based indexing
+              var sRef = structures[refIndex].structure;
+              var seleRef = opts.superpose.seleReference;
+              var seleTarget = opts.superpose.seleTarget;
+
+              // Loop over all structures except the reference
+              for (var i = 0; i < structures.length; i++) {
+                  if (i !== refIndex) {
+                    var sTarget = structures[i].structure;
+                    // Superpose sTarget onto sRef
+                    NGL.superpose(sRef, sTarget, true, seleRef, seleTarget);
+                }
+                
+               }
+
+                // Update representations to reflect the new positions
+                structures[0].updateRepresentations({ position: true });
+          }
+          
           if (structures.length > 1) {
             stage.autoView();
           }

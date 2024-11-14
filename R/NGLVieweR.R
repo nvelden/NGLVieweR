@@ -204,6 +204,7 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
   )
   
   x$structures <- c(x$structures, list(new_structure))
+  x$superpose = list()
  
   # Add stage parameters
   x$setQuality <- "medium"
@@ -432,6 +433,47 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
   
 }
 
+#' Set superpose
+#'
+#' @description Enable or disable superposition of multiple structures, with
+#' options to specify the reference structure and selection strings for
+#' alignment.
+#' @param NGLVieweR A NGLVieweR object.
+#' @param reference The index of the reference structure to align other
+#'   structures to. Defaults to 1 (the first loaded structure).
+#' @param sele_reference Selection string for the reference structure,
+#'   specifying which parts to align. Mandatory.
+#' @param sele_target Selection string for each target structure, specifying
+#'   which parts to align. Mandatory.
+#' @param superpose Logical; if \code{TRUE} (default), enable superposition of
+#'   multiple structures. Set to \code{FALSE} to disable.
+#' @return Sets the `superpose` list in the \code{NGLVieweR} \code{htmlwidgets}
+#'   object.
+#' @examples
+#' NGLVieweR("1CRN") %>%
+#'   addStructure("1GZM") %>%
+#'   addRepresentation("cartoon", param = list(color = "blue")) %>%
+#'   addStructure("1U19") %>%
+#'   addRepresentation("cartoon", param = list(color = "orange")) %>%
+#'   setSuperpose(reference = 1, sele_reference = ":A", sele_target = ":A", superpose = TRUE)
+#' @export
+setSuperpose <- function(NGLVieweR, reference = 1, sele_reference, sele_target, superpose = TRUE) {
+  
+  # Ensure sele_reference and sele_target are provided
+  if (missing(sele_reference) || missing(sele_target)) {
+    stop("Both 'sele_reference' and 'sele_target' parameters are mandatory and must be specified.")
+  }
+  
+  # Set superpose list in the NGLVieweR object
+  NGLVieweR$x$superpose <- list(
+    superpose = superpose,
+    reference = reference,
+    seleReference = sele_reference,
+    seleTarget = sele_target
+  )
+  
+  NGLVieweR
+}
 
 #'Add representation
 #'
@@ -629,13 +671,14 @@ zoomMove <- function(NGLVieweR, center, zoom, duration = 0, z_offSet = 0){
 
 #' Rotate View
 #'
-#' @description
-#' Set rotation for the representation
+#' @description Set rotation for the representation
 #' @param NGLVieweR A NGLVieweR object.
 #' @param x Rotation angle around the x-axis. Default is 0.
 #' @param y Rotation angle around the y-axis. Default is 0.
 #' @param z Rotation angle around the z-axis. Default is 0.
-#' @param degrees A logical value. If TRUE (default), the input angles are assumed to be in degrees and will be converted to radians. If FALSE, the angles are assumed to be in radians.
+#' @param degrees A logical value. If TRUE (default), the input angles are
+#'   assumed to be in degrees and will be converted to radians. If FALSE, the
+#'   angles are assumed to be in radians.
 #' @return NGLVieweR object with updated rotateView parameters.
 #' @family transformations
 #' @seealso

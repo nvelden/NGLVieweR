@@ -35,13 +35,13 @@ NGLVieweR("1CRN") \%>\%
   addRepresentation("cartoon", param = list(color = "blue")) \%>\%
   addStructure("1CRN") \%>\%
   addRepresentation("cartoon", param = list(color = "orange")) \%>\%
-  setPosition(x=20, y=0, z=0) \%>\%
-  setRotation(x=2, y=0, z=0, degrees = FALSE) \%>\%
+  setPosition(x = 20, y = 0, z = 0) \%>\%
+  setRotation(x = 2, y = 0, z = 0, degrees = FALSE) \%>\% 
   setScale(0.5)
 
-Note: The first "1CRN" structure is represented in blue, while the second 
-"1CRN" structure is represented in orange. Transformations such as 
-setPosition, setRotation, and setScale apply to the second 
-(most recently added) structure.
+# Note: The first "1CRN" structure is represented in blue, while the second 
+# "1CRN" structure is represented in orange. Transformations such as 
+# setPosition, setRotation, and setScale apply to the second 
+# (most recently added) structure.
 
 }

@@ -1,114 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/NGLVieweR.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/NGLVieweR-shiny.html</loc>
-  </url>
-  <url>
-    <loc>/reference/NGLVieweR.html</loc>
-  </url>
-  <url>
-    <loc>/reference/NGLVieweR_example.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addRepresentation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addSelection.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeSelection.html</loc>
-  </url>
-  <url>
-    <loc>/reference/selectionParameters.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setFocus.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setPosition.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setQuality.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setRock.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setRotation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setScale.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setSpin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/snapShot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stageParameters.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateColor.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateFocus.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateFullscreen.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateRepresentation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateRock.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateSelection.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateSpin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateStage.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateVisibility.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateZoomMove.html</loc>
-  </url>
-  <url>
-    <loc>/reference/zoomMove.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://github.com/nvelden/NGLVieweR/404.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/LICENSE-text.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/LICENSE.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/articles/NGLVieweR.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/articles/index.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/authors.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/index.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/news/index.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/NGLVieweR-shiny.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/NGLVieweR.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/NGLVieweR_example.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/addRepresentation.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/addSelection.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/addStructure.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/index.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/reexports.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/removeSelection.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/selectionParameters.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/setFocus.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/setPosition.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/setQuality.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/setRock.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/setRotation.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/setScale.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/setSpin.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/snapShot.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/stageParameters.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateColor.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateFocus.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateFullscreen.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateRepresentation.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateRock.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateSelection.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateSpin.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateStage.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateVisibility.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/updateZoomMove.html</loc></url>
+<url><loc>https://github.com/nvelden/NGLVieweR/reference/zoomMove.html</loc></url>
 </urlset>
+

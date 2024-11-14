@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="man/figures/logo.png" height="150px" width="150px" align="right">
+  <img src="man/figures/logo.png" height="150px" width="150px" align="right" alt="NGLVieweR Logo">
   <h1><strong>NGLVieweR</strong> - Visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny</h1>
 </p>
 <!-- badges: start -->
@@ -44,7 +44,7 @@ NGLVieweR("7CID") %>%
 addRepresentation("cartoon")
 ```
 
-<img src="man/figures/cartoon_representation.PNG" class="screenshot" width="50%"/>
+<img src="man/figures/cartoon_representation.PNG" class="screenshot" width="50%" alt="Cartoon representation example in NGLVieweR"/>
 
 ## Functionality
 

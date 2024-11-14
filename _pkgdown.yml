@@ -1,3 +1,5 @@
+url: https://github.com/nvelden/NGLVieweR
+
 template:
   params:
     bootswatch: flatly
@@ -30,6 +32,7 @@ reference:
   - '`setScale`'
   - '`addRepresentation`'
   - '`addSelection`'
+  - '`addStructure`'
   - '`NGLVieweR-shiny`'
   - '`NGLVieweR`'
   - '`NGLVieweR_example`'

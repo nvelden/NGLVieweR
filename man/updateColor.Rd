@@ -28,7 +28,8 @@ NGLVieweR_proxy("structure") \%>\%
 
 if (interactive()) {
   library(shiny)
-
+  library(colourpicker)
+  
   ui <- fluidPage(
     titlePanel("Viewer with API inputs"),
     sidebarLayout(

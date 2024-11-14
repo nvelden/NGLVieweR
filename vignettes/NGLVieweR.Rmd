@@ -103,7 +103,7 @@ addRepresentation("ball+stick")
 
 You can alter the appearance of select residues using the `param` argument. For a full list of options see the [NGL.js](http://nglviewer.org/ngl/api/) "RepresentationParameters" and the "Selection language" section.
 
-```{r representations, screenshot.force=FALSE}
+```{r structures, screenshot.force=FALSE}
 NGLVieweR("7CID") %>%
   addRepresentation("cartoon",
     param = list(colorScheme = "residueindex")
@@ -121,6 +121,22 @@ NGLVieweR("7CID") %>%
       opacity = 0.1
     )
   )
+```
+
+## Structures
+
+Using `addStructure()`, you can overlay or superimpose multiple structures. In this example, the first structure is represented in blue, while the second 
+representation of the structure is represented in orange. Transformations such as `setPosition()`, `setRotation()`, and `setScale()` apply to the second 
+(most recently added) structure.
+
+```{r representations, screenshot.force=FALSE}
+NGLVieweR("1CRN") %>%
+  addRepresentation("cartoon", param = list(color = "blue")) %>%
+  addStructure("1CRN") %>%
+  addRepresentation("cartoon", param = list(color = "orange")) %>%
+  setPosition(x = 20, y = 0, z = 0) %>%
+  setRotation(x = 2, y = 0, z = 0, degrees = FALSE) %>% 
+  setScale(0.5)
 ```
 
 ## Stage
@@ -347,7 +363,7 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.cap="A basic NGLVieweR Shiny app"}
 knitr::include_graphics("../man/figures/basic_shiny.PNG")
 ```
 
@@ -403,7 +419,7 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.cap="NGLVieweR API in Shiny"}
 knitr::include_graphics("../man/figures/API_shiny.PNG")
 ```
 
@@ -566,6 +582,6 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.cap="Click interaction example in NGLVieweR"}
 knitr::include_graphics("../man/figures/click_interaction.PNG")
 ```

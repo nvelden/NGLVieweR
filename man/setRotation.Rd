@@ -15,7 +15,9 @@ setRotation(NGLVieweR, x = 0, y = 0, z = 0, degrees = TRUE)
 
 \item{z}{Rotation angle around the z-axis. Default is 0.}
 
-\item{degrees}{A logical value. If TRUE (default), the input angles are assumed to be in degrees and will be converted to radians. If FALSE, the angles are assumed to be in radians.}
+\item{degrees}{A logical value. If TRUE (default), the input angles are
+assumed to be in degrees and will be converted to radians. If FALSE, the
+angles are assumed to be in radians.}
 }
 \value{
 NGLVieweR object with updated rotateView parameters.
