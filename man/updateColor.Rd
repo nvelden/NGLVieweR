@@ -11,11 +11,14 @@ updateColor(NGLVieweR_proxy, name, color)
 
 \item{name}{Name of selection to alter the color.}
 
-\item{color}{Can be a colorValue (color name or HEX code) or colorScheme (e.g. "element", "resname", "random" or "residueindex").
-For a full list of options, see the "Colormaker" section in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+\item{color}{Can be a colorValue (color name or HEX code) or colorScheme (e.g.
+"element", "resname", "random" or "residueindex"). For a full list of
+options, see the "Colormaker" section in the official
+\href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
 \value{
-API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+API call containing \code{NGLVieweR} \code{id} and list of message
+parameters.
 }
 \description{
 Update color of an existing NGLVieweR selection in Shinymode.
@@ -29,7 +32,7 @@ NGLVieweR_proxy("structure") \%>\%
 if (interactive()) {
   library(shiny)
   library(colourpicker)
-  
+
   ui <- fluidPage(
     titlePanel("Viewer with API inputs"),
     sidebarLayout(

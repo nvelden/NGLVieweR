@@ -88,11 +88,11 @@ addSelection <- function(NGLVieweR_proxy, type, param = list(), structureIndex =
 
 #'Remove a selection
 #'
-#'@description
-#'Remove an existing NGLVieweR selection in Shinymode.
+#'@description Remove an existing NGLVieweR selection in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param name Name of selection to be removed.
-#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message
+#'  parameters.
 #'@family selections
 #'@seealso
 #'* [NGLVieweR_example()] See example "removeSelection".
@@ -101,10 +101,10 @@ addSelection <- function(NGLVieweR_proxy, type, param = list(), structureIndex =
 #' NGLVieweR_proxy("structure") %>%
 #'      removeSelection("sel1")
 #' }
-#' 
+#'
 #' if (interactive()) {
 #'   library(shiny)
-#' 
+#'
 #'   ui <- fluidPage(
 #'     titlePanel("Viewer with API inputs"),
 #'     sidebarLayout(
@@ -138,7 +138,7 @@ addSelection <- function(NGLVieweR_proxy, type, param = list(), structureIndex =
 #'             )
 #'         )
 #'     })
-#' 
+#'
 #'     observeEvent(input$remove, {
 #'       NGLVieweR_proxy("structure") %>%
 #'         removeSelection("sel1")
@@ -146,7 +146,7 @@ addSelection <- function(NGLVieweR_proxy, type, param = list(), structureIndex =
 #'   }
 #'   shinyApp(ui, server)
 #' }
-#' @export
+#'@export
 removeSelection <- function(NGLVieweR_proxy, name) {
 
   message <- list(id = NGLVieweR_proxy$id, name = name)
@@ -157,13 +157,14 @@ removeSelection <- function(NGLVieweR_proxy, name) {
 
 #'Update a selection
 #'
-#'@description
-#'Update the selected residues of an existing NGLVieweR selection in
+#'@description Update the selected residues of an existing NGLVieweR selection
+#'in
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param name Name of selection.
-#'@param sele Selected atoms/residues.
-#'See the section "selection-language" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+#'@param sele Selected atoms/residues. See the section "selection-language" in
+#'  the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message
+#'  parameters.
 #'@family selections
 #'@seealso
 #'* [NGLVieweR_example()] See example "updateSelection".
@@ -172,7 +173,7 @@ removeSelection <- function(NGLVieweR_proxy, name) {
 #' NGLVieweR_proxy("structure") %>%
 #'   updateSelection("ball+stick", sele = "1-20")
 #' }
-#' 
+#'
 #' if (interactive()) {
 #'   library(shiny)
 #'   ui <- fluidPage(
@@ -221,13 +222,15 @@ updateSelection <- function(NGLVieweR_proxy, name = name, sele = "none"){
 
 #'Update color of a selection
 #'
-#'@description
-#'Update color of an existing NGLVieweR selection in Shinymode.
+#'@description Update color of an existing NGLVieweR selection in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param name Name of selection to alter the color.
-#'@param color Can be a colorValue (color name or HEX code) or colorScheme (e.g. "element", "resname", "random" or "residueindex").
-#'For a full list of options, see the "Colormaker" section in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+#'@param color Can be a colorValue (color name or HEX code) or colorScheme (e.g.
+#'  "element", "resname", "random" or "residueindex"). For a full list of
+#'  options, see the "Colormaker" section in the official
+#'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message
+#'  parameters.
 #'@family updates
 #'@seealso
 #'* [NGLVieweR_example()] See example "updateColor".
@@ -240,7 +243,7 @@ updateSelection <- function(NGLVieweR_proxy, name = name, sele = "none"){
 #' if (interactive()) {
 #'   library(shiny)
 #'   library(colourpicker)
-#'   
+#'
 #'   ui <- fluidPage(
 #'     titlePanel("Viewer with API inputs"),
 #'     sidebarLayout(
@@ -267,7 +270,7 @@ updateSelection <- function(NGLVieweR_proxy, name = name, sele = "none"){
 #'   }
 #'   shinyApp(ui, server)
 #' }
-#' @export
+#'@export
 updateColor <- function(NGLVieweR_proxy, name, color) {
 
   message <- list(id = NGLVieweR_proxy$id, name = name, color = color)
@@ -348,25 +351,25 @@ snapShot <- function(NGLVieweR_proxy, fileName = "Snapshot", param = list()) {
 
 #'Update visibility
 #'
-#'@description
-#'Hide or show an existing NGLVieweR selection in Shinymode.
+#'@description Hide or show an existing NGLVieweR selection in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param name Name of selection to alter the color.
-#'@param value Hide \code{FALSE} or show \code{TRUE} selection.
-#'For a full description see "setVisibility" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+#'@param value Hide \code{FALSE} or show \code{TRUE} selection. For a full
+#'  description see "setVisibility" in the official
+#'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message
+#'  parameters.
 #'@family updates
-#'@seealso
-#'[NGLVieweR_example()] See example "updateVisibility".
+#'@seealso [NGLVieweR_example()] See example "updateVisibility".
 #'@examples
 #'\dontrun{
 #' NGLVieweR_proxy("structure") %>%
 #'  updateVisibility("cartoon", value = TRUE)
 #' }
-#' 
+#'
 #' if (interactive()) {
 #' library(shiny)
-#' 
+#'
 #' ui = fluidPage(
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
@@ -382,18 +385,18 @@ snapShot <- function(NGLVieweR_proxy, fileName = "Snapshot", param = list()) {
 #' server = function(input, output) {
 #'   output$structure <- renderNGLVieweR({
 #'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", 
+#'       addRepresentation("cartoon",
 #'                         param = list(name = "cartoon", color="residueindex"))
 #'   })
 #'   observeEvent(input$show, {
 #'     NGLVieweR_proxy("structure") %>%
 #'       updateVisibility("cartoon", value = TRUE)
-#' 
+#'
 #'   })
 #'   observeEvent(input$hide, {
 #'     NGLVieweR_proxy("structure") %>%
 #'       updateVisibility("cartoon", value = FALSE)
-#' 
+#'
 #'   })
 #' }
 #' shinyApp(ui, server)
@@ -409,13 +412,17 @@ updateVisibility <- function(NGLVieweR_proxy, name, value = FALSE) {
 
 #'Update Representation
 #'
-#'@description
-#'Update an existing NGLVieweR representation in Shinymode.
+#'@description Update an existing NGLVieweR representation in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param name Name of representation to alter the color.
-#'@param param Options for the different types of representations. Most common options are \code{name}, \code{opacity}, \code{colorScheme}, \code{colorValue} and \code{visibility}.
-#'For a full list of options, see the general "RepresentationParameters" method and type specific Label-, Structure- and Surface- RepresentationParameters in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#'@return API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+#'@param param Options for the different types of representations. Most common
+#'  options are \code{name}, \code{opacity}, \code{colorScheme},
+#'  \code{colorValue} and \code{visibility}. For a full list of options, see the
+#'  general "RepresentationParameters" method and type specific Label-,
+#'  Structure- and Surface- RepresentationParameters in the official
+#'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return API call containing \code{NGLVieweR} \code{id} and list of message
+#'  parameters.
 #'@family updates
 #'@seealso
 #'* [addSelection()] Add a new selection to a NGLVieweR object.
@@ -432,10 +439,10 @@ updateVisibility <- function(NGLVieweR_proxy, name, value = FALSE) {
 #'     )
 #'   )
 #' }
-#' 
+#'
 #' if (interactive()) {
 #' library(shiny)
-#' 
+#'
 #' ui = fluidPage(
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
@@ -452,7 +459,7 @@ updateVisibility <- function(NGLVieweR_proxy, name, value = FALSE) {
 #' server = function(input, output) {
 #'   output$structure <- renderNGLVieweR({
 #'     NGLVieweR("7CID") %>%
-#'       addRepresentation("cartoon", 
+#'       addRepresentation("cartoon",
 #'                         param = list(name = "cartoon", color="red"))
 #'   })
 #' observeEvent(input$update, {
@@ -467,7 +474,7 @@ updateVisibility <- function(NGLVieweR_proxy, name, value = FALSE) {
 #'  }
 #' shinyApp(ui, server)
 #' }
-#' @export
+#'@export
 updateRepresentation <- function(NGLVieweR_proxy, name, param = list()) {
 
   message <- list(id = NGLVieweR_proxy$id, name = name, param = param)

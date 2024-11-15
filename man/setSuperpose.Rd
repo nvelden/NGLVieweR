@@ -37,8 +37,14 @@ options to specify the reference structure and selection strings for
 alignment.
 }
 \examples{
-NGLVieweR("1CRN") \%>\%
-  addStructure("1GZM") \%>\%
+NGLVieweR("1GZM") \%>\%
+  addRepresentation("cartoon", param = list(color = "blue")) \%>\%
   addStructure("1U19") \%>\%
-  setSuperpose(reference = 1, sele_reference = ":A", sele_target = ":A", superpose = TRUE)
+  addRepresentation("cartoon", param = list(color = "orange")) \%>\%
+  setSuperpose(
+    reference = 1, 
+    sele_reference = ":A", 
+    sele_target = ":A", 
+    superpose = TRUE
+  )
 }

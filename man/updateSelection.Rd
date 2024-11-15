@@ -11,14 +11,16 @@ updateSelection(NGLVieweR_proxy, name = name, sele = "none")
 
 \item{name}{Name of selection.}
 
-\item{sele}{Selected atoms/residues.
-See the section "selection-language" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+\item{sele}{Selected atoms/residues. See the section "selection-language" in
+the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
 \value{
-API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+API call containing \code{NGLVieweR} \code{id} and list of message
+parameters.
 }
 \description{
-Update the selected residues of an existing NGLVieweR selection in
+Update the selected residues of an existing NGLVieweR selection
+in
 }
 \examples{
 \dontrun{

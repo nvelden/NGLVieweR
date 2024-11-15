@@ -68,6 +68,9 @@ HTMLWidgets.widget({
               let type = arrType[repIndex];
               o.addRepresentation(type, value);
             });
+            
+            o.autoView();
+            stage.autoView();
 
             // Set Scale
             if (structureOpts.setScale) {
@@ -83,7 +86,7 @@ HTMLWidgets.widget({
             if (structureOpts.setPosition && Object.keys(structureOpts.setPosition).length > 0) {
               o.setPosition([structureOpts.setPosition.x, structureOpts.setPosition.y, structureOpts.setPosition.z]);
             }
-
+ 
             // Set zoomMove
             var zoomMoveOpts = structureOpts.zoomMove;
             if (zoomMoveOpts && typeof zoomMoveOpts.zoom !== 'undefined') {
@@ -92,8 +95,6 @@ HTMLWidgets.widget({
               stage.animationControls.zoomMove(center, zoom, zoomMoveOpts.duration);
             }
 
-            o.autoView();
-            
             // If in Shiny mode, collect AA sequences and other data
             if (HTMLWidgets.shinyMode) {
               var sequence = [];
@@ -117,6 +118,38 @@ HTMLWidgets.widget({
               resnos.push(resno);
               chainnames.push(chainname);
               PDBdatas.push(PDBdata);
+              
+            }
+
+          });
+          
+                      
+          if (structures.length > 1 && opts.superpose.superpose) {
+              var refIndex = opts.superpose.reference - 1; 
+              var sRef = structures[refIndex].structure;
+              var seleRef = opts.superpose.seleReference;
+              var seleTarget = opts.superpose.seleTarget;
+
+              // Loop over all structures except the reference
+              for (var i = 0; i < structures.length; i++) {
+                  if (i !== refIndex) {
+                    var sTarget = structures[i].structure;
+                    // Superpose sTarget onto sRef
+                    NGL.superpose(sRef, sTarget, true, seleRef, seleTarget);
+                }
+                
+               }
+
+                // Update representations to reflect the new positions
+                structures[0].updateRepresentations({ position: true });
+          }
+          
+          if (structures.length > 1) {
+            stage.autoView();
+          }
+          
+          // Send data do shiny
+          if (HTMLWidgets.shinyMode) {
 
               Shiny.onInputChange(`${el.id}_PDB`, PDBdatas);
               
@@ -130,8 +163,7 @@ HTMLWidgets.widget({
               Shiny.onInputChange(`${el.id}_resno`, resnos);
               Shiny.onInputChange(`${el.id}_chainname`, chainnames);
             }
-
-          });
+          
       });
       
      //<---------------------------// Shiny inputs // ---------------------------------->

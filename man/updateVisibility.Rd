@@ -11,11 +11,13 @@ updateVisibility(NGLVieweR_proxy, name, value = FALSE)
 
 \item{name}{Name of selection to alter the color.}
 
-\item{value}{Hide \code{FALSE} or show \code{TRUE} selection.
-For a full description see "setVisibility" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+\item{value}{Hide \code{FALSE} or show \code{TRUE} selection. For a full
+description see "setVisibility" in the official
+\href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
 \value{
-API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+API call containing \code{NGLVieweR} \code{id} and list of message
+parameters.
 }
 \description{
 Hide or show an existing NGLVieweR selection in Shinymode.
@@ -44,7 +46,7 @@ ui = fluidPage(
 server = function(input, output) {
   output$structure <- renderNGLVieweR({
     NGLVieweR("7CID") \%>\%
-      addRepresentation("cartoon", 
+      addRepresentation("cartoon",
                         param = list(name = "cartoon", color="residueindex"))
   })
   observeEvent(input$show, {

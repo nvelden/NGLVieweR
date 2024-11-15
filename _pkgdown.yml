@@ -30,6 +30,7 @@ reference:
   - '`setPosition`'
   - '`setRotation`'
   - '`setScale`'
+  - '`setSuperpose`'
   - '`addRepresentation`'
   - '`addSelection`'
   - '`addStructure`'

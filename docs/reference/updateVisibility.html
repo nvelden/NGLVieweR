@@ -78,13 +78,15 @@
 
 
 <dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
-<dd><p>Hide <code>FALSE</code> or show <code>TRUE</code> selection.
-For a full description see "setVisibility" in the official <a href="http://nglviewer.org/ngl/api/" class="external-link">NGL.js</a> manual.</p></dd>
+<dd><p>Hide <code>FALSE</code> or show <code>TRUE</code> selection. For a full
+description see "setVisibility" in the official
+<a href="http://nglviewer.org/ngl/api/" class="external-link">NGL.js</a> manual.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>API call containing <code>NGLVieweR</code> <code>id</code> and list of message parameters.</p>
+    <p>API call containing <code>NGLVieweR</code> <code>id</code> and list of message
+parameters.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -120,7 +122,7 @@ For a full description see "setVisibility" in the official <a href="http://nglvi
 <span class="r-in"><span><span class="va">server</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">output</span><span class="op">$</span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="NGLVieweR-shiny.html">renderNGLVieweR</a></span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>, </span></span>
+<span class="r-in"><span>      <span class="fu"><a href="addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,</span></span>
 <span class="r-in"><span>                        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, color<span class="op">=</span><span class="st">"residueindex"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">show</span>, <span class="op">{</span></span></span>
