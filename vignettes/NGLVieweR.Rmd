@@ -125,7 +125,7 @@ NGLVieweR("7CID") %>%
 
 ## Structures
 
-Using `addStructure()`, you can overlay or superimpose multiple structures. In this example, the first structure is represented in blue, while the second 
+Using `addStructure()`, you can load multiple structures into the same stage. In this example, the first structure is represented in blue, while the second 
 representation of the structure is represented in orange. Transformations such as `setPosition()`, `setRotation()`, and `setScale()` apply to the second 
 (most recently added) structure.
 
@@ -138,6 +138,24 @@ NGLVieweR("1CRN") %>%
   setRotation(x = 2, y = 0, z = 0, degrees = FALSE) %>% 
   setScale(0.5)
 ```
+
+## Superpose
+
+Structures can be superposed onto each other using the `setSuperpose()` function. It aligns the structures by specifying a reference structure (defaulting to the first one loaded) and defining the selections within each structure to be used for alignment.
+
+```{r superpose, screenshot.force=FALSE}
+NGLVieweR("1GZM") %>%
+   addRepresentation("cartoon", param = list(color = "blue")) %>%
+   addStructure("1U19") %>%
+   addRepresentation("cartoon", param = list(color = "orange")) %>%
+   setSuperpose(
+     reference = 1, 
+     sele_reference = ":A", 
+     sele_target = ":A", 
+     superpose = TRUE
+     )
+```
+
 
 ## Stage
 

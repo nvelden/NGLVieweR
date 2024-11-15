@@ -450,12 +450,16 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
 #' @return Sets the `superpose` list in the \code{NGLVieweR} \code{htmlwidgets}
 #'   object.
 #' @examples
-#' NGLVieweR("1CRN") %>%
-#'   addStructure("1GZM") %>%
+#' NGLVieweR("1GZM") %>%
 #'   addRepresentation("cartoon", param = list(color = "blue")) %>%
 #'   addStructure("1U19") %>%
 #'   addRepresentation("cartoon", param = list(color = "orange")) %>%
-#'   setSuperpose(reference = 1, sele_reference = ":A", sele_target = ":A", superpose = TRUE)
+#'   setSuperpose(
+#'     reference = 1, 
+#'     sele_reference = ":A", 
+#'     sele_target = ":A", 
+#'     superpose = TRUE
+#'   )
 #' @export
 setSuperpose <- function(NGLVieweR, reference = 1, sele_reference, sele_target, superpose = TRUE) {
   

@@ -125,7 +125,7 @@ HTMLWidgets.widget({
           
                       
           if (structures.length > 1 && opts.superpose.superpose) {
-              var refIndex = opts.superpose.reference - 1; // Adjust for zero-based indexing
+              var refIndex = opts.superpose.reference - 1; 
               var sRef = structures[refIndex].structure;
               var seleRef = opts.superpose.seleReference;
               var seleTarget = opts.superpose.seleTarget;
