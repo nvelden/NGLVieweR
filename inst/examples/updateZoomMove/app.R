@@ -9,7 +9,7 @@ ui = fluidPage(
       textInput("zoom", "Zoom", "200"),
       numericInput("zoomOffset", "Zoom offset", 80,0,100),
       numericInput("duration", "Duration", 2000,0,2000),
-      actionButton("zoom", "Zoom"),
+      actionButton("zoombtn", "Zoom"),
       actionButton("reset", "Reset")
     ),
     mainPanel(
@@ -23,25 +23,26 @@ server = function(input, output) {
       addRepresentation("cartoon", param = list(name = "cartoon", color="red")) %>%
       addRepresentation("ball+stick", param = list(name = "ball+stick", sele="200"))
   })
-
-  observeEvent(input$zoom,{
-
+  
+  observeEvent(input$zoombtn,{
+    
     NGLVieweR_proxy("structure") %>% updateZoomMove(center = isolate(input$center),
-                                                    zoom = isolate(input$zoom),
+                                                    zoom = isolate(input$zoombtn),
                                                     z_offSet = isolate(input$zoomOffset),
                                                     duration = isolate(input$duration))
-
+    
   })
-
+  
   observeEvent(input$reset,{
-
+    
     NGLVieweR_proxy("structure") %>% updateZoomMove(center = "*",
                                                     zoom = "*",
                                                     z_offSet = 0,
                                                     duration = 1000)
-
+    
   })
 }
 shinyApp(ui, server)
+
 
 

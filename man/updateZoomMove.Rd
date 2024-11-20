@@ -4,7 +4,14 @@
 \alias{updateZoomMove}
 \title{Update zoomMove}
 \usage{
-updateZoomMove(NGLVieweR_proxy, center, zoom, duration = 0, z_offSet = 0)
+updateZoomMove(
+  NGLVieweR_proxy,
+  center,
+  zoom,
+  duration = 0,
+  z_offSet = 0,
+  structureIndex = NULL
+)
 }
 \arguments{
 \item{NGLVieweR_proxy}{A NGLVieweR object.}
@@ -20,6 +27,9 @@ updateZoomMove(NGLVieweR_proxy, center, zoom, duration = 0, z_offSet = 0)
 \item{duration}{Optional animation time in milliseconds (default = 0).}
 
 \item{z_offSet}{Optional zoom offset value (default = 0).}
+
+\item{structureIndex}{Optional index of the structure to target for the zoom
+animation. If \code{NULL} (default), the first structure (index 0) is targeted.}
 }
 \value{
 API call containing \code{NGLVieweR} \code{id} and list of message

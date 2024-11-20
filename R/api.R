@@ -10,9 +10,9 @@
 #'  general "RepresentationParameters" method and type specific Label-,
 #'  Structure- and Surface- RepresentationParameters in the official
 #'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#' @param structureIndex (optional) The index of the specific structure to which the
-#'   selection should be added. If not specified, the selection will be applied
-#'   to all loaded structures.
+#'@param structureIndex (optional) The index of the specific structure to which
+#'  the selection should be added (index 0 for the first). If not specified, the
+#'  selection will be applied to all loaded structures.
 #'@return API call containing \code{NGLVieweR} \code{id} and list of message
 #'  parameters.
 #'@family selections
@@ -791,6 +791,8 @@ updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE){
 #'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
 #'@param duration Optional animation time in milliseconds (default = 0).
 #'@param z_offSet Optional zoom offset value (default = 0).
+#'@param structureIndex Optional index of the structure to target for the zoom
+#'  animation. If `NULL` (default), the first structure (index 0) is targeted.
 #'@return API call containing \code{NGLVieweR} \code{id} and list of message
 #'  parameters.
 #'@family animations
@@ -856,10 +858,23 @@ updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE){
 #' shinyApp(ui, server)
 #' }
 #'@export
-updateZoomMove <- function(NGLVieweR_proxy, center, zoom, duration = 0, z_offSet = 0){
-  message <- list(id = NGLVieweR_proxy$id, center = center, zoom = zoom, duration = duration, z_offSet = z_offSet)
-  NGLVieweR_proxy$session$sendCustomMessage("NGLVieweR:updateZoomMove", message)
+updateZoomMove <- function(NGLVieweR_proxy, center, zoom, duration = 0, z_offSet = 0, structureIndex = NULL) {
+  
+  message <- list(
+    id = NGLVieweR_proxy$id,
+    center = center,
+    zoom = zoom,
+    duration = duration,
+    z_offSet = z_offSet
+  )
+  
+  if (!is.null(structureIndex)) {
+    message$structureIndex <- structureIndex
+  }
+  
 
+  NGLVieweR_proxy$session$sendCustomMessage("NGLVieweR:updateZoomMove", message)
+  
   return(NGLVieweR_proxy)
 }
 

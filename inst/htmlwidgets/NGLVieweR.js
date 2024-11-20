@@ -300,22 +300,35 @@ Shiny.addCustomMessageHandler('NGLVieweR:updateFullscreen', function(message){
 
 });
 
-Shiny.addCustomMessageHandler('NGLVieweR:updateZoomMove', function(message){
-
-  var structure = getNGLStructure(message.id);
+Shiny.addCustomMessageHandler('NGLVieweR:updateZoomMove', function(message) {
+  
+  // Get the array of loaded structures
+  var structures = getNGLStructure(message.id);
   var stage = getNGLStage(message.id);
 
- if(typeof(structure) !== "undefined"){
+  // Check if structures are loaded and stage is defined
+  if (structures && structures.length > 0 && stage) {
+    var structureIndex = message.structureIndex;
 
-  structure.then(function(o){
-
-      var center = o.getCenter(message.center);
-      var zoom = o.getZoom(message.zoom) + message.z_offSet;
+    // Check if a specific structure index is provided
+    if (typeof structureIndex === 'number' && structureIndex >= 0 && structureIndex < structures.length) {
+      // Handle zoomMove for the specified structure
+      var structure = structures[structureIndex];
+      var center = structure.getCenter(message.center);
+      var zoom = structure.getZoom(message.zoom) + (message.z_offSet || 0);
 
       stage.animationControls.zoomMove(center, zoom, message.duration);
- })
-}
+    } else {
+      // No specific index provided; default to the first structure
+      var structure = structures[0];
+      var center = structure.getCenter(message.center);
+      var zoom = structure.getZoom(message.zoom) + (message.z_offSet || 0);
 
+      stage.animationControls.zoomMove(center, zoom, message.duration);
+    }
+  } else {
+    console.log("Structures not loaded, unavailable, or stage undefined.");
+  }
 });
 
 Shiny.addCustomMessageHandler('NGLVieweR:updateFocus', function(message){

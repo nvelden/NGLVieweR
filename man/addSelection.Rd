@@ -19,9 +19,9 @@ general "RepresentationParameters" method and type specific Label-,
 Structure- and Surface- RepresentationParameters in the official
 \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 
-\item{structureIndex}{(optional) The index of the specific structure to which the
-selection should be added. If not specified, the selection will be applied
-to all loaded structures.}
+\item{structureIndex}{(optional) The index of the specific structure to which
+the selection should be added (index 0 for the first). If not specified, the
+selection will be applied to all loaded structures.}
 }
 \value{
 API call containing \code{NGLVieweR} \code{id} and list of message
