@@ -3,19 +3,19 @@
 #' @export
 tools::file_ext
 
-#' Create a NGLVieweR
-#'@description
-#' NGLVieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
-#' It includes a set of API functions to manipulate the viewer after creation in Shiny.
-#'@details
-#'The package is based on the \href{http://nglviewer.org/ngl/api/}{NGL.js} JavaScript library.
-#'To see the full set of features please read the official manual of NGL.js.
+#'Create a NGLVieweR
+#'@description NGLVieweR can be used to visualize and interact with Protein Data
+#'Bank (PDB) and structural files in R and Shiny applications. It includes a set
+#'of API functions to manipulate the viewer after creation in Shiny.
+#'@details The package is based on the
+#'\href{http://nglviewer.org/ngl/api/}{NGL.js} JavaScript library. To see the
+#'full set of features please read the official manual of NGL.js.
 #'@param data PDB file or PDB entry code
-#'@param format Input format (.mmcif, .cif, .mcif, .pdb, .ent, .pqr, 
-#'.gro, .sdf, .sd, .mol2, .mmtf). Needed when no file extension is provided.
+#'@param format Input format (.mmcif, .cif, .mcif, .pdb, .ent, .pqr, .gro, .sdf,
+#'  .sd, .mol2, .mmtf). Needed when no file extension is provided.
 #'@param width,height Must be a valid CSS unit (like \code{'100\%'},
-#' \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
-#' string and have \code{'px'} appended.
+#'  \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
+#'  string and have \code{'px'} appended.
 #'@param elementId optional element Id
 #'@return A \code{NGLVieweR} \code{htmlwidgets} object.
 #'@seealso
@@ -25,7 +25,8 @@ tools::file_ext
 #'
 #' # Example 1: Most Basic
 #'NGLVieweR("7CID") %>%
-#'  addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
+#'  addRepresentation("cartoon", 
+#'  param = list(name = "cartoon", colorScheme="residueindex"))
 #'
 #' # Example 2: Advanced
 #' NGLVieweR("7CID") %>%
@@ -100,7 +101,7 @@ tools::file_ext
 #'# App 2: Example with API calls
 #'if (interactive()) {
 #' library(shiny)
-#' 
+#'
 #' ui <- fluidPage(
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
@@ -138,7 +139,7 @@ tools::file_ext
 #'           )
 #'       )
 #'   })
-#' 
+#'
 #'   observeEvent(input$remove, {
 #'     NGLVieweR_proxy("structure") %>%
 #'       removeSelection("sel1")
@@ -158,23 +159,31 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
       call. = FALSE
     )
   }
-  if (nchar(data) > 8 && tools::file_ext(data) == "" && is.null(format)) {
+  
+  if (is.character(data) && length(data) == 1 && nchar(data) > 8 && tools::file_ext(data) == "" && is.null(format)) {
     stop("NGLVieweR: Please specify the file format",
       call. = FALSE
     )
+  }
+  
+  # Process format to remove leading dot if present
+  if (!is.null(format) && startsWith(format, ".")) {
+    format <- substr(format, 2, nchar(format)) # Remove the leading dot
   }
 
   type <- NULL
   file_ext <- format
   # Read PDB file
-  if (file.exists(data) && nchar(data) > 8) {
+  if (is.character(data) && length(data) == 1 && file.exists(data)) {
+    # If data is a file path
     if (is.null(format)) {
       file_ext <- tools::file_ext(data)
     }
     data <- paste(readLines(data), collapse = "\n")
     type <- "file"
     # Read directly from R editor
-  } else if (nchar(data) > 8 && tools::file_ext(data) == "") {
+  } else if (is.character(data) && length(data) == 1 && nchar(data) > 8 ) {
+    # If data is a vector of strings, assume it's a text file content
     type <- "file"
     file_ext <- format
     data <- paste(data, collapse = "\n")
@@ -251,15 +260,17 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
   )
 }
 
-#' Set stage parameters
+#'Set stage parameters
 #'
-#'@description
-#'Set stage parameters.
+#'@description Set stage parameters.
 #'@param NGLVieweR A NGLVieweR object.
-#'@param ... Options controlling the stage. Most common options are \code{backgroundColor}, \code{rotateSpeed}, \code{zoomSpeed},
-#'\code{hoverTimeout} and \code{lightIntensity}. For a full list of options, see the "stageParameters" method in the official
-#'\href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#'@return Returns list of stage parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+#'@param ... Options controlling the stage. Most common options are
+#'  \code{backgroundColor}, \code{rotateSpeed}, \code{zoomSpeed},
+#'  \code{hoverTimeout} and \code{lightIntensity}. For a full list of options,
+#'  see the "stageParameters" method in the official
+#'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@return Returns list of stage parameters to \code{NGLVieweR}
+#'  \code{htmlwidgets} object.
 #'@seealso
 #'* [updateStage()]
 #'* [NGLVieweR_example()] See example "basic".
@@ -291,14 +302,16 @@ stageParameters <- function(NGLVieweR, ...) {
 
 }
 
-#' Set selection parameters
+#'Set selection parameters
 #'
-#'@description
-#'Set selection parameters.
+#'@description Set selection parameters.
 #'@param NGLVieweR A NGLVieweR object.
-#'@param proximity Set distance in angstrom for atoms to return in proximity of selection. Default = \code{3}. 
-#'@param level Set level on which atoms in proximity of selection are returned. Options are "residue" (default) or atom".
-#'@return Returns list of selection parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+#'@param proximity Set distance in angstrom for atoms to return in proximity of
+#'  selection. Default = \code{3}.
+#'@param level Set level on which atoms in proximity of selection are returned.
+#'  Options are "residue" (default) or atom".
+#'@return Returns list of selection parameters to \code{NGLVieweR}
+#'  \code{htmlwidgets} object.
 #'@examples
 #'NGLVieweR("7CID") %>%
 #'  addRepresentation("cartoon") %>%
@@ -502,11 +515,14 @@ setSuperpose <- function(NGLVieweR, reference = 1, sele_reference, sele_target, 
 #'@examples
 #' NGLVieweR("7CID") %>%
 #'   stageParameters(backgroundColor = "black") %>%
-#'   addRepresentation("cartoon", param = list(name = "cartoon", colorValue = "blue")) %>%
-#'   addRepresentation("ball+stick", param = list(
-#'     name = "ball+stick", sele = "241",
-#'     colorScheme = "element", colorValue = "yellow"
-#'   )) %>%
+#'   addRepresentation("cartoon", 
+#'   param = list(name = "cartoon", colorValue = "blue")) %>%
+#'   addRepresentation("ball+stick",
+#'     param = list(
+#'       name = "ball+stick", sele = "241",
+#'       colorScheme = "element", colorValue = "yellow"
+#'     ) 
+#'   ) %>%
 #'   addRepresentation("label",
 #'     param = list(
 #'       name = "label",
@@ -570,11 +586,11 @@ addRepresentation <- function(NGLVieweR, type, param = list()) {
 
 #'Set rock
 #'
-#'@description
-#'Set rock animation
+#'@description Set rock animation
 #'@param NGLVieweR A NGLVieweR object.
 #'@param rock If \code{TRUE} (default), start rocking and stop spinning.
-#'@return setRock parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR} \code{htmlwidgets} object.
+#'@return setRock parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR}
+#'  \code{htmlwidgets} object.
 #'@family animations
 #'@seealso
 #'* [setSpin()]
@@ -592,11 +608,11 @@ setRock <- function(NGLVieweR, rock = TRUE) {
 
 #'Set Spin
 #'
-#'@description
-#'Set Spin animation
+#'@description Set Spin animation
 #'@param NGLVieweR A NGLVieweR object.
 #'@param spin If \code{TRUE} (default), start spinning and stop rocking
-#'@return setSpin parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR} \code{htmlwidgets} object.
+#'@return setSpin parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR}
+#'  \code{htmlwidgets} object.
 #'@family animations
 #'@seealso
 #'* [setRock()]
@@ -626,7 +642,8 @@ setSpin <- function(NGLVieweR, spin = TRUE) {
 #' * [setPosition()]
 #' @examples
 #' NGLVieweR("7CID") %>%
-#' addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) %>%
+#' addRepresentation("cartoon", 
+#' param=list(name="cartoon", colorValue="blue")) %>%
 #' setScale(2)
 #' @export
 setScale <- function(NGLVieweR, scale = 1) {
@@ -639,16 +656,18 @@ setScale <- function(NGLVieweR, scale = 1) {
 
 #' Set zoomMove
 #'
-#' @description
-#' Add a zoom animation
+#' @description Add a zoom animation
 #' @param NGLVieweR A NGLVieweR object.
-#' @param center Target distance of selected atoms/residues.
-#' See the section "selection-language" in the official \href{https://nglviewer.org/}{NGL.js} manual.
-#' @param zoom Target zoom of selected atoms/residues.
-#' See the section "selection-language" in the official \href{https://nglviewer.org/}{NGL.js} manual.
+#' @param center Target distance of selected atoms/residues. See the section
+#'   "selection-language" in the official \href{https://nglviewer.org/}{NGL.js}
+#'   manual.
+#' @param zoom Target zoom of selected atoms/residues. See the section
+#'   "selection-language" in the official \href{https://nglviewer.org/}{NGL.js}
+#'   manual.
 #' @param duration Optional animation time in milliseconds (default = 0).
 #' @param z_offSet Optional zoom offset value (default = 0).
-#' @return List of zoomMove parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+#' @return List of zoomMove parameters to \code{NGLVieweR} \code{htmlwidgets}
+#'   object.
 #' @family transformations
 #' @seealso
 #' * [setScale()]
@@ -752,15 +771,16 @@ setPosition <- function(NGLVieweR, x=0, y=0, z=0){
 
 #'Set Quality
 #'
-#'@description
-#'Set Quality
+#'@description Set Quality
 #'@param NGLVieweR A NGLVieweR object.
-#'@param quality Set rendering quality. Can be "low", "medium" (default) or "high".
+#'@param quality Set rendering quality. Can be "low", "medium" (default) or
+#'  "high".
 #'@return setQuality parameter in \code{NGLVieweR} \code{htmlwidgets} object.
 #'@family options
 #'@examples
 #'NGLVieweR("7CID") %>%
-#'   addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) %>%
+#'   addRepresentation("cartoon",
+#'   param=list(name="cartoon", colorValue="blue")) %>%
 #'   setQuality("medium")
 #'@export
 setQuality <- function(NGLVieweR, quality = "medium") {
@@ -780,7 +800,8 @@ setQuality <- function(NGLVieweR, quality = "medium") {
 #'@family options
 #'@examples
 #'NGLVieweR("7CID") %>%
-#'   addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) %>%
+#'   addRepresentation("cartoon", 
+#'   param=list(name="cartoon", colorValue="blue")) %>%
 #'   setFocus(0)
 #' @export
 setFocus <- function(NGLVieweR, focus = 0) {

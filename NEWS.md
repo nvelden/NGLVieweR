@@ -1,3 +1,8 @@
+# NGLVieweR 1.4.0
+
+* Added `addStructure` and `setSuperpose` functions to load and overlap multiple structures in the same stage.
+* Updated internal logic with R 4.3.0's stricter && and || evaluations to prevent errors with multi-element vectors.
+
 # NGLVieweR 1.3.4
 
 * Added `setScale`, `setRotation`, and `setPosition` functions for controlling scale, rotation, and position of representations.
