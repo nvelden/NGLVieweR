@@ -11,11 +11,14 @@ snapShot(NGLVieweR_proxy, fileName = "Snapshot", param = list())
 
 \item{fileName}{Optional name for Snapshot (default = "Snapshot").}
 
-\item{param}{Of type list, can be; antialias \code{TRUE/FALSE}, trim \code{TRUE/FALSE}, transparent \code{TRUE/FALSE} or scale \code{numeric}.
-For a full list of options, see "makeImage" and "ImageParameters" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+\item{param}{Of type list, can be; antialias \code{TRUE/FALSE}, trim
+\code{TRUE/FALSE}, transparent \code{TRUE/FALSE} or scale \code{numeric}.
+For a full list of options, see "makeImage" and "ImageParameters" in the
+official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
 \value{
-API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+API call containing \code{NGLVieweR} \code{id} and list of message
+parameters.
 }
 \description{
 Make a snapshot of a NGLVieweR object in Shinymode.

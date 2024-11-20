@@ -9,18 +9,21 @@ updateZoomMove(NGLVieweR_proxy, center, zoom, duration = 0, z_offSet = 0)
 \arguments{
 \item{NGLVieweR_proxy}{A NGLVieweR object.}
 
-\item{center}{Target distance of selected atoms/residues.
-See the section "selection-language" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+\item{center}{Target distance of selected atoms/residues. See the section
+"selection-language" in the official
+\href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 
-\item{zoom}{Target zoom of selected atoms/residues.
-See the section "selection-language" in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+\item{zoom}{Target zoom of selected atoms/residues. See the section
+"selection-language" in the official
+\href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 
 \item{duration}{Optional animation time in milliseconds (default = 0).}
 
 \item{z_offSet}{Optional zoom offset value (default = 0).}
 }
 \value{
-API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+API call containing \code{NGLVieweR} \code{id} and list of message
+parameters.
 }
 \description{
 Add a zoom animation on an existing NGLVieweR object.

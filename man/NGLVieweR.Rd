@@ -9,8 +9,8 @@ NGLVieweR(data, format = NULL, width = NULL, height = NULL, elementId = NULL)
 \arguments{
 \item{data}{PDB file or PDB entry code}
 
-\item{format}{Input format (.mmcif, .cif, .mcif, .pdb, .ent, .pqr,
-.gro, .sdf, .sd, .mol2, .mmtf). Needed when no file extension is provided.}
+\item{format}{Input format (.mmcif, .cif, .mcif, .pdb, .ent, .pqr, .gro, .sdf,
+.sd, .mol2, .mmtf). Needed when no file extension is provided.}
 
 \item{width, height}{Must be a valid CSS unit (like \code{'100\%'},
 \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
@@ -22,18 +22,21 @@ string and have \code{'px'} appended.}
 A \code{NGLVieweR} \code{htmlwidgets} object.
 }
 \description{
-NGLVieweR can be used to visualize and interact with Protein Data Bank (PDB) and structural files in R and Shiny applications.
-It includes a set of API functions to manipulate the viewer after creation in Shiny.
+NGLVieweR can be used to visualize and interact with Protein Data
+Bank (PDB) and structural files in R and Shiny applications. It includes a set
+of API functions to manipulate the viewer after creation in Shiny.
 }
 \details{
-The package is based on the \href{http://nglviewer.org/ngl/api/}{NGL.js} JavaScript library.
-To see the full set of features please read the official manual of NGL.js.
+The package is based on the
+\href{http://nglviewer.org/ngl/api/}{NGL.js} JavaScript library. To see the
+full set of features please read the official manual of NGL.js.
 }
 \examples{
 
 # Example 1: Most Basic
 NGLVieweR("7CID") \%>\%
- addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
+ addRepresentation("cartoon", 
+ param = list(name = "cartoon", colorScheme="residueindex"))
 
 # Example 2: Advanced
 NGLVieweR("7CID") \%>\%

@@ -9,11 +9,14 @@ updateStage(NGLVieweR_proxy, param = list())
 \arguments{
 \item{NGLVieweR_proxy}{A NGLVieweR object.}
 
-\item{param}{Of type list. Most common options are \code{backgroundColor}, \code{rotateSpeed}, \code{zoomSpeed},
-\code{hoverTimeout} and \code{lightIntensity}. For a full list of options, see the "StageParameters" method in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
+\item{param}{Of type list. Most common options are \code{backgroundColor},
+\code{rotateSpeed}, \code{zoomSpeed}, \code{hoverTimeout} and
+\code{lightIntensity}. For a full list of options, see the "StageParameters"
+method in the official \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.}
 }
 \value{
-API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+API call containing \code{NGLVieweR} \code{id} and list of message
+parameters.
 }
 \description{
 Update an existing NGLVieweR stage in Shinymode.
@@ -21,7 +24,7 @@ Update an existing NGLVieweR stage in Shinymode.
 \examples{
 \dontrun{
 NGLVieweR("7CID") \%>\%
- addRepresentation("cartoon", 
+ addRepresentation("cartoon",
                    param = list(name = "cartoon", color="red")) \%>\%
  stageParameters(backgroundColor = "black")
 }

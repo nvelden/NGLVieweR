@@ -19,7 +19,8 @@ Set Focus
 }
 \examples{
 NGLVieweR("7CID") \%>\%
-  addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) \%>\%
+  addRepresentation("cartoon", 
+  param=list(name="cartoon", colorValue="blue")) \%>\%
   setFocus(0)
 }
 \seealso{

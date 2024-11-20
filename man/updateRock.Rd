@@ -12,10 +12,12 @@ updateRock(NGLVieweR_proxy, rock = TRUE)
 \item{rock}{If \code{TRUE} (default), start rocking and stop spinning.}
 }
 \value{
-API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+API call containing \code{NGLVieweR} \code{id} and list of message
+parameters.
 }
 \description{
-Start rock animation and stop spinning. Works on an existing NGLVieweR object in Shinymode.
+Start rock animation and stop spinning. Works on an existing
+NGLVieweR object in Shinymode.
 }
 \examples{
 \dontrun{
@@ -40,20 +42,20 @@ ui = fluidPage(
 server = function(input, output) {
   output$structure <- renderNGLVieweR({
     NGLVieweR("7CID") \%>\%
-      addRepresentation("cartoon", 
+      addRepresentation("cartoon",
       param = list(name = "cartoon", color="red"))
   })
 
   observeEvent(input$animate,{
     if(input$animate == "Rock"){
-      NGLVieweR_proxy("structure") \%>\% 
+      NGLVieweR_proxy("structure") \%>\%
       updateRock(TRUE)
     } else if(input$animate == "Spin") {
-      NGLVieweR_proxy("structure") \%>\% 
+      NGLVieweR_proxy("structure") \%>\%
       updateSpin(TRUE)
     } else{
-      NGLVieweR_proxy("structure") \%>\% 
-      updateRock(FALSE) \%>\% 
+      NGLVieweR_proxy("structure") \%>\%
+      updateRock(FALSE) \%>\%
       updateSpin(FALSE)
     }
   })

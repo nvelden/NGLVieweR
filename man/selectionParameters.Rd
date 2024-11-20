@@ -9,12 +9,15 @@ selectionParameters(NGLVieweR, proximity = 3, level = "residue")
 \arguments{
 \item{NGLVieweR}{A NGLVieweR object.}
 
-\item{proximity}{Set distance in angstrom for atoms to return in proximity of selection. Default = \code{3}.}
+\item{proximity}{Set distance in angstrom for atoms to return in proximity of
+selection. Default = \code{3}.}
 
-\item{level}{Set level on which atoms in proximity of selection are returned. Options are "residue" (default) or atom".}
+\item{level}{Set level on which atoms in proximity of selection are returned.
+Options are "residue" (default) or atom".}
 }
 \value{
-Returns list of selection parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+Returns list of selection parameters to \code{NGLVieweR}
+\code{htmlwidgets} object.
 }
 \description{
 Set selection parameters.

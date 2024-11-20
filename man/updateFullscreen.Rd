@@ -12,7 +12,8 @@ updateFullscreen(NGLVieweR_proxy, fullscreen = TRUE)
 \item{fullscreen}{If \code{TRUE} put viewer in fullscreen.}
 }
 \value{
-API call containing \code{NGLVieweR} \code{id} and list of message parameters.
+API call containing \code{NGLVieweR} \code{id} and list of message
+parameters.
 }
 \description{
 Put viewer in fullscreen. Works in Shinymode.

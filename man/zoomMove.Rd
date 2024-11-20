@@ -9,18 +9,21 @@ zoomMove(NGLVieweR, center, zoom, duration = 0, z_offSet = 0)
 \arguments{
 \item{NGLVieweR}{A NGLVieweR object.}
 
-\item{center}{Target distance of selected atoms/residues.
-See the section "selection-language" in the official \href{https://nglviewer.org/}{NGL.js} manual.}
+\item{center}{Target distance of selected atoms/residues. See the section
+"selection-language" in the official \href{https://nglviewer.org/}{NGL.js}
+manual.}
 
-\item{zoom}{Target zoom of selected atoms/residues.
-See the section "selection-language" in the official \href{https://nglviewer.org/}{NGL.js} manual.}
+\item{zoom}{Target zoom of selected atoms/residues. See the section
+"selection-language" in the official \href{https://nglviewer.org/}{NGL.js}
+manual.}
 
 \item{duration}{Optional animation time in milliseconds (default = 0).}
 
 \item{z_offSet}{Optional zoom offset value (default = 0).}
 }
 \value{
-List of zoomMove parameters to \code{NGLVieweR} \code{htmlwidgets} object.
+List of zoomMove parameters to \code{NGLVieweR} \code{htmlwidgets}
+object.
 }
 \description{
 Add a zoom animation

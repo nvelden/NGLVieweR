@@ -31,11 +31,14 @@ Add a representation and its parameters.
 \examples{
 NGLVieweR("7CID") \%>\%
   stageParameters(backgroundColor = "black") \%>\%
-  addRepresentation("cartoon", param = list(name = "cartoon", colorValue = "blue")) \%>\%
-  addRepresentation("ball+stick", param = list(
-    name = "ball+stick", sele = "241",
-    colorScheme = "element", colorValue = "yellow"
-  )) \%>\%
+  addRepresentation("cartoon", 
+  param = list(name = "cartoon", colorValue = "blue")) \%>\%
+  addRepresentation("ball+stick",
+    param = list(
+      name = "ball+stick", sele = "241",
+      colorScheme = "element", colorValue = "yellow"
+    ) 
+  ) \%>\%
   addRepresentation("label",
     param = list(
       name = "label",

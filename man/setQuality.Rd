@@ -9,7 +9,8 @@ setQuality(NGLVieweR, quality = "medium")
 \arguments{
 \item{NGLVieweR}{A NGLVieweR object.}
 
-\item{quality}{Set rendering quality. Can be "low", "medium" (default) or "high".}
+\item{quality}{Set rendering quality. Can be "low", "medium" (default) or
+"high".}
 }
 \value{
 setQuality parameter in \code{NGLVieweR} \code{htmlwidgets} object.
@@ -19,7 +20,8 @@ Set Quality
 }
 \examples{
 NGLVieweR("7CID") \%>\%
-  addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) \%>\%
+  addRepresentation("cartoon",
+  param=list(name="cartoon", colorValue="blue")) \%>\%
   setQuality("medium")
 }
 \seealso{

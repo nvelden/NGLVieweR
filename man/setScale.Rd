@@ -19,7 +19,8 @@ Set the scale factor for the representation
 }
 \examples{
 NGLVieweR("7CID") \%>\%
-addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) \%>\%
+addRepresentation("cartoon", 
+param=list(name="cartoon", colorValue="blue")) \%>\%
 setScale(2)
 }
 \seealso{
