@@ -1,11 +1,12 @@
 library(shiny)
 library(NGLVieweR)
+library(colourpicker)
 
 ui = fluidPage(
   titlePanel("Viewer with API inputs"),
   sidebarLayout(
     sidebarPanel(
-      colourInput("color", "red", "red"),
+      colourpicker::colourInput("color", "red", "red"),
       actionButton("update", "Update"),
     ),
     mainPanel(

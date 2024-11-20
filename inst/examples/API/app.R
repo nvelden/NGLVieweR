@@ -1,7 +1,7 @@
 library(shiny)
 library(NGLVieweR)
 
-ui = fluidPage(
+ui <- fluidPage(
   titlePanel("Viewer with API inputs"),
   sidebarLayout(
     sidebarPanel(
@@ -16,27 +16,47 @@ ui = fluidPage(
     )
   )
 )
-server = function(input, output) {
+
+server <- function(input, output) {
   output$structure <- renderNGLVieweR({
     NGLVieweR("7CID") %>%
-      addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex")) %>%
+      addRepresentation("cartoon",
+                        param = list(name = "cartoon", colorScheme = "residueindex")
+      ) %>%
       stageParameters(backgroundColor = input$backgroundColor) %>%
       setQuality("high") %>%
       setFocus(0) %>%
       setSpin(TRUE)
   })
+  
   observeEvent(input$add, {
-    NGLVieweR_proxy("structure") %>%
-      addSelection(isolate(input$type),
-                   param =
-                     list(name="sel1",
-                          sele=isolate(input$selection),
-                          colorValue=isolate(input$color)))
+    if (isolate(input$type) == "cartoon") {
+      # For cartoon, use the color parameter
+      NGLVieweR_proxy("structure") %>%
+        addSelection(isolate(input$type),
+                     param = list(
+                       name = "sel1",
+                       sele = isolate(input$selection),
+                       color = isolate(input$color)
+                     )
+        )
+    } else {
+      # For other types, use colorValue
+      NGLVieweR_proxy("structure") %>%
+        addSelection(isolate(input$type),
+                     param = list(
+                       name = "sel1",
+                       sele = isolate(input$selection),
+                       colorValue = isolate(input$color)
+                     )
+        )
+    }
   })
-
+  
   observeEvent(input$remove, {
     NGLVieweR_proxy("structure") %>%
       removeSelection("sel1")
   })
 }
+
 shinyApp(ui, server)
