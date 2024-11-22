@@ -7,8 +7,8 @@
 #'@param example Example type for which to see an example, possible values are:
 #'  "basic", "API", "addSelection", "removeSelection", "snapshot",
 #'  "updateAnimation", "updateColor", "updateFocus", "updateFullscreen",
-#'  "updateRepresentation", "updateSelection", "updateStage", "updateVisibility"
-#'  and "updateZoomMove".
+#'  "updateRepresentation", "updateSelection", "updateStage", "updateVisibility",
+#'  "updateZoomMove", "multiStructureSelection".
 #'@return Call to load Shiny example.
 #' @examples
 #'
@@ -34,7 +34,7 @@ example <- match.arg(
     "basic", "API", "addSelection", "removeSelection", "snapshot",
     "updateAnimation", "updateColor", "updateFocus", "updateFullscreen",
     "updateRepresentation", "updateSelection", "updateStage", "updateVisibility",
-    "updateZoomMove"
+    "updateZoomMove", "multiStructureSelection"
   ),
   several.ok = FALSE
 )
