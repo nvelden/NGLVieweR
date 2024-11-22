@@ -1,3 +1,17 @@
+# Version 1.4 Submission
+22.11.2024
+
+### Test environments
+- Local R installation, R 4.4.0
+- Ubuntu 24.04 (on GitHub Actions), R 4.4.0
+- Win-builder (devel)
+
+### Submission comments
+- Added addStructure and setSuperpose functions to load and overlap multiple 
+structures in the same stage.
+- Updated internal logic with R 4.3.0's stricter && and || evaluations to 
+prevent errors with multi-element vectors.
+
 # Round 3
 
 ## Test environments
