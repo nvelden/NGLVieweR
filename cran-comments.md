@@ -108,7 +108,7 @@ with angle brackets for auto-linking and no space after 'http:' and
 **These are abbreviations.**
 
 -   Found the following (possibly) invalid URLs: URL:
-    <https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/> From:
+    <https://nvelden.github.io/shinyliveNGLVieweR/> From:
     inst/doc/NGLVieweR.html README.md Status: Error Message: libcurl
     error code 35: schannel: next InitializeSecurityContext failed:
     SEC_E\_ILLEGAL_MESSAGE (0x80090326) - This error usually occurs when

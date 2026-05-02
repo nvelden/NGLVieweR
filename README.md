@@ -9,7 +9,7 @@
 [![Metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/NGLVieweR)](https://cran.r-project.org/package=NGLVieweR)
 <!-- badges: end -->
 
-### [Click here](https://niels-van-der-velden.shinyapps.io/shinyNGLVieweR/) to view a Shiny application integrating most features of **NGLVieweR**.
+### [Click here](https://nvelden.github.io/shinyliveNGLVieweR/) to view a Shiny application integrating most features of **NGLVieweR**.
 
 ## Description
 
