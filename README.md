@@ -11,6 +11,9 @@
 
 ### [Click here](https://nvelden.github.io/shinyliveNGLVieweR/) to view a Shiny application integrating most features of **NGLVieweR**.
 
+> **Note:** The app can take 1-2 minutes to load on your first visit while the
+> browser downloads and starts the WebAssembly runtime.
+
 ## Description
 
 **NGLvieweR** provides an R interface to the [NGL.js](http://nglviewer.org/ngl/api/) JavaScript library. It can be used to visualize and interact with protein data bank (PDB) and structural files in R and Shiny applications. It includes a set of API functions to manipulate the viewer after creation and makes it possible to retrieve data from the visualization into R.

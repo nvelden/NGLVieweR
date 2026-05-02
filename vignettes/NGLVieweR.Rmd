@@ -95,6 +95,8 @@ NGLVieweR(benz, format="sdf") %>%
 
 You can load the structure as a "cartoon", "ball+stick", "line", "surface", "ribbon", or any other representation listed in the [NGL.js](http://nglviewer.org/ngl/api/) manual under "StructureRepresentation". Multiple representations of the same structure can be overlaid by chaining the `addSelection()` function. Also see the "structure" tab in the [demo](https://nvelden.github.io/shinyliveNGLVieweR/) app for a list of possible representations.
 
+> **Note:** The demo can take 1-2 minutes to load on your first visit while the browser downloads and starts the WebAssembly runtime.
+
 ```{r eval=FALSE}
 NGLVieweR("7CID") %>%
 addRepresentation("cartoon") %>%
