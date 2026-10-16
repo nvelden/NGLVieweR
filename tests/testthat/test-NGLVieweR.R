@@ -131,3 +131,33 @@ test_that("NGLVieweR() and addStructure() parse the same input the same way (#6)
   expect_equal((NGLVieweR("1CRN") %>% addStructure("7CID"))$x$structures[[2]]$data,
                "rcsb://7CID.pdb")
 })
+
+test_that("the residues input handler builds a data frame (#11)", {
+  handler <- NGLVieweR:::.residues_input
+  x <- list(structure = list(1L, 1L, 2L), chain = list("A", "A", "AA"),
+            resno = list(1L, 2L, 1L), inscode = list("", "", "B"),
+            resname = list("THR", "HOH", "GLY"), letter = list("T", "X", "G"))
+  df <- handler(x, NULL, "x")
+  expect_s3_class(df, "data.frame")
+  expect_equal(names(df), c("structure", "chain", "resno", "inscode", "resname", "letter"))
+  expect_equal(df$structure, c(1L, 1L, 2L))
+  expect_equal(df$chain, c("A", "A", "AA"))
+  expect_equal(df$resno, c(1L, 2L, 1L))
+  expect_type(df$letter, "character")
+
+  empty <- handler(list(structure = list(), chain = list(), resno = list(),
+                        inscode = list(), resname = list(), letter = list()), NULL, "x")
+  expect_equal(nrow(empty), 0)
+  expect_equal(names(empty), names(df))
+  expect_null(handler(NULL, NULL, "x"))
+
+  # A missing value (JSON null) becomes NA and does not shift the columns
+  y <- x
+  y$chain[[2]] <- NULL
+  y$chain <- append(y$chain, list(NULL), after = 1)
+  y$resno[2] <- list(NULL)
+  df <- handler(y, NULL, "x")
+  expect_equal(nrow(df), 3)
+  expect_equal(df$chain, c("A", NA, "AA"))
+  expect_equal(df$resno, c(1L, NA, 1L))
+})

@@ -481,9 +481,10 @@ knitr::include_graphics("../man/figures/API_shiny.PNG")
 In a Shiny application one can retrieve information from the widget as inputs based on the NGLVieweR `outputID`. Suppose the `outputID` is "structure", then the following information can be retrieved:
 
 -   input\$structure_selection - Get details on the clicked residue.
--   input\$structure_sequence - will return the sequence of the PDB file as a character vector.
--   input\$structure_resno - will return all the sequence numbers as a numeric vector.
--   input\$structure_chainname - will return the chainname of each amino acid as a character vector,
+-   input\$structure_residues - a data frame with one row per residue of every loaded structure, with the columns `structure` (number of the structure, counting from 1), `chain`, `resno`, `inscode` (insertion code), `resname` (three-letter name) and `letter` (one-letter code, `"X"` for water, ligands and other non-standard residues). It has the same shape for one or several structures, e.g. `subset(input$structure_residues, structure == 2)`.
+-   input\$structure_sequence - will return the sequence of the PDB file as a character vector (standard residues only). With several structures it is one string per structure instead; use `_residues` there.
+-   input\$structure_resno - will return all the sequence numbers as a numeric vector. With several structures it is one comma-separated string per structure; use `_residues` there.
+-   input\$structure_chainname - will return the chainname of each amino acid as a character vector. With several structures it is one joined string per structure; use `_residues` there.
 -   input\$structure_rendering - will return `TRUE` if the widget is loading or `FALSE` when completed.
 -   input\$structure_PDB - will return the PDB file as a text string.
 -   input\$structure_selAround - will return a list of atoms surrounding a clicked residue.

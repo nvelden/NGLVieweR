@@ -189,6 +189,10 @@ HTMLWidgets.widget({
           var resnos = [];
           var chainnames = [];
           var PDBdatas = [];
+          // One entry per residue of every structure, sent as columns and
+          // turned into a data frame in R (see .residues_input)
+          var residues = { structure: [], chain: [], resno: [], inscode: [],
+                           resname: [], letter: [] };
 
           structures.forEach(function(o, index) {
             var structureOpts = opts.structures[index];
@@ -230,6 +234,12 @@ HTMLWidgets.widget({
               var chainname = [];
               o.structure.eachResidue(rp => {
                 var code = rp.getResname1(); // The single-letter code
+                residues.structure.push(index + 1);
+                residues.chain.push(rp.chainname);
+                residues.resno.push(rp.resno);
+                residues.inscode.push(rp.inscode || "");
+                residues.resname.push(rp.resname);
+                residues.letter.push(code);
                 if (code !== 'X') {          // use `rp.resname` for 3-letter
                   sequence.push(code);
                   resno.push(rp.resno);
@@ -293,6 +303,7 @@ HTMLWidgets.widget({
               Shiny.onInputChange(`${el.id}_sequence`, sequences);
               Shiny.onInputChange(`${el.id}_resno`, resnos);
               Shiny.onInputChange(`${el.id}_chainname`, chainnames);
+              Shiny.onInputChange(`${el.id}_residues:NGLVieweR.residues`, residues);
               Shiny.onInputChange(`${el.id}_error`, null);
             }
 
@@ -322,6 +333,7 @@ HTMLWidgets.widget({
               Shiny.onInputChange(`${el.id}_sequence`, null);
               Shiny.onInputChange(`${el.id}_resno`, null);
               Shiny.onInputChange(`${el.id}_chainname`, null);
+              Shiny.onInputChange(`${el.id}_residues`, null);
             }
           } else {
             // The structures loaded, but setting them up failed (e.g. an

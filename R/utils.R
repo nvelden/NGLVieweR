@@ -141,3 +141,23 @@
   }
   structure
 }
+
+# Shiny input handler for input$<id>_residues: the widget sends one array
+# per column (structure, chain, resno, inscode, resname, letter); this turns
+# them into a data frame with one row per residue. Registered in .onLoad().
+.residues_input <- function(x, session, inputname) {
+  if (is.null(x)) return(NULL)
+  cols <- list(structure = integer(), chain = character(), resno = integer(),
+               inscode = character(), resname = character(), letter = character())
+  # Missing values arrive as NULL; keep them as NA so all columns keep the
+  # same length (unlist() would drop them)
+  n <- length(x[["structure"]])
+  for (name in names(cols)) {
+    values <- x[[name]]
+    if (length(values) != n) values <- rep(list(NULL), n)
+    values <- vapply(values, function(v) if (length(v) == 1) as.character(v) else NA_character_,
+                     character(1), USE.NAMES = FALSE)
+    cols[[name]] <- if (is.integer(cols[[name]])) suppressWarnings(as.integer(values)) else values
+  }
+  as.data.frame(cols, stringsAsFactors = FALSE)
+}

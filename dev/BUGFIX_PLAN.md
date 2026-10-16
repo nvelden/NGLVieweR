@@ -26,7 +26,7 @@ Start the chat with something like:
 | 8 | #10 `snapShot` resets `_rendering` too early | committed (2026-10-16); explained; repro confirmed headless (false at 19 ms, PNG at 164 ms); failing tests in test-browser-snapshot.R (order wrong; no error on failure). Verified (2026-10-16): snapshots counted on the stage (stage.pendingSnapshots), countChanged leaves the final false to the snapshot, which sends it after the download if no other task runs; tested with the real makeImage and overlapping snapshots; 372 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #10"` |
 | 9 | #9 `zoomMove()` overridden with several structures | committed (2026-10-16); explained; repro confirmed headless: duration 0 (default) with 2 structures always lost (camera 24 A off); duration 1000 works by animation timing; with superpose, zoomMove on a target aims at its pre-superpose position (47 A off). Failing tests in test-browser-zoommove.R (5 of 7 fail; the 2 duration-1000 cases without superpose already pass). Verified (2026-10-16): zoomMove applied after superpose, autoView and the Shiny inputs; shared zoomMoveTo() also used by updateZoomMove; R warns for zoomMove on several structures; repro all 10 cases 0.0 A; 386 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #9"` |
 | 9b | #18 click structure + #12 1-based numbering + #15 structureIndex in param | committed (2026-10-16); explained; repro confirmed headless (click on structure 2 zooms to structure 1, 42 A off; highlight on both). Decision (user): 1-based now — new `structure` argument, `structureIndex` deprecated (warning, still works), new input `_selectionStructure` (1-based). #15 included (same lines). Failing tests: test-proxy.R (structure arg, deprecation, validation) and test-browser-click-structure.R (no _selectionStructure). Verified (2026-10-16): click inputs sent as events (same residue in another copy now fires); `structure` placed after `structureIndex` (positional calls unchanged); invalid structureIndex warns and applies to all as before; 424 pass / 0 skip; rcmdcheck = baseline; repro: both clicks OK, highlight only on clicked structure | see `git log --grep "Fix #18"` |
-| 10 | #11 Sequence inputs change shape | todo | |
+| 10 | #11 Sequence inputs change shape | committed (2026-10-16); explained; repro confirmed headless (2 structures: _sequence chr[2] joined, _resno chr "1,2,3,...", length(seq) 2, seq[5] NA, resno + 1 errors; _chainname joined without separator loses multi-letter chain names). Decision (user, after discussing options): keep _sequence/_resno/_chainname unchanged; add input$<id>_residues, a data frame with one row per residue (structure, chain, resno, inscode, resname, letter), same shape for 1 or many structures. Built by a registered input handler (Shiny flattens nested arrays). Implemented (R/zzz.R .onLoad/.onUnload, .residues_input in R/utils.R; missing values become NA). Verified (2026-10-16): 454 pass / 0 skip; rcmdcheck = baseline; repro: 46 rows (1 structure) / 92 rows (2), same columns | see `git log --grep "Fix #11"` |
 | 11 | #13 `updateSelection(name = name)` self-default | todo | |
 | 12 | #14 Dead code and build config cleanup | todo | |
 | 13 | #15 `structureIndex` leaks into NGL parameters | committed with Step 9b | see `git log --grep "Fix #18"` |
@@ -882,6 +882,13 @@ users may already depend on 0-based.
   components, so not reachable today; (b) the superpose range check and
   structureFromMessage() report out-of-range numbers separately (different
   messages); could share one helper.
+- _residues (from /code-review, Step 10): (a) an error after loading (e.g.
+  unknown representation type) leaves _residues -- like _sequence/_PDB --
+  at the previous render's values, because the inputs are sent after the
+  representations; (b) every residue incl. water is sent on each render
+  (large for ~100k-residue assemblies; the structure column could be sent
+  as counts); (c) the old _sequence/_resno/_chainname could be derived from
+  the same residue walk instead of a second set of arrays.
 - `setFocus()`/`setQuality()` override `stageParameters()` (from /code-review
   in Step 2). `renderValue` always calls `stage.setQuality(opts.setQuality)`
   and `stage.setFocus(opts.setFocus)` after `setParameters`, with defaults

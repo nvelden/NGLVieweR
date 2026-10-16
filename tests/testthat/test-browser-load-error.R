@@ -51,6 +51,8 @@ test_that("a structure NGL cannot load sets _error and clears the inputs", {
   skip_if_no_browser()
   app <- start_app(load_error_app())
   expect_length(unlist(app$get_value(input = "viewer_sequence")), 46)
+  app$wait_for_value(input = "viewer_residues", ignore = list(NULL))
+  expect_equal(nrow(app$get_value(input = "viewer_residues")), 46)
 
   render_choice(app, "bad", expect_error = TRUE)
   expect_match(app$get_value(input = "viewer_error"), "structure 1")
@@ -58,6 +60,7 @@ test_that("a structure NGL cannot load sets _error and clears the inputs", {
   expect_null(app$get_value(input = "viewer_resno"))
   expect_null(app$get_value(input = "viewer_chainname"))
   expect_null(app$get_value(input = "viewer_PDB"))
+  expect_null(app$get_value(input = "viewer_residues"))
   expect_true(nothing_shown(app))
   expect_equal(unexpected_errors(app), character())
 })

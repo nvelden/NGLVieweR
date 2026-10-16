@@ -1,6 +1,7 @@
 # NGLVieweR (development version)
 
 * Updated the bundled NGL.js from 2.0.0 to 2.4.0.
+* New Shiny input `input$<outputId>_residues`: a data frame with one row per residue of every loaded structure (columns `structure`, `chain`, `resno`, `inscode`, `resname`, `letter`). Unlike `_sequence`, `_resno` and `_chainname`, which become one joined string per structure when several structures are loaded, it has the same shape for one or several structures and keeps chain names of more than one character. The older inputs are unchanged.
 * New Shiny input `input$<outputId>_selectionStructure`: the number of the clicked structure. With several structures, a click previously gave no way to tell which one was clicked, so click-to-zoom or highlight code acted on the first (or every) structure.
 * The click inputs `_selection`, `_selAround` and `_selectionStructure` are now sent as events, so every click triggers `observeEvent()`, also a click that gives the same values as the previous one (e.g. the same residue in another copy of a structure, or the same atom twice).
 * `addSelection()` and `updateZoomMove()` have a new argument `structure` that counts from 1, like `setSuperpose(reference = )`. `structureIndex` (counting from 0) still works but is deprecated and gives a warning; this also applies to `structureIndex` given inside `param`. The structure number is no longer passed on to NGL.js as a representation parameter. A structure number larger than the number of structures is reported in the browser console instead of being applied to all (or the first) structure.
