@@ -1,12 +1,11 @@
-.gitignore
+^\.gitignore$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
 ^man/figures/pkgdown$
-^pkgdown$
 ^README\.Rmd$
 ^create_widget\.R$
-^LICENSE\.md
+^LICENSE\.md$
 ^\.github$
 ^cran-comments\.md$
 ^CRAN-RELEASE$

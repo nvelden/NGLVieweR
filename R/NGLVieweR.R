@@ -198,28 +198,6 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
   x$stageParameters <- list()
   
   
-  # x$file_ext <- file_ext
-  # x$data <- data
-  # x$type <- type
-  # 
-  # # Data from functions
-  # x$stageParameters <- list()
-  # x$addRepresentation <- list()
-  # x$addRepresentation$type <- list()
-  # x$addRepresentation$values <- list()
-  # x$addStructure <- list()
-  # x$addStructure$data <- list()
-  # x$addStructure$format <- list()
-  # x$setQuality <- "medium"
-  # x$setRock <- FALSE
-  # x$toggleRock <- FALSE
-  # x$setSpin <- FALSE
-  # x$setScale <- 1
-  # x$setRotation <- list()
-  # x$setPosition <- list()
-  # x$setFocus <- 0
-  # x$toggleSpin <- FALSE
-  # x$zoomMove <- list()
   
   # create widget
   htmlwidgets::createWidget(
@@ -383,13 +361,9 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
       type = list(),
       values = list()
     ),
-    setRock = FALSE,
-    toggleRock = FALSE,
-    setSpin = FALSE,
     setScale = 1,
     setRotation = list(),
     setPosition = list(),
-    toggleSpin = FALSE,
     zoomMove = list()
   )
   

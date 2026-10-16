@@ -86,6 +86,12 @@ test_that("NGLVieweR() sets the documented stage defaults", {
   expect_equal(s$zoomMove, list())
 })
 
+test_that("structures carry no stage-wide spin/rock fields (#14)", {
+  s <- (NGLVieweR("1CRN") %>% addStructure("7CID"))$x$structures[[2]]
+  for (f in c("setRock", "setSpin", "toggleRock", "toggleSpin")) expect_null(s[[f]], label = f)
+  expect_equal(names((NGLVieweR("1CRN"))$x$structures[[1]]), names(s))
+})
+
 test_that("addStructure() appends a code or a long file path", {
   path <- fixture("1crn_moved.pdb")
   x <- (NGLVieweR("1CRN") %>% addStructure("7CID") %>% addStructure(path))$x
