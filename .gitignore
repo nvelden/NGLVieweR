@@ -4,3 +4,4 @@
 .Ruserdata
 create_widget.R
 inst/doc
+.DS_Store
