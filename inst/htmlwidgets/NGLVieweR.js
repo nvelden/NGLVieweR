@@ -1,3 +1,16 @@
+// The structure component a proxy message targets with `structure` (counting
+// from 1): null when none is given, undefined (with a console error) when the
+// number is out of range.
+function structureFromMessage(message, structures, caller) {
+  if (message.structure === undefined || message.structure === null) return null;
+  var component = structures[message.structure - 1];
+  if (!component) {
+    console.error("NGLVieweR: " + caller + "() structure " + message.structure +
+      " is out of range: there are " + structures.length + " structures.");
+  }
+  return component;
+}
+
 // Moves the camera to the center/zoom of a selection in a structure
 // component (opts: center, zoom, duration, z_offSet). Used by zoomMove() and
 // updateZoomMove().
@@ -51,8 +64,17 @@ HTMLWidgets.widget({
       // Click handler for the stage
       stage.signals.clicked.add(function(pickingProxy) {
         if (pickingProxy) {
+          // Number of the clicked structure (from 1), for structure = in
+          // addSelection()/updateZoomMove()
+          // Clicks are sent as events, so a click that gives the same values
+          // as the previous one (e.g. the same residue in another copy of
+          // the structure) still triggers observers
+          var clicked = structures ? structures.indexOf(pickingProxy.component) + 1 : 0;
+          Shiny.onInputChange(`${el.id}_selectionStructure`, clicked > 0 ? clicked : null,
+            { priority: "event" });
+
           // Get AA selection details
-          Shiny.onInputChange(`${el.id}_selection`, pickingProxy.getLabel());
+          Shiny.onInputChange(`${el.id}_selection`, pickingProxy.getLabel(), { priority: "event" });
 
           // Get list of surrounding atoms
           if (pickingProxy.atom) {
@@ -73,7 +95,7 @@ HTMLWidgets.widget({
 
             let atomSet = selectedStructure.getAtomSetWithinSelection(selection, proximity);
             let atomSet2 = selectedStructure.getAtomSetWithinGroup( atomSet );
-            Shiny.onInputChange(`${el.id}_selAround`, atomSet2.toSeleString());
+            Shiny.onInputChange(`${el.id}_selAround`, atomSet2.toSeleString(), { priority: "event" });
           }
         }
       });
@@ -92,6 +114,10 @@ HTMLWidgets.widget({
       //In case of Rerendering remove all components
       stage.removeAllComponents();
       structures = null;
+      if (HTMLWidgets.shinyMode) {
+        // The clicked structure no longer exists
+        Shiny.onInputChange(`${el.id}_selectionStructure`, null);
+      }
 
       //Load timer for rendering
       //console.time("load-to-render");
@@ -421,15 +447,12 @@ Shiny.addCustomMessageHandler('NGLVieweR:updateZoomMove', function(message) {
 
   // Check if structures are loaded and stage is defined
   if (structures && structures.length > 0 && stage) {
-    var structureIndex = message.structureIndex;
-
-    // Check if a specific structure index is provided
-    if (typeof structureIndex === 'number' && structureIndex >= 0 && structureIndex < structures.length) {
-      // Handle zoomMove for the specified structure
-      zoomMoveTo(stage, structures[structureIndex], message);
-    } else {
-      // No specific index provided; default to the first structure
+    var target = structureFromMessage(message, structures, "updateZoomMove");
+    if (target === null) {
+      // No structure given; default to the first structure
       zoomMoveTo(stage, structures[0], message);
+    } else if (target) {
+      zoomMoveTo(stage, target, message);
     }
   } else {
     console.log("Structures not loaded, unavailable, or stage undefined.");
@@ -477,22 +500,20 @@ Shiny.addCustomMessageHandler('NGLVieweR:addSelection', function(message) {
     // Prepare the representation parameters
     var param = message.param;
     var color = param['color'];
-    var structureIndex = param['structureIndex'];
-      
+
     // Convert color if necessary
     if (typeof color === 'object' && color !== null) {
       param['color'] = colorMaker(param['color']);
     }
-    
-    // Check if a specific structure index is provided
-    if (typeof structureIndex === 'number' && structureIndex >= 0 && structureIndex < structures.length) {
-      // Add representation to the specified structure
-      structures[structureIndex].addRepresentation(message.type, param);
-    } else {
-      // No specific index provided; add to all structures
+
+    var target = structureFromMessage(message, structures, "addSelection");
+    if (target === null) {
+      // No structure given; add to all structures
       structures.forEach(function(o) {
         o.addRepresentation(message.type, param);
       });
+    } else if (target) {
+      target.addRepresentation(message.type, param);
     }
 
   } else {

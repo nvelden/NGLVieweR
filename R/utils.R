@@ -112,3 +112,32 @@
          "use a text format such as PDB or mmCIF.")
   }
 }
+
+# Works out the 1-based structure number for addSelection()/updateZoomMove().
+# `structureIndex` is the deprecated 0-based form; it is converted with a
+# warning. Returns NULL when neither is given (all / first structure).
+.resolve_structure <- function(structure, structureIndex, caller) {
+  if (!is.null(structureIndex)) {
+    if (!is.null(structure)) {
+      stop(caller, ": use either 'structure' or 'structureIndex', not both.", call. = FALSE)
+    }
+    # The old argument stays lenient: values it never accepted (e.g. "1" from
+    # a selectInput) applied to all structures before, so they still do.
+    if (!is.numeric(structureIndex) || length(structureIndex) != 1 ||
+        !is.finite(structureIndex) || structureIndex < 0 ||
+        structureIndex != round(structureIndex)) {
+      warning(caller, ": 'structureIndex' must be a whole number of 0 or more; ",
+              "it is ignored. Use 'structure', which counts from 1.", call. = FALSE)
+      return(NULL)
+    }
+    warning(caller, ": 'structureIndex' is deprecated; use 'structure', which counts ",
+            "from 1 (structure = structureIndex + 1).", call. = FALSE)
+    structure <- structureIndex + 1
+  }
+  if (!is.null(structure) &&
+      (!is.numeric(structure) || length(structure) != 1 || !is.finite(structure) ||
+       structure < 1 || structure != round(structure))) {
+    stop(caller, ": 'structure' must be a single whole number of 1 or more.", call. = FALSE)
+  }
+  structure
+}

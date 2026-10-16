@@ -27,26 +27,27 @@ server <- function(input, output) {
       setScale(0.5) %>%
       setSpin(TRUE)
   })
-  
+
   observeEvent(input$add, {
-    
-    structureIndex <- ifelse(input$selStructure == "blue", 0, 1)
-    
+
+    # Structures are numbered from 1 in the order they were added
+    structure <- ifelse(input$selStructure == "blue", 1, 2)
+
     NGLVieweR_proxy("structure") %>%
       addSelection("ball+stick",
                    param = list(
-                     name = paste0("sel", structureIndex),
-                     structureIndex = structureIndex,  
+                     name = paste0("sel", structure),
                      sele = isolate(input$selection),
-                     colorScheme = "element"  
-                   )
+                     colorScheme = "element"
+                   ),
+                   structure = structure
       )
   })
-  
+
   observeEvent(input$remove, {
-    
-    selectionName <- ifelse(input$selStructure == "blue", "sel0", "sel1")
-    
+
+    selectionName <- ifelse(input$selStructure == "blue", "sel1", "sel2")
+
     NGLVieweR_proxy("structure") %>%
       removeSelection(selectionName)
   })

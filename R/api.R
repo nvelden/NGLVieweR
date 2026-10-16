@@ -10,9 +10,13 @@
 #'  general "RepresentationParameters" method and type specific Label-,
 #'  Structure- and Surface- RepresentationParameters in the official
 #'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
-#'@param structureIndex (optional) The index of the specific structure to which
-#'  the selection should be added (index 0 for the first). If not specified, the
-#'  selection will be applied to all loaded structures.
+#'@param structure (optional) Number of the structure to add the selection to,
+#'  counting from 1 in the order the structures were added (see
+#'  [addStructure()]). In Shiny, \code{input$<outputId>_selectionStructure}
+#'  gives the number of the last clicked structure. If not specified, the
+#'  selection is added to all loaded structures.
+#'@param structureIndex Deprecated; use \code{structure}. The same, but
+#'  counting from 0.
 #'@return API call containing \code{NGLVieweR} \code{id} and list of message
 #'  parameters.
 #'@family selections
@@ -74,15 +78,26 @@
 #' shinyApp(ui, server)
 #' }
 #'@export
-addSelection <- function(NGLVieweR_proxy, type, param = list(), structureIndex = NULL) {
-  
-  if (!is.null(structureIndex)) {
-    param$structureIndex <- structureIndex
+addSelection <- function(NGLVieweR_proxy, type, param = list(), structureIndex = NULL,
+                         structure = NULL) {
+
+  # structureIndex used to be accepted inside param as well
+  if (is.list(param) && !is.null(param$structureIndex)) {
+    if (!is.null(structureIndex)) {
+      stop("addSelection: 'structureIndex' is given both as an argument and in 'param'.",
+           call. = FALSE)
+    }
+    structureIndex <- param$structureIndex
+    param$structureIndex <- NULL
   }
-  
+  structure <- .resolve_structure(structure, structureIndex, "addSelection")
+
   message <- list(id = NGLVieweR_proxy$id, type = type, param = param)
+  if (!is.null(structure)) {
+    message$structure <- structure
+  }
   NGLVieweR_proxy$session$sendCustomMessage("NGLVieweR:addSelection", message)
-  
+
   return(NGLVieweR_proxy)
 }
 
@@ -812,8 +827,12 @@ updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE, element = c("pa
 #'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
 #'@param duration Optional animation time in milliseconds (default = 0).
 #'@param z_offSet Optional zoom offset value (default = 0).
-#'@param structureIndex Optional index of the structure to target for the zoom
-#'  animation. If `NULL` (default), the first structure (index 0) is targeted.
+#'@param structure Optional number of the structure to zoom to, counting from
+#'  1 in the order the structures were added (see [addStructure()]). In
+#'  Shiny, \code{input$<outputId>_selectionStructure} gives the number of the
+#'  last clicked structure. If \code{NULL} (default), the first structure.
+#'@param structureIndex Deprecated; use \code{structure}. The same, but
+#'  counting from 0.
 #'@return API call containing \code{NGLVieweR} \code{id} and list of message
 #'  parameters.
 #'@family animations
@@ -879,8 +898,11 @@ updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE, element = c("pa
 #' shinyApp(ui, server)
 #' }
 #'@export
-updateZoomMove <- function(NGLVieweR_proxy, center, zoom, duration = 0, z_offSet = 0, structureIndex = NULL) {
-  
+updateZoomMove <- function(NGLVieweR_proxy, center, zoom, duration = 0, z_offSet = 0,
+                           structureIndex = NULL, structure = NULL) {
+
+  structure <- .resolve_structure(structure, structureIndex, "updateZoomMove")
+
   message <- list(
     id = NGLVieweR_proxy$id,
     center = center,
@@ -888,14 +910,12 @@ updateZoomMove <- function(NGLVieweR_proxy, center, zoom, duration = 0, z_offSet
     duration = duration,
     z_offSet = z_offSet
   )
-  
-  if (!is.null(structureIndex)) {
-    message$structureIndex <- structureIndex
+  if (!is.null(structure)) {
+    message$structure <- structure
   }
-  
 
   NGLVieweR_proxy$session$sendCustomMessage("NGLVieweR:updateZoomMove", message)
-  
+
   return(NGLVieweR_proxy)
 }
 

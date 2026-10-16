@@ -21,6 +21,40 @@ test_that("addSelection()", {
               list(type = "ball+stick", param = list(name = "sel1", sele = "1-20")))
 })
 
+test_that("addSelection() sends a 1-based structure outside param (#12, #15)", {
+  p <- fake_proxy()
+  addSelection(p, "cartoon", param = list(name = "s"), structure = 2)
+  expect_sent(p, "addSelection",
+              list(type = "cartoon", param = list(name = "s"), structure = 2))
+  # The old 0-based argument still works, with a deprecation warning.
+  expect_warning(addSelection(p, "cartoon", param = list(name = "s"), structureIndex = 1),
+                 "structureIndex.*deprecated.*structure")
+  expect_sent(p, "addSelection",
+              list(type = "cartoon", param = list(name = "s"), structure = 2))
+  for (bad in list(0, 1.5, NA, "2", c(1, 2))) {
+    expect_error(addSelection(p, "cartoon", structure = bad), "structure")
+  }
+  expect_error(addSelection(p, "cartoon", structure = 1, structureIndex = 0), "not both")
+  expect_error(addSelection(p, "cartoon", param = list(structureIndex = 0), structureIndex = 1),
+               "both as an argument and in 'param'")
+})
+
+test_that("structureIndex keeps its old position and stays lenient", {
+  p <- fake_proxy()
+  # Positional: the 4th argument of addSelection() is still structureIndex
+  expect_warning(addSelection(p, "cartoon", list(name = "s"), 1), "deprecated")
+  expect_sent(p, "addSelection", list(type = "cartoon", param = list(name = "s"), structure = 2))
+  expect_warning(updateZoomMove(p, "1-5", "1-5", 0, 0, 1), "deprecated")
+  expect_equal(last_msg(p)$message$structure, 2)
+  # Values the old argument never accepted: warning, and all structures as before
+  for (bad in list("1", -1, 0.5)) {
+    expect_warning(addSelection(p, "cartoon", structureIndex = bad), "ignored")
+    expect_null(last_msg(p)$message$structure)
+  }
+  # A non-list param is passed on as before
+  expect_no_error(addSelection(p, "cartoon", param = c(sele = "1-20")))
+})
+
 test_that("removeSelection()", {
   p <- fake_proxy()
   removeSelection(p, "sel1")
@@ -105,10 +139,16 @@ test_that("updateZoomMove()", {
   expect_sent(p, "updateZoomMove",
               list(center = "1-5", zoom = "1-5", duration = 0, z_offSet = 0))
   updateZoomMove(p, center = "1", zoom = "2", duration = 100, z_offSet = 5,
-                 structureIndex = 1)
+                 structure = 2)
   expect_sent(p, "updateZoomMove",
               list(center = "1", zoom = "2", duration = 100, z_offSet = 5,
-                   structureIndex = 1))
+                   structure = 2))
+  # The old 0-based argument still works, with a deprecation warning.
+  expect_warning(updateZoomMove(p, center = "1", zoom = "2", structureIndex = 1),
+                 "structureIndex.*deprecated.*structure")
+  expect_sent(p, "updateZoomMove",
+              list(center = "1", zoom = "2", duration = 0, z_offSet = 0, structure = 2))
+  expect_error(updateZoomMove(p, center = "1", zoom = "2", structure = 0), "structure")
 })
 
 test_that("NGLVieweR_proxy() requires a session and namespaces the id", {

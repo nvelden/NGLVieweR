@@ -25,11 +25,12 @@ Start the chat with something like:
 | 7 | #8 Structure load failures are silent | committed (2026-10-16); explained; repro confirmed headless (bad code: stale 46-residue _sequence, no error; broken.pdb loads as 0 atoms without error; good+bad: nothing shown; console only says "error loading file: ''"). Decisions: all-or-nothing + _error; clear _sequence/_resno/_chainname/_PDB on failure; 0 atoms = error. Failing tests in test-browser-load-error.R (4/4 time out waiting for _error). Verified (2026-10-16): all loads awaited (no partial display), every failing structure named, errors after loading keep the structure, _error sent as event, stale renders ignored (render counter); 366 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #8"` |
 | 8 | #10 `snapShot` resets `_rendering` too early | committed (2026-10-16); explained; repro confirmed headless (false at 19 ms, PNG at 164 ms); failing tests in test-browser-snapshot.R (order wrong; no error on failure). Verified (2026-10-16): snapshots counted on the stage (stage.pendingSnapshots), countChanged leaves the final false to the snapshot, which sends it after the download if no other task runs; tested with the real makeImage and overlapping snapshots; 372 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #10"` |
 | 9 | #9 `zoomMove()` overridden with several structures | committed (2026-10-16); explained; repro confirmed headless: duration 0 (default) with 2 structures always lost (camera 24 A off); duration 1000 works by animation timing; with superpose, zoomMove on a target aims at its pre-superpose position (47 A off). Failing tests in test-browser-zoommove.R (5 of 7 fail; the 2 duration-1000 cases without superpose already pass). Verified (2026-10-16): zoomMove applied after superpose, autoView and the Shiny inputs; shared zoomMoveTo() also used by updateZoomMove; R warns for zoomMove on several structures; repro all 10 cases 0.0 A; 386 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #9"` |
+| 9b | #18 click structure + #12 1-based numbering + #15 structureIndex in param | committed (2026-10-16); explained; repro confirmed headless (click on structure 2 zooms to structure 1, 42 A off; highlight on both). Decision (user): 1-based now — new `structure` argument, `structureIndex` deprecated (warning, still works), new input `_selectionStructure` (1-based). #15 included (same lines). Failing tests: test-proxy.R (structure arg, deprecation, validation) and test-browser-click-structure.R (no _selectionStructure). Verified (2026-10-16): click inputs sent as events (same residue in another copy now fires); `structure` placed after `structureIndex` (positional calls unchanged); invalid structureIndex warns and applies to all as before; 424 pass / 0 skip; rcmdcheck = baseline; repro: both clicks OK, highlight only on clicked structure | see `git log --grep "Fix #18"` |
 | 10 | #11 Sequence inputs change shape | todo | |
 | 11 | #13 `updateSelection(name = name)` self-default | todo | |
 | 12 | #14 Dead code and build config cleanup | todo | |
-| 13 | #15 `structureIndex` leaks into NGL parameters | todo | |
-| 14 | #12 0- vs 1-based indexing (breaking, decide last) | todo | |
+| 13 | #15 `structureIndex` leaks into NGL parameters | committed with Step 9b | see `git log --grep "Fix #18"` |
+| 14 | #12 0- vs 1-based indexing (breaking, decide last) | committed with Step 9b (decision: 1-based `structure`, `structureIndex` deprecated) | see `git log --grep "Fix #18"` |
 
 States: `todo` → `explained` → `observed` (user confirmed seeing it) → `fixed` → `verified` → `committed`.
 
@@ -647,6 +648,43 @@ structure 2, duration 0 → camera center within ~1 Å of the selection center.
 
 ---
 
+## Step 9b — #18 A click does not say which structure was clicked
+
+**Raised by the user in Step 9** ("will click-to-zoom pick the right
+molecule with several structures?").
+
+**What happens.** The click handler sends `_selection` =
+`pickingProxy.getLabel()`, e.g. `atom: [LYS]3:A.CB (7CID.pdb)` for a PDB
+code and `atom: [CYS]4:A.N ()` for a file or file contents (the component
+has no name). Nothing gives the structure's number. A click-to-zoom app
+calls `updateZoomMove(center = resi)` without `structureIndex`, so it
+zooms to that residue in structure 1 even when structure 2 was clicked.
+`_selAround` is a list of atom indices of the clicked structure
+(`@0,1,2...`); passed to `addSelection()` without `structureIndex` it is
+applied to every structure, highlighting unrelated atoms there.
+
+**Proposed fix.** New input `input$<id>_selectionStructure`: the number of
+the clicked structure, sent with `_selection`/`_selAround`. Its base (0 or 1)
+must match whatever #12 decides for `structureIndex`.
+
+**Tests.** Browser: two structures; a click on structure 2 sends 2 (or 1,
+per decision); click-to-zoom using it ends on the clicked residue.
+
+**Combined with #12 and #15 (decided 2026-10-16).**
+- `addSelection(..., structure = NULL, structureIndex = NULL)` and
+  `updateZoomMove(..., structure = NULL, structureIndex = NULL)`: `structure`
+  counts from 1. `structureIndex` (0-based) still works but warns that it is
+  deprecated and is converted (`structure = structureIndex + 1`).
+- The structure number is sent as a top-level message field, not inside
+  `param` (#15); the JS converts it to an array index.
+- A structure number larger than the number of structures logs a console
+  error instead of silently applying to all/first.
+- New input `input$<id>_selectionStructure` (1-based), sent on every click.
+- Update `multiStructureSelection` example, ?addSelection, ?updateZoomMove,
+  vignette input list, NEWS.
+
+---
+
 ## Step 10 — #11 Sequence inputs change shape with the number of structures
 
 **Where.** `NGLVieweR.js` ~156-164.
@@ -838,6 +876,12 @@ users may already depend on 0-based.
   superpose limit); documented in ?zoomMove; (b) the per-structure and final
   stage.autoView() calls still run before a zoomMove replaces them; could
   be skipped when a zoomMove is set (cosmetic, not done).
+- Click inputs (from /code-review, Step 9b): (a) a click on a component
+  that is not one of the loaded structures gives _selectionStructure NULL,
+  which means "all" for addSelection(); NGLVieweR only creates structure
+  components, so not reachable today; (b) the superpose range check and
+  structureFromMessage() report out-of-range numbers separately (different
+  messages); could share one helper.
 - `setFocus()`/`setQuality()` override `stageParameters()` (from /code-review
   in Step 2). `renderValue` always calls `stage.setQuality(opts.setQuality)`
   and `stage.setFocus(opts.setFocus)` after `setParameters`, with defaults

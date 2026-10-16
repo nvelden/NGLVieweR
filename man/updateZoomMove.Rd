@@ -10,7 +10,8 @@ updateZoomMove(
   zoom,
   duration = 0,
   z_offSet = 0,
-  structureIndex = NULL
+  structureIndex = NULL,
+  structure = NULL
 )
 }
 \arguments{
@@ -28,8 +29,13 @@ updateZoomMove(
 
 \item{z_offSet}{Optional zoom offset value (default = 0).}
 
-\item{structureIndex}{Optional index of the structure to target for the zoom
-animation. If \code{NULL} (default), the first structure (index 0) is targeted.}
+\item{structureIndex}{Deprecated; use \code{structure}. The same, but
+counting from 0.}
+
+\item{structure}{Optional number of the structure to zoom to, counting from
+1 in the order the structures were added (see \code{\link[=addStructure]{addStructure()}}). In
+Shiny, \code{input$<outputId>_selectionStructure} gives the number of the
+last clicked structure. If \code{NULL} (default), the first structure.}
 }
 \value{
 API call containing \code{NGLVieweR} \code{id} and list of message
