@@ -160,48 +160,17 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
     )
   }
   
-  if (is.character(data) && length(data) == 1 && nchar(data) > 8 && .file_ext(data) == "" && is.null(format)) {
-    stop("NGLVieweR: Please specify the file format",
-      call. = FALSE
-    )
-  }
-  
-  # Process format to remove leading dot if present
-  if (!is.null(format) && startsWith(format, ".")) {
-    format <- substr(format, 2, nchar(format)) # Remove the leading dot
-  }
+  input <- .parse_structure_input(data, format, "NGLVieweR")
 
-  type <- NULL
-  file_ext <- format
-  # Read PDB file
-  if (.could_be_path(data) && file.exists(data)) {
-    # If data is a file path
-    if (is.null(format)) {
-      file_ext <- .file_ext(data)
-    }
-    data <- paste(readLines(data), collapse = "\n")
-    type <- "file"
-    # Read directly from R editor
-  } else if (is.character(data) && length(data) == 1 && nchar(data) > 8 ) {
-    # If data is a vector of strings, assume it's a text file content
-    type <- "file"
-    file_ext <- format
-    data <- paste(data, collapse = "\n")
-    # Read from PDB code
-  } else {
-    type <- "code"
-    data <- sprintf("rcsb://%s.pdb", data)
-  }
-  
   # forward options using x
   x <- list()
   # Add structure data and parameters
   x$structures <- list()
   
   new_structure <- list(
-    file_ext = file_ext,
-    data = data,
-    type = type,
+    file_ext = input$file_ext,
+    data = input$data,
+    type = input$type,
     addRepresentation = list(
       type = list(),
       values = list()
@@ -396,37 +365,13 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
          call. = FALSE
     )
   }
-  if (nchar(data) > 8 && .file_ext(data) == "" && is.null(format)) {
-    stop("addStructure: Please specify the file format",
-         call. = FALSE
-    )
-  }
-  
-  type <- NULL
-  file_ext <- format
-  # Read PDB file
-  if (.could_be_path(data) && file.exists(data) && nchar(data) > 8) {
-    if (is.null(format)) {
-      file_ext <- .file_ext(data)
-    }
-    data <- paste(readLines(data), collapse = "\n")
-    type <- "file"
-    # Read directly from R editor
-  } else if (nchar(data) > 8 && .file_ext(data) == "") {
-    type <- "file"
-    file_ext <- format
-    data <- paste(data, collapse = "\n")
-    # Read from PDB code
-  } else {
-    type <- "code"
-    data <- sprintf("rcsb://%s.pdb", data)
-  }
-  
+  input <- .parse_structure_input(data, format, "addStructure")
+
   # Add structure to the NGLVieweR object
   new_structure <- list(
-    file_ext = file_ext,
-    data = data,
-    type = type,
+    file_ext = input$file_ext,
+    data = input$data,
+    type = input$type,
     addRepresentation = list(
       type = list(),
       values = list()

@@ -20,7 +20,7 @@ Start the chat with something like:
 | 2b | #17 Content strings fail on R-devel (`file_ext` → `basename`), see Found during the work | committed (2026-10-16): 170 pass / 1 known skip; rcmdcheck = baseline. Helpers `.could_be_path()`/`.file_ext()` in R/utils.R | see `git log --grep "Fix #17"` |
 | 3 | #4 Superpose moves the wrong structure | committed (2026-10-16): 209 pass / 1 known skip; rcmdcheck = baseline; vignette example checked (reference 0.000 Å, target 63 Å). Decision: reference stays put (NEWS note) | see `git log --grep "Fix #4"` |
 | 4 | #5 `updateFullscreen()` ignores its argument | committed (2026-10-16); explained; repro confirmed headless with trusted clicks (FALSE enters, TRUE exits, element BODY). Decision: new `element = c("page", "viewer")`, default "page"; also fix the example's if (interactive()). Verified (2026-10-16): 234 pass / 0 skip; rcmdcheck = baseline; trusted-click check: page and viewer enter/leave correctly, sizes restored. Example now has Enter/Exit buttons | see `git log --grep "Fix #5"` |
-| 5 | #6 `addStructure()` / `NGLVieweR()` parse input differently | todo | |
+| 5 | #6 `addStructure()` / `NGLVieweR()` parse input differently | committed (2026-10-16); explained; repro confirmed headless (2 of 5 inputs differ: 8-char file name, format with leading dot); failing test written (4 expectations fail as expected). Verified (2026-10-16): shared `.parse_structure_input()` in R/utils.R; 243 pass / 0 skip; rcmdcheck = baseline; repro: all 5 inputs same, both viewers load | see `git log --grep "Fix #6"` |
 | 6 | #7 Missing files, line vectors, binary formats | todo | |
 | 7 | #8 Structure load failures are silent | todo | |
 | 8 | #10 `snapShot` resets `_rendering` too early | todo | |
@@ -465,6 +465,10 @@ path, or file contents, but with different rules:
 | Contents | `nchar > 8` | `nchar > 8 && file_ext(data) == ""` |
 | Vector input guard | `length(data) == 1` | none (R ≥ 4.3 `&&` error on length > 1) |
 
+Also (found in the Step 5 repro): `NGLVieweR()` strips a leading dot from
+`format` (".pdb" -> "pdb"), `addStructure()` does not, so
+`addStructure("1crn.pdb", format = ".pdb")` is a code with file_ext ".pdb".
+
 Example: a file `1crn.pdb` in the working directory (8 characters).
 `NGLVieweR("1crn.pdb")` reads the file. `addStructure("1crn.pdb")` fails the
 `nchar > 8` test and is treated as a PDB code, so NGL requests
@@ -518,6 +522,17 @@ corrupts it. `.gz` files have the same issue, and `file_ext("x.pdb.gz")` is `"gz
 **Decision:** support binary (R: `readBin` + base64; JS: decode to
 `Uint8Array` for the Blob, pass `compressed`/`binary` options) or remove
 `.mmtf` from the docs and error clearly on binary extensions. Ask the user.
+
+**More parser edge cases** (from /code-review in Step 5; decide the rules
+together here, in `.parse_structure_input()`):
+- a short file name without extension that exists ("model") passes the
+  "specify the format" check (only runs for nchar > 8) and is sent with
+  file_ext "";
+- short contents with an explicit format (`"C\nO"`, format = "sdf") become a
+  PDB code because nchar <= 8; a given `format` or a line break should mean
+  contents/file;
+- `format` is not validated (NA, "", ".", c("pdb", "cif"));
+- `NA` data becomes "rcsb://NA.pdb" (also listed under Found during the work).
 
 **Repro `dev/repro/07-input-parsing`.** Three tabs, one per sub-bug, each
 showing the R call, the resulting `widget$x$structures[[1]]` summary, and the

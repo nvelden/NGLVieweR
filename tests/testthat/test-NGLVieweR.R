@@ -96,3 +96,38 @@ test_that("addStructure() appends a code or a long file path", {
   expect_equal(x$structures[[3]]$file_ext, "pdb")
   expect_equal(x$structures[[3]]$data, paste(readLines(path), collapse = "\n"))
 })
+
+test_that("NGLVieweR() and addStructure() parse the same input the same way (#6)", {
+  # Work in a folder that contains 1crn.pdb, so "1crn.pdb" (8 characters)
+  # is a file in the working directory.
+  dir <- withr::local_tempdir()
+  file.copy(fixture("1crn.pdb"), dir)
+  txt <- paste(readLines(fixture("1crn.pdb")), collapse = "\n")
+  withr::local_dir(dir)
+
+  inputs <- list(
+    "PDB code" = list("1CRN"),
+    "short file name" = list("1crn.pdb"),
+    "full path" = list(normalizePath("1crn.pdb")),
+    "format with leading dot" = list("1crn.pdb", format = ".pdb"),
+    "contents with format" = list(txt, format = "pdb")
+  )
+  for (name in names(inputs)) {
+    args <- inputs[[name]]
+    a <- do.call(NGLVieweR, args)$x$structures[[1]]
+    b <- (NGLVieweR("1CRN") %>% (function(w) do.call(addStructure, c(list(w), args))))$x$structures[[2]]
+    expect_identical(b[c("type", "file_ext", "data")], a[c("type", "file_ext", "data")],
+                     label = paste("addStructure() for", name))
+  }
+
+  # And both read the short file name as a file.
+  s <- (NGLVieweR("1CRN") %>% addStructure("1crn.pdb"))$x$structures[[2]]
+  expect_equal(s$type, "file")
+  expect_equal(s$file_ext, "pdb")
+
+  # A folder named like a PDB code is not a file.
+  dir.create("7CID")
+  expect_equal(NGLVieweR("7CID")$x$structures[[1]]$data, "rcsb://7CID.pdb")
+  expect_equal((NGLVieweR("1CRN") %>% addStructure("7CID"))$x$structures[[2]]$data,
+               "rcsb://7CID.pdb")
+})

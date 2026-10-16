@@ -12,3 +12,38 @@
 .file_ext <- function(x) {
   if (.could_be_path(x)) tools::file_ext(x) else ""
 }
+
+# Works out whether `data` is a file path, file contents or a PDB code, and
+# returns the structure fields list(type, data, file_ext). Shared by
+# NGLVieweR() and addStructure() so both read the same input the same way.
+# `caller` names the function in error messages.
+.parse_structure_input <- function(data, format, caller) {
+  if (is.character(data) && length(data) == 1 && nchar(data) > 8 &&
+      .file_ext(data) == "" && is.null(format)) {
+    stop(caller, ": Please specify the file format", call. = FALSE)
+  }
+
+  # Remove a leading dot from the format (".pdb" -> "pdb")
+  if (!is.null(format) && startsWith(format, ".")) {
+    format <- substr(format, 2, nchar(format))
+  }
+
+  file_ext <- format
+  if (.could_be_path(data) && file.exists(data) && !dir.exists(data)) {
+    # A file path
+    if (is.null(format)) {
+      file_ext <- .file_ext(data)
+    }
+    data <- paste(readLines(data), collapse = "\n")
+    type <- "file"
+  } else if (is.character(data) && length(data) == 1 && nchar(data) > 8) {
+    # File contents
+    type <- "file"
+  } else {
+    # A PDB code
+    type <- "code"
+    data <- sprintf("rcsb://%s.pdb", data)
+  }
+
+  list(type = type, data = data, file_ext = file_ext)
+}
