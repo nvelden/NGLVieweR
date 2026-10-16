@@ -1,3 +1,9 @@
+# NGLVieweR (development version)
+
+* Updated the bundled NGL.js from 2.0.0 to 2.4.0.
+* Fixed event handlers piling up when `renderNGLVieweR()` re-runs in Shiny: each re-render added another click, rendering-status and window-resize handler, so one click computed `_selection`/`_selAround` once per render so far, using the `selectionParameters()` of older renders. Handlers are now registered once and always use the latest options.
+* The viewer now also resizes when its container changes size without a window resize, e.g. when a tab is shown or a sidebar collapses.
+
 # NGLVieweR 1.4.0
 
 * Added `addStructure` and `setSuperpose` functions to load and overlap multiple structures in the same stage.

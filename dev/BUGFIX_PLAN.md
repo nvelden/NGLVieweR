@@ -15,7 +15,7 @@ Start the chat with something like:
 | Step | Item | State | Commit |
 |---|---|---|---|
 | 0 | Baseline: NGL 2.4.0 packaging (#1), test infrastructure (#16), fixtures, baseline run | verified (2026-10-16; see dev/baseline-check.md). Test deps in Suggests (user chose option 1). Not committed | |
-| 1 | #2 Handlers pile up on re-render | observed (user, 2026-10-16); repro: counts 1→4, 4 sends/click, 4 resize calls | |
+| 1 | #2 Handlers pile up on re-render | committed (2026-10-16): 139 pass / 1 known skip; rcmdcheck = baseline. Decision: resize via htmlwidgets `resize()` only (window listener removed) | see `git log --grep "Fix #2"` |
 | 2 | #3 Spin/rock never switch off on re-render | todo | |
 | 3 | #4 Superpose moves the wrong structure | todo | |
 | 4 | #5 `updateFullscreen()` ignores its argument | todo | |
@@ -712,5 +712,28 @@ users may already depend on 0-based.
   is the only example that does this. Its smoke test is skipped
   (`known_broken` in `test-browser-examples.R`) until fixed; good candidate
   to fix together with #5 (Step 4). Found in Step 0.
+- Overlapping re-renders (from /code-review in Step 1). `renderValue` starts
+  `Promise.all(loadFile...)` without a render token. If a second render
+  starts before the first load resolves, the first render's components are
+  added after `removeAllComponents()` and its `.then` overwrites
+  `structures` and sends stale `_PDB`/`_sequence`. Fix: a render counter;
+  ignore results of stale renders. Pre-existing.
+- Stage settings survive re-renders (from /code-review in Step 1).
+  `stage.setParameters(opts.stageParameters)` only sets the keys given, so a
+  `backgroundColor` from an earlier render stays after it is removed from
+  the R code. Same family as #3; consider handling in Step 2. Pre-existing.
+- `structures` points to removed components between `removeAllComponents()`
+  and the new load resolving, so proxy calls (`updateZoomMove`,
+  `addSelection`) in that window act on disposed components. Fix: set
+  `structures = null` after `removeAllComponents()`. Pre-existing.
+- Click handler applies defaults only when `selectionParameters` is absent,
+  not per field (e.g. proximity `NA` from a cleared `numericInput`).
+  Pre-existing, minor.
+- `inst/htmlwidgets/NGLVieweR.yaml`: both dependencies (`NGLVieweR`,
+  `helperFunctions`) use `src: htmlwidgets`, i.e. the whole folder. A saved
+  widget (`saveWidget(selfcontained = FALSE)`) therefore contains the folder
+  twice, incl. `ngl.js` (~1.3 MB) twice and stray copies of `NGLVieweR.js`;
+  self-contained HTML and R Markdown output may be ~1.3 MB larger than
+  needed. Fix: `src: htmlwidgets/lib/NGL-2.4.0` etc. Found in Step 1.
 - `inst/examples/multiStructureSelection/app.R` has no final newline
   (cosmetic; `readLines()` warns). Found in Step 0.

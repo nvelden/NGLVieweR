@@ -43,10 +43,6 @@ $(document).on('click', '#reset', function() {
   window.sendCounts = {};
   window.resizeCalls = 0;
 });
-$(document).on('click', '#fireResize', function() {
-  window.resizeCalls = 0;
-  window.dispatchEvent(new Event('resize'));
-});
 ")
 
 ui <- fluidPage(
@@ -62,7 +58,9 @@ ui <- fluidPage(
       tags$li("Press 'Reset counters', then click ONE atom in the viewer. ",
               "'_selection sends' shows how many times that single click was sent ",
               "(1 when correct, N after N renders)."),
-      tags$li("Press 'Fire window resize': handleResize runs once per render so far, not once.")
+      tags$li("Press 'Reset counters', then resize the browser window (drag its edge once) and wait a second. ",
+              "'handleResize calls' shows how often the canvas was resized: 1 when correct, ",
+              "N after N renders.")
     )
   ),
   fluidRow(
@@ -70,7 +68,6 @@ ui <- fluidPage(
       selectInput("rep", "Representation (re-renders)", c("cartoon", "ball+stick", "spacefill")),
       numericInput("proximity", "selectionParameters(proximity =) (re-renders)", 3, min = 1, max = 10),
       actionButton("reset", "Reset counters"),
-      actionButton("fireResize", "Fire window resize"),
       h4("Debug panel"),
       tableOutput("debug"),
       h4("Server side"),
@@ -103,7 +100,7 @@ server <- function(input, output, session) {
                   "stage.tasks.signals.countChanged listeners",
                   "_selection sends (since reset)",
                   "_selAround sends (since reset)",
-                  "handleResize calls (last resize)"),
+                  "handleResize calls (since reset)"),
       value = as.integer(c(renders(), d$clicked, d$countChanged, d$selectionSends,
                            d$selAroundSends, d$resizeCalls))
     )

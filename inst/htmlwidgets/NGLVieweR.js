@@ -8,24 +8,69 @@ HTMLWidgets.widget({
 
       var stage = new NGL.Stage(el);
       var structures = null;
+      // Options of the latest render, read by the event handlers below
+      var currentOpts = null;
+
+      // Event handlers are registered once per widget, not in renderValue,
+      // which runs again every time renderNGLVieweR() re-runs. Resizing is
+      // handled by the resize() method below.
+
+     //<---------------------------// Shiny inputs // ---------------------------------->
+     if (HTMLWidgets.shinyMode) {
+      // Send rendering status to shiny
+      stage.tasks.signals.countChanged.add(function(count) {
+        if (count > 0) {
+          Shiny.onInputChange(`${el.id}_rendering`, true);
+        } else {
+          try {
+            Shiny.onInputChange(`${el.id}_rendering`, false);
+          } catch (e) {
+            // already removed
+          }
+        }
+      });
+
+      // Click handler for the stage
+      stage.signals.clicked.add(function(pickingProxy) {
+        if (pickingProxy) {
+          // Get AA selection details
+          Shiny.onInputChange(`${el.id}_selection`, pickingProxy.getLabel());
+
+          // Get list of surrounding atoms
+          if (pickingProxy.atom) {
+            let atom = pickingProxy.atom;
+            let atomName = atom.qualifiedName().split("]").pop();
+            let resiName = atomName.split('.')[0];
+            let proximity = 3;
+            let proxlevel = "residue";
+
+            if (currentOpts && typeof(currentOpts.selectionParameters) !== 'undefined') {
+              proximity = currentOpts.selectionParameters["proximity"];
+              proxlevel = currentOpts.selectionParameters["level"];
+            }
+
+            let selection = proxlevel === "residue" ? new NGL.Selection(resiName) : new NGL.Selection(atomName);
+            let selectedComponent = pickingProxy.component;
+            let selectedStructure = selectedComponent.structure;
+
+            let atomSet = selectedStructure.getAtomSetWithinSelection(selection, proximity);
+            let atomSet2 = selectedStructure.getAtomSetWithinGroup( atomSet );
+            Shiny.onInputChange(`${el.id}_selAround`, atomSet2.toSeleString());
+          }
+        }
+      });
+     }
+
+    //<---------------------------------// // ------------------------------------------>
 
     return {
       renderValue: function(opts) {
 
+      currentOpts = opts;
+
       //In case of Rerendering remove all components
       stage.removeAllComponents();
 
-      //Hande resizing
-      if (HTMLWidgets.shinyMode) {
-      $(window).resize(function(){
-      stage.handleResize();
-      });
-      } else {
-      window.addEventListener( "resize", function( event ){
-      stage.handleResize();
-      }, false );
-      }
-   
       //Load timer for rendering
       //console.time("load-to-render");
 
@@ -165,54 +210,6 @@ HTMLWidgets.widget({
             }
           
       });
-      
-     //<---------------------------// Shiny inputs // ---------------------------------->
-     if (HTMLWidgets.shinyMode) {
-      // Send rendering status to shiny
-      stage.tasks.signals.countChanged.add(function(count) {
-        if (count > 0) {
-          Shiny.onInputChange(`${el.id}_rendering`, true);
-        } else {
-          try {
-            Shiny.onInputChange(`${el.id}_rendering`, false);
-          } catch (e) {
-            // already removed
-          }
-        }
-      });
-
-      // Click handler for the stage
-      stage.signals.clicked.add(function(pickingProxy) {
-        if (pickingProxy) {
-          // Get AA selection details
-          Shiny.onInputChange(`${el.id}_selection`, pickingProxy.getLabel());
-
-          // Get list of surrounding atoms
-          if (pickingProxy.atom) {
-            let atom = pickingProxy.atom;
-            let atomName = atom.qualifiedName().split("]").pop();
-            let resiName = atomName.split('.')[0];
-            let proximity = 3;
-            let proxlevel = "residue";
-
-            if (typeof(opts.selectionParameters) !== 'undefined') {
-              proximity = opts.selectionParameters["proximity"];
-              proxlevel = opts.selectionParameters["level"];
-            }
-
-            let selection = proxlevel === "residue" ? new NGL.Selection(resiName) : new NGL.Selection(atomName);
-            let selectedComponent = pickingProxy.component;
-            let selectedStructure = selectedComponent.structure;
-            
-            let atomSet = selectedStructure.getAtomSetWithinSelection(selection, proximity);
-            let atomSet2 = selectedStructure.getAtomSetWithinGroup( atomSet );
-            Shiny.onInputChange(`${el.id}_selAround`, atomSet2.toSeleString());
-          }
-        }
-      });
-     }
-
-    //<---------------------------------// // ------------------------------------------>
 
      //setRock
      if(opts.setRock === true){
@@ -233,8 +230,10 @@ HTMLWidgets.widget({
 
    },
 
+      // Called by htmlwidgets (and Shiny) whenever the container changes
+      // size: window resizes, tabs being shown, sidebars collapsing
       resize: function(width, height) {
-        // Code to re-render the widget with a new size
+        stage.handleResize();
       },
 
       //Make stage and structure globally available
