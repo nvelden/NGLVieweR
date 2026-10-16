@@ -18,6 +18,10 @@ setSpin parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR}
 \description{
 Set Spin animation
 }
+\details{
+Only one animation can run at a time. If both \code{setSpin(TRUE)}
+and \code{setRock(TRUE)} are used, the structure spins.
+}
 \examples{
 NGLVieweR("7CID") \%>\%
  addRepresentation("cartoon", param=list(name="cartoon", colorValue="blue")) \%>\%

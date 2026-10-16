@@ -16,7 +16,7 @@ Start the chat with something like:
 |---|---|---|---|
 | 0 | Baseline: NGL 2.4.0 packaging (#1), test infrastructure (#16), fixtures, baseline run | verified (2026-10-16; see dev/baseline-check.md). Test deps in Suggests (user chose option 1). Not committed | |
 | 1 | #2 Handlers pile up on re-render | committed (2026-10-16): 139 pass / 1 known skip; rcmdcheck = baseline. Decision: resize via htmlwidgets `resize()` only (window listener removed) | see `git log --grep "Fix #2"` |
-| 2 | #3 Spin/rock never switch off on re-render | todo | |
+| 2 | #3 Spin/rock never switch off on re-render | committed (2026-10-16): 160 pass / 1 known skip. Decisions: spin wins (documented); stageParameters keys set by the previous render (only those) reset to NGL defaults | see `git log --grep "Fix #3"` |
 | 3 | #4 Superpose moves the wrong structure | todo | |
 | 4 | #5 `updateFullscreen()` ignores its argument | todo | |
 | 5 | #6 `addStructure()` / `NGLVieweR()` parse input differently | todo | |
@@ -303,14 +303,22 @@ because it calls `stage.setSpin(message.spin)` with the real value.)
 **Proposed fix.** Replace the four `if` blocks with:
 
 ```js
-stage.setSpin(!!opts.setSpin);
 stage.setRock(!!opts.setRock);
+stage.setSpin(!!opts.setSpin);
 ```
 
 Order matters: NGL's `setRock(false)` only pauses rock, `setSpin(false)` only
-pauses spin, and `setX(true)` pauses the other. With the order above,
-`spin = TRUE, rock = TRUE` ends with rock (same as today's code). Write that
-down in the roxygen of `setSpin`/`setRock` or make it an error — ask the user.
+pauses spin, and `setX(true)` pauses the other. Today's code calls rock
+first and spin second, so `spin = TRUE, rock = TRUE` ends with **spin**
+(confirmed in the repro; this plan originally said rock and had the order
+reversed). The order above keeps that. Write it down in the roxygen of
+`setSpin`/`setRock` or make it an error — ask the user.
+
+Related (from /code-review in Step 1, confirmed in the repro): stage
+settings from `stageParameters()` also survive re-renders; a
+`backgroundColor = "white"` stays after it is removed from the R code.
+Possible fix: remember `stage.getParameters()` once in `factory` and apply
+`Object.assign({}, defaults, opts.stageParameters)` in `renderValue`.
 Remove the dead `toggleRock`/`toggleSpin` fields from `NGLVieweR()` and the
 JS (also listed in #14).
 
@@ -705,6 +713,21 @@ users may already depend on 0-based.
 
 (Add anything new discovered while fixing; do not fix it inside another bug's step.)
 
+- **NEW, high priority — content strings fail on R-devel** (found by CI on
+  2026-10-16, ubuntu R-devel, run 38921922335). `NGLVieweR(<file contents>,
+  format = "pdb")` errors with "basename(x): path too long": R-devel's
+  `tools::file_ext()` calls `basename()`, which errors for strings longer
+  than PATH_MAX (4096). The first check in `NGLVieweR()` and both checks in
+  `addStructure()` call `tools::file_ext(data)` on the raw input, and
+  `file.exists(data)` may follow. Every real PDB passed as text is longer
+  than 4096 characters. Breaks the test `test-NGLVieweR.R` "a content string
+  with a format", so CRAN's R-devel check would ERROR on the next
+  submission. Belongs with Step 5/6 (input parsing), but should be done
+  before them.
+- CI macOS R-devel failed in `setup-r-dependencies` (no CRAN binaries for
+  R 4.7 on macOS; dependencies built from source). Probably a new Suggests
+  (chromote → websocket) failing to compile; not confirmed.
+
 - The `_PDB` input is written before superposition (see #4, point 4).
 - `inst/examples/updateFullscreen/app.R` wraps the whole app in
   `if (interactive()) { ... }`, so `app.R` returns `NULL` in a non-interactive
@@ -729,6 +752,11 @@ users may already depend on 0-based.
 - Click handler applies defaults only when `selectionParameters` is absent,
   not per field (e.g. proximity `NA` from a cleared `numericInput`).
   Pre-existing, minor.
+- `setFocus()`/`setQuality()` override `stageParameters()` (from /code-review
+  in Step 2). `renderValue` always calls `stage.setQuality(opts.setQuality)`
+  and `stage.setFocus(opts.setFocus)` after `setParameters`, with defaults
+  "medium" and 0, so `stageParameters(quality = "high")` or clip/fog values
+  are silently replaced. Pre-existing.
 - `inst/htmlwidgets/NGLVieweR.yaml`: both dependencies (`NGLVieweR`,
   `helperFunctions`) use `src: htmlwidgets`, i.e. the whole folder. A saved
   widget (`saveWidget(selfcontained = FALSE)`) therefore contains the folder

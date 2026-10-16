@@ -22,6 +22,11 @@ Returns list of stage parameters to \code{NGLVieweR}
 \description{
 Set stage parameters.
 }
+\details{
+Options that are not given use the NGL.js defaults. In Shiny, this
+also holds when \code{renderNGLVieweR()} re-renders: an option set in an
+earlier render but not in the current one returns to its default.
+}
 \examples{
 NGLVieweR("7CID") \%>\%
  stageParameters(backgroundColor = "white", zoomSpeed = 1) \%>\%

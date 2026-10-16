@@ -10,6 +10,11 @@ HTMLWidgets.widget({
       var structures = null;
       // Options of the latest render, read by the event handlers below
       var currentOpts = null;
+      // NGL's default stage parameters and the keys the previous render set
+      // with stageParameters(). Keys that the current render no longer sets
+      // go back to their default; all other stage parameters are left alone.
+      var defaultStageParameters = Object.assign({}, stage.getParameters());
+      var renderedStageKeys = [];
 
       // Event handlers are registered once per widget, not in renderValue,
       // which runs again every time renderNGLVieweR() re-runs. Resizing is
@@ -75,7 +80,13 @@ HTMLWidgets.widget({
       //console.time("load-to-render");
 
       //Set stage parameters
-      stage.setParameters(opts.stageParameters);
+      var stageParams = {};
+      renderedStageKeys.forEach(function(key) {
+        stageParams[key] = defaultStageParameters[key];
+      });
+      Object.assign(stageParams, opts.stageParameters);
+      renderedStageKeys = Object.keys(opts.stageParameters || {});
+      stage.setParameters(stageParams);
       stage.setQuality(opts.setQuality);
       stage.setFocus(opts.setFocus);
       
@@ -211,22 +222,11 @@ HTMLWidgets.widget({
           
       });
 
-     //setRock
-     if(opts.setRock === true){
-     stage.setRock(true);
-     }
-     //toggleRock
-     if(opts.toggleRock === true){
-     stage.toggleRock(true);
-     }
-     //setSpin
-     if(opts.setSpin === true){
-     stage.setSpin(true);
-     }
-     //toggleSpin
-     if(opts.toggleSpin === true){
-     stage.toggleSpin(true);
-     }
+     //setRock and setSpin: always apply both, so a re-render with FALSE stops
+     //an animation started by an earlier render. NGL runs only one of them;
+     //spin is applied last, so spin wins when both are TRUE.
+     stage.setRock(opts.setRock === true);
+     stage.setSpin(opts.setSpin === true);
 
    },
 

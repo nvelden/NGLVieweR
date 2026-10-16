@@ -218,9 +218,7 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
   # Add stage parameters
   x$setQuality <- "medium"
   x$setRock <- FALSE
-  x$toggleRock <- FALSE
   x$setSpin <- FALSE
-  x$toggleSpin <- FALSE
   x$setFocus <- 0
 
   x$stageParameters <- list()
@@ -269,6 +267,9 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
 #'  \code{hoverTimeout} and \code{lightIntensity}. For a full list of options,
 #'  see the "stageParameters" method in the official
 #'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@details Options that are not given use the NGL.js defaults. In Shiny, this
+#'  also holds when \code{renderNGLVieweR()} re-renders: an option set in an
+#'  earlier render but not in the current one returns to its default.
 #'@return Returns list of stage parameters to \code{NGLVieweR}
 #'  \code{htmlwidgets} object.
 #'@seealso
@@ -589,6 +590,8 @@ addRepresentation <- function(NGLVieweR, type, param = list()) {
 #'@description Set rock animation
 #'@param NGLVieweR A NGLVieweR object.
 #'@param rock If \code{TRUE} (default), start rocking and stop spinning.
+#'@details Only one animation can run at a time. If both \code{setRock(TRUE)}
+#'  and \code{setSpin(TRUE)} are used, the structure spins.
 #'@return setRock parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR}
 #'  \code{htmlwidgets} object.
 #'@family animations
@@ -611,6 +614,8 @@ setRock <- function(NGLVieweR, rock = TRUE) {
 #'@description Set Spin animation
 #'@param NGLVieweR A NGLVieweR object.
 #'@param spin If \code{TRUE} (default), start spinning and stop rocking
+#'@details Only one animation can run at a time. If both \code{setSpin(TRUE)}
+#'  and \code{setRock(TRUE)} are used, the structure spins.
 #'@return setSpin parameter to \code{TRUE} or \code{FALSE} in \code{NGLVieweR}
 #'  \code{htmlwidgets} object.
 #'@family animations

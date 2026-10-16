@@ -45,6 +45,9 @@ test_that("NGLVieweR() sets the documented stage defaults", {
   expect_equal(x$setFocus, 0)
   expect_equal(x$stageParameters, list())
   expect_equal(x$superpose, list())
+  # toggleRock/toggleSpin were never settable from R and are not sent.
+  expect_null(x$toggleRock)
+  expect_null(x$toggleSpin)
   s <- x$structures[[1]]
   expect_equal(s$setScale, 1)
   expect_equal(s$addRepresentation, list(type = list(), values = list()))

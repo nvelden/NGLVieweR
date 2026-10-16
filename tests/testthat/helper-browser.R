@@ -51,6 +51,17 @@ wait_for_structures <- function(app, id = "viewer", timeout = 30000) {
     id), timeout = timeout)
 }
 
+# Changes an input that renderNGLVieweR() depends on and waits until the
+# widget has loaded the structure of the new render.
+rerender <- function(app, ..., id = "viewer") {
+  app$run_js(sprintf("HTMLWidgets.find('#%s').getStructure()[0].__oldRender = true;", id))
+  app$set_inputs(..., wait_ = FALSE)
+  app$wait_for_js(sprintf(
+    "(function(){ var s = HTMLWidgets.find('#%s').getStructure();
+       return !!(s && s.length > 0 && !s[0].__oldRender && s[0].reprList.length > 0); })()",
+    id), timeout = 30000)
+}
+
 # Evaluates a JS expression with `w` bound to the widget and `stage` to its stage.
 widget_js <- function(app, expr, id = "viewer") {
   app$get_js(sprintf(

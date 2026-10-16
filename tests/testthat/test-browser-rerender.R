@@ -20,17 +20,6 @@ rerender_app <- function(env = parent.frame()) {
   ), env = env)
 }
 
-# Changes an input that renderNGLVieweR() depends on and waits until the
-# widget has loaded the structure of the new render.
-rerender <- function(app, ...) {
-  app$run_js("HTMLWidgets.find('#viewer').getStructure()[0].__oldRender = true;")
-  app$set_inputs(..., wait_ = FALSE)
-  app$wait_for_js(
-    "(function(){ var s = HTMLWidgets.find('#viewer').getStructure();
-       return !!(s && s.length > 0 && !s[0].__oldRender && s[0].reprList.length > 0); })()",
-    timeout = 30000)
-}
-
 # Records every value the widget sends for the given inputs from now on.
 record_sends <- function(app, names) {
   app$run_js(sprintf("
