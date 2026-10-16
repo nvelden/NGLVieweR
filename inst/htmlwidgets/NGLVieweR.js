@@ -10,6 +10,8 @@ HTMLWidgets.widget({
       var structures = null;
       // Options of the latest render, read by the event handlers below
       var currentOpts = null;
+      // Number of renders so far; see renderValue
+      var renderCount = 0;
       // NGL's default stage parameters and the keys the previous render set
       // with stageParameters(). Keys that the current render no longer sets
       // go back to their default; all other stage parameters are left alone.
@@ -72,9 +74,13 @@ HTMLWidgets.widget({
       renderValue: function(opts) {
 
       currentOpts = opts;
+      // Identifies this render, so a slower earlier render that finishes
+      // later cannot overwrite or clear it
+      var renderId = ++renderCount;
 
       //In case of Rerendering remove all components
       stage.removeAllComponents();
+      structures = null;
 
       //Load timer for rendering
       //console.time("load-to-render");
@@ -90,17 +96,54 @@ HTMLWidgets.widget({
       stage.setQuality(opts.setQuality);
       stage.setFocus(opts.setFocus);
       
-      // Iterate through all structures in the list
-        Promise.all(opts.structures.map(function(structureOpts) {
-          if (structureOpts.type == "code") {
-            return stage.loadFile(structureOpts.data);
-          } else if (structureOpts.type == "file") {
-            return stage.loadFile(new Blob([structureOpts.data], { type: 'text/plain' }), {
-             ext: structureOpts.file_ext
-            });
+      // Iterate through all structures in the list. Wait for every load to
+      // finish (succeeded or failed), so a failure cannot be followed by a
+      // slower structure still appearing.
+        Promise.all(opts.structures.map(function(structureOpts, index) {
+          // Promise.resolve().then() also turns errors that loadFile() throws
+          // straight away into a rejection
+          return Promise.resolve().then(function() {
+            if (structureOpts.type == "code") {
+              return stage.loadFile(structureOpts.data);
+            } else if (structureOpts.type == "file") {
+              return stage.loadFile(new Blob([structureOpts.data], { type: 'text/plain' }), {
+               ext: structureOpts.file_ext
+              });
+            }
+          }).then(function(component) {
+            if (!component) {
+              throw new Error("nothing was loaded");
+            }
+            if (component.structure && component.structure.atomCount === 0) {
+              throw new Error("it contains no atoms (is the format right?)");
+            }
+            return { value: component };
+          }).catch(function(err) {
+            var source = structureOpts.type == "code" ? structureOpts.data :
+              "file contents, format \"" + structureOpts.file_ext + "\"";
+            return { error: "could not load structure " + (index + 1) + " (" + source + "): " +
+              (err && err.message ? err.message : String(err)) };
+          });
+        })).then(function(results) {
+          var errors = results.filter(function(r) { return r.error; })
+            .map(function(r) { return r.error; });
+          var loaded = results.filter(function(r) { return r.value; })
+            .map(function(r) { return r.value; });
+          if (errors.length > 0) {
+            loaded.forEach(function(c) { stage.removeComponent(c); });
+            var loadError = new Error(errors.join("; "));
+            loadError.loadFailure = true;
+            throw loadError;
           }
-        })).then(function(loaded) {
-          
+          return loaded;
+        }).then(function(loaded) {
+
+          // A newer render has started; drop this one's components
+          if (renderId !== renderCount) {
+            loaded.forEach(function(c) { stage.removeComponent(c); });
+            return;
+          }
+
           // Make globaly available
           structures = loaded;
           
@@ -221,8 +264,32 @@ HTMLWidgets.widget({
               Shiny.onInputChange(`${el.id}_sequence`, sequences);
               Shiny.onInputChange(`${el.id}_resno`, resnos);
               Shiny.onInputChange(`${el.id}_chainname`, chainnames);
+              Shiny.onInputChange(`${el.id}_error`, null);
             }
-          
+
+        }).catch(function(err) {
+          if (renderId !== renderCount) return;
+
+          var message = err && err.message ? err.message : String(err);
+          if (err && err.loadFailure) {
+            // Show nothing rather than part of the structures
+            stage.removeAllComponents();
+            structures = null;
+            if (HTMLWidgets.shinyMode) {
+              Shiny.onInputChange(`${el.id}_PDB`, null);
+              Shiny.onInputChange(`${el.id}_sequence`, null);
+              Shiny.onInputChange(`${el.id}_resno`, null);
+              Shiny.onInputChange(`${el.id}_chainname`, null);
+            }
+          } else {
+            // The structures loaded, but setting them up failed (e.g. an
+            // unknown representation type); keep what is shown
+            message = "error while displaying the structures: " + message;
+          }
+          console.error("NGLVieweR: " + message);
+          if (HTMLWidgets.shinyMode) {
+            Shiny.onInputChange(`${el.id}_error`, message, { priority: "event" });
+          }
       });
 
      //setRock and setSpin: always apply both, so a re-render with FALSE stops

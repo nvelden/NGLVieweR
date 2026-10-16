@@ -22,7 +22,7 @@ Start the chat with something like:
 | 4 | #5 `updateFullscreen()` ignores its argument | committed (2026-10-16); explained; repro confirmed headless with trusted clicks (FALSE enters, TRUE exits, element BODY). Decision: new `element = c("page", "viewer")`, default "page"; also fix the example's if (interactive()). Verified (2026-10-16): 234 pass / 0 skip; rcmdcheck = baseline; trusted-click check: page and viewer enter/leave correctly, sizes restored. Example now has Enter/Exit buttons | see `git log --grep "Fix #5"` |
 | 5 | #6 `addStructure()` / `NGLVieweR()` parse input differently | committed (2026-10-16); explained; repro confirmed headless (2 of 5 inputs differ: 8-char file name, format with leading dot); failing test written (4 expectations fail as expected). Verified (2026-10-16): shared `.parse_structure_input()` in R/utils.R; 243 pass / 0 skip; rcmdcheck = baseline; repro: all 5 inputs same, both viewers load | see `git log --grep "Fix #6"` |
 | 6 | #7 Missing files, line vectors, binary formats | committed (2026-10-16); explained; repro confirmed headless (7a, 7b throw JS errors that also break other Shiny outputs; 7c gz: `ext 'gz' unknown`). Decisions: binary (mmtf) dropped from docs with a clear error; .gz/.bz2/.xz supported; rules table as proposed (missing path -> 'file not found', line vector/line breaks -> contents, validate format and data). Failing tests in test-parse-input.R (8 of 10 tests fail/error as expected). Verified (2026-10-16): 343 pass / 0 skip; rcmdcheck = baseline; repro: 7a R error, 7b/7c load 327 atoms, 0 console errors | see `git log --grep "Fix #7"` |
-| 7 | #8 Structure load failures are silent | todo | |
+| 7 | #8 Structure load failures are silent | committed (2026-10-16); explained; repro confirmed headless (bad code: stale 46-residue _sequence, no error; broken.pdb loads as 0 atoms without error; good+bad: nothing shown; console only says "error loading file: ''"). Decisions: all-or-nothing + _error; clear _sequence/_resno/_chainname/_PDB on failure; 0 atoms = error. Failing tests in test-browser-load-error.R (4/4 time out waiting for _error). Verified (2026-10-16): all loads awaited (no partial display), every failing structure named, errors after loading keep the structure, _error sent as event, stale renders ignored (render counter); 366 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #8"` |
 | 8 | #10 `snapShot` resets `_rendering` too early | todo | |
 | 9 | #9 `zoomMove()` overridden with several structures | todo | |
 | 10 | #11 Sequence inputs change shape | todo | |
@@ -569,6 +569,13 @@ the load failed. With several structures, one bad one stops all of them.
 error input. **Look for:** enter `1CRN` (loads), then `XXXX` → viewer blank,
 `_sequence` still shows 1CRN's data.
 
+**Measured in Step 7:** a file NGL cannot parse (broken.pdb) does not
+reject at all: it "loads" as a structure with 0 atoms, `_sequence` becomes
+empty and no error is reported. NGL's rejection message is just
+`error loading file: ''`, without saying which structure failed. After a
+failed load `getStructure()` still returns the removed components of the
+previous render (see Found during the work), so proxy calls act on them.
+
 **Proposed fix.** Add `.catch(function(err) { console.error(...); if (shinyMode) Shiny.setInputValue(el.id + "_error", String(err), {priority: "event"}); })`.
 Decide with the user: also clear `_sequence`/`_PDB` on failure? Document the
 new `_error` input in the vignette's "Retrieving data" list.
@@ -805,6 +812,13 @@ users may already depend on 0-based.
   (c) an extensionless file named like a code (`./1CRN`) wins over the code
   and gives "specify the file format"; (d) unknown formats ("xyz") are not
   checked in R, because NGL supports more than the documented list.
+- Load errors (from /code-review, Step 7): (a) for file input the message
+  says "file contents, format ..." and not the file name, because R does
+  not send the path to the browser (could pass a label from R); (b) proxy
+  calls that arrive while structures are loading are dropped with a
+  console.log (before #8 they acted on already removed components).
+- Overlapping renders: partly fixed in Step 7 (#8): results of an older
+  render that finishes after a newer one are discarded (render counter).
 - `setFocus()`/`setQuality()` override `stageParameters()` (from /code-review
   in Step 2). `renderValue` always calls `stage.setQuality(opts.setQuality)`
   and `stage.setFocus(opts.setFocus)` after `setParameters`, with defaults
