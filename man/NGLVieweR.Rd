@@ -7,10 +7,15 @@
 NGLVieweR(data, format = NULL, width = NULL, height = NULL, elementId = NULL)
 }
 \arguments{
-\item{data}{PDB file or PDB entry code}
+\item{data}{A PDB entry code (e.g. \code{"7CID"}), the path to a structure
+file, or the file contents as a single string or a vector of lines (e.g.
+from \code{readLines()}). Files compressed with gzip, bzip2 or xz
+(\code{.gz}, \code{.bz2}, \code{.xz}) are decompressed.}
 
-\item{format}{Input format (.mmcif, .cif, .mcif, .pdb, .ent, .pqr, .gro, .sdf,
-.sd, .mol2, .mmtf). Needed when no file extension is provided.}
+\item{format}{Input format (cif, mmcif, mcif, pdb, ent, pqr, gro, sdf, sd,
+mol2), with or without a leading dot. Needed for file contents and for
+files without a recognisable extension. Binary formats such as MMTF are
+not supported.}
 
 \item{width, height}{Must be a valid CSS unit (like \code{'100\%'},
 \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a

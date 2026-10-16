@@ -1,6 +1,11 @@
 # NGLVieweR (development version)
 
 * Updated the bundled NGL.js from 2.0.0 to 2.4.0.
+* `NGLVieweR()` and `addStructure()` give clear R errors instead of an empty viewer (or a JavaScript error that could also stop other Shiny outputs) for input they cannot use: a file path that does not exist ("file not found"), file contents or an extensionless file without `format`, a malformed `format` (e.g. `NA` or `""`), `data` that is empty or not text, or a URL (not supported; download the file first).
+* File contents can now also be given as a vector of lines, e.g. `NGLVieweR(readLines("1crn.pdb"), format = "pdb")`. Text with line breaks is always treated as file contents.
+* Structure files compressed with gzip, bzip2 or xz (e.g. `1crn.cif.gz`) can now be loaded; the format is taken from the extension before `.gz`.
+* Formats are passed to NGL.js in lower case, so files such as `1CRN.PDB` load.
+* Binary formats such as MMTF were listed as supported but were corrupted when read; they are removed from the documentation and now give a clear error.
 * Fixed `addStructure()` reading its input differently from `NGLVieweR()`: a short file name such as `"1crn.pdb"` was treated as a PDB code, and a `format` with a leading dot (`".pdb"`) was not accepted. Both functions now use the same rules.
 * Fixed `NGLVieweR()` and `addStructure()` failing with "path too long" on R-devel when given file contents (e.g. `NGLVieweR(pdb_text, format = "pdb")`): file contents are no longer passed to `tools::file_ext()` and `file.exists()`.
 * Fixed event handlers piling up when `renderNGLVieweR()` re-runs in Shiny: each re-render added another click, rendering-status and window-resize handler, so one click computed `_selection`/`_selAround` once per render so far, using the `selectionParameters()` of older renders. Handlers are now registered once and always use the latest options.

@@ -9,12 +9,14 @@ addStructure(NGLVieweR, data, format = NULL)
 \arguments{
 \item{NGLVieweR}{A NGLVieweR object.}
 
-\item{data}{Structure data to be added. Can be a PDB entry code (e.g. "7CID"),
-a file path to a structure file, or a text representation of the structure.}
+\item{data}{Structure data to be added, in the same forms as in
+\code{\link[=NGLVieweR]{NGLVieweR()}}: a PDB entry code (e.g. "7CID"), a file path (also
+compressed with gzip, bzip2 or xz), or the file contents as a single
+string or a vector of lines.}
 
-\item{format}{Format of the structure file, if reading from a file. Supported
-formats are "pdb", "cif", etc. If the file format cannot be inferred from
-the file name, this parameter must be specified.}
+\item{format}{Format of the structure, as in \code{\link[=NGLVieweR]{NGLVieweR()}} (e.g. "pdb",
+"cif"). Needed for file contents and when the format cannot be inferred
+from the file name.}
 }
 \value{
 An updated NGLVieweR object with the added structure.

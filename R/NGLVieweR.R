@@ -10,9 +10,14 @@ tools::file_ext
 #'@details The package is based on the
 #'\href{http://nglviewer.org/ngl/api/}{NGL.js} JavaScript library. To see the
 #'full set of features please read the official manual of NGL.js.
-#'@param data PDB file or PDB entry code
-#'@param format Input format (.mmcif, .cif, .mcif, .pdb, .ent, .pqr, .gro, .sdf,
-#'  .sd, .mol2, .mmtf). Needed when no file extension is provided.
+#'@param data A PDB entry code (e.g. \code{"7CID"}), the path to a structure
+#'  file, or the file contents as a single string or a vector of lines (e.g.
+#'  from \code{readLines()}). Files compressed with gzip, bzip2 or xz
+#'  (\code{.gz}, \code{.bz2}, \code{.xz}) are decompressed.
+#'@param format Input format (cif, mmcif, mcif, pdb, ent, pqr, gro, sdf, sd,
+#'  mol2), with or without a leading dot. Needed for file contents and for
+#'  files without a recognisable extension. Binary formats such as MMTF are
+#'  not supported.
 #'@param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'  \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'  string and have \code{'px'} appended.
@@ -327,11 +332,13 @@ selectionParameters <- function(NGLVieweR, proximity = 3, level = "residue") {
 #'  code, a file, or directly from the R environment.
 #'
 #'@param NGLVieweR A NGLVieweR object.
-#'@param data Structure data to be added. Can be a PDB entry code (e.g. "7CID"),
-#'  a file path to a structure file, or a text representation of the structure.
-#'@param format Format of the structure file, if reading from a file. Supported
-#'  formats are "pdb", "cif", etc. If the file format cannot be inferred from
-#'  the file name, this parameter must be specified.
+#'@param data Structure data to be added, in the same forms as in
+#'  [NGLVieweR()]: a PDB entry code (e.g. "7CID"), a file path (also
+#'  compressed with gzip, bzip2 or xz), or the file contents as a single
+#'  string or a vector of lines.
+#'@param format Format of the structure, as in [NGLVieweR()] (e.g. "pdb",
+#'  "cif"). Needed for file contents and when the format cannot be inferred
+#'  from the file name.
 #'
 #'@details This function allows you to add a structure to the NGLVieweR widget.
 #'  You can add the structure using a PDB entry code, by specifying a local

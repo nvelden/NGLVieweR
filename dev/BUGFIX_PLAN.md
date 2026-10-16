@@ -21,7 +21,7 @@ Start the chat with something like:
 | 3 | #4 Superpose moves the wrong structure | committed (2026-10-16): 209 pass / 1 known skip; rcmdcheck = baseline; vignette example checked (reference 0.000 Å, target 63 Å). Decision: reference stays put (NEWS note) | see `git log --grep "Fix #4"` |
 | 4 | #5 `updateFullscreen()` ignores its argument | committed (2026-10-16); explained; repro confirmed headless with trusted clicks (FALSE enters, TRUE exits, element BODY). Decision: new `element = c("page", "viewer")`, default "page"; also fix the example's if (interactive()). Verified (2026-10-16): 234 pass / 0 skip; rcmdcheck = baseline; trusted-click check: page and viewer enter/leave correctly, sizes restored. Example now has Enter/Exit buttons | see `git log --grep "Fix #5"` |
 | 5 | #6 `addStructure()` / `NGLVieweR()` parse input differently | committed (2026-10-16); explained; repro confirmed headless (2 of 5 inputs differ: 8-char file name, format with leading dot); failing test written (4 expectations fail as expected). Verified (2026-10-16): shared `.parse_structure_input()` in R/utils.R; 243 pass / 0 skip; rcmdcheck = baseline; repro: all 5 inputs same, both viewers load | see `git log --grep "Fix #6"` |
-| 6 | #7 Missing files, line vectors, binary formats | todo | |
+| 6 | #7 Missing files, line vectors, binary formats | committed (2026-10-16); explained; repro confirmed headless (7a, 7b throw JS errors that also break other Shiny outputs; 7c gz: `ext 'gz' unknown`). Decisions: binary (mmtf) dropped from docs with a clear error; .gz/.bz2/.xz supported; rules table as proposed (missing path -> 'file not found', line vector/line breaks -> contents, validate format and data). Failing tests in test-parse-input.R (8 of 10 tests fail/error as expected). Verified (2026-10-16): 343 pass / 0 skip; rcmdcheck = baseline; repro: 7a R error, 7b/7c load 327 atoms, 0 console errors | see `git log --grep "Fix #7"` |
 | 7 | #8 Structure load failures are silent | todo | |
 | 8 | #10 `snapShot` resets `_rendering` too early | todo | |
 | 9 | #9 `zoomMove()` overridden with several structures | todo | |
@@ -534,6 +534,14 @@ together here, in `.parse_structure_input()`):
 - `format` is not validated (NA, "", ".", c("pdb", "cif"));
 - `NA` data becomes "rcsb://NA.pdb" (also listed under Found during the work).
 
+**Measured in Step 6:** 7a and 7b do not just fail silently: the bad data
+makes `stage.loadFile()` throw synchronously in `renderValue`, which Shiny
+reports as a client error and which also stops the other outputs updated
+in the same flush. `.gz` files are read correctly by `readLines()` (R
+decompresses them) but get file_ext "gz", which NGL rejects ("autoLoad: ext
+'gz' unknown"); using the extension before `.gz` is enough. RCSB retired
+MMTF in July 2024.
+
 **Repro `dev/repro/07-input-parsing`.** Three tabs, one per sub-bug, each
 showing the R call, the resulting `widget$x$structures[[1]]` summary, and the
 viewer. **Look for:** blank viewer without an error; vector of URLs; mmtf garbage.
@@ -789,6 +797,14 @@ users may already depend on 0-based.
   it; repeated calls overwrite the saved size. NGL behaviour. (b) With
   several widgets or a fullscreen video on the page, "is fullscreen" is
   page-wide, so one widget's TRUE/FALSE acts on another's fullscreen.
+- Input parsing ideas / known limits (from /code-review, Step 6): (a) URL
+  support would be easy (NGL loads URLs; pass as type "code" with the URL
+  as data) -- today a clear "URLs are not supported" error; (b) extended
+  PDB IDs (`pdb_00001crn`, 12 chars) are treated as contents ("specify the
+  file format"), as before -- revisit when wwPDB starts using them;
+  (c) an extensionless file named like a code (`./1CRN`) wins over the code
+  and gives "specify the file format"; (d) unknown formats ("xyz") are not
+  checked in R, because NGL supports more than the documented list.
 - `setFocus()`/`setQuality()` override `stageParameters()` (from /code-review
   in Step 2). `renderValue` always calls `stage.setQuality(opts.setQuality)`
   and `stage.setFocus(opts.setFocus)` after `setParameters`, with defaults

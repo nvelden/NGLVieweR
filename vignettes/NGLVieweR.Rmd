@@ -52,7 +52,7 @@ NGLVieweR_example("basic")
 
 ## Loading other structural files
 
-This package has been developed and tested using PDB files but supports loading of any of the following structural files: .mmcif, .cif, .mcif, .ent, .pqr, .gro, .sdf, .sd, .mol2 and .mmtf.
+This package has been developed and tested using PDB files but supports loading of any of the following structural files: .pdb, .mmcif, .cif, .mcif, .ent, .pqr, .gro, .sdf, .sd and .mol2, also when compressed with gzip, bzip2 or xz (e.g. `1crn.cif.gz`). Binary formats such as MMTF are not supported.
 
 By default **NGLVieweR** guesses the file format from the file extension. Use the `format` parameter in case no or the wrong file extension is provided.
 
