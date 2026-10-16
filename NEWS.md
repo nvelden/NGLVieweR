@@ -1,6 +1,7 @@
 # NGLVieweR (development version)
 
 * Updated the bundled NGL.js from 2.0.0 to 2.4.0.
+* Fixed `NGLVieweR()` and `addStructure()` failing with "path too long" on R-devel when given file contents (e.g. `NGLVieweR(pdb_text, format = "pdb")`): file contents are no longer passed to `tools::file_ext()` and `file.exists()`.
 * Fixed event handlers piling up when `renderNGLVieweR()` re-runs in Shiny: each re-render added another click, rendering-status and window-resize handler, so one click computed `_selection`/`_selAround` once per render so far, using the `selectionParameters()` of older renders. Handlers are now registered once and always use the latest options.
 * The viewer now also resizes when its container changes size without a window resize, e.g. when a tab is shown or a sidebar collapses.
 * Fixed `setSpin()` and `setRock()` not switching off when `renderNGLVieweR()` re-runs with `FALSE`: an animation started by an earlier render kept running. If both are `TRUE`, the structure spins (now documented).

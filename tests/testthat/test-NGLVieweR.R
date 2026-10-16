@@ -29,6 +29,36 @@ test_that("a content string with a format is passed as file contents", {
   expect_equal(s$data, txt)
 })
 
+test_that("file contents work with R-devel's tools::file_ext() (#17)", {
+  # R-devel's file_ext() calls basename(), which errors for strings longer
+  # than PATH_MAX. Simulate that so the test fails on any R version.
+  devel_file_ext <- function(x) {
+    x <- as.character(x)
+    if (any(nchar(x) > 4095)) stop("basename(x): path too long")
+    ifelse(grepl("^(.*[^.]+.*)[.]([[:alnum:]]+)$", basename(x)),
+           sub(".*[.]([[:alnum:]]+)$", "\\1", x), "")
+  }
+  local_mocked_bindings(file_ext = devel_file_ext, .package = "tools")
+  txt <- paste(readLines(fixture("1crn.pdb")), collapse = "\n")
+
+  s <- NGLVieweR(txt, format = "pdb")$x$structures[[1]]
+  expect_equal(s$type, "file")
+  expect_equal(s$file_ext, "pdb")
+  expect_equal(s$data, txt)
+
+  s <- (NGLVieweR("1CRN") %>% addStructure(txt, format = "pdb"))$x$structures[[2]]
+  expect_equal(s$type, "file")
+  expect_equal(s$file_ext, "pdb")
+  expect_equal(s$data, txt)
+
+  expect_error(NGLVieweR(txt), "Please specify the file format")
+  expect_error(NGLVieweR("1CRN") %>% addStructure(txt), "Please specify the file format")
+
+  # Paths and codes still use file_ext() / file.exists() as before.
+  expect_equal(NGLVieweR(fixture("1crn.pdb"))$x$structures[[1]]$file_ext, "pdb")
+  expect_equal(NGLVieweR("1CRN")$x$structures[[1]]$type, "code")
+})
+
 test_that("missing data and missing format give clear errors", {
   expect_error(NGLVieweR(), "Please specify a PDB entry code or file")
   expect_error(NGLVieweR("HEADER    PLANT PROTEIN"), "Please specify the file format")

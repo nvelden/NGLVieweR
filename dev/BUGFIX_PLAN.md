@@ -17,6 +17,7 @@ Start the chat with something like:
 | 0 | Baseline: NGL 2.4.0 packaging (#1), test infrastructure (#16), fixtures, baseline run | verified (2026-10-16; see dev/baseline-check.md). Test deps in Suggests (user chose option 1). Not committed | |
 | 1 | #2 Handlers pile up on re-render | committed (2026-10-16): 139 pass / 1 known skip; rcmdcheck = baseline. Decision: resize via htmlwidgets `resize()` only (window listener removed) | see `git log --grep "Fix #2"` |
 | 2 | #3 Spin/rock never switch off on re-render | committed (2026-10-16): 160 pass / 1 known skip. Decisions: spin wins (documented); stageParameters keys set by the previous render (only those) reset to NGL defaults | see `git log --grep "Fix #3"` |
+| 2b | #17 Content strings fail on R-devel (`file_ext` → `basename`), see Found during the work | committed (2026-10-16): 170 pass / 1 known skip; rcmdcheck = baseline. Helpers `.could_be_path()`/`.file_ext()` in R/utils.R | see `git log --grep "Fix #17"` |
 | 3 | #4 Superpose moves the wrong structure | todo | |
 | 4 | #5 `updateFullscreen()` ignores its argument | todo | |
 | 5 | #6 `addStructure()` / `NGLVieweR()` parse input differently | todo | |
@@ -713,7 +714,7 @@ users may already depend on 0-based.
 
 (Add anything new discovered while fixing; do not fix it inside another bug's step.)
 
-- **NEW, high priority — content strings fail on R-devel** (found by CI on
+- **#17 (Step 2b), high priority — content strings fail on R-devel** (found by CI on
   2026-10-16, ubuntu R-devel, run 38921922335). `NGLVieweR(<file contents>,
   format = "pdb")` errors with "basename(x): path too long": R-devel's
   `tools::file_ext()` calls `basename()`, which errors for strings longer
@@ -724,6 +725,9 @@ users may already depend on 0-based.
   with a format", so CRAN's R-devel check would ERROR on the next
   submission. Belongs with Step 5/6 (input parsing), but should be done
   before them.
+- `NGLVieweR(NA_character_)` / `addStructure(v, NA)` fail with "missing value
+  where TRUE/FALSE needed" instead of a clear message (from /code-review in
+  Step 2b). Pre-existing; fold into Step 5/6.
 - CI macOS R-devel failed in `setup-r-dependencies` (no CRAN binaries for
   R 4.7 on macOS; dependencies built from source). Probably a new Suggests
   (chromote → websocket) failing to compile; not confirmed.

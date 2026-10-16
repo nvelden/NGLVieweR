@@ -160,7 +160,7 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
     )
   }
   
-  if (is.character(data) && length(data) == 1 && nchar(data) > 8 && tools::file_ext(data) == "" && is.null(format)) {
+  if (is.character(data) && length(data) == 1 && nchar(data) > 8 && .file_ext(data) == "" && is.null(format)) {
     stop("NGLVieweR: Please specify the file format",
       call. = FALSE
     )
@@ -174,10 +174,10 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
   type <- NULL
   file_ext <- format
   # Read PDB file
-  if (is.character(data) && length(data) == 1 && file.exists(data)) {
+  if (.could_be_path(data) && file.exists(data)) {
     # If data is a file path
     if (is.null(format)) {
-      file_ext <- tools::file_ext(data)
+      file_ext <- .file_ext(data)
     }
     data <- paste(readLines(data), collapse = "\n")
     type <- "file"
@@ -396,7 +396,7 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
          call. = FALSE
     )
   }
-  if (nchar(data) > 8 && tools::file_ext(data) == "" && is.null(format)) {
+  if (nchar(data) > 8 && .file_ext(data) == "" && is.null(format)) {
     stop("addStructure: Please specify the file format",
          call. = FALSE
     )
@@ -405,14 +405,14 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
   type <- NULL
   file_ext <- format
   # Read PDB file
-  if (file.exists(data) && nchar(data) > 8) {
+  if (.could_be_path(data) && file.exists(data) && nchar(data) > 8) {
     if (is.null(format)) {
-      file_ext <- tools::file_ext(data)
+      file_ext <- .file_ext(data)
     }
     data <- paste(readLines(data), collapse = "\n")
     type <- "file"
     # Read directly from R editor
-  } else if (nchar(data) > 8 && tools::file_ext(data) == "") {
+  } else if (nchar(data) > 8 && .file_ext(data) == "") {
     type <- "file"
     file_ext <- format
     data <- paste(data, collapse = "\n")
