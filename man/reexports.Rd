@@ -12,8 +12,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
+  \item{magrittr}{\code{\link[magrittr:\%>\%]{\%>\%}}}
 
-  \item{tools}{\code{\link[tools:fileutils]{file_ext}}}
+  \item{tools}{\code{\link[tools:file_ext]{file_ext()}}}
 }}
 

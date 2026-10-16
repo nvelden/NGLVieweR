@@ -91,8 +91,8 @@ shinyApp(ui, server)
 \item \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "addSelection".
 }
 
-Other selections: 
-\code{\link{removeSelection}()},
-\code{\link{updateSelection}()}
+Other selections:
+\code{\link[=removeSelection]{removeSelection()}},
+\code{\link[=updateSelection]{updateSelection()}}
 }
 \concept{selections}

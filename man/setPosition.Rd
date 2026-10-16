@@ -38,9 +38,9 @@ setPosition(25, 0, 0)
 \item \code{\link[=setRotation]{setRotation()}}
 }
 
-Other transformations: 
-\code{\link{setRotation}()},
-\code{\link{setScale}()},
-\code{\link{zoomMove}()}
+Other transformations:
+\code{\link[=setRotation]{setRotation()}},
+\code{\link[=setScale]{setScale()}},
+\code{\link[=zoomMove]{zoomMove()}}
 }
 \concept{transformations}

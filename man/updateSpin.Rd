@@ -68,10 +68,10 @@ shinyApp(ui, server)
 \item \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "updateAnimation".
 }
 
-Other animations: 
-\code{\link{setRock}()},
-\code{\link{setSpin}()},
-\code{\link{updateRock}()},
-\code{\link{updateZoomMove}()}
+Other animations:
+\code{\link[=setRock]{setRock()}},
+\code{\link[=setSpin]{setSpin()}},
+\code{\link[=updateRock]{updateRock()}},
+\code{\link[=updateZoomMove]{updateZoomMove()}}
 }
 \concept{animations}

@@ -65,9 +65,9 @@ if (interactive()) {
 \item \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "updateColor".
 }
 
-Other updates: 
-\code{\link{updateRepresentation}()},
-\code{\link{updateStage}()},
-\code{\link{updateVisibility}()}
+Other updates:
+\code{\link[=updateRepresentation]{updateRepresentation()}},
+\code{\link[=updateStage]{updateStage()}},
+\code{\link[=updateVisibility]{updateVisibility()}}
 }
 \concept{updates}

@@ -67,9 +67,9 @@ shinyApp(ui, server)
 \item \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "updateStage".
 }
 
-Other updates: 
-\code{\link{updateColor}()},
-\code{\link{updateRepresentation}()},
-\code{\link{updateVisibility}()}
+Other updates:
+\code{\link[=updateColor]{updateColor()}},
+\code{\link[=updateRepresentation]{updateRepresentation()}},
+\code{\link[=updateVisibility]{updateVisibility()}}
 }
 \concept{updates}

@@ -26,10 +26,10 @@ NGLVieweR("7CID") \%>\%
 \seealso{
 \code{\link[=updateFocus]{updateFocus()}}
 
-Other options: 
-\code{\link{setQuality}()},
-\code{\link{snapShot}()},
-\code{\link{updateFocus}()},
-\code{\link{updateFullscreen}()}
+Other options:
+\code{\link[=setQuality]{setQuality()}},
+\code{\link[=snapShot]{snapShot()}},
+\code{\link[=updateFocus]{updateFocus()}},
+\code{\link[=updateFullscreen]{updateFullscreen()}}
 }
 \concept{options}

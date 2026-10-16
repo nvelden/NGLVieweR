@@ -70,8 +70,8 @@ if (interactive()) {
 \item \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "updateSelection".
 }
 
-Other selections: 
-\code{\link{addSelection}()},
-\code{\link{removeSelection}()}
+Other selections:
+\code{\link[=addSelection]{addSelection()}},
+\code{\link[=removeSelection]{removeSelection()}}
 }
 \concept{selections}

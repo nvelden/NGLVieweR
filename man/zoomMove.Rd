@@ -45,9 +45,9 @@ stageParameters(backgroundColor = "white") \%>\%
 \item \code{\link[=setPosition]{setPosition()}}
 }
 
-Other transformations: 
-\code{\link{setPosition}()},
-\code{\link{setRotation}()},
-\code{\link{setScale}()}
+Other transformations:
+\code{\link[=setPosition]{setPosition()}},
+\code{\link[=setRotation]{setRotation()}},
+\code{\link[=setScale]{setScale()}}
 }
 \concept{transformations}

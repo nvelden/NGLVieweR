@@ -57,10 +57,10 @@ shinyApp(ui, server)
 \item \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "updateFocus".
 }
 
-Other options: 
-\code{\link{setFocus}()},
-\code{\link{setQuality}()},
-\code{\link{snapShot}()},
-\code{\link{updateFullscreen}()}
+Other options:
+\code{\link[=setFocus]{setFocus()}},
+\code{\link[=setQuality]{setQuality()}},
+\code{\link[=snapShot]{snapShot()}},
+\code{\link[=updateFullscreen]{updateFullscreen()}}
 }
 \concept{options}

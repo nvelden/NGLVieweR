@@ -29,10 +29,10 @@ NGLVieweR("7CID") \%>\%
 \item \code{\link[=updateSpin]{updateSpin()}}
 }
 
-Other animations: 
-\code{\link{setRock}()},
-\code{\link{updateRock}()},
-\code{\link{updateSpin}()},
-\code{\link{updateZoomMove}()}
+Other animations:
+\code{\link[=setRock]{setRock()}},
+\code{\link[=updateRock]{updateRock()}},
+\code{\link[=updateSpin]{updateSpin()}},
+\code{\link[=updateZoomMove]{updateZoomMove()}}
 }
 \concept{animations}

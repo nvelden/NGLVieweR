@@ -56,10 +56,10 @@ server = function(input, output) {
 \seealso{
 \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "updateFullscreen".
 
-Other options: 
-\code{\link{setFocus}()},
-\code{\link{setQuality}()},
-\code{\link{snapShot}()},
-\code{\link{updateFocus}()}
+Other options:
+\code{\link[=setFocus]{setFocus()}},
+\code{\link[=setQuality]{setQuality()}},
+\code{\link[=snapShot]{snapShot()}},
+\code{\link[=updateFocus]{updateFocus()}}
 }
 \concept{options}

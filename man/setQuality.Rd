@@ -25,10 +25,10 @@ NGLVieweR("7CID") \%>\%
   setQuality("medium")
 }
 \seealso{
-Other options: 
-\code{\link{setFocus}()},
-\code{\link{snapShot}()},
-\code{\link{updateFocus}()},
-\code{\link{updateFullscreen}()}
+Other options:
+\code{\link[=setFocus]{setFocus()}},
+\code{\link[=snapShot]{snapShot()}},
+\code{\link[=updateFocus]{updateFocus()}},
+\code{\link[=updateFullscreen]{updateFullscreen()}}
 }
 \concept{options}

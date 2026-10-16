@@ -75,10 +75,10 @@ if (interactive()) {
 \seealso{
 \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "snapshot".
 
-Other options: 
-\code{\link{setFocus}()},
-\code{\link{setQuality}()},
-\code{\link{updateFocus}()},
-\code{\link{updateFullscreen}()}
+Other options:
+\code{\link[=setFocus]{setFocus()}},
+\code{\link[=setQuality]{setQuality()}},
+\code{\link[=updateFocus]{updateFocus()}},
+\code{\link[=updateFullscreen]{updateFullscreen()}}
 }
 \concept{options}
