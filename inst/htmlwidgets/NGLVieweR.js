@@ -28,6 +28,8 @@ HTMLWidgets.widget({
       stage.tasks.signals.countChanged.add(function(count) {
         if (count > 0) {
           Shiny.onInputChange(`${el.id}_rendering`, true);
+        } else if (stage.pendingSnapshots > 0) {
+          // A snapshot reports the end of rendering itself, after its download
         } else {
           try {
             Shiny.onInputChange(`${el.id}_rendering`, false);
@@ -334,20 +336,37 @@ Shiny.addCustomMessageHandler('NGLVieweR:updateRock', function(message){
 });
 
 Shiny.addCustomMessageHandler('NGLVieweR:snapShot', function(message){
-  Shiny.onInputChange(`${message.id}_rendering`, true);
-  setTimeout(function() {
-
   var stage = getNGLStage(message.id);
 
-  if(typeof(stage) !== "undefined"){
-  stage.makeImage(message.param).then(function (blob) {
-      NGL.download(blob, message.fileName);
-
-    });
+  if(typeof(stage) === "undefined"){
+    Shiny.onInputChange(`${message.id}_rendering`, false);
+    return;
   }
 
-Shiny.onInputChange(`${message.id}_rendering`, false);
+  // makeImage() is asynchronous and NGL's task counter reaches zero just
+  // before the image is returned. Count running snapshots on the stage, so
+  // the countChanged handler leaves the end of rendering to this handler,
+  // which reports it after the download (and only if nothing else runs).
+  stage.pendingSnapshots = (stage.pendingSnapshots || 0) + 1;
+  Shiny.onInputChange(`${message.id}_rendering`, true);
 
+  var errorMessage = function (err) { return err && err.message ? err.message : String(err); };
+
+  setTimeout(function() {
+    stage.makeImage(message.param).then(function (blob) {
+      try {
+        NGL.download(blob, message.fileName);
+      } catch (err) {
+        console.error("NGLVieweR: snapshot download failed: " + errorMessage(err));
+      }
+    }, function (err) {
+      console.error("NGLVieweR: snapshot failed: " + errorMessage(err));
+    }).then(function () {
+      stage.pendingSnapshots--;
+      if (stage.pendingSnapshots === 0 && stage.tasks.count === 0) {
+        Shiny.onInputChange(`${message.id}_rendering`, false);
+      }
+    });
   }, 10);
 });
 

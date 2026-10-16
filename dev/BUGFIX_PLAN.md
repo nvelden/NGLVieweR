@@ -23,7 +23,7 @@ Start the chat with something like:
 | 5 | #6 `addStructure()` / `NGLVieweR()` parse input differently | committed (2026-10-16); explained; repro confirmed headless (2 of 5 inputs differ: 8-char file name, format with leading dot); failing test written (4 expectations fail as expected). Verified (2026-10-16): shared `.parse_structure_input()` in R/utils.R; 243 pass / 0 skip; rcmdcheck = baseline; repro: all 5 inputs same, both viewers load | see `git log --grep "Fix #6"` |
 | 6 | #7 Missing files, line vectors, binary formats | committed (2026-10-16); explained; repro confirmed headless (7a, 7b throw JS errors that also break other Shiny outputs; 7c gz: `ext 'gz' unknown`). Decisions: binary (mmtf) dropped from docs with a clear error; .gz/.bz2/.xz supported; rules table as proposed (missing path -> 'file not found', line vector/line breaks -> contents, validate format and data). Failing tests in test-parse-input.R (8 of 10 tests fail/error as expected). Verified (2026-10-16): 343 pass / 0 skip; rcmdcheck = baseline; repro: 7a R error, 7b/7c load 327 atoms, 0 console errors | see `git log --grep "Fix #7"` |
 | 7 | #8 Structure load failures are silent | committed (2026-10-16); explained; repro confirmed headless (bad code: stale 46-residue _sequence, no error; broken.pdb loads as 0 atoms without error; good+bad: nothing shown; console only says "error loading file: ''"). Decisions: all-or-nothing + _error; clear _sequence/_resno/_chainname/_PDB on failure; 0 atoms = error. Failing tests in test-browser-load-error.R (4/4 time out waiting for _error). Verified (2026-10-16): all loads awaited (no partial display), every failing structure named, errors after loading keep the structure, _error sent as event, stale renders ignored (render counter); 366 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #8"` |
-| 8 | #10 `snapShot` resets `_rendering` too early | todo | |
+| 8 | #10 `snapShot` resets `_rendering` too early | committed (2026-10-16); explained; repro confirmed headless (false at 19 ms, PNG at 164 ms); failing tests in test-browser-snapshot.R (order wrong; no error on failure). Verified (2026-10-16): snapshots counted on the stage (stage.pendingSnapshots), countChanged leaves the final false to the snapshot, which sends it after the download if no other task runs; tested with the real makeImage and overlapping snapshots; 372 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #10"` |
 | 9 | #9 `zoomMove()` overridden with several structures | todo | |
 | 10 | #11 Sequence inputs change shape | todo | |
 | 11 | #13 `updateSelection(name = name)` self-default | todo | |
@@ -819,6 +819,9 @@ users may already depend on 0-based.
   console.log (before #8 they acted on already removed components).
 - Overlapping renders: partly fixed in Step 7 (#8): results of an older
   render that finishes after a newer one are discarded (render counter).
+- Snapshot (from /code-review, Step 8): if NGL's makeImage() promise never
+  settles (e.g. a task that never finishes), `_rendering` stays TRUE; no
+  timeout fallback (NGL's own task counter would be stuck as well).
 - `setFocus()`/`setQuality()` override `stageParameters()` (from /code-review
   in Step 2). `renderValue` always calls `stage.setQuality(opts.setQuality)`
   and `stage.setFocus(opts.setFocus)` after `setParameters`, with defaults

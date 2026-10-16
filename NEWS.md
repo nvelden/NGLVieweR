@@ -1,6 +1,7 @@
 # NGLVieweR (development version)
 
 * Updated the bundled NGL.js from 2.0.0 to 2.4.0.
+* Fixed `snapShot()` setting `input$<outputId>_rendering` to `FALSE` before the image was made, so a spinner tied to it stopped too early. It now changes to `FALSE` after the PNG is handed to the download, and a failed snapshot is reported in the browser console.
 * Structure load failures are no longer silent. A new Shiny input `input$<outputId>_error` reports which structure could not be loaded and why (e.g. a PDB code that does not exist, a network error, or a file that contains no atoms), and is `NULL` after a successful load. After a failure the viewer is empty and the `_sequence`, `_resno`, `_chainname` and `_PDB` inputs are cleared, instead of keeping the values of the previous structure. Previously one failing structure also stopped all others without any message.
 * `NGLVieweR()` and `addStructure()` give clear R errors instead of an empty viewer (or a JavaScript error that could also stop other Shiny outputs) for input they cannot use: a file path that does not exist ("file not found"), file contents or an extensionless file without `format`, a malformed `format` (e.g. `NA` or `""`), `data` that is empty or not text, or a URL (not supported; download the file first).
 * File contents can now also be given as a vector of lines, e.g. `NGLVieweR(readLines("1crn.pdb"), format = "pdb")`. Text with line breaks is always treated as file contents.
