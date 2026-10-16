@@ -67,6 +67,12 @@ test_that("updateSelection()", {
   expect_sent(p, "updateSelection", list(name = "sel1", sele = "1-10"))
 })
 
+test_that("updateSelection() without name gives a clear error (#13)", {
+  p <- fake_proxy()
+  expect_error(updateSelection(p, sele = "1-10"), "updateSelection: 'name'")
+  expect_length(p$sent$msgs, 0)
+})
+
 test_that("updateColor()", {
   p <- fake_proxy()
   updateColor(p, "sel1", "red")

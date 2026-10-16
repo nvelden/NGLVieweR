@@ -4,7 +4,7 @@
 \alias{updateSelection}
 \title{Update a selection}
 \usage{
-updateSelection(NGLVieweR_proxy, name = name, sele = "none")
+updateSelection(NGLVieweR_proxy, name, sele = "none")
 }
 \arguments{
 \item{NGLVieweR_proxy}{A NGLVieweR object.}
@@ -20,7 +20,7 @@ parameters.
 }
 \description{
 Update the selected residues of an existing NGLVieweR selection
-in
+in Shinymode.
 }
 \examples{
 \dontrun{

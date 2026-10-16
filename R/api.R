@@ -173,7 +173,7 @@ removeSelection <- function(NGLVieweR_proxy, name) {
 #'Update a selection
 #'
 #'@description Update the selected residues of an existing NGLVieweR selection
-#'in
+#'  in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
 #'@param name Name of selection.
 #'@param sele Selected atoms/residues. See the section "selection-language" in
@@ -226,7 +226,12 @@ removeSelection <- function(NGLVieweR_proxy, name) {
 #'   shinyApp(ui, server)
 #' }
 #'@export
-updateSelection <- function(NGLVieweR_proxy, name = name, sele = "none"){
+updateSelection <- function(NGLVieweR_proxy, name, sele = "none"){
+
+  if (missing(name)) {
+    stop("updateSelection: 'name' is required; it is the name of the selection to update.",
+         call. = FALSE)
+  }
 
   message <- list(id = NGLVieweR_proxy$id, name = name, sele = sele)
   NGLVieweR_proxy$session$sendCustomMessage("NGLVieweR:updateSelection", message)
