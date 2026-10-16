@@ -24,7 +24,7 @@ Start the chat with something like:
 | 6 | #7 Missing files, line vectors, binary formats | committed (2026-10-16); explained; repro confirmed headless (7a, 7b throw JS errors that also break other Shiny outputs; 7c gz: `ext 'gz' unknown`). Decisions: binary (mmtf) dropped from docs with a clear error; .gz/.bz2/.xz supported; rules table as proposed (missing path -> 'file not found', line vector/line breaks -> contents, validate format and data). Failing tests in test-parse-input.R (8 of 10 tests fail/error as expected). Verified (2026-10-16): 343 pass / 0 skip; rcmdcheck = baseline; repro: 7a R error, 7b/7c load 327 atoms, 0 console errors | see `git log --grep "Fix #7"` |
 | 7 | #8 Structure load failures are silent | committed (2026-10-16); explained; repro confirmed headless (bad code: stale 46-residue _sequence, no error; broken.pdb loads as 0 atoms without error; good+bad: nothing shown; console only says "error loading file: ''"). Decisions: all-or-nothing + _error; clear _sequence/_resno/_chainname/_PDB on failure; 0 atoms = error. Failing tests in test-browser-load-error.R (4/4 time out waiting for _error). Verified (2026-10-16): all loads awaited (no partial display), every failing structure named, errors after loading keep the structure, _error sent as event, stale renders ignored (render counter); 366 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #8"` |
 | 8 | #10 `snapShot` resets `_rendering` too early | committed (2026-10-16); explained; repro confirmed headless (false at 19 ms, PNG at 164 ms); failing tests in test-browser-snapshot.R (order wrong; no error on failure). Verified (2026-10-16): snapshots counted on the stage (stage.pendingSnapshots), countChanged leaves the final false to the snapshot, which sends it after the download if no other task runs; tested with the real makeImage and overlapping snapshots; 372 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #10"` |
-| 9 | #9 `zoomMove()` overridden with several structures | todo | |
+| 9 | #9 `zoomMove()` overridden with several structures | committed (2026-10-16); explained; repro confirmed headless: duration 0 (default) with 2 structures always lost (camera 24 A off); duration 1000 works by animation timing; with superpose, zoomMove on a target aims at its pre-superpose position (47 A off). Failing tests in test-browser-zoommove.R (5 of 7 fail; the 2 duration-1000 cases without superpose already pass). Verified (2026-10-16): zoomMove applied after superpose, autoView and the Shiny inputs; shared zoomMoveTo() also used by updateZoomMove; R warns for zoomMove on several structures; repro all 10 cases 0.0 A; 386 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #9"` |
 | 10 | #11 Sequence inputs change shape | todo | |
 | 11 | #13 `updateSelection(name = name)` self-default | todo | |
 | 12 | #14 Dead code and build config cleanup | todo | |
@@ -632,6 +632,13 @@ depend on timing. The repro must establish which cases actually fail.
 **Look for:** with two structures the camera ends at the overall center, not
 the `zoomMove` center.
 
+**Measured in Step 9:** with the default `duration = 0`, zoomMove is always
+overridden by the final `stage.autoView()` when there are 2+ structures.
+With `duration > 0` it survives (the running animation overrides the
+immediate autoView), i.e. by timing. New: zoomMove's center is computed
+before superpose, so `zoomMove()` on a superposed target aims at where it
+was before it moved (47 A off in the repro).
+
 **Proposed fix.** Apply camera moves after all structures are loaded and
 superposed: first one `stage.autoView()`, then the (last) requested `zoomMove`.
 
@@ -822,6 +829,15 @@ users may already depend on 0-based.
 - Snapshot (from /code-review, Step 8): if NGL's makeImage() promise never
   settles (e.g. a task that never finishes), `_rendering` stays TRUE; no
   timeout fallback (NGL's own task counter would be stuck as well).
+- Test infrastructure: once (Step 9) chromote failed to start Chrome
+  ("cannot open the connection to http://127.0.0.1:<port>/json/version");
+  the test then ran under different conditions. Not reproduced in two
+  reruns. Watch for flakiness.
+- zoomMove (from /code-review, Step 9): (a) the center ignores component
+  transforms from setPosition()/setRotation()/setScale() (same family as the
+  superpose limit); documented in ?zoomMove; (b) the per-structure and final
+  stage.autoView() calls still run before a zoomMove replaces them; could
+  be skipped when a zoomMove is set (cosmetic, not done).
 - `setFocus()`/`setQuality()` override `stageParameters()` (from /code-review
   in Step 2). `renderValue` always calls `stage.setQuality(opts.setQuality)`
   and `stage.setFocus(opts.setFocus)` after `setParameters`, with defaults

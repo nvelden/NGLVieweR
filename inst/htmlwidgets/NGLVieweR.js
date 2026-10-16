@@ -1,3 +1,12 @@
+// Moves the camera to the center/zoom of a selection in a structure
+// component (opts: center, zoom, duration, z_offSet). Used by zoomMove() and
+// updateZoomMove().
+function zoomMoveTo(stage, component, opts) {
+  var center = component.getCenter(opts.center);
+  var zoom = component.getZoom(opts.zoom) + (opts.z_offSet || 0);
+  stage.animationControls.zoomMove(center, zoom, opts.duration || 0);
+}
+
 HTMLWidgets.widget({
 
   name: 'NGLVieweR',
@@ -188,14 +197,6 @@ HTMLWidgets.widget({
               o.setPosition([structureOpts.setPosition.x, structureOpts.setPosition.y, structureOpts.setPosition.z]);
             }
  
-            // Set zoomMove
-            var zoomMoveOpts = structureOpts.zoomMove;
-            if (zoomMoveOpts && typeof zoomMoveOpts.zoom !== 'undefined') {
-              var center = o.getCenter(zoomMoveOpts.center);
-              var zoom = o.getZoom(zoomMoveOpts.zoom) + zoomMoveOpts.z_offSet;
-              stage.animationControls.zoomMove(center, zoom, zoomMoveOpts.duration);
-            }
-
             // If in Shiny mode, collect AA sequences and other data
             if (HTMLWidgets.shinyMode) {
               var sequence = [];
@@ -268,6 +269,19 @@ HTMLWidgets.widget({
               Shiny.onInputChange(`${el.id}_chainname`, chainnames);
               Shiny.onInputChange(`${el.id}_error`, null);
             }
+
+          // zoomMove last: after superpose (so the center uses the superposed
+          // atom coordinates) and after autoView (so nothing moves the camera
+          // away again), and after the inputs were sent (so a bad selection
+          // does not stop them). If several structures have a zoomMove, the
+          // last one is used.
+          for (var z = structures.length - 1; z >= 0; z--) {
+            var zoomMoveOpts = opts.structures[z].zoomMove;
+            if (zoomMoveOpts && typeof zoomMoveOpts.zoom !== 'undefined') {
+              zoomMoveTo(stage, structures[z], zoomMoveOpts);
+              break;
+            }
+          }
 
         }).catch(function(err) {
           if (renderId !== renderCount) return;
@@ -412,18 +426,10 @@ Shiny.addCustomMessageHandler('NGLVieweR:updateZoomMove', function(message) {
     // Check if a specific structure index is provided
     if (typeof structureIndex === 'number' && structureIndex >= 0 && structureIndex < structures.length) {
       // Handle zoomMove for the specified structure
-      var structure = structures[structureIndex];
-      var center = structure.getCenter(message.center);
-      var zoom = structure.getZoom(message.zoom) + (message.z_offSet || 0);
-
-      stage.animationControls.zoomMove(center, zoom, message.duration);
+      zoomMoveTo(stage, structures[structureIndex], message);
     } else {
       // No specific index provided; default to the first structure
-      var structure = structures[0];
-      var center = structure.getCenter(message.center);
-      var zoom = structure.getZoom(message.zoom) + (message.z_offSet || 0);
-
-      stage.animationControls.zoomMove(center, zoom, message.duration);
+      zoomMoveTo(stage, structures[0], message);
     }
   } else {
     console.log("Structures not loaded, unavailable, or stage undefined.");

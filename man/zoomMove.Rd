@@ -28,6 +28,13 @@ object.
 \description{
 Add a zoom animation
 }
+\details{
+Applies to the last structure added. The camera moves after all
+structures are loaded and superposed (see \code{\link[=setSuperpose]{setSuperpose()}}). If
+\code{zoomMove()} is used for several structures, the last one is used
+(with a warning). The center is that of the atom coordinates, so it does
+not follow \code{\link[=setPosition]{setPosition()}}, \code{\link[=setRotation]{setRotation()}} or \code{\link[=setScale]{setScale()}}.
+}
 \examples{
 NGLVieweR("7CID") \%>\%
 stageParameters(backgroundColor = "white") \%>\%

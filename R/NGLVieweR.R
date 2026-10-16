@@ -630,6 +630,11 @@ setScale <- function(NGLVieweR, scale = 1) {
 #'   manual.
 #' @param duration Optional animation time in milliseconds (default = 0).
 #' @param z_offSet Optional zoom offset value (default = 0).
+#' @details Applies to the last structure added. The camera moves after all
+#'   structures are loaded and superposed (see [setSuperpose()]). If
+#'   \code{zoomMove()} is used for several structures, the last one is used
+#'   (with a warning). The center is that of the atom coordinates, so it does
+#'   not follow [setPosition()], [setRotation()] or [setScale()].
 #' @return List of zoomMove parameters to \code{NGLVieweR} \code{htmlwidgets}
 #'   object.
 #' @family transformations
@@ -651,6 +656,12 @@ zoomMove <- function(NGLVieweR, center, zoom, duration = 0, z_offSet = 0){
   opts <- list(center = center, zoom = zoom, duration = duration, z_offSet = z_offSet)
   
   last_structure_index <- length(NGLVieweR$x$structures)
+  earlier <- vapply(NGLVieweR$x$structures[-last_structure_index],
+                    function(s) length(s$zoomMove) > 0, logical(1))
+  if (any(earlier)) {
+    warning("zoomMove: an earlier structure also has a zoomMove(); only the last one is used.",
+            call. = FALSE)
+  }
   NGLVieweR$x$structures[[last_structure_index]]$zoomMove <- opts
   
   NGLVieweR
