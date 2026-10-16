@@ -26,6 +26,9 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      # shinytest2/chromote are not installed below (the browser tests are
+      # skipped on CI), so the check must accept missing Suggests
+      _R_CHECK_FORCE_SUGGESTS_: false
 
     steps:
       - uses: actions/checkout@v4
@@ -40,7 +43,13 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          # The browser tests are skipped on CI, so do not install their
+          # packages: chromote needs Chromium (a flaky download on Ubuntu)
+          # and websocket, which does not compile on R-devel macOS
+          extra-packages: |
+            any::rcmdcheck
+            shinytest2=?ignore
+            chromote=?ignore
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
