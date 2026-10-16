@@ -18,7 +18,7 @@ Start the chat with something like:
 | 1 | #2 Handlers pile up on re-render | committed (2026-10-16): 139 pass / 1 known skip; rcmdcheck = baseline. Decision: resize via htmlwidgets `resize()` only (window listener removed) | see `git log --grep "Fix #2"` |
 | 2 | #3 Spin/rock never switch off on re-render | committed (2026-10-16): 160 pass / 1 known skip. Decisions: spin wins (documented); stageParameters keys set by the previous render (only those) reset to NGL defaults | see `git log --grep "Fix #3"` |
 | 2b | #17 Content strings fail on R-devel (`file_ext` → `basename`), see Found during the work | committed (2026-10-16): 170 pass / 1 known skip; rcmdcheck = baseline. Helpers `.could_be_path()`/`.file_ext()` in R/utils.R | see `git log --grep "Fix #17"` |
-| 3 | #4 Superpose moves the wrong structure | todo | |
+| 3 | #4 Superpose moves the wrong structure | committed (2026-10-16): 209 pass / 1 known skip; rcmdcheck = baseline; vignette example checked (reference 0.000 Å, target 63 Å). Decision: reference stays put (NEWS note) | see `git log --grep "Fix #4"` |
 | 4 | #5 `updateFullscreen()` ignores its argument | todo | |
 | 5 | #6 `addStructure()` / `NGLVieweR()` parse input differently | todo | |
 | 6 | #7 Missing files, line vectors, binary formats | todo | |
@@ -361,6 +361,9 @@ So:
    refreshed, so on screen it may stay where it was. Whether it visibly
    moves depends on whether its representations were still being built
    (NGL builds them asynchronously), so the result can vary between runs.
+   *Repro (Step 3): not observed* — with the 1crn fixtures the drawings
+   always matched the moved coordinates. Still refresh every moved
+   structure in the fix; do not rely on async timing.
 4. `_PDB` is written before superposition, so it never contains the
    superposed coordinates (note only; may be intentional).
 
@@ -756,6 +759,15 @@ users may already depend on 0-based.
 - Click handler applies defaults only when `selectionParameters` is absent,
   not per field (e.g. proximity `NA` from a cleared `numericInput`).
   Pre-existing, minor.
+- `_PDB` is still written before superposition (see #4 point 4). After the
+  #4 fix the stale coordinates are those of the moved targets, not the
+  reference. Decide: send `_PDB` after superpose? (from /code-review, Step 3)
+- `setPosition()`/`setRotation()`/`setScale()` on a structure are component
+  transforms; superpose works on atom coordinates and ignores them, so a
+  transformed target is not visually on the reference. Pre-existing.
+- An exception inside `NGL.superpose()` (e.g. selection matching no atoms)
+  aborts the rest of the `.then` (no `_PDB`/`_sequence`, no autoView).
+  Handle with #8 (Step 7). Pre-existing.
 - `setFocus()`/`setQuality()` override `stageParameters()` (from /code-review
   in Step 2). `renderValue` always calls `stage.setQuality(opts.setQuality)`
   and `stage.setFocus(opts.setFocus)` after `setParameters`, with defaults

@@ -143,7 +143,7 @@ NGLVieweR("1CRN") %>%
 
 ## Superpose
 
-Structures can be superposed onto each other using the `setSuperpose()` function. It aligns the structures by specifying a reference structure (defaulting to the first one loaded) and defining the selections within each structure to be used for alignment.
+Structures can be superposed onto each other using the `setSuperpose()` function. It aligns the structures by specifying a reference structure (defaulting to the first one loaded) and defining the selections within each structure to be used for alignment. The reference structure stays in place; all other structures are moved onto it.
 
 ```{r superpose, screenshot.force=FALSE}
 NGLVieweR("1GZM") %>%

@@ -454,7 +454,8 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
 #' alignment.
 #' @param NGLVieweR A NGLVieweR object.
 #' @param reference The index of the reference structure to align other
-#'   structures to. Defaults to 1 (the first loaded structure).
+#'   structures to. Defaults to 1 (the first loaded structure). The reference
+#'   keeps its coordinates; every other structure is moved onto it.
 #' @param sele_reference Selection string for the reference structure,
 #'   specifying which parts to align. Mandatory.
 #' @param sele_target Selection string for each target structure, specifying
@@ -477,6 +478,12 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
 #' @export
 setSuperpose <- function(NGLVieweR, reference = 1, sele_reference, sele_target, superpose = TRUE) {
   
+  if (!is.numeric(reference) || length(reference) != 1 || !is.finite(reference) ||
+      reference < 1 || reference != round(reference)) {
+    stop("setSuperpose: 'reference' must be a single whole number of 1 or more.",
+         call. = FALSE)
+  }
+
   # Ensure sele_reference and sele_target are provided
   if (missing(sele_reference) || missing(sele_target)) {
     stop("Both 'sele_reference' and 'sele_target' parameters are mandatory and must be specified.")

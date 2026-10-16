@@ -181,23 +181,26 @@ HTMLWidgets.widget({
           
                       
           if (structures.length > 1 && opts.superpose.superpose) {
-              var refIndex = opts.superpose.reference - 1; 
-              var sRef = structures[refIndex].structure;
+              var refIndex = opts.superpose.reference - 1;
               var seleRef = opts.superpose.seleReference;
               var seleTarget = opts.superpose.seleTarget;
 
-              // Loop over all structures except the reference
-              for (var i = 0; i < structures.length; i++) {
-                  if (i !== refIndex) {
-                    var sTarget = structures[i].structure;
-                    // Superpose sTarget onto sRef
-                    NGL.superpose(sRef, sTarget, true, seleRef, seleTarget);
-                }
-                
-               }
+              if (!Number.isInteger(refIndex) || refIndex < 0 || refIndex >= structures.length) {
+                console.error("NGLVieweR: setSuperpose() reference " + opts.superpose.reference +
+                  " is out of range: there are " + structures.length + " structures.");
+              } else {
+                var sRef = structures[refIndex].structure;
 
-                // Update representations to reflect the new positions
-                structures[0].updateRepresentations({ position: true });
+                // Move every other structure onto the reference. NGL.superpose(a, b)
+                // moves a onto b, and its selections are in the same order.
+                for (var i = 0; i < structures.length; i++) {
+                  if (i !== refIndex) {
+                    NGL.superpose(structures[i].structure, sRef, true, seleTarget, seleRef);
+                    // Update representations to reflect the new position
+                    structures[i].updateRepresentations({ position: true });
+                  }
+                }
+              }
           }
           
           if (structures.length > 1) {

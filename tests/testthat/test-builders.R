@@ -61,6 +61,16 @@ test_that("setSuperpose() stores its arguments", {
                                  seleReference = ":A", seleTarget = ":B"))
 })
 
+test_that("setSuperpose() rejects an invalid reference", {
+  for (bad in list(0, -1, 1.5, NA, Inf, "1", c(1, 2))) {
+    expect_error(two_structures() %>%
+                   setSuperpose(reference = bad, sele_reference = ":A", sele_target = ":A"),
+                 "reference", info = deparse(bad))
+  }
+  expect_no_error(two_structures() %>%
+                    setSuperpose(reference = 2L, sele_reference = ":A", sele_target = ":A"))
+})
+
 test_that("setSuperpose() requires both selections", {
   expect_error(two_structures() %>% setSuperpose(sele_reference = ":A"),
                "'sele_reference' and 'sele_target' parameters are mandatory")

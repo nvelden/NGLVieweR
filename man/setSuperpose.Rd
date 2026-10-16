@@ -16,7 +16,8 @@ setSuperpose(
 \item{NGLVieweR}{A NGLVieweR object.}
 
 \item{reference}{The index of the reference structure to align other
-structures to. Defaults to 1 (the first loaded structure).}
+structures to. Defaults to 1 (the first loaded structure). The reference
+keeps its coordinates; every other structure is moved onto it.}
 
 \item{sele_reference}{Selection string for the reference structure,
 specifying which parts to align. Mandatory.}
