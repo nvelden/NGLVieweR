@@ -12,6 +12,8 @@ ui <- fluidPage(
   wellPanel(
     tags$b("What to look for"),
     tags$p("Switch between 1 and 2 structures and compare str() of the inputs. ",
+           "FIX: the new input$viewer_residues has the same shape for 1 or 2 structures; ",
+           "the old inputs below are unchanged on purpose. ",
            "With 1 structure, _sequence has one letter per residue and _resno is numeric. ",
            "With 2 structures, _sequence has one long string per structure and _resno ",
            "becomes text like \"1,2,3,...\". Code written for one structure (e.g. length(seq), ",
@@ -21,7 +23,11 @@ ui <- fluidPage(
     column(4,
       radioButtons("n", "Number of structures", c(1, 2), inline = TRUE),
       h4("Typical code written for one structure"),
-      verbatimTextOutput("typical")
+      tags$p("Old inputs (unchanged): breaks with 2 structures."),
+      verbatimTextOutput("typical"),
+      h4("The same with input$viewer_residues"),
+      tags$p("Works for 1 and 2 structures (here: structure 1)."),
+      verbatimTextOutput("typical_new")
     ),
     column(8, h4("str() of the inputs"), verbatimTextOutput("str"))
   ),
@@ -47,6 +53,17 @@ server <- function(input, output, session) {
       cat("\ninput$viewer_residues (new, same shape for 1 or 2 structures):\n")
       str(input$viewer_residues, vec.len = 3)
     }), collapse = "\n")
+  })
+  output$typical_new <- renderText({
+    res <- input$viewer_residues
+    req(res)
+    s1 <- res[res$structure == 1 & res$letter != "X", ]
+    paste0(
+      "nrow(s1):        ", nrow(s1), "   (number of residues)\n",
+      "s1$letter[5]:    ", s1$letter[5], "\n",
+      "s1$resno[1] + 1: ", s1$resno[1] + 1, "\n",
+      "structures:      ", paste(unique(res$structure), collapse = ", ")
+    )
   })
   output$typical <- renderText({
     seq <- input$viewer_sequence
