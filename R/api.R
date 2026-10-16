@@ -728,9 +728,16 @@ updateSpin <- function(NGLVieweR_proxy, spin = TRUE){
 
 #'Fullscreen
 #'
-#'@description Put viewer in fullscreen. Works in Shinymode.
+#'@description Enter or leave fullscreen. Works in Shinymode.
 #'@param NGLVieweR_proxy A NGLVieweR object.
-#'@param fullscreen If \code{TRUE} put viewer in fullscreen.
+#'@param fullscreen If \code{TRUE} (default) enter fullscreen, if
+#'  \code{FALSE} leave it. Nothing happens if the page is already in the
+#'  requested state.
+#'@param element What to show fullscreen: \code{"page"} (default) the whole
+#'  page, so the app's own controls stay visible, or \code{"viewer"} only the
+#'  viewer. Only used when entering fullscreen; users can always leave with Esc.
+#'@details Browsers only allow entering fullscreen in response to a user
+#'  action, such as clicking a button that triggers \code{updateFullscreen()}.
 #'@return API call containing \code{NGLVieweR} \code{id} and list of message
 #'  parameters.
 #'@family options
@@ -747,7 +754,8 @@ updateSpin <- function(NGLVieweR_proxy, spin = TRUE){
 #'   titlePanel("Viewer with API inputs"),
 #'   sidebarLayout(
 #'     sidebarPanel(
-#'       actionButton("fullscreen", "Fullscreen"),
+#'       actionButton("enter", "Enter fullscreen"),
+#'       actionButton("exit", "Exit fullscreen")
 #'     ),
 #'     mainPanel(
 #'       NGLVieweROutput("structure")
@@ -762,17 +770,30 @@ updateSpin <- function(NGLVieweR_proxy, spin = TRUE){
 #'     )
 #' })
 #'
-#'   observeEvent(input$fullscreen, {
+#'   observeEvent(input$enter, {
 #'   NGLVieweR_proxy("structure") %>%
-#'     updateFullscreen()
+#'     updateFullscreen(TRUE)
+#' })
+#'
+#'   observeEvent(input$exit, {
+#'   NGLVieweR_proxy("structure") %>%
+#'     updateFullscreen(FALSE)
 #' })
 #' }
 #'   shinyApp(ui, server)
 #' }
 #'@export
-updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE){
+updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE, element = c("page", "viewer")){
 
-  message <- list(id = NGLVieweR_proxy$id, fullscreen = fullscreen)
+  if (!is.logical(fullscreen) || length(fullscreen) != 1 || is.na(fullscreen)) {
+    stop("updateFullscreen: 'fullscreen' must be TRUE or FALSE.", call. = FALSE)
+  }
+  if (identical(element, c("page", "viewer"))) element <- "page"
+  if (!is.character(element) || length(element) != 1 || !element %in% c("page", "viewer")) {
+    stop("updateFullscreen: 'element' must be \"page\" or \"viewer\".", call. = FALSE)
+  }
+
+  message <- list(id = NGLVieweR_proxy$id, fullscreen = fullscreen, element = element)
   NGLVieweR_proxy$session$sendCustomMessage("NGLVieweR:updateFullscreen", 
                                             message)
 

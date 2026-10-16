@@ -6,6 +6,9 @@
 * The viewer now also resizes when its container changes size without a window resize, e.g. when a tab is shown or a sidebar collapses.
 * Fixed `setSuperpose()` moving the wrong structure. The reference structure now keeps its coordinates and every other structure is moved onto it, as documented. Previously the reference was moved onto the other structures, so with three or more structures only the last one ended up aligned. Note that the superposed scene is now in the coordinate frame of the reference.
 * `setSuperpose()` now gives an error for an invalid `reference` (not a whole number of 1 or more), and the viewer logs a clear console error when `reference` is larger than the number of structures.
+* Fixed `updateFullscreen()` ignoring its `fullscreen` argument: it always toggled, so `updateFullscreen(FALSE)` could enter fullscreen and `updateFullscreen(TRUE)` could leave it. It now only changes the state when it differs from the requested one.
+* `updateFullscreen()` has a new `element` argument: `"page"` (default, the whole page as before) or `"viewer"` (only the viewer).
+* The `updateFullscreen` example app now also runs outside an interactive R session.
 * Fixed `setSpin()` and `setRock()` not switching off when `renderNGLVieweR()` re-runs with `FALSE`: an animation started by an earlier render kept running. If both are `TRUE`, the structure spins (now documented).
 * `stageParameters()` options set in an earlier render but not in the current one now return to their NGL.js defaults on re-render, instead of staying in effect (e.g. a background color). Stage options that no render set (for example ones changed only with `updateStage()`) are left as they are.
 

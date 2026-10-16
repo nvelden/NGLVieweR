@@ -4,19 +4,33 @@
 \alias{updateFullscreen}
 \title{Fullscreen}
 \usage{
-updateFullscreen(NGLVieweR_proxy, fullscreen = TRUE)
+updateFullscreen(
+  NGLVieweR_proxy,
+  fullscreen = TRUE,
+  element = c("page", "viewer")
+)
 }
 \arguments{
 \item{NGLVieweR_proxy}{A NGLVieweR object.}
 
-\item{fullscreen}{If \code{TRUE} put viewer in fullscreen.}
+\item{fullscreen}{If \code{TRUE} (default) enter fullscreen, if
+\code{FALSE} leave it. Nothing happens if the page is already in the
+requested state.}
+
+\item{element}{What to show fullscreen: \code{"page"} (default) the whole
+page, so the app's own controls stay visible, or \code{"viewer"} only the
+viewer. Only used when entering fullscreen; users can always leave with Esc.}
 }
 \value{
 API call containing \code{NGLVieweR} \code{id} and list of message
 parameters.
 }
 \description{
-Put viewer in fullscreen. Works in Shinymode.
+Enter or leave fullscreen. Works in Shinymode.
+}
+\details{
+Browsers only allow entering fullscreen in response to a user
+action, such as clicking a button that triggers \code{updateFullscreen()}.
 }
 \examples{
 \dontrun{
@@ -30,7 +44,8 @@ ui <- fluidPage(
   titlePanel("Viewer with API inputs"),
   sidebarLayout(
     sidebarPanel(
-      actionButton("fullscreen", "Fullscreen"),
+      actionButton("enter", "Enter fullscreen"),
+      actionButton("exit", "Exit fullscreen")
     ),
     mainPanel(
       NGLVieweROutput("structure")
@@ -45,9 +60,14 @@ server = function(input, output) {
     )
 })
 
-  observeEvent(input$fullscreen, {
+  observeEvent(input$enter, {
   NGLVieweR_proxy("structure") \%>\%
-    updateFullscreen()
+    updateFullscreen(TRUE)
+})
+
+  observeEvent(input$exit, {
+  NGLVieweR_proxy("structure") \%>\%
+    updateFullscreen(FALSE)
 })
 }
   shinyApp(ui, server)

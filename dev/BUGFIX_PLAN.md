@@ -19,7 +19,7 @@ Start the chat with something like:
 | 2 | #3 Spin/rock never switch off on re-render | committed (2026-10-16): 160 pass / 1 known skip. Decisions: spin wins (documented); stageParameters keys set by the previous render (only those) reset to NGL defaults | see `git log --grep "Fix #3"` |
 | 2b | #17 Content strings fail on R-devel (`file_ext` → `basename`), see Found during the work | committed (2026-10-16): 170 pass / 1 known skip; rcmdcheck = baseline. Helpers `.could_be_path()`/`.file_ext()` in R/utils.R | see `git log --grep "Fix #17"` |
 | 3 | #4 Superpose moves the wrong structure | committed (2026-10-16): 209 pass / 1 known skip; rcmdcheck = baseline; vignette example checked (reference 0.000 Å, target 63 Å). Decision: reference stays put (NEWS note) | see `git log --grep "Fix #4"` |
-| 4 | #5 `updateFullscreen()` ignores its argument | todo | |
+| 4 | #5 `updateFullscreen()` ignores its argument | committed (2026-10-16); explained; repro confirmed headless with trusted clicks (FALSE enters, TRUE exits, element BODY). Decision: new `element = c("page", "viewer")`, default "page"; also fix the example's if (interactive()). Verified (2026-10-16): 234 pass / 0 skip; rcmdcheck = baseline; trusted-click check: page and viewer enter/leave correctly, sizes restored. Example now has Enter/Exit buttons | see `git log --grep "Fix #5"` |
 | 5 | #6 `addStructure()` / `NGLVieweR()` parse input differently | todo | |
 | 6 | #7 Missing files, line vectors, binary formats | todo | |
 | 7 | #8 Structure load failures are silent | todo | |
@@ -736,7 +736,7 @@ users may already depend on 0-based.
   (chromote → websocket) failing to compile; not confirmed.
 
 - The `_PDB` input is written before superposition (see #4, point 4).
-- `inst/examples/updateFullscreen/app.R` wraps the whole app in
+- (Fixed in Step 4 with #5.) `inst/examples/updateFullscreen/app.R` wrapped the whole app in
   `if (interactive()) { ... }`, so `app.R` returns `NULL` in a non-interactive
   R process (shinytest2, shiny-server, Rscript) and the app cannot start. It
   is the only example that does this. Its smoke test is skipped
@@ -768,6 +768,12 @@ users may already depend on 0-based.
 - An exception inside `NGL.superpose()` (e.g. selection matching no atoms)
   aborts the rest of the `.then` (no `_PDB`/`_sequence`, no autoView).
   Handle with #8 (Step 7). Pre-existing.
+- Fullscreen edge cases (from /code-review, Step 4), not fixed: (a) if the
+  browser rejects requestFullscreen (no user gesture), NGL's
+  toggleFullscreen still sets the element to screen size and never undoes
+  it; repeated calls overwrite the saved size. NGL behaviour. (b) With
+  several widgets or a fullscreen video on the page, "is fullscreen" is
+  page-wide, so one widget's TRUE/FALSE acts on another's fullscreen.
 - `setFocus()`/`setQuality()` override `stageParameters()` (from /code-review
   in Step 2). `renderValue` always calls `stage.setQuality(opts.setQuality)`
   and `stage.setFocus(opts.setFocus)` after `setParameters`, with defaults

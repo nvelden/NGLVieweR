@@ -79,12 +79,24 @@ test_that("updateRock() and updateSpin()", {
   expect_sent(p, "updateSpin", list(spin = FALSE))
 })
 
-test_that("updateFullscreen() sends the requested value", {
+test_that("updateFullscreen() sends the requested value and element", {
   p <- fake_proxy()
   updateFullscreen(p)
-  expect_sent(p, "updateFullscreen", list(fullscreen = TRUE))
+  expect_sent(p, "updateFullscreen", list(fullscreen = TRUE, element = "page"))
   updateFullscreen(p, FALSE)
-  expect_sent(p, "updateFullscreen", list(fullscreen = FALSE))
+  expect_sent(p, "updateFullscreen", list(fullscreen = FALSE, element = "page"))
+  updateFullscreen(p, TRUE, element = "viewer")
+  expect_sent(p, "updateFullscreen", list(fullscreen = TRUE, element = "viewer"))
+  updateFullscreen(p, TRUE, element = c("page", "viewer"))
+  expect_sent(p, "updateFullscreen", list(fullscreen = TRUE, element = "page"))
+})
+
+test_that("updateFullscreen() validates its arguments", {
+  p <- fake_proxy()
+  expect_error(updateFullscreen(p, element = "window"), "element")
+  expect_error(updateFullscreen(p, fullscreen = NA), "fullscreen")
+  expect_error(updateFullscreen(p, fullscreen = "yes"), "fullscreen")
+  expect_length(p$sent$msgs, 0)
 })
 
 test_that("updateZoomMove()", {

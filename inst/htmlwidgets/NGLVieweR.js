@@ -297,7 +297,18 @@ Shiny.addCustomMessageHandler('NGLVieweR:updateFullscreen', function(message){
 
   var stage = getNGLStage(message.id);
   if(typeof(stage) !== "undefined"){
-    stage.toggleFullscreen(document.body);
+    // toggleFullscreen() flips the state, so only call it when the current
+    // state differs from the requested one
+    var fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement ||
+      document.mozFullScreenElement || document.msFullscreenElement;
+    if (!!message.fullscreen !== !!fullscreenElement) {
+      if (message.fullscreen) {
+        stage.toggleFullscreen(message.element === "viewer" ? stage.viewer.container : document.body);
+      } else {
+        // Leave with the element NGL entered with, so it restores that element's size
+        stage.toggleFullscreen(stage.lastFullscreenElement || fullscreenElement);
+      }
+    }
   }
 
 });

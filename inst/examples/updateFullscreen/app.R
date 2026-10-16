@@ -1,14 +1,12 @@
 library(shiny)
 library(NGLVieweR)
 
-if (interactive()) {
-library(shiny)
-
 ui = fluidPage(
   titlePanel("Viewer with API inputs"),
   sidebarLayout(
     sidebarPanel(
-      actionButton("fullscreen", "Fullscreen"),
+      actionButton("enter", "Enter fullscreen"),
+      actionButton("exit", "Exit fullscreen")
     ),
     mainPanel(
       NGLVieweROutput("structure")
@@ -21,12 +19,14 @@ server = function(input, output) {
       addRepresentation("cartoon", param = list(name = "cartoon", color="red"))
   })
 
-  observeEvent(input$fullscreen,{
+  observeEvent(input$enter, {
+    NGLVieweR_proxy("structure") %>% updateFullscreen(TRUE)
+  })
 
-    NGLVieweR_proxy("structure") %>% updateFullscreen()
-
+  observeEvent(input$exit, {
+    NGLVieweR_proxy("structure") %>% updateFullscreen(FALSE)
   })
 }
-  shinyApp(ui, server)
-}
+
+shinyApp(ui, server)
 
