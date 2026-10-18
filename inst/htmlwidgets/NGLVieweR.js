@@ -20,6 +20,32 @@ function zoomMoveTo(stage, component, opts) {
   stage.animationControls.zoomMove(center, zoom, opts.duration || 0);
 }
 
+// Sets input$<id>_rendering to FALSE, unless NGL is still busy: a task is
+// running (loading, building a representation, making an image) or a
+// snapshot has not been downloaded yet. Whatever ends last reports it.
+function renderingDone(id, stage) {
+  if (stage && (stage.tasks.count > 0 || stage.pendingSnapshots > 0)) return;
+  Shiny.onInputChange(`${id}_rendering`, false);
+}
+
+// NGL bug (2.5.0): when a representation is removed, the stage stops
+// listening to its task counter without taking off the tasks still open
+// (a build in progress, or one that failed), so stage.tasks.count stays
+// above zero for good: _rendering stays TRUE and makeImage() never starts.
+// Take off whatever NGL left behind (nothing, once NGL fixes this).
+function fixTaskCounter(stage) {
+  var tasks = stage.tasks;
+  var unlisten = tasks.unlisten;
+  tasks.unlisten = function(counter) {
+    var listening = counter.signals.countChanged.has(tasks.change, tasks);
+    var open = counter.count;
+    var before = tasks.count;
+    unlisten.apply(tasks, arguments);
+    var left = listening ? open - (before - tasks.count) : 0;
+    if (left > 0) tasks.change(-left);
+  };
+}
+
 HTMLWidgets.widget({
 
   name: 'NGLVieweR',
@@ -29,6 +55,7 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
 
       var stage = new NGL.Stage(el);
+      fixTaskCounter(stage);
       var structures = null;
       // Options of the latest render, read by the event handlers below
       var currentOpts = null;
@@ -47,14 +74,13 @@ HTMLWidgets.widget({
      //<---------------------------// Shiny inputs // ---------------------------------->
      if (HTMLWidgets.shinyMode) {
       // Send rendering status to shiny
-      stage.tasks.signals.countChanged.add(function(count) {
+      // NGL dispatches countChanged(delta, count)
+      stage.tasks.signals.countChanged.add(function(delta, count) {
         if (count > 0) {
           Shiny.onInputChange(`${el.id}_rendering`, true);
-        } else if (stage.pendingSnapshots > 0) {
-          // A snapshot reports the end of rendering itself, after its download
         } else {
           try {
-            Shiny.onInputChange(`${el.id}_rendering`, false);
+            renderingDone(el.id, stage);
           } catch (e) {
             // already removed
           }
@@ -400,7 +426,7 @@ Shiny.addCustomMessageHandler('NGLVieweR:snapShot', function(message){
   var stage = getNGLStage(message.id);
 
   if(typeof(stage) === "undefined"){
-    Shiny.onInputChange(`${message.id}_rendering`, false);
+    renderingDone(message.id, stage);
     return;
   }
 
@@ -424,9 +450,7 @@ Shiny.addCustomMessageHandler('NGLVieweR:snapShot', function(message){
       console.error("NGLVieweR: snapshot failed: " + errorMessage(err));
     }).then(function () {
       stage.pendingSnapshots--;
-      if (stage.pendingSnapshots === 0 && stage.tasks.count === 0) {
-        Shiny.onInputChange(`${message.id}_rendering`, false);
-      }
+      renderingDone(message.id, stage);
     });
   }, 10);
 });
@@ -563,7 +587,7 @@ setTimeout(function() {
   releaseColorSchemes(stage);
   }
 
-Shiny.onInputChange(`${message.id}_rendering`, false);
+renderingDone(message.id, stage);
 
 }, 10);
 
@@ -580,7 +604,7 @@ setTimeout(function() {
   stage.getRepresentationsByName(message.name).setVisibility(message.value);
   }
 
-Shiny.onInputChange(`${message.id}_rendering`, false);
+renderingDone(message.id, stage);
 
 }, 10);
 });
@@ -605,7 +629,7 @@ setTimeout(function() {
   releaseColorSchemes(stage);
   }
 
-Shiny.onInputChange(`${message.id}_rendering`, false);
+renderingDone(message.id, stage);
 
 }, 10);
 });
@@ -622,7 +646,7 @@ setTimeout(function() {
   stage.setParameters(message.param);
  }
 
- Shiny.onInputChange(`${message.id}_rendering`, false);
+ renderingDone(message.id, stage);
 
 }, 10);
 });

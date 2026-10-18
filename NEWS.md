@@ -1,5 +1,8 @@
 # NGLVieweR (development version)
 
+* Fixed `input$<outputId>_rendering` changing to `FALSE` while the viewer was still busy, so a spinner tied to it stopped too early. `updateColor()`, `updateVisibility()`, `updateRepresentation()` and `updateStage()` set it to `FALSE` right away, even while a snapshot was being made or NGL.js was still rebuilding a representation (e.g. a surface), and with several NGL.js tasks at once (loading several structures) it changed to `FALSE` when the first one finished. It now changes to `FALSE` only when nothing is running.
+* Fixed `snapShot()` doing nothing, and `input$<outputId>_rendering` staying `TRUE`, after a representation was removed while it was still being built (e.g. `removeSelection()` and `addSelection()` of a surface while its sliders move, or a re-render). NGL.js kept counting the unfinished build as a running task.
+
 * Fixed PDB entry codes without a PDB-format file not loading (GitHub #17). RCSB only provides large entries, such as ribosomes and other big cryo-EM structures (e.g. `NGLVieweR("3J9M")`), as mmCIF, so loading them failed. A code now loads the PDB-format file as before, and the mmCIF file if that fails. `format = "pdb"` or `format = "cif"` now picks the file for a code (it used to be ignored); any other `format` for a code is now an error.
 
 * Updated the bundled NGL.js from 2.0.0 to 2.5.0.

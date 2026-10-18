@@ -31,7 +31,8 @@ Start the chat with something like:
 | 12 | #14 Dead code and build config cleanup | committed (2026-10-16); explained: addStructure per-structure setRock/setSpin/toggleRock/toggleSpin, commented-out block in NGLVieweR(), .Rbuildignore (^pkgdown$ twice, .gitignore unanchored, ^LICENSE\.md without $); failing test written. Verified (2026-10-16): JS reads only opts.setRock/setSpin (stage-wide); tarball 123 files, no stray files; 461 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #14"` |
 | 13 | #15 `structureIndex` leaks into NGL parameters | committed with Step 9b | see `git log --grep "Fix #18"` |
 | 14 | #12 0- vs 1-based indexing (breaking, decide last) | committed with Step 9b (decision: 1-based `structure`, `structureIndex` deprecated) | see `git log --grep "Fix #18"` |
-| 15 | #20 PDB codes without a legacy PDB file cannot be loaded (GitHub #17) | explained (2026-10-18); repro confirmed headless (3J9M and 4V6X: `_error` "could not load structure 1 (rcsb://3J9M.pdb)", also with `format = "cif"`; 1CRN loads). Risk test of mmCIF default done (22 entries; see section). Decision (user): C — `.pdb` first, `.cif` fallback; `format` picks the file. Fixed (2026-10-18): `fallback` field from `.parse_structure_input()`, JS retries with it; failing tests written first (parse-input: fallback/format; browser-pdb-code: fallback, both fail, no fallback, 3J9M). Verified: 639 pass / 0 fail / 0 skip; rcmdcheck = baseline; /code-review: no bugs, cleanups done. User checked repro (2026-10-18; skipped the example app). GitHub #17 commented (stays closed). Not committed | |
+| 15 | #20 PDB codes without a legacy PDB file cannot be loaded (GitHub #17) | explained (2026-10-18); repro confirmed headless (3J9M and 4V6X: `_error` "could not load structure 1 (rcsb://3J9M.pdb)", also with `format = "cif"`; 1CRN loads). Risk test of mmCIF default done (22 entries; see section). Decision (user): C — `.pdb` first, `.cif` fallback; `format` picks the file. Fixed (2026-10-18): `fallback` field from `.parse_structure_input()`, JS retries with it; failing tests written first (parse-input: fallback/format; browser-pdb-code: fallback, both fail, no fallback, 3J9M). Verified: 639 pass / 0 fail / 0 skip; rcmdcheck = baseline; /code-review: no bugs, cleanups done. User checked repro (2026-10-18; skipped the example app). Committed and pushed; GitHub #17 commented with the fix (stays closed) | see `git log --grep "Fix #20"` |
+| 16 | #21 Update functions reset `_rendering` too early | explained (2026-10-18); repro confirmed headless (snapshot + updateColor: `false` at 16 ms, PNG at 152 ms; surface rebuild: `false` at 15 ms with 1 task running; updateColor alone correct). Also found: countChanged handler read NGL's delta as the count (2 -> 1 sent `false`). Decision (user): include it. Fixed (2026-10-18): `renderingDone()` helper (false only when tasks 0 and no snapshot pending) used by countChanged, snapShot and the 4 update handlers. Making the count trustworthy exposed an NGL 2.5.0 leak (unlisten keeps a removed representation's open tasks: mid-build removal or failed build) -> `fixTaskCounter()` wraps stage.tasks.unlisten (takes off only what NGL left, so safe if NGL fixes it). Failing tests first (test-browser-rendering.R: 6 fail before, leak tests fail without the wrapper). Verified: 659 pass / 0 fail / 0 skip; rcmdcheck = baseline; stress script 17 cases settle (tasks 0, no false while busy); user's shinyNGLVieweR app: loader ends hidden in all 11 phases (old code: NGL count leaked to 15, snapshot never downloaded, loader stuck); /code-review findings addressed (see Found during the work). User checked repro (2026-10-18). Committed and pushed | see `git log --grep "Fix #21"` |
 
 States: `todo` → `explained` → `observed` (user confirmed seeing it) → `fixed` → `verified` → `committed`.
 
@@ -877,12 +878,44 @@ requests only the `.pdb`; 3J9M loads (158,384 atoms) with and without
 
 ---
 
+## Step 16 — #21 Update functions reset `_rendering` too early
+
+**Where.** `NGLVieweR.js` handlers `NGLVieweR:updateColor`,
+`updateVisibility`, `updateRepresentation`, `updateStage` (each sets
+`_rendering` true, runs its work in a 10 ms `setTimeout`, then sets it
+false unconditionally); and the `countChanged` handler at the top of the
+Shiny inputs block.
+
+**What happens.** (a) The handlers set `_rendering` false right after
+their synchronous work, even if NGL started a rebuild (a surface
+recalculates for a changed probe radius) or a snapshot is still running
+(undoes #10). (b) NGL's `Counter` dispatches `countChanged(delta, count)`;
+the handler names the first argument `count`, so every decrement sends
+`false`, including 2 -> 1 while a task still runs.
+
+**Repro `dev/repro/21-update-rendering`.** Three buttons (snapshot +
+updateColor, updateRepresentation surface rebuild, updateColor only) and a
+log of `_rendering` values and NGL task counts. **Look for:** lines marked
+WRONG; the debug panel counts them.
+
+**Proposed fix.** One helper that reports `false` only when
+`stage.tasks.count === 0` and no snapshot is pending; the four handlers
+call it instead of sending `false`; the countChanged handler uses the
+second argument (`count`) and the same helper.
+
+**Tests.** Browser: snapshot + updateColor (order: true, PNG, false);
+updateRepresentation with a rebuild (no `false` while tasks > 0);
+updateColor alone still ends with `false`; overlapping tasks (2 -> 1 sends
+no `false`).
+
+---
+
 ## Found during the work
 
 (Add anything new discovered while fixing; do not fix it inside another bug's step.)
 
-- **Second code review (2026-10-18), not yet scheduled.** #20 has its own
-  step above. The others:
+- **Second code review (2026-10-18), not yet scheduled.** #20 and #21 have
+  their own steps above. The others:
   - #19 `colorByValue(input$<id>_residues + value)` fails for multi-model
     (NMR) structures: `_residues` has one row per residue per model, so
     rows repeat and colorByValue() stops with "a residue is given more than
@@ -905,6 +938,21 @@ requests only the `.pdb`; 3J9M loads (158,384 atoms) with and without
     non-existent `input$backgroundColor`; App 1 names a ball+stick
     representation "cartoon"; `tools::file_ext` is re-exported
     (accidental; removing it changes the API).
+
+- From Step 16 (#21) /code-review and testing, not fixed: (a) an NGL build
+  that throws (e.g. `updateRepresentation(..., param = list(subdiv = -1))`)
+  never closes its NGL task; `_rendering` now stays TRUE (and NGL's
+  makeImage() waits) until that representation is removed or the viewer
+  re-renders (`fixTaskCounter()` then clears it). Before #21 the next update
+  reset `_rendering` to FALSE, but snapshots were already blocked.
+  (b) An exception inside an update handler's setTimeout skips
+  renderingDone() (pre-existing; the next update or finished task resets
+  it). (c) countChanged sends TRUE on every change above 0, also 3 -> 2
+  (harmless: Shiny drops repeated values; same as before for +1).
+  (d) shinyNGLVieweR (user's app) logs 7 console errors with and without
+  the fix: `sequenceOutput.js` "div is not defined" and Shiny "output in an
+  unexpected state" messages for the viewer output -- in the app, not the
+  package.
 
 - **#17 (Step 2b), high priority — content strings fail on R-devel** (found by CI on
   2026-10-16, ubuntu R-devel, run 38921922335). `NGLVieweR(<file contents>,
