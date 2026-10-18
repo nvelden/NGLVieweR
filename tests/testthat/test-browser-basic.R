@@ -19,7 +19,7 @@ test_that("widget renders the 1crn fixture and sends structure data to Shiny", {
   app$wait_for_value(input = "viewer_PDB", ignore = list(NULL))
 
   # The app must run the bundled NGL from the working tree.
-  expect_equal(app$get_js("NGL.Version"), "2.4.0")
+  expect_equal(app$get_js("NGL.Version"), "2.5.0")
   expect_equal(widget_js(app, "w.getStructure().length"), 1)
   expect_equal(widget_js(app, "w.getStructure()[0].structure.atomCount"), 327)
   expect_equal(widget_js(app, "stage.getRepresentationsByName('cartoon').list.length"), 1)
