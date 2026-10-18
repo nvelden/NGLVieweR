@@ -27,13 +27,16 @@ ca_coords <- function(app) {
   lapply(xyz, function(s) do.call(rbind, lapply(s, unlist)))
 }
 
-# CA coordinates as written in a fixture file.
-file_ca <- function(name) {
-  l <- readLines(fixture(name))
+# CA coordinates (n x 3) from PDB text.
+pdb_text_ca <- function(pdb) {
+  l <- strsplit(pdb, "\n", fixed = TRUE)[[1]]
   l <- l[grepl("^ATOM", l) & substr(l, 13, 16) == " CA "]
   cbind(as.numeric(substr(l, 31, 38)), as.numeric(substr(l, 39, 46)),
         as.numeric(substr(l, 47, 54)))
 }
+
+# CA coordinates as written in a fixture file.
+file_ca <- function(name) pdb_text_ca(paste(readLines(fixture(name)), collapse = "\n"))
 
 rmsd <- function(a, b) sqrt(mean(rowSums((a - b)^2)))
 
@@ -75,4 +78,47 @@ test_that("a reference larger than the number of structures logs an error", {
   ca <- ca_coords(app)
   expect_lt(rmsd(ca[[1]], file_ca(files[1])), 0.01)
   expect_lt(rmsd(ca[[2]], file_ca(files[2])), 0.01)
+})
+
+# Bug #27: input$<id>_PDB must hold the coordinates shown in the viewer,
+# i.e. be written after superposition.
+
+for (case in list(c(2, 1), c(3, 2))) {
+  n <- case[1]
+  ref <- case[2]
+  test_that(sprintf("_PDB holds the superposed coordinates (%d structures, reference %d)", n, ref), {
+    skip_if_no_browser()
+    app <- start_app(superpose_app(n, ref))
+    pdb <- unlist(app$wait_for_value(input = "viewer_PDB", ignore = list(NULL)))
+    expect_length(pdb, n)
+    ca <- ca_coords(app)
+    for (i in seq_len(n)) {
+      expect_lt(rmsd(pdb_text_ca(pdb[i]), ca[[i]]), 0.01,
+                label = sprintf("RMSD of exported structure %d to displayed", i))
+    }
+    # The exported reference is still at its file position.
+    expect_lt(rmsd(pdb_text_ca(pdb[ref]), file_ca(files[ref])), 0.01)
+    expect_equal(console_errors(app), character())
+  })
+}
+
+test_that("_PDB without superpose holds the file coordinates", {
+  skip_if_no_browser()
+  app <- start_app(make_app(c(
+    "files <- file.path(fixture_dir, c('1crn.pdb', '1crn_moved.pdb'))",
+    "ui <- fluidPage(NGLVieweROutput('viewer'))",
+    "server <- function(input, output) {",
+    "  output$viewer <- renderNGLVieweR({",
+    "    NGLVieweR(files[1]) %>% addRepresentation('cartoon') %>%",
+    "      addStructure(files[2]) %>% addRepresentation('cartoon')",
+    "  })",
+    "}",
+    "shinyApp(ui, server)"
+  )))
+  pdb <- unlist(app$wait_for_value(input = "viewer_PDB", ignore = list(NULL)))
+  expect_length(pdb, 2)
+  for (i in 1:2) {
+    expect_lt(rmsd(pdb_text_ca(pdb[i]), file_ca(files[i])), 0.01)
+  }
+  expect_equal(console_errors(app), character())
 })

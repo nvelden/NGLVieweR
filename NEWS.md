@@ -1,5 +1,6 @@
 # NGLVieweR (development version)
 
+* Fixed `input$<outputId>_PDB` holding the coordinates from before `setSuperpose()`: the PDB text was written before the structures were superposed, so an exported target did not overlay the reference although the viewer showed them aligned. It now has the superposed coordinates. (`setPosition()`, `setRotation()` and `setScale()` move only how a structure is drawn and are still not in `_PDB`.)
 * Fixed `input$<outputId>_rendering` changing to `FALSE` while the viewer was still busy, so a spinner tied to it stopped too early. `updateColor()`, `updateVisibility()`, `updateRepresentation()` and `updateStage()` set it to `FALSE` right away, even while a snapshot was being made or NGL.js was still rebuilding a representation (e.g. a surface), and with several NGL.js tasks at once (loading several structures) it changed to `FALSE` when the first one finished. It now changes to `FALSE` only when nothing is running.
 * Fixed `snapShot()` doing nothing, and `input$<outputId>_rendering` staying `TRUE`, after a representation was removed while it was still being built (e.g. `removeSelection()` and `addSelection()` of a surface while its sliders move, or a re-render). NGL.js kept counting the unfinished build as a running task.
 

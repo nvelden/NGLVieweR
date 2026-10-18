@@ -33,6 +33,7 @@ Start the chat with something like:
 | 14 | #12 0- vs 1-based indexing (breaking, decide last) | committed with Step 9b (decision: 1-based `structure`, `structureIndex` deprecated) | see `git log --grep "Fix #18"` |
 | 15 | #20 PDB codes without a legacy PDB file cannot be loaded (GitHub #17) | explained (2026-10-18); repro confirmed headless (3J9M and 4V6X: `_error` "could not load structure 1 (rcsb://3J9M.pdb)", also with `format = "cif"`; 1CRN loads). Risk test of mmCIF default done (22 entries; see section). Decision (user): C — `.pdb` first, `.cif` fallback; `format` picks the file. Fixed (2026-10-18): `fallback` field from `.parse_structure_input()`, JS retries with it; failing tests written first (parse-input: fallback/format; browser-pdb-code: fallback, both fail, no fallback, 3J9M). Verified: 639 pass / 0 fail / 0 skip; rcmdcheck = baseline; /code-review: no bugs, cleanups done. User checked repro (2026-10-18; skipped the example app). Committed and pushed; GitHub #17 commented with the fix (stays closed) | see `git log --grep "Fix #20"` |
 | 16 | #21 Update functions reset `_rendering` too early | explained (2026-10-18); repro confirmed headless (snapshot + updateColor: `false` at 16 ms, PNG at 152 ms; surface rebuild: `false` at 15 ms with 1 task running; updateColor alone correct). Also found: countChanged handler read NGL's delta as the count (2 -> 1 sent `false`). Decision (user): include it. Fixed (2026-10-18): `renderingDone()` helper (false only when tasks 0 and no snapshot pending) used by countChanged, snapShot and the 4 update handlers. Making the count trustworthy exposed an NGL 2.5.0 leak (unlisten keeps a removed representation's open tasks: mid-build removal or failed build) -> `fixTaskCounter()` wraps stage.tasks.unlisten (takes off only what NGL left, so safe if NGL fixes it). Failing tests first (test-browser-rendering.R: 6 fail before, leak tests fail without the wrapper). Verified: 659 pass / 0 fail / 0 skip; rcmdcheck = baseline; stress script 17 cases settle (tasks 0, no false while busy); user's shinyNGLVieweR app: loader ends hidden in all 11 phases (old code: NGL count leaked to 15, snapshot never downloaded, loader stuck); /code-review findings addressed (see Found during the work). User checked repro (2026-10-18). Committed and pushed | see `git log --grep "Fix #21"` |
+| 17 | #27 `_PDB` holds pre-superpose coordinates | committed; explained (2026-10-18); repro confirmed headless (`dev/repro/27-pdb-superpose`: target exported vs displayed CA RMSD 17.56 A, exported = file 0.00 A; superpose off: 0.00). Fixed (2026-10-18, user go-ahead): PDB text written after superpose (`structures.map(PdbWriter)` in the Shiny block). Failing tests first (test-browser-superpose.R: 3 fail before, targets 17.56/51.28 A). Verified: 671 tests, 670 pass + 1 flaky (test-browser-pdb-code.R:93, 1CRN.pdb listed twice; 3/3 reruns pass, see Found during the work); rcmdcheck = baseline; repro 0.00 A; /code-review: 4 minor findings addressed. Committed and pushed (2026-10-18) | see `git log --grep "Fix #27"` |
 
 States: `todo` → `explained` → `observed` (user confirmed seeing it) → `fixed` → `verified` → `committed`.
 
@@ -910,6 +911,35 @@ no `false`).
 
 ---
 
+## Step 17 — #27 `input$<id>_PDB` holds the coordinates from before superposition
+
+**Where.** `NGLVieweR.js` `renderValue`: `new NGL.PdbWriter(o.structure)`
+runs per structure inside the load loop; the `NGL.superpose()` block runs
+after the loop.
+
+**What happens.** `NGL.superpose(target, ref, true, ...)` rewrites the
+target's atom coordinates in place, but the PDB text was already written,
+so `_PDB` of every target holds its file coordinates. Apps that export
+`_PDB` get unaligned structures although the viewer shows them aligned.
+(Already noted under #4 point 4 and in "Found during the work".)
+
+**Repro `dev/repro/27-pdb-superpose`.** 1crn.pdb + 1crn_moved.pdb with
+setSuperpose on/off; debug panel: CA RMSD exported `_PDB` vs displayed, and
+vs file; download button for the exported PDBs. **Look for:** structure 2
+"exported vs displayed" 17.56 A with superpose on; 0.00 with it off.
+
+**Proposed fix.** Write the PDB text after the superpose block (one loop
+over `structures` before the inputs are sent). The reference and
+non-superposed loads are unchanged (coordinates not touched). Component
+transforms (`setPosition`/`setRotation`/`setScale`) stay out of `_PDB`, as
+before (they are not atom coordinates).
+
+**Tests.** Browser (test-browser-superpose.R): for each superpose case,
+CA from `_PDB` matches the displayed CA (RMSD < 0.01) for every structure;
+without superpose `_PDB` equals the file coordinates.
+
+---
+
 ## Found during the work
 
 (Add anything new discovered while fixing; do not fix it inside another bug's step.)
@@ -972,7 +1002,8 @@ no `false`).
   R 4.7 on macOS; dependencies built from source). Probably a new Suggests
   (chromote → websocket) failing to compile; not confirmed.
 
-- The `_PDB` input is written before superposition (see #4, point 4).
+- Flaky (from Step 17): `test-browser-pdb-code.R:93` once saw `1CRN.pdb` twice in `performance.getEntriesByType('resource')` during the full suite (passed 3/3 alone). Probably a browser re-request; consider deduplicating `rcsb_requests()` or checking `length(unique())`.
+- The `_PDB` input is written before superposition (see #4, point 4). Now Step 17 (#27).
 - (Fixed in Step 4 with #5.) `inst/examples/updateFullscreen/app.R` wrapped the whole app in
   `if (interactive()) { ... }`, so `app.R` returns `NULL` in a non-interactive
   R process (shinytest2, shiny-server, Rscript) and the app cannot start. It

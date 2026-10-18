@@ -221,7 +221,6 @@ HTMLWidgets.widget({
           var sequences = [];
           var resnos = [];
           var chainnames = [];
-          var PDBdatas = [];
           // One entry per residue of every structure, sent as columns and
           // turned into a data frame in R (see .residues_input)
           var residues = { structure: [], chain: [], resno: [], inscode: [],
@@ -280,15 +279,10 @@ HTMLWidgets.widget({
                 }
               });
 
-              // Write PDB
-              var writer = new NGL.PdbWriter(o.structure);
-              var PDBdata = writer.getData();
-              
               // Collect data for all structures
               sequences.push(sequence);
               resnos.push(resno);
               chainnames.push(chainname);
-              PDBdatas.push(PDBdata);
               
             }
 
@@ -325,6 +319,10 @@ HTMLWidgets.widget({
           // Send data do shiny
           if (HTMLWidgets.shinyMode) {
 
+              // Write PDB after superpose, so it has the superposed atom
+              // coordinates (component transforms such as setPosition()
+              // are not atom coordinates and are not written)
+              var PDBdatas = structures.map(o => new NGL.PdbWriter(o.structure).getData());
               Shiny.onInputChange(`${el.id}_PDB`, PDBdatas);
               
               if (sequences.length > 1) {

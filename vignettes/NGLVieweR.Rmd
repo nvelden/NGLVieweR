@@ -486,7 +486,7 @@ In a Shiny application one can retrieve information from the widget as inputs ba
 -   input\$structure_resno - will return all the sequence numbers as a numeric vector. With several structures it is one comma-separated string per structure; use `_residues` there.
 -   input\$structure_chainname - will return the chainname of each amino acid as a character vector. With several structures it is one joined string per structure; use `_residues` there.
 -   input\$structure_rendering - will return `TRUE` if the widget is loading or `FALSE` when completed.
--   input\$structure_PDB - will return the PDB file as a text string.
+-   input\$structure_PDB - will return the PDB file as a text string, one per structure. With `setSuperpose()` it has the superposed coordinates.
 -   input\$structure_selAround - will return a list of atoms surrounding a clicked residue.
 -   input\$structure_selectionStructure - the number (counting from 1) of the structure that was clicked. Pass it as `structure` to `addSelection()` or `updateZoomMove()` to act on the clicked structure when several are loaded.
 -   input\$structure_error - `NULL` when the structures loaded, otherwise a message saying which structure could not be loaded and why (e.g. a PDB code that does not exist, no network connection or a file in the wrong format). After a failed load the viewer is empty and the sequence, resno, chainname and PDB inputs are `NULL`.
