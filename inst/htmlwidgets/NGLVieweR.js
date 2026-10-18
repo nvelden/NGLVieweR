@@ -113,6 +113,7 @@ HTMLWidgets.widget({
 
       //In case of Rerendering remove all components
       stage.removeAllComponents();
+      releaseColorSchemes(stage);
       structures = null;
       if (HTMLWidgets.shinyMode) {
         // The clicked structure no longer exists
@@ -201,7 +202,7 @@ HTMLWidgets.widget({
             var representation = structureOpts.addRepresentation;
             var arrType = representation.type;
             var arrValues = representation.values;
-            arrHandler(arrValues, "color");
+            arrHandler(arrValues, "color", stage, structures);
 
             // Apply to all representation values objects
             arrValues.forEach((value, repIndex) => {
@@ -337,7 +338,9 @@ HTMLWidgets.widget({
             }
           } else {
             // The structures loaded, but setting them up failed (e.g. an
-            // unknown representation type); keep what is shown
+            // unknown representation type); keep what is shown, but free
+            // color schemes of representations that were not added
+            releaseColorSchemes(stage);
             message = "error while displaying the structures: " + message;
           }
           console.error("NGLVieweR: " + message);
@@ -497,6 +500,7 @@ Shiny.addCustomMessageHandler('NGLVieweR:removeSelection', function(message){
 
  if(typeof(stage) !== "undefined"){
   stage.getRepresentationsByName(message.name).dispose();
+  releaseColorSchemes(stage);
  }
 
 });
@@ -504,6 +508,7 @@ Shiny.addCustomMessageHandler('NGLVieweR:removeSelection', function(message){
 Shiny.addCustomMessageHandler('NGLVieweR:addSelection', function(message) {
 
   // Get the array of loaded structures
+  var stage = getNGLStage(message.id);
   var structures = getNGLStructure(message.id);
 
   // Check if structures are loaded
@@ -515,7 +520,7 @@ Shiny.addCustomMessageHandler('NGLVieweR:addSelection', function(message) {
 
     // Convert color if necessary
     if (typeof color === 'object' && color !== null) {
-      param['color'] = colorMaker(param['color']);
+      param['color'] = colorMaker(param['color'], stage, structures);
     }
 
     var target = structureFromMessage(message, structures, "addSelection");
@@ -527,6 +532,8 @@ Shiny.addCustomMessageHandler('NGLVieweR:addSelection', function(message) {
     } else if (target) {
       target.addRepresentation(message.type, param);
     }
+    // Frees the color scheme if no representation was added
+    releaseColorSchemes(stage);
 
   } else {
     console.log("Structures not loaded or unavailable.");
@@ -542,11 +549,12 @@ Shiny.onInputChange(`${message.id}_rendering`, true);
 setTimeout(function() {
 
 
-  if(typeof color === 'object' && color !== null){
-    color = colorMaker(color);
-  }
   if(typeof(stage) !== "undefined"){
+  if(typeof color === 'object' && color !== null){
+    color = colorMaker(color, stage, getNGLStructure(message.id));
+  }
   stage.getRepresentationsByName(message.name).setColor(color);
+  releaseColorSchemes(stage);
   }
 
 Shiny.onInputChange(`${message.id}_rendering`, false);
@@ -577,17 +585,18 @@ Shiny.addCustomMessageHandler('NGLVieweR:updateRepresentation', function(message
     
     var param = message.param;
     var color = param['color'];
-      
-      //Convert color values
-      if(typeof color === 'object' && color !== null){
-      param['color'] = colorMaker(param['color']);
-      }
 
 Shiny.onInputChange(`${message.id}_rendering`, true);
 setTimeout(function() {
 
   if(typeof(stage) !== "undefined"){
+  //Convert color values. Registered here, right before it is used, so a
+  //releaseColorSchemes() in between cannot remove the new scheme.
+  if(typeof color === 'object' && color !== null){
+    param['color'] = colorMaker(color, stage, getNGLStructure(message.id));
+  }
   stage.getRepresentationsByName(message.name).setParameters(message.param);
+  releaseColorSchemes(stage);
   }
 
 Shiny.onInputChange(`${message.id}_rendering`, false);

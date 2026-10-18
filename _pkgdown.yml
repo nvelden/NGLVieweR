@@ -34,6 +34,7 @@ reference:
   - '`addRepresentation`'
   - '`addSelection`'
   - '`addStructure`'
+  - '`colorByValue`'
   - '`NGLVieweR-shiny`'
   - '`NGLVieweR`'
   - '`NGLVieweR_example`'
