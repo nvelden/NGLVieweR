@@ -16,7 +16,8 @@ string or a vector of lines.}
 
 \item{format}{Format of the structure, as in \code{\link[=NGLVieweR]{NGLVieweR()}} (e.g. "pdb",
 "cif"). Needed for file contents and when the format cannot be inferred
-from the file name.}
+from the file name. For a PDB entry code it picks the file downloaded
+from RCSB, as in \code{\link[=NGLVieweR]{NGLVieweR()}}.}
 }
 \value{
 An updated NGLVieweR object with the added structure.

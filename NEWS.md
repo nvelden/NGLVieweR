@@ -1,5 +1,7 @@
 # NGLVieweR (development version)
 
+* Fixed PDB entry codes without a PDB-format file not loading (GitHub #17). RCSB only provides large entries, such as ribosomes and other big cryo-EM structures (e.g. `NGLVieweR("3J9M")`), as mmCIF, so loading them failed. A code now loads the PDB-format file as before, and the mmCIF file if that fails. `format = "pdb"` or `format = "cif"` now picks the file for a code (it used to be ignored); any other `format` for a code is now an error.
+
 * Updated the bundled NGL.js from 2.0.0 to 2.5.0.
 * New `colorByValue()`: color residues by a numeric value computed in R (a conservation score, a mutation effect, B-factors, a p-value). Values are mapped onto a color gradient (`palette`, `domain`), residues with a missing value or no data get `na_color`, and the result can be used as `color` in `addRepresentation()`, `addSelection()`, `updateColor()` and `updateRepresentation()`. Takes a data frame (`resno`, `value`, optionally `chain`, `inscode` and `structure`, so `input$<outputId>_residues` with an added `value` column works as is) or a named vector such as `c("A:12" = 0.3)`.
 * Fixed color schemes piling up in NGL.js: every render, `addSelection()`, `updateColor()` or `updateRepresentation()` with a selection color (`color = list(c("red", "1-10"), ...)`) registered a new color scheme that was never removed. Color schemes are now removed once no representation uses them.

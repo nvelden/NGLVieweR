@@ -15,7 +15,11 @@ from \code{readLines()}). Files compressed with gzip, bzip2 or xz
 \item{format}{Input format (cif, mmcif, mcif, pdb, ent, pqr, gro, sdf, sd,
 mol2), with or without a leading dot. Needed for file contents and for
 files without a recognisable extension. Binary formats such as MMTF are
-not supported.}
+not supported. For a PDB entry code, \code{"pdb"} or \code{"cif"} picks
+the file downloaded from RCSB; without \code{format} the PDB-format file
+is used, and the mmCIF file if there is none (large entries such as
+ribosomes only exist as mmCIF). For such entries, \code{format = "cif"}
+saves the failed request for the PDB-format file.}
 
 \item{width, height}{Must be a valid CSS unit (like \code{'100\%'},
 \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a

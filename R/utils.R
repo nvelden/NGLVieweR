@@ -63,6 +63,9 @@
     }
   }
 
+  # mmCIF file to load when the PDB code's .pdb fails (codes only)
+  fallback <- NULL
+
   # A vector of lines (e.g. from readLines()) is file contents
   if (length(data) > 1) {
     data <- paste(data, collapse = "\n")
@@ -91,10 +94,21 @@
     file_ext <- format
     type <- "file"
   } else {
-    # A PDB code
-    file_ext <- format
+    # A PDB code. RCSB has no legacy .pdb file for large entries, so without
+    # a format the widget falls back to mmCIF when the .pdb fails to load.
+    # The .pdb stays first: NGL reads it more completely than mmCIF (bonds of
+    # atoms with alternate locations, the "sugar" selection, the unit cell).
     type <- "code"
-    data <- sprintf("rcsb://%s.pdb", data)
+    code <- data
+    if (is.null(format)) {
+      file_ext <- NULL
+      data <- sprintf("rcsb://%s.pdb", code)
+      fallback <- sprintf("rcsb://%s.cif", code)
+    } else {
+      file_ext <- switch(tolower(format), pdb = , ent = "pdb", cif = , mmcif = , mcif = "cif",
+        fail("for a PDB code, 'format' must be \"pdb\" or \"cif\"."))
+      data <- sprintf("rcsb://%s.%s", code, file_ext)
+    }
   }
 
   if (type == "file") {
@@ -103,7 +117,7 @@
     .check_text_format(file_ext, fail)
   }
 
-  list(type = type, data = data, file_ext = file_ext)
+  list(type = type, data = data, file_ext = file_ext, fallback = fallback)
 }
 
 .check_text_format <- function(file_ext, fail) {

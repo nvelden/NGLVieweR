@@ -31,6 +31,7 @@ Start the chat with something like:
 | 12 | #14 Dead code and build config cleanup | committed (2026-10-16); explained: addStructure per-structure setRock/setSpin/toggleRock/toggleSpin, commented-out block in NGLVieweR(), .Rbuildignore (^pkgdown$ twice, .gitignore unanchored, ^LICENSE\.md without $); failing test written. Verified (2026-10-16): JS reads only opts.setRock/setSpin (stage-wide); tarball 123 files, no stray files; 461 pass / 0 skip; rcmdcheck = baseline | see `git log --grep "Fix #14"` |
 | 13 | #15 `structureIndex` leaks into NGL parameters | committed with Step 9b | see `git log --grep "Fix #18"` |
 | 14 | #12 0- vs 1-based indexing (breaking, decide last) | committed with Step 9b (decision: 1-based `structure`, `structureIndex` deprecated) | see `git log --grep "Fix #18"` |
+| 15 | #20 PDB codes without a legacy PDB file cannot be loaded (GitHub #17) | explained (2026-10-18); repro confirmed headless (3J9M and 4V6X: `_error` "could not load structure 1 (rcsb://3J9M.pdb)", also with `format = "cif"`; 1CRN loads). Risk test of mmCIF default done (22 entries; see section). Decision (user): C — `.pdb` first, `.cif` fallback; `format` picks the file. Fixed (2026-10-18): `fallback` field from `.parse_structure_input()`, JS retries with it; failing tests written first (parse-input: fallback/format; browser-pdb-code: fallback, both fail, no fallback, 3J9M). Verified: 639 pass / 0 fail / 0 skip; rcmdcheck = baseline; /code-review: no bugs, cleanups done. User checked repro (2026-10-18; skipped the example app). GitHub #17 commented (stays closed). Not committed | |
 
 States: `todo` → `explained` → `observed` (user confirmed seeing it) → `fixed` → `verified` → `committed`.
 
@@ -788,9 +789,122 @@ users may already depend on 0-based.
 
 ---
 
+## Step 15 — #20 PDB codes without a legacy PDB file cannot be loaded (GitHub #17)
+
+From the second code review (2026-10-18). Reported by a user as GitHub
+issue #17 (closed, but only half fixed).
+
+**Where.** `.parse_structure_input()` in `R/utils.R` (~94-97): a PDB code
+always becomes `rcsb://<code>.pdb`, and `format` is stored but never used
+for codes (`NGLVieweR.js` calls `stage.loadFile(structureOpts.data)`).
+
+**What happens.** RCSB has no legacy PDB-format file for large entries
+(ribosomes, big cryo-EM assemblies: more than 99,999 atoms or 62 chains).
+`https://files.rcsb.org/download/3J9M.pdb` and `4V6X.pdb` return 404, the
+`.cif` files return 200. So `NGLVieweR("3J9M")` fails with
+`_error` "could not load structure 1 (rcsb://3J9M.pdb): error loading
+file: ''", and `format = "cif"` is silently ignored. The other half of
+GitHub #17 (local `.cif` files) is fixed by NGL.js 2.5.0: 3J9M.cif
+(17 MB, 158,384 atoms, 220 chains) loads as a path, as `.cif.gz` and as
+contents with `format = "cif"` (checked 2026-10-18).
+
+**Measured (risk of switching codes to mmCIF, 2026-10-18).** 22 entries
+loaded from RCSB as `.pdb` and `.cif` in headless Chrome and compared field
+by field: the 7 codes in docs/tests (1CRN, 7CID, 1GZM, 1U19, 3RY2, 3J9M,
+4V6X; the last two have no .pdb) plus 4HHB, 1HSG, 3PTB, 1CA2, 1EMA, 1BNA,
+1EHZ, 1D3Z, 1L2Y, 1EJG, 3NIR, 1IGT, 2FBJ, 3HFM, 1STP, 1AON, 6VXX.
+Scripts: scratchpad `i17/fingerprint.js`, `risk.R`, `dig.js` (not kept).
+- Identical in all 22: every atom (coordinates, B-factor, occupancy,
+  element, altloc), residues and their order, chain names, residue numbers,
+  insertion codes, models, secondary structure, `_sequence`, `_PDB`
+  output, polymer fragments (cartoon), disulfides drawn.
+- Better in mmCIF: ligand double bonds (biotin in 3RY2, GFP chromophore),
+  modified nucleotides count as `nucleic` (1EHZ), the chromophore as
+  `protein` (1EMA), 1L2Y no longer classed as `ligand`, no bogus HEM
+  O1A-O2A bond (4HHB), `structure.header` has resolution and dates.
+- Worse in mmCIF (NGL's CIF parser):
+  (1) atoms with an alternate location lose all bonds: in ball+stick
+  3RY2 residue 22 (in our docs) has 36 sticks from .pdb, 24 from .cif;
+  1EJG 856 -> 672. Common in high-resolution X-ray structures.
+  (2) `sugar` selects nothing for glycans (6VXX NAG: 882 -> 0 atoms;
+  still `ligand`/`hetero`). (3) no unit cell, so the `UNITCELL` and
+  `SUPERCELL` assemblies are gone. (4) N-terminal H1/H2/H3 unbonded in
+  some entries (1IGT, 1L2Y). Disulfide/metal bonds have order 0 but are
+  drawn.
+- Selections can match different atom sets in entries with modified
+  residues (`protein`, `nucleic`, `ligand`, `polymer`, `sidechain`,
+  `backbone`), mostly more correct.
+- mmCIF downloads are 15-75% larger (4HHB: 107 kB -> 189 kB compressed).
+
+**Repro `dev/repro/20-pdb-code-cif`.** Radio buttons: 1CRN, 3J9M,
+3J9M with `format = "cif"`, 4V6X. Debug panel: the URL R sends,
+`input$viewer_error`, residues loaded (`nrow(input$viewer_residues)`).
+Needs network (RCSB). **Look for:** 1CRN loads; 3J9M/4V6X show an error
+and an empty viewer, also with `format = "cif"`.
+
+**Decision.** (A) use `format` for codes only (`"pdb"`/`"cif"`), default
+stays `.pdb`, so `NGLVieweR("3J9M")` still fails without `format`;
+(B) fetch codes as mmCIF by default, `format = "pdb"` keeps the old file;
+(C) try `.pdb` and fall back to `.cif` when it fails.
+
+**Proposed fix.** User first preferred (B); after the risk test above,
+(C) with an explicit `format` is the zero-risk option: without `format`,
+load `.pdb` and only if that fails load `.cif` (entries that load today
+are unchanged; only entries that fail today change); `format = "pdb"` or
+`"cif"` (aliases `"mmcif"`, `"mcif"`) picks the file, no fallback; clear
+R error for any other format. NEWS bullet referencing GitHub #17;
+`?NGLVieweR` `format` docs. **Decision (user, 2026-10-18): C.** `"ent"`
+is accepted as `"pdb"` (documented format, so it must not start failing).
+
+**Known limits (from /code-review, accepted).** The fallback runs on any
+`.pdb` load failure, not only a 404 (NGL's rejection carries no HTTP
+status; a network error would usually fail the `.cif` too). When both
+fail, `_error` names both URLs but carries only the `.cif` error (NGL's
+messages are the same empty "error loading file: ''"). A `.pdb` that loads
+with 0 atoms does not fall back. A large entry or a mistyped code costs
+two requests; `format = "cif"` avoids it (documented).
+
+**Tests.** Unit (test-parse-input.R): code without format -> `.pdb` data
+and `.cif` fallback; `format` `pdb`/`PDB`/`.pdb`/`ent` -> `.pdb`,
+`cif`/`CIF`/`.cif`/`mmcif`/`mcif` -> `.cif`, both without fallback; other
+format -> error; files get no fallback; all for `NGLVieweR()` and
+`addStructure()`. Browser test-browser-pdb-code.R: fallback without
+network (fixtures served with `addResourcePath`, `data` pointing at a
+missing file): loads from the fallback; both fail -> `_error` names both;
+no fallback -> only the given file. With network (skip_if_offline): 1CRN
+requests only the `.pdb`; 3J9M loads (158,384 atoms) with and without
+`format = "cif"`.
+
+---
+
 ## Found during the work
 
 (Add anything new discovered while fixing; do not fix it inside another bug's step.)
+
+- **Second code review (2026-10-18), not yet scheduled.** #20 has its own
+  step above. The others:
+  - #19 `colorByValue(input$<id>_residues + value)` fails for multi-model
+    (NMR) structures: `_residues` has one row per residue per model, so
+    rows repeat and colorByValue() stops with "a residue is given more than
+    once" (confirmed headless, 2-model 1CRN: 92 rows, 46 duplicates).
+    `_sequence`/`_resno`/`_chainname` also repeat per model.
+  - #21 `updateColor`/`updateVisibility`/`updateRepresentation`/
+    `updateStage` set `_rendering` FALSE after 10 ms regardless of a
+    pending snapshot or running NGL tasks (undoes part of #10).
+  - #22 `colorByValue()`: with equal domain ends, NA values get the middle
+    color instead of `na_color` (confirmed: `c("A:1" = 5, "A:2" = NA)`).
+  - #23 A click on a bond (ball+stick/licorice stick) gives `_selection`
+    but no `_selAround`: `pickingProxy.atom` is undefined for bonds; use
+    `pickingProxy.atom || pickingProxy.closestBondAtom`.
+  - #24 `selectionParameters(level = "atom")` still returns whole residues
+    (`getAtomSetWithinGroup()` always runs); only the seed changes. Check
+    intent.
+  - #25 `colorByValue()` accepts number strings as colors (`"1"` is
+    `palette()[1]`, black).
+  - #26 Docs: "App 2" examples in `?NGLVieweR` and `?NGLVieweR-shiny` use a
+    non-existent `input$backgroundColor`; App 1 names a ball+stick
+    representation "cartoon"; `tools::file_ext` is re-exported
+    (accidental; removing it changes the API).
 
 - **#17 (Step 2b), high priority — content strings fail on R-devel** (found by CI on
   2026-10-16, ubuntu R-devel, run 38921922335). `NGLVieweR(<file contents>,

@@ -17,7 +17,11 @@ tools::file_ext
 #'@param format Input format (cif, mmcif, mcif, pdb, ent, pqr, gro, sdf, sd,
 #'  mol2), with or without a leading dot. Needed for file contents and for
 #'  files without a recognisable extension. Binary formats such as MMTF are
-#'  not supported.
+#'  not supported. For a PDB entry code, \code{"pdb"} or \code{"cif"} picks
+#'  the file downloaded from RCSB; without \code{format} the PDB-format file
+#'  is used, and the mmCIF file if there is none (large entries such as
+#'  ribosomes only exist as mmCIF). For such entries, \code{format = "cif"}
+#'  saves the failed request for the PDB-format file.
 #'@param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'  \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'  string and have \code{'px'} appended.
@@ -176,6 +180,7 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
     file_ext = input$file_ext,
     data = input$data,
     type = input$type,
+    fallback = input$fallback,
     addRepresentation = list(
       type = list(),
       values = list()
@@ -316,7 +321,8 @@ selectionParameters <- function(NGLVieweR, proximity = 3, level = "residue") {
 #'  string or a vector of lines.
 #'@param format Format of the structure, as in [NGLVieweR()] (e.g. "pdb",
 #'  "cif"). Needed for file contents and when the format cannot be inferred
-#'  from the file name.
+#'  from the file name. For a PDB entry code it picks the file downloaded
+#'  from RCSB, as in [NGLVieweR()].
 #'
 #'@details This function allows you to add a structure to the NGLVieweR widget.
 #'  You can add the structure using a PDB entry code, by specifying a local
@@ -357,6 +363,7 @@ addStructure <- function(NGLVieweR, data, format = NULL) {
     file_ext = input$file_ext,
     data = input$data,
     type = input$type,
+    fallback = input$fallback,
     addRepresentation = list(
       type = list(),
       values = list()

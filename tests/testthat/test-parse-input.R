@@ -28,6 +28,43 @@ test_that("7a: PDB codes are still codes", {
   for (s in both("1crn")) expect_equal(s$data, "rcsb://1crn.pdb")
 })
 
+# Bug #20 (GitHub #17): large entries have no legacy .pdb file on RCSB.
+test_that("#20: a PDB code without format loads .pdb with an mmCIF fallback", {
+  for (s in both("1CRN")) {
+    expect_equal(s$data, "rcsb://1CRN.pdb")
+    expect_equal(s$fallback, "rcsb://1CRN.cif")
+    expect_null(s$file_ext)
+  }
+})
+
+test_that("#20: format picks the file for a PDB code, without fallback", {
+  for (f in c("cif", "CIF", ".cif", "mmcif", "mcif")) {
+    for (s in both("3J9M", format = f)) {
+      expect_equal(s$data, "rcsb://3J9M.cif", label = f)
+      expect_null(s$fallback)
+      expect_equal(s$file_ext, "cif")
+    }
+  }
+  for (f in c("pdb", "PDB", ".pdb", "ent")) {
+    for (s in both("1CRN", format = f)) {
+      expect_equal(s$data, "rcsb://1CRN.pdb", label = f)
+      expect_null(s$fallback)
+      expect_equal(s$file_ext, "pdb")
+    }
+  }
+})
+
+test_that("#20: other formats are an error for a PDB code", {
+  expect_error_both("1CRN", format = "sdf",
+                    regexp = "for a PDB code, 'format' must be \"pdb\" or \"cif\"")
+  expect_error_both("1CRN", format = "mmtf", regexp = "for a PDB code")
+})
+
+test_that("#20: files are not given a fallback", {
+  for (s in both(test_path("fixtures", "1crn.pdb"))) expect_null(s$fallback)
+  for (s in both(pdb_text, format = "pdb")) expect_null(s$fallback)
+})
+
 test_that("7b: a vector of lines is file contents", {
   for (s in both(pdb_lines, format = "pdb")) {
     expect_equal(s$type, "file")

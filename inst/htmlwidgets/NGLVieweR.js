@@ -142,7 +142,12 @@ HTMLWidgets.widget({
           // straight away into a rejection
           return Promise.resolve().then(function() {
             if (structureOpts.type == "code") {
-              return stage.loadFile(structureOpts.data);
+              // A PDB code: if the .pdb fails (RCSB has none for large
+              // entries), load the mmCIF fallback
+              return stage.loadFile(structureOpts.data).catch(function(err) {
+                if (!structureOpts.fallback) throw err;
+                return stage.loadFile(structureOpts.fallback);
+              });
             } else if (structureOpts.type == "file") {
               return stage.loadFile(new Blob([structureOpts.data], { type: 'text/plain' }), {
                ext: structureOpts.file_ext
@@ -157,7 +162,8 @@ HTMLWidgets.widget({
             }
             return { value: component };
           }).catch(function(err) {
-            var source = structureOpts.type == "code" ? structureOpts.data :
+            var source = structureOpts.type == "code" ?
+              structureOpts.data + (structureOpts.fallback ? " or " + structureOpts.fallback : "") :
               "file contents, format \"" + structureOpts.file_ext + "\"";
             return { error: "could not load structure " + (index + 1) + " (" + source + "): " +
               (err && err.message ? err.message : String(err)) };
