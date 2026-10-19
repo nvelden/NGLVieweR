@@ -194,11 +194,10 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
   x$structures <- c(x$structures, list(new_structure))
   x$superpose = list()
  
-  # Add stage parameters
-  x$setQuality <- "medium"
+  # Add stage parameters. Quality and focus are only sent when setQuality()
+  # or setFocus() is used, so they cannot override stageParameters().
   x$setRock <- FALSE
   x$setSpin <- FALSE
-  x$setFocus <- 0
 
   x$stageParameters <- list()
   
@@ -227,6 +226,11 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
 #'@details Options that are not given use the NGL.js defaults. In Shiny, this
 #'  also holds when \code{renderNGLVieweR()} re-renders: an option set in an
 #'  earlier render but not in the current one returns to its default.
+#'
+#'  [setFocus()] and [setQuality()] are shortcuts that set clipping, fog and
+#'  quality. Options named here win over them: for example
+#'  \code{setFocus(50) \%>\% stageParameters(fogFar = 60)} keeps the clipping
+#'  of focus 50 with \code{fogFar} 60.
 #'
 #'  All NGL.js stage parameters can be set here or changed later with
 #'  [updateStage()]. For example:
@@ -782,6 +786,9 @@ setPosition <- function(NGLVieweR, x=0, y=0, z=0){
 #'@param NGLVieweR A NGLVieweR object.
 #'@param quality Set rendering quality. Can be "low", "medium" (default) or
 #'  "high".
+#'@details Without \code{setQuality()} the viewer uses the NGL.js default
+#'  ("medium"). A \code{quality} given in [stageParameters()] wins over
+#'  \code{setQuality()}.
 #'@return setQuality parameter in \code{NGLVieweR} \code{htmlwidgets} object.
 #'@family options
 #'@examples
@@ -802,6 +809,12 @@ setQuality <- function(NGLVieweR, quality = "medium") {
 #'Set Focus
 #'@param NGLVieweR A NGLVieweR object.
 #'@param focus Set focus between 0 (default) to 100.
+#'@details The focus sets the clipping planes and the fog (the NGL.js stage
+#'  parameters \code{clipNear}, \code{clipFar}, \code{fogNear} and
+#'  \code{fogFar}). Without \code{setFocus()} the viewer uses the NGL.js
+#'  defaults (with the default \code{clipScale = "relative"} these equal focus
+#'  0). Values of these four parameters given in [stageParameters()] win over
+#'  \code{setFocus()}.
 #'@return setFocus parameter in \code{NGLVieweR} \code{htmlwidgets} object.
 #'@seealso [updateFocus()]
 #'@family options

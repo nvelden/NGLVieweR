@@ -17,6 +17,14 @@ setFocus parameter in \code{NGLVieweR} \code{htmlwidgets} object.
 \description{
 Set Focus
 }
+\details{
+The focus sets the clipping planes and the fog (the NGL.js stage
+parameters \code{clipNear}, \code{clipFar}, \code{fogNear} and
+\code{fogFar}). Without \code{setFocus()} the viewer uses the NGL.js
+defaults (with the default \code{clipScale = "relative"} these equal focus
+0). Values of these four parameters given in \code{\link[=stageParameters]{stageParameters()}} win over
+\code{setFocus()}.
+}
 \examples{
 NGLVieweR("7CID") \%>\%
   addRepresentation("cartoon", 

@@ -69,10 +69,12 @@ test_that("missing data and missing format give clear errors", {
 
 test_that("NGLVieweR() sets the documented stage defaults", {
   x <- NGLVieweR("1CRN")$x
-  expect_equal(x$setQuality, "medium")
   expect_false(x$setRock)
   expect_false(x$setSpin)
-  expect_equal(x$setFocus, 0)
+  # Bug #28: no quality or focus unless setQuality()/setFocus() is used, so
+  # they cannot override stageParameters(); the stage keeps NGL's defaults.
+  expect_null(x$setQuality)
+  expect_null(x$setFocus)
   expect_equal(x$stageParameters, list())
   expect_equal(x$superpose, list())
   # toggleRock/toggleSpin were never settable from R and are not sent.

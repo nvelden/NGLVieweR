@@ -18,6 +18,11 @@ setQuality parameter in \code{NGLVieweR} \code{htmlwidgets} object.
 \description{
 Set Quality
 }
+\details{
+Without \code{setQuality()} the viewer uses the NGL.js default
+("medium"). A \code{quality} given in \code{\link[=stageParameters]{stageParameters()}} wins over
+\code{setQuality()}.
+}
 \examples{
 NGLVieweR("7CID") \%>\%
   addRepresentation("cartoon",

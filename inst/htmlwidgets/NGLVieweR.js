@@ -154,12 +154,31 @@ HTMLWidgets.widget({
       renderedStageKeys.forEach(function(key) {
         stageParams[key] = defaultStageParameters[key];
       });
-      Object.assign(stageParams, opts.stageParameters);
-      renderedStageKeys = Object.keys(opts.stageParameters || {});
+      var userParams = opts.stageParameters || {};
+      Object.assign(stageParams, userParams);
+      renderedStageKeys = Object.keys(userParams);
       stage.setParameters(stageParams);
-      stage.setQuality(opts.setQuality);
-      stage.setFocus(opts.setFocus);
-      
+      // setQuality() and setFocus() only when used. They run after
+      // stageParameters() (setFocus() reads its clipMode and clipScale), and
+      // the keys they set that stageParameters() names are put back, so
+      // stageParameters() wins. Their keys go back to the default on the
+      // next render, like the stageParameters() keys.
+      var shortcutKeys = [];
+      if (opts.setQuality != null && !("quality" in userParams)) {
+        stage.setQuality(opts.setQuality);
+        shortcutKeys.push("quality");
+      }
+      if (opts.setFocus != null) {
+        stage.setFocus(opts.setFocus);
+        shortcutKeys.push("clipNear", "clipFar", "fogNear", "fogFar");
+      }
+      var named = {};
+      shortcutKeys.forEach(function(key) {
+        if (key in userParams) named[key] = userParams[key];
+        else renderedStageKeys.push(key);
+      });
+      if (Object.keys(named).length > 0) stage.setParameters(named);
+
       // Iterate through all structures in the list. Wait for every load to
       // finish (succeeded or failed), so a failure cannot be followed by a
       // slower structure still appearing.

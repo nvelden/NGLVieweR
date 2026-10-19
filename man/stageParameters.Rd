@@ -27,6 +27,11 @@ Options that are not given use the NGL.js defaults. In Shiny, this
 also holds when \code{renderNGLVieweR()} re-renders: an option set in an
 earlier render but not in the current one returns to its default.
 
+\code{\link[=setFocus]{setFocus()}} and \code{\link[=setQuality]{setQuality()}} are shortcuts that set clipping, fog and
+quality. Options named here win over them: for example
+\code{setFocus(50) \%>\% stageParameters(fogFar = 60)} keeps the clipping
+of focus 50 with \code{fogFar} 60.
+
 All NGL.js stage parameters can be set here or changed later with
 \code{\link[=updateStage]{updateStage()}}. For example:
 \itemize{

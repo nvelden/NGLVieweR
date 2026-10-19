@@ -34,6 +34,7 @@ Start the chat with something like:
 | 15 | #20 PDB codes without a legacy PDB file cannot be loaded (GitHub #17) | explained (2026-10-18); repro confirmed headless (3J9M and 4V6X: `_error` "could not load structure 1 (rcsb://3J9M.pdb)", also with `format = "cif"`; 1CRN loads). Risk test of mmCIF default done (22 entries; see section). Decision (user): C — `.pdb` first, `.cif` fallback; `format` picks the file. Fixed (2026-10-18): `fallback` field from `.parse_structure_input()`, JS retries with it; failing tests written first (parse-input: fallback/format; browser-pdb-code: fallback, both fail, no fallback, 3J9M). Verified: 639 pass / 0 fail / 0 skip; rcmdcheck = baseline; /code-review: no bugs, cleanups done. User checked repro (2026-10-18; skipped the example app). Committed and pushed; GitHub #17 commented with the fix (stays closed) | see `git log --grep "Fix #20"` |
 | 16 | #21 Update functions reset `_rendering` too early | explained (2026-10-18); repro confirmed headless (snapshot + updateColor: `false` at 16 ms, PNG at 152 ms; surface rebuild: `false` at 15 ms with 1 task running; updateColor alone correct). Also found: countChanged handler read NGL's delta as the count (2 -> 1 sent `false`). Decision (user): include it. Fixed (2026-10-18): `renderingDone()` helper (false only when tasks 0 and no snapshot pending) used by countChanged, snapShot and the 4 update handlers. Making the count trustworthy exposed an NGL 2.5.0 leak (unlisten keeps a removed representation's open tasks: mid-build removal or failed build) -> `fixTaskCounter()` wraps stage.tasks.unlisten (takes off only what NGL left, so safe if NGL fixes it). Failing tests first (test-browser-rendering.R: 6 fail before, leak tests fail without the wrapper). Verified: 659 pass / 0 fail / 0 skip; rcmdcheck = baseline; stress script 17 cases settle (tasks 0, no false while busy); user's shinyNGLVieweR app: loader ends hidden in all 11 phases (old code: NGL count leaked to 15, snapshot never downloaded, loader stuck); /code-review findings addressed (see Found during the work). User checked repro (2026-10-18). Committed and pushed | see `git log --grep "Fix #21"` |
 | 17 | #27 `_PDB` holds pre-superpose coordinates | committed; explained (2026-10-18); repro confirmed headless (`dev/repro/27-pdb-superpose`: target exported vs displayed CA RMSD 17.56 A, exported = file 0.00 A; superpose off: 0.00). Fixed (2026-10-18, user go-ahead): PDB text written after superpose (`structures.map(PdbWriter)` in the Shiny block). Failing tests first (test-browser-superpose.R: 3 fail before, targets 17.56/51.28 A). Verified: 671 tests, 670 pass + 1 flaky (test-browser-pdb-code.R:93, 1CRN.pdb listed twice; 3/3 reruns pass, see Found during the work); rcmdcheck = baseline; repro 0.00 A; /code-review: 4 minor findings addressed. Committed and pushed (2026-10-18) | see `git log --grep "Fix #27"` |
+| 18 | #28 `setFocus()`/`setQuality()` defaults override clip, fog and quality from `stageParameters()` | committed; explained (2026-10-19); repro confirmed headless (`dev/repro/28-focus-overrides-stage`): stageParameters(clipNear = 45) -> actual 0; fogNear 0/fogFar 30 -> 50/100; quality "high" -> "medium"; updateStage() with the same values applies them (45; 0/30; high); no console errors. Decisions (user): stageParameters() wins (shortcuts after it, named keys put back); re-render reset yes. Fixed (2026-10-19): no setQuality/setFocus defaults in NGLVieweR(); renderValue applies them only when used. Failing tests first (test-NGLVieweR.R 2, test-browser-stage-state.R 5 fail before). Verified: 165 tests / 689 expectations pass, 0 skip; rcmdcheck = baseline (1 local time NOTE; a transient GitHub 502 URL NOTE once); repro: render gives 45; 0/30; high; /code-review: 8 findings, 6 addressed (comment, docs, guard, order test, NEWS), re-render after updateFocus() kept by design (NEWS), absolute-scale focus before load noted in Found during the work. Repro extended with sliders on user request; user checked it (2026-10-19). Committed and pushed | see `git log --grep "Fix #28"` |
 
 States: `todo` → `explained` → `observed` (user confirmed seeing it) → `fixed` → `verified` → `committed`.
 
@@ -940,10 +941,73 @@ without superpose `_PDB` equals the file coordinates.
 
 ---
 
+## Step 18 — #28 `setFocus()`/`setQuality()` defaults override `stageParameters()`
+
+Found in the pre-submission review (2026-10-19). Already listed under
+"Found during the work" (from /code-review in Step 2); it now matters
+because `?stageParameters` and the vignette (commit 03adf3c) document
+clipping, fog and quality there, with a fog example that does not work.
+
+**Where.** `R/NGLVieweR.R` `NGLVieweR()`: `x$setQuality <- "medium"` and
+`x$setFocus <- 0` are always set. `inst/htmlwidgets/NGLVieweR.js`
+`renderValue`: after `stage.setParameters(stageParams)` it always calls
+`stage.setQuality(opts.setQuality)` and `stage.setFocus(opts.setFocus)`.
+
+**What happens.** In NGL.js 2.5.0, `Stage.setFocus(f)` (clipMode "scene")
+computes and sets `clipNear`, `clipFar`, `fogNear` and `fogFar`; for f = 0
+with clipScale "relative" these are NGL's defaults 0/100/50/100.
+`Stage.setQuality()` sets `quality`. Both run after `stageParameters()`, so
+`stageParameters(clipNear =, clipFar =, fogNear =, fogFar =, quality =)`
+is silently replaced, even when the user never called `setFocus()` or
+`setQuality()`. `updateStage()` is not affected (it only calls
+`setParameters`), and `updateFocus()` overriding clip/fog is expected.
+
+**Repro `dev/repro/28-focus-overrides-stage`.** 1crn.pdb (offline). Cases
+A clipNear = 45, B fogNear = 0 / fogFar = 30, C quality = "high", each set
+only via `stageParameters()`; debug table requested vs NGL's actual stage
+parameters; button applies the same via `updateStage()` (shows the
+expected look); checkbox adds `setFocus(50)`. **Look for:** actual stays at
+0 / 50,100 / medium; the updateStage button gives 45 / 0,30 / high and the
+front of the protein is cut away (A) or fogged (B).
+
+**Proposed fix.** `NGLVieweR()` no longer sets `setQuality`/`setFocus`
+defaults; `renderValue` calls `stage.setQuality()`/`stage.setFocus()` only
+when `setQuality()`/`setFocus()` were used. Without them the stage starts
+from NGL's defaults (quality "medium", focus 0 = clip 0/100, fog 50/100),
+so viewers that do not use these options look the same as now. For
+re-renders (as #3): when the previous render used `setFocus()` the keys
+`clipNear`, `clipFar`, `fogNear`, `fogFar` are added to the keys that
+return to their default; for `setQuality()` the key `quality`.
+
+**Decisions (user, 2026-10-19).**
+1. `stageParameters()` wins over `setFocus()`/`setQuality()`: the stage
+   applies `setQuality()`/`setFocus()` first and `stageParameters()` on top,
+   so named values are used and the rest comes from the shortcut (e.g.
+   `setFocus(50) %>% stageParameters(fogFar = 60)` keeps focus-50 clipping
+   with fogFar 60). Changes the old order (focus last), which never let
+   these `stageParameters()` keys through, so nothing can rely on it.
+   `updateStage()`/`updateFocus()` are unchanged: the last call wins.
+2. Re-render reset: yes (same rule as #3).
+
+**Tests.** Unit (test-builders.R): `NGLVieweR()` has no `setFocus`/
+`setQuality` in `x`; `setFocus()`/`setQuality()` still set them. Browser
+(test-browser-stage-state.R): stageParameters clipNear/clipFar, fogNear/
+fogFar and quality reach `stage.parameters`; with `setFocus(50)` the
+`stageParameters()` keys win and the other focus values stay (decision 1); re-render from `setFocus(50)` / `setQuality("high")`
+to neither returns clip/fog/quality to NGL's defaults; default viewer has
+NGL's default clip/fog/quality.
+
+---
+
 ## Found during the work
 
 (Add anything new discovered while fixing; do not fix it inside another bug's step.)
 
+- From Step 18 (#28) /code-review, not fixed (pre-existing): `setFocus()`
+  with `clipScale = "absolute"` runs in renderValue before the structures
+  are loaded, so NGL's relativeToAbsolute() uses the empty/previous scene;
+  `updateFocus()` after loading gives the right values. Could re-apply the
+  focus after loading (as zoomMove does).
 - **Second code review (2026-10-18), not yet scheduled.** #20 and #21 have
   their own steps above. The others:
   - #19 `colorByValue(input$<id>_residues + value)` fails for multi-model
