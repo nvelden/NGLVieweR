@@ -227,6 +227,20 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
 #'@details Options that are not given use the NGL.js defaults. In Shiny, this
 #'  also holds when \code{renderNGLVieweR()} re-renders: an option set in an
 #'  earlier render but not in the current one returns to its default.
+#'
+#'  All NGL.js stage parameters can be set here or changed later with
+#'  [updateStage()]. For example:
+#'
+#'  * **Clipping**: \code{clipNear}, \code{clipFar}, \code{clipDist},
+#'    \code{clipMode} ("scene" or "camera") and \code{clipScale} ("relative"
+#'    or "absolute").
+#'  * **Fog**: \code{fogNear} and \code{fogFar}.
+#'  * **Lighting**: \code{lightColor}, \code{lightIntensity},
+#'    \code{ambientColor} and \code{ambientIntensity}.
+#'  * **Camera**: \code{cameraType} ("perspective", "orthographic" or
+#'    "stereo"), \code{cameraFov} and \code{cameraEyeSep}.
+#'  * **Mouse controls**: \code{mousePreset} ("default", "pymol", "coot" or
+#'    "astexviewer").
 #'@return Returns list of stage parameters to \code{NGLVieweR}
 #'  \code{htmlwidgets} object.
 #'@seealso
@@ -236,6 +250,16 @@ NGLVieweR <- function(data, format = NULL, width = NULL, height = NULL, elementI
 #'NGLVieweR("7CID") %>%
 #'  stageParameters(backgroundColor = "white", zoomSpeed = 1) %>%
 #'  addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
+#'
+#' # Orthographic camera, PyMOL mouse controls and fog
+#' NGLVieweR("7CID") %>%
+#'   stageParameters(
+#'     cameraType = "orthographic",
+#'     mousePreset = "pymol",
+#'     fogNear = 40,
+#'     fogFar = 80
+#'   ) %>%
+#'   addRepresentation("cartoon")
 #'
 #' if (interactive()) {
 #'   library(shiny)
@@ -448,6 +472,22 @@ setSuperpose <- function(NGLVieweR, reference = 1, sele_reference, sele_target, 
 #'  general "RepresentationParameters" method and type specific Label-,
 #'  Structure- and Surface- RepresentationParameters in the official
 #'  \href{http://nglviewer.org/ngl/api/}{NGL.js} manual.
+#'@details \code{type} and \code{param} are passed to NGL.js as they are, so
+#'  every NGL.js representation and parameter works, including ones not
+#'  listed above. Some useful ones:
+#'
+#'  * **Other styles**: "spacefill", "licorice", "hyperball", "backbone",
+#'    "trace", "tube", "rope", "rocket", "point", "axes", "helixorient",
+#'    "unitcell" and "contact".
+#'  * **Measurements**: "distance" (\code{atomPair}), "angle"
+#'    (\code{atomTriple}) and "dihedral" (\code{atomQuad}). Give each as a list
+#'    of selections, e.g. \code{atomPair = list(list("1.CA", "20.CA"))}. These
+#'    are only drawn; the measured values are not returned to R or Shiny.
+#'  * **Biological assemblies and crystal packing**: the \code{assembly}
+#'    parameter shows a biological unit such as "BU1", the unit cell
+#'    ("UNITCELL") or a 3x3x3 block of unit cells ("SUPERCELL"). The default
+#'    is the asymmetric unit ("AU"). Only assemblies defined in the file can
+#'    be shown.
 #'@return List of representation parameters to \code{NGLVieweR}
 #'  \code{htmlwidgets} object.
 #'@seealso
@@ -475,7 +515,18 @@ setSuperpose <- function(NGLVieweR, reference = 1, sele_reference, sele_target, 
 #'       sele = ":A and 241 and .CG"
 #'     )
 #'   )
-#' 
+#'
+#' # Biological assembly
+#' NGLVieweR("1RUZ") %>%
+#'   addRepresentation("cartoon", param = list(assembly = "BU1"))
+#'
+#' # Distance measurement
+#' NGLVieweR("1CRN") %>%
+#'   addRepresentation("cartoon") %>%
+#'   addRepresentation("distance",
+#'     param = list(atomPair = list(list("1.CA", "20.CA")))
+#'   )
+#'
 #' # Shiny context
 #' if (interactive()) {
 #'   library(shiny)

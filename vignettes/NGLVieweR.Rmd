@@ -125,6 +125,37 @@ NGLVieweR("7CID") %>%
   )
 ```
 
+`addRepresentation()` passes the type and `param` straight to NGL.js, so you are not limited to the styles above. Other types include "spacefill", "licorice", "hyperball", "backbone", "trace", "tube", "rope", "rocket", "point", "axes", "helixorient" and "unitcell".
+
+## Assemblies
+
+By default the asymmetric unit of a structure is shown. Use the `assembly` parameter to show a biological assembly ("BU1", "BU2", ...), the unit cell ("UNITCELL") or a 3x3x3 block of unit cells ("SUPERCELL"). Only assemblies defined in the structure file can be shown.
+
+```{r assembly, screenshot.force=FALSE}
+NGLVieweR("1RUZ") %>%
+  addRepresentation("cartoon",
+    param = list(assembly = "BU1", colorScheme = "chainid")
+  )
+```
+
+## Measurements
+
+Distances, angles and dihedrals are drawn with the "distance", "angle" and "dihedral" representation types. Give the atoms as a list of selections in `atomPair`, `atomTriple` or `atomQuad`. You can give several measurements at once. The values are only drawn in the viewer; they are not returned to R or Shiny.
+
+```{r measurements, screenshot.force=FALSE}
+NGLVieweR("1CRN") %>%
+  addRepresentation("cartoon") %>%
+  addRepresentation("distance",
+    param = list(atomPair = list(list("1.CA", "20.CA"), list("5.CA", "30.CA")))
+  ) %>%
+  addRepresentation("angle",
+    param = list(atomTriple = list(list("1.CA", "10.CA", "20.CA")))
+  ) %>%
+  addRepresentation("dihedral",
+    param = list(atomQuad = list(list("1.CA", "10.CA", "20.CA", "30.CA")))
+  )
+```
+
 ## Structures
 
 Using `addStructure()`, you can load multiple structures into the same stage. In this example, the first structure is represented in blue, while the second 
@@ -176,6 +207,26 @@ NGLVieweR("7CID") %>%
     param = list(name = "cartoon", colorScheme = "residueindex")
   ) %>%
   setSpin()
+```
+
+`stageParameters()` (and `updateStage()` in Shiny) accept any NGL.js stage parameter, including:
+
+-   **Clipping**: `clipNear`, `clipFar`, `clipDist`, `clipMode` ("scene" or "camera") and `clipScale` ("relative" or "absolute")
+-   **Fog**: `fogNear` and `fogFar`
+-   **Lighting**: `lightColor`, `lightIntensity`, `ambientColor` and `ambientIntensity`
+-   **Camera**: `cameraType` ("perspective", "orthographic" or "stereo"), `cameraFov` and `cameraEyeSep`
+-   **Mouse controls**: `mousePreset` ("default", "pymol", "coot" or "astexviewer")
+
+```{r stage-camera, screenshot.force=FALSE}
+NGLVieweR("7CID") %>%
+  stageParameters(
+    cameraType = "orthographic",
+    mousePreset = "pymol",
+    fogNear = 40,
+    fogFar = 80,
+    lightIntensity = 1.5
+  ) %>%
+  addRepresentation("cartoon", param = list(colorScheme = "residueindex"))
 ```
 
 ## Labels

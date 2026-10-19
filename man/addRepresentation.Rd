@@ -28,6 +28,25 @@ List of representation parameters to \code{NGLVieweR}
 \description{
 Add a representation and its parameters.
 }
+\details{
+\code{type} and \code{param} are passed to NGL.js as they are, so
+every NGL.js representation and parameter works, including ones not
+listed above. Some useful ones:
+\itemize{
+\item \strong{Other styles}: "spacefill", "licorice", "hyperball", "backbone",
+"trace", "tube", "rope", "rocket", "point", "axes", "helixorient",
+"unitcell" and "contact".
+\item \strong{Measurements}: "distance" (\code{atomPair}), "angle"
+(\code{atomTriple}) and "dihedral" (\code{atomQuad}). Give each as a list
+of selections, e.g. \code{atomPair = list(list("1.CA", "20.CA"))}. These
+are only drawn; the measured values are not returned to R or Shiny.
+\item \strong{Biological assemblies and crystal packing}: the \code{assembly}
+parameter shows a biological unit such as "BU1", the unit cell
+("UNITCELL") or a 3x3x3 block of unit cells ("SUPERCELL"). The default
+is the asymmetric unit ("AU"). Only assemblies defined in the file can
+be shown.
+}
+}
 \examples{
 NGLVieweR("7CID") \%>\%
   stageParameters(backgroundColor = "black") \%>\%
@@ -49,6 +68,17 @@ NGLVieweR("7CID") \%>\%
       backgroundOpacity = 0.8,
       sele = ":A and 241 and .CG"
     )
+  )
+
+# Biological assembly
+NGLVieweR("1RUZ") \%>\%
+  addRepresentation("cartoon", param = list(assembly = "BU1"))
+
+# Distance measurement
+NGLVieweR("1CRN") \%>\%
+  addRepresentation("cartoon") \%>\%
+  addRepresentation("distance",
+    param = list(atomPair = list(list("1.CA", "20.CA")))
   )
 
 # Shiny context

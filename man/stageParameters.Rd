@@ -26,11 +26,36 @@ Set stage parameters.
 Options that are not given use the NGL.js defaults. In Shiny, this
 also holds when \code{renderNGLVieweR()} re-renders: an option set in an
 earlier render but not in the current one returns to its default.
+
+All NGL.js stage parameters can be set here or changed later with
+\code{\link[=updateStage]{updateStage()}}. For example:
+\itemize{
+\item \strong{Clipping}: \code{clipNear}, \code{clipFar}, \code{clipDist},
+\code{clipMode} ("scene" or "camera") and \code{clipScale} ("relative"
+or "absolute").
+\item \strong{Fog}: \code{fogNear} and \code{fogFar}.
+\item \strong{Lighting}: \code{lightColor}, \code{lightIntensity},
+\code{ambientColor} and \code{ambientIntensity}.
+\item \strong{Camera}: \code{cameraType} ("perspective", "orthographic" or
+"stereo"), \code{cameraFov} and \code{cameraEyeSep}.
+\item \strong{Mouse controls}: \code{mousePreset} ("default", "pymol", "coot" or
+"astexviewer").
+}
 }
 \examples{
 NGLVieweR("7CID") \%>\%
  stageParameters(backgroundColor = "white", zoomSpeed = 1) \%>\%
  addRepresentation("cartoon", param = list(name = "cartoon", colorScheme="residueindex"))
+
+# Orthographic camera, PyMOL mouse controls and fog
+NGLVieweR("7CID") \%>\%
+  stageParameters(
+    cameraType = "orthographic",
+    mousePreset = "pymol",
+    fogNear = 40,
+    fogFar = 80
+  ) \%>\%
+  addRepresentation("cartoon")
 
 if (interactive()) {
   library(shiny)
