@@ -845,7 +845,7 @@ updateFullscreen <- function(NGLVieweR_proxy, fullscreen = TRUE, element = c("pa
 #'@family animations
 #'@seealso
 #'* [zoomMove()]
-#'* [NGLVieweR_example()] See example "updatezoomMove".
+#'* [NGLVieweR_example()] See example "updateZoomMove".
 #'@examples
 #'\dontrun{
 #' NGLVieweR_proxy("structure") %>% updateZoomMove(center = "200",

@@ -17,7 +17,7 @@ NGLVieweR_example(example = "basic")
 Call to load Shiny example.
 }
 \description{
-Launch an example to demonstrate how to use \code{NGLvieweR} in
+Launch an example to demonstrate how to use \code{NGLVieweR} in
 Shiny.
 }
 \examples{

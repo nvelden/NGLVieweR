@@ -21,8 +21,8 @@ Authors@R: c(
 Copyright: See the file inst/COPYRIGHTS for the copyright holders and licenses
     of the bundled NGL.js library and the code it includes.
 Maintainer: Niels van der Velden <n.s.j.vandervelden@gmail.com>
-Description: Provides an 'htmlwidgets' <https://www.htmlwidgets.org/> interface to 'NGL.js' <http://nglviewer.org/ngl/api/>.
-    'NGLvieweR' can be used to visualize and interact with protein databank ('PDB') and structural files in R and Shiny applications.
+Description: Provides an 'htmlwidgets' <https://www.htmlwidgets.org/> interface to 'NGL.js' <https://nglviewer.org/ngl/api/>.
+    'NGLVieweR' can be used to visualize and interact with protein databank ('PDB') and structural files in R and Shiny applications.
     It includes a set of API functions to manipulate the viewer after creation in Shiny.
 License: MIT + file LICENSE
 Encoding: UTF-8

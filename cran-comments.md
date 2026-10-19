@@ -1,3 +1,27 @@
+# Version 1.5.0 Submission
+19.10.2026
+
+### Test environments
+- Local macOS (arm64), R 4.4.0
+
+### R CMD check results
+0 errors | 0 warnings | 1 note
+
+- checking for future file timestamps: unable to verify current time.
+  This comes from the local environment (time server), not the package.
+
+### Submission comments
+- Updated the bundled 'NGL.js' library from 2.0.0 to 2.5.0. The copyright and
+  license notices of 'NGL.js' and of the libraries compiled into it are now
+  included in inst/COPYRIGHTS and inst/htmlwidgets/lib/NGL-2.5.0/LICENSE, and
+  their copyright holders are listed in Authors@R with role "cph".
+- New function colorByValue() and new Shiny inputs; many bug fixes (see NEWS.md).
+
+### Reverse dependencies
+- RiboCrypt (Bioconductor): checked its use of NGLVieweR (NGLVieweR(),
+  stageParameters(), the Shiny output functions and the re-exported
+  file_ext()). All of these are unchanged in this version.
+
 # Version 1.4 Submission
 22.11.2024
 

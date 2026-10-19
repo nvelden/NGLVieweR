@@ -106,7 +106,7 @@ shinyApp(ui, server)
 \seealso{
 \itemize{
 \item \code{\link[=zoomMove]{zoomMove()}}
-\item \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "updatezoomMove".
+\item \code{\link[=NGLVieweR_example]{NGLVieweR_example()}} See example "updateZoomMove".
 }
 
 Other animations:

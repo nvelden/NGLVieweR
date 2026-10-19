@@ -1,7 +1,7 @@
 #'
 #'Run NGLVieweR example Shiny app
 #'
-#'@description Launch an example to demonstrate how to use \code{NGLvieweR} in
+#'@description Launch an example to demonstrate how to use \code{NGLVieweR} in
 #'Shiny.
 #'
 #'@param example Example type for which to see an example, possible values are:
