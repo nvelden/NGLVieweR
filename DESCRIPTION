@@ -1,6 +1,6 @@
 Package: NGLVieweR
 Title: Interactive 3D Visualization of Molecular Structures
-Version: 1.4.0
+Version: 1.5.0
 Authors@R: c( 
     person("Niels", "van der Velden", role = c("aut", "cre"), email = "n.s.j.vandervelden@gmail.com"),
     person("Alexander", "Rose", role = "cph", comment = 'NGL.js library'))
@@ -29,7 +29,7 @@ Suggests:
     withr,
     pkgload
 VignetteBuilder: knitr
-URL: https://github.com/nvelden/NGLVieweR
+URL: https://nvelden.github.io/NGLVieweR/, https://github.com/nvelden/NGLVieweR
 BugReports: https://github.com/nvelden/NGLVieweR/issues
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.0.0
