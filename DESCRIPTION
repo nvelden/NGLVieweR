@@ -3,7 +3,23 @@ Title: Interactive 3D Visualization of Molecular Structures
 Version: 1.5.0
 Authors@R: c( 
     person("Niels", "van der Velden", role = c("aut", "cre"), email = "n.s.j.vandervelden@gmail.com"),
-    person("Alexander", "Rose", role = "cph", comment = 'NGL.js library'))
+    person("Alexander", "Rose", role = "cph", comment = 'NGL.js library'),
+    person("three.js authors", role = "cph", comment = 'three.js library, bundled in NGL.js'),
+    person("Mol* contributors", role = "cph", comment = 'Mol* library, bundled in NGL.js'),
+    person("Gregor", "Aisch", role = "cph", comment = 'chroma.js library, bundled in NGL.js'),
+    person("Cynthia", "Brewer", role = "cph", comment = 'ColorBrewer colors in chroma.js'),
+    person("Mark", "Harrower", role = "cph", comment = 'ColorBrewer colors in chroma.js'),
+    person("The Pennsylvania State University", role = "cph", comment = 'ColorBrewer colors in chroma.js'),
+    person("Alexandru", "Mărășteanu", role = "cph", comment = 'sprintf.js library, bundled in NGL.js'),
+    person("Miller", "Medeiros", role = "cph", comment = 'JS Signals library, bundled in NGL.js'),
+    person("Microsoft Corporation", role = "cph", comment = 'tslib library, bundled in NGL.js'),
+    person("Vitaly", "Puzrin", role = "cph", comment = 'pako code in NGL.js'),
+    person("Jean-loup", "Gailly", role = "cph", comment = 'zlib code ported in pako'),
+    person("Mark", "Adler", role = "cph", comment = 'zlib code ported in pako'),
+    person("Daniel", "Lemire", role = "cph", comment = 'FastBitSet.js code in NGL.js'),
+    person("Gregg", "Tavares", role = "cph", comment = 'webgl-utils.js code in NGL.js'))
+Copyright: See the file inst/COPYRIGHTS for the copyright holders and licenses
+    of the bundled NGL.js library and the code it includes.
 Maintainer: Niels van der Velden <n.s.j.vandervelden@gmail.com>
 Description: Provides an 'htmlwidgets' <https://www.htmlwidgets.org/> interface to 'NGL.js' <http://nglviewer.org/ngl/api/>.
     'NGLvieweR' can be used to visualize and interact with protein databank ('PDB') and structural files in R and Shiny applications.

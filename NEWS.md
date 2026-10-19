@@ -1,5 +1,6 @@
 # NGLVieweR 1.5.0
 
+* The package now includes the copyright and license notices of the bundled NGL.js library and of the libraries compiled into it (three.js, Mol*, chroma.js, sprintf.js, JS Signals, tslib and code adapted in NGL.js), with the source and checksum of the bundled file, in `inst/COPYRIGHTS` and `inst/htmlwidgets/lib/NGL-2.5.0/LICENSE`. Their copyright holders are listed in DESCRIPTION.
 * The re-export of `file_ext()` from 'tools' was added by accident and will be removed in a future release. Packages that use `file_ext()` through `import(NGLVieweR)` should import it from 'tools' instead (`importFrom(tools, file_ext)`) or call `tools::file_ext()`.
 * Fixed the Shiny examples in `?NGLVieweR` and `?NGLVieweR-shiny`: they used an input `input$backgroundColor` that the app does not define, and the first app named its ball+stick representation "cartoon".
 * A widget saved with its files in a separate folder (`htmlwidgets::saveWidget(selfcontained = FALSE)`, R Markdown or Quarto output that is not self-contained, pkgdown sites) no longer contains NGL.js (1.3 MB) twice and extra copies of the widget files. Self-contained output and Shiny apps were not affected.
