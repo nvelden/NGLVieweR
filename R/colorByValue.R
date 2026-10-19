@@ -97,8 +97,10 @@ colorByValue <- function(values, palette = c("blue", "white", "red"), domain = N
     fail("'domain' must be two numbers c(min, max) with min <= max.")
   }
 
-  # Position on the palette, 0 to 1; equal ends give the middle color
-  pos <- if (domain[1] == domain[2]) rep(0.5, length(value)) else
+  # Position on the palette, 0 to 1. With equal ends a value at the domain
+  # gets the middle color and one outside it the nearest end; missing values
+  # stay NA, so they get na_color.
+  pos <- if (domain[1] == domain[2]) (sign(value - domain[1]) + 1) / 2 else
     (value - domain[1]) / (domain[2] - domain[1])
   pos <- pmin(pmax(pos, 0), 1)
   color <- rep(na_color, length(value))

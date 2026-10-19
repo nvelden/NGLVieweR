@@ -28,6 +28,27 @@ test_that("equal values do not fail and get the middle color", {
   expect_equal(as.character(cv$color), c("#FFFFFF", "#FFFFFF"))
 })
 
+test_that("missing values get na_color also when the domain ends are equal (#22)", {
+  # One distinct value: the default domain is c(5, 5)
+  cv <- colorByValue(data.frame(resno = 1:3, value = c(5, NA, NaN)),
+                     palette = bwr, na_color = "green")
+  expect_equal(as.numeric(cv$domain), c(5, 5))
+  expect_equal(as.character(cv$color), c("#FFFFFF", "#00FF00", "#00FF00"))
+  # Equal ends given as domain
+  cv <- colorByValue(c("A:1" = 3, "A:2" = NA, "A:3" = NaN), palette = bwr,
+                     domain = c(3, 3), na_color = "green")
+  expect_equal(as.character(cv$color), c("#FFFFFF", "#00FF00", "#00FF00"))
+})
+
+test_that("with equal domain ends, values outside the domain get the nearest end", {
+  cv <- colorByValue(c("A:1" = 1, "A:2" = 3, "A:3" = 5), palette = bwr,
+                     domain = c(3, 3))
+  expect_equal(as.character(cv$color), c("#0000FF", "#FFFFFF", "#FF0000"))
+  # Infinite values do not set the default domain, which is then c(5, 5)
+  cv <- colorByValue(c("A:1" = 5, "A:2" = Inf, "A:3" = -Inf), palette = bwr)
+  expect_equal(as.character(cv$color), c("#FFFFFF", "#FF0000", "#0000FF"))
+})
+
 test_that("NA values get na_color, which is also sent for unlisted residues", {
   cv <- colorByValue(data.frame(resno = 1:3, value = c(0, NA, 1)), na_color = "grey")
   expect_equal(as.character(cv$color)[2], "#BEBEBE")

@@ -35,6 +35,8 @@ Start the chat with something like:
 | 16 | #21 Update functions reset `_rendering` too early | explained (2026-10-18); repro confirmed headless (snapshot + updateColor: `false` at 16 ms, PNG at 152 ms; surface rebuild: `false` at 15 ms with 1 task running; updateColor alone correct). Also found: countChanged handler read NGL's delta as the count (2 -> 1 sent `false`). Decision (user): include it. Fixed (2026-10-18): `renderingDone()` helper (false only when tasks 0 and no snapshot pending) used by countChanged, snapShot and the 4 update handlers. Making the count trustworthy exposed an NGL 2.5.0 leak (unlisten keeps a removed representation's open tasks: mid-build removal or failed build) -> `fixTaskCounter()` wraps stage.tasks.unlisten (takes off only what NGL left, so safe if NGL fixes it). Failing tests first (test-browser-rendering.R: 6 fail before, leak tests fail without the wrapper). Verified: 659 pass / 0 fail / 0 skip; rcmdcheck = baseline; stress script 17 cases settle (tasks 0, no false while busy); user's shinyNGLVieweR app: loader ends hidden in all 11 phases (old code: NGL count leaked to 15, snapshot never downloaded, loader stuck); /code-review findings addressed (see Found during the work). User checked repro (2026-10-18). Committed and pushed | see `git log --grep "Fix #21"` |
 | 17 | #27 `_PDB` holds pre-superpose coordinates | committed; explained (2026-10-18); repro confirmed headless (`dev/repro/27-pdb-superpose`: target exported vs displayed CA RMSD 17.56 A, exported = file 0.00 A; superpose off: 0.00). Fixed (2026-10-18, user go-ahead): PDB text written after superpose (`structures.map(PdbWriter)` in the Shiny block). Failing tests first (test-browser-superpose.R: 3 fail before, targets 17.56/51.28 A). Verified: 671 tests, 670 pass + 1 flaky (test-browser-pdb-code.R:93, 1CRN.pdb listed twice; 3/3 reruns pass, see Found during the work); rcmdcheck = baseline; repro 0.00 A; /code-review: 4 minor findings addressed. Committed and pushed (2026-10-18) | see `git log --grep "Fix #27"` |
 | 18 | #28 `setFocus()`/`setQuality()` defaults override clip, fog and quality from `stageParameters()` | committed; explained (2026-10-19); repro confirmed headless (`dev/repro/28-focus-overrides-stage`): stageParameters(clipNear = 45) -> actual 0; fogNear 0/fogFar 30 -> 50/100; quality "high" -> "medium"; updateStage() with the same values applies them (45; 0/30; high); no console errors. Decisions (user): stageParameters() wins (shortcuts after it, named keys put back); re-render reset yes. Fixed (2026-10-19): no setQuality/setFocus defaults in NGLVieweR(); renderValue applies them only when used. Failing tests first (test-NGLVieweR.R 2, test-browser-stage-state.R 5 fail before). Verified: 165 tests / 689 expectations pass, 0 skip; rcmdcheck = baseline (1 local time NOTE; a transient GitHub 502 URL NOTE once); repro: render gives 45; 0/30; high; /code-review: 8 findings, 6 addressed (comment, docs, guard, order test, NEWS), re-render after updateFocus() kept by design (NEWS), absolute-scale focus before load noted in Found during the work. Repro extended with sliders on user request; user checked it (2026-10-19). Committed and pushed | see `git log --grep "Fix #28"` |
+| 19 | #22 `colorByValue()`: NA gets the middle color when the domain ends are equal | committed; explained (2026-10-19); repro confirmed headless (`dev/repro/22-colorbyvalue-na`): one score + NA -> NGL colors residue 30 (NA) #ffffff instead of na_color; NaN same; two scores -> na_color (correct); no console errors. Fixed (2026-10-19, user go-ahead): equal ends use `(sign(value - domain[1]) + 1) / 2`, so NA/NaN stay NA (na_color) and, from /code-review, values outside the domain (incl. Inf) get the nearest end as documented. Failing tests first (test-colorByValue.R: 4 fail before). Verified: 167 tests / 694 expectations pass, 0 skip (one earlier run had 1 skip + 1 warning, not reproduced in 2 reruns: chromote start, see Found during the work); rcmdcheck = baseline; /code-review: 6 findings, out-of-domain + tests addressed, `ok` from pos kept (sign() carries NA). User checked repro (2026-10-19). Committed and pushed | see `git log --grep "Fix #22"` |
+| 20 | #25 `colorByValue()` accepts number strings and "transparent" as colors | deferred (2026-10-19, user: edge case, leave as is for 1.5.0); explained (2026-10-19); repro confirmed headless (repro app removed): c("1","2") -> #000000/#DF536B, "8" -> #9E9E9E, "transparent" -> #FFFFFF, all without error; no console errors | |
 
 States: `todo` → `explained` → `observed` (user confirmed seeing it) → `fixed` → `verified` → `committed`.
 
@@ -999,6 +1001,68 @@ NGL's default clip/fog/quality.
 
 ---
 
+## Step 19 — #22 `colorByValue()` colors NA like a value when the domain ends are equal
+
+From the second code review (2026-10-18, "Found during the work").
+
+**Where.** `R/colorByValue.R` `colorByValue()`: `pos <- if (domain[1] == domain[2]) rep(0.5, length(value)) else (value - domain[1]) / (domain[2] - domain[1])`.
+
+**What happens.** With equal ends every row gets position 0.5, also rows
+whose value is `NA`/`NaN`, so `ok <- !is.na(pos)` is TRUE for them and they
+get the middle palette color instead of `na_color`. Equal ends happen
+whenever the data has a single distinct finite value and `domain` is taken
+from the data, e.g. `colorByValue(c("A:1" = 5, "A:2" = NA))`, or a
+`_residues` table where only a few residues have the same score; also with
+an explicit `domain = c(x, x)`. Residues *not listed* are unaffected (the JS
+side gives them `na_color`).
+
+**Repro `dev/repro/22-colorbyvalue-na`.** 1crn.pdb, scores for residues
+1-23, none for 24-46, `na_color = "green"`. **Look for:** case A (one
+score) and C (NaN) show residues 24-46 white; B (two scores) green.
+
+**Proposed fix.** Equal ends give 0.5 only for non-missing values:
+`rep(0.5, length(value))` -> `ifelse(is.na(value), NA, 0.5)`.
+
+**Tests.** Unit (test-colorByValue.R): one distinct value + NA/NaN, from
+data and with `domain = c(x, x)`: the missing rows get `na_color`, the
+others the middle color; unequal ends unchanged.
+
+---
+
+## Step 20 — #25 `colorByValue()` accepts number strings and "transparent" as colors
+
+From the second code review (2026-10-18, "Found during the work").
+
+**Where.** `R/colorByValue.R` `.hex_colors()`, used for `palette` and
+`na_color`.
+
+**What happens.** Numbers are already rejected (`is.character()` check),
+but strings go straight to `grDevices::col2rgb()`, which reads number
+strings as indices into `palette()` ("1" = black, "2" = #DF536B, "8" =
+grey; "0" errors) and accepts "transparent" (white with alpha 0; alpha is
+dropped, so it becomes white). None of these is what a user means; a number
+string typically comes from a data column or a text input.
+
+**Repro `dev/repro/25-colorbyvalue-number-colors`.** Residues colored 1-46
+with four palettes. **Look for:** A `c("1", "2")` black to pink, B "8"
+grey, C "transparent" white, all without an error; D blue-red works.
+
+**Proposed fix.** In `.hex_colors()`, reject strings that are only digits
+(after trimming) and "transparent" with the existing message ("contains a
+color that is not a color name or HEX code"). HEX codes with an alpha part
+stay accepted (alpha is dropped, as documented).
+
+**Decision.** Reject "transparent" too (proposed: yes), or keep it as white?
+
+**Status.** Deferred by the user (2026-10-19): an input mistake with a
+visible result, not needed for 1.5.0. No code or tests changed.
+
+**Tests.** Unit (test-colorByValue.R): `palette = c("1", "2")`,
+`c("blue", "8")`, `c("transparent", "red")` and `na_color = "1"` error;
+`"#FF000080"`, names and HEX codes still work.
+
+---
+
 ## Found during the work
 
 (Add anything new discovered while fixing; do not fix it inside another bug's step.)
@@ -1124,7 +1188,7 @@ NGL's default clip/fog/quality.
 - Snapshot (from /code-review, Step 8): if NGL's makeImage() promise never
   settles (e.g. a task that never finishes), `_rendering` stays TRUE; no
   timeout fallback (NGL's own task counter would be stuck as well).
-- Test infrastructure: once (Step 9) chromote failed to start Chrome
+- Test infrastructure: chromote failed to start Chrome again in Step 18 (while a second Chrome ran) and Step 19 (one skip + warning in a full run, not reproduced). Once (Step 9) chromote failed to start Chrome
   ("cannot open the connection to http://127.0.0.1:<port>/json/version");
   the test then ran under different conditions. Not reproduced in two
   reruns. Watch for flakiness.
