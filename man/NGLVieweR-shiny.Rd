@@ -66,7 +66,7 @@ server <- function(input, output) {
       addRepresentation("cartoon",
         param = list(name = "cartoon", color = "residueindex")
       ) \%>\%
-      stageParameters(backgroundColor = input$backgroundColor) \%>\%
+      stageParameters(backgroundColor = "black") \%>\%
       setQuality("high") \%>\%
       setFocus(0) \%>\%
       setSpin(TRUE)

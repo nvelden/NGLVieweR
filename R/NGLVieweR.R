@@ -1,8 +1,3 @@
-#
-#' @importFrom tools file_ext
-#' @export
-tools::file_ext
-
 #'Create a NGLVieweR
 #'@description NGLVieweR can be used to visualize and interact with Protein Data
 #'Bank (PDB) and structural files in R and Shiny applications. It includes a set
@@ -93,7 +88,7 @@ tools::file_ext
 #'         ) %>%
 #'         addRepresentation("ball+stick",
 #'           param = list(
-#'             name = "cartoon",
+#'             name = "ball+stick",
 #'             sele = "1-20",
 #'             colorScheme = "element"
 #'           )
@@ -132,7 +127,7 @@ tools::file_ext
 #'       addRepresentation("cartoon",
 #'         param = list(name = "cartoon", colorScheme = "residueindex")
 #'       ) %>%
-#'       stageParameters(backgroundColor = input$backgroundColor) %>%
+#'       stageParameters(backgroundColor = "black") %>%
 #'       setQuality("high") %>%
 #'       setFocus(0) %>%
 #'       setSpin(TRUE)

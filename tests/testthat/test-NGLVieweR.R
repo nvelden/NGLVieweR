@@ -169,3 +169,9 @@ test_that("the residues input handler builds a data frame (#11)", {
   expect_equal(df$chain, c("A", NA, "AA"))
   expect_equal(df$resno, c(1L, NA, 1L))
 })
+
+test_that("tools::file_ext() is not re-exported (#26)", {
+  exports <- getNamespaceExports("NGLVieweR")
+  expect_false("file_ext" %in% exports)
+  expect_true("%>%" %in% exports)
+})

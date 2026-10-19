@@ -103,7 +103,7 @@ if (interactive()) {
         ) \%>\%
         addRepresentation("ball+stick",
           param = list(
-            name = "cartoon",
+            name = "ball+stick",
             sele = "1-20",
             colorScheme = "element"
           )
@@ -142,7 +142,7 @@ server <- function(input, output) {
       addRepresentation("cartoon",
         param = list(name = "cartoon", colorScheme = "residueindex")
       ) \%>\%
-      stageParameters(backgroundColor = input$backgroundColor) \%>\%
+      stageParameters(backgroundColor = "black") \%>\%
       setQuality("high") \%>\%
       setFocus(0) \%>\%
       setSpin(TRUE)
