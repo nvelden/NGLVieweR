@@ -13,3 +13,5 @@
 ^\.Rproj\.user$
 ^CRAN-SUBMISSION$
 ^dev$
+^\.quarto$
+^\.gitattributes$
