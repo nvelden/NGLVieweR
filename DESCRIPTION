@@ -27,7 +27,9 @@ Suggests:
     shinytest2,
     chromote,
     withr,
-    pkgload
+    pkgload,
+    htmltools,
+    callr
 VignetteBuilder: knitr
 URL: https://nvelden.github.io/NGLVieweR/, https://github.com/nvelden/NGLVieweR
 BugReports: https://github.com/nvelden/NGLVieweR/issues

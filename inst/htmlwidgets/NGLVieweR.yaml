@@ -5,8 +5,11 @@
     src: htmlwidgets
     script: ./lib/NGL-2.5.0/ngl.js
     stylesheet:
+    # Copy only the script, not the whole htmlwidgets folder
+    all_files: false
   - name: helperFunctions
     version: 1.0
     src: htmlwidgets
     script: ./lib/helperFunctions.js
     stylesheet:
+    all_files: false

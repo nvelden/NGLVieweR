@@ -37,6 +37,7 @@ Start the chat with something like:
 | 18 | #28 `setFocus()`/`setQuality()` defaults override clip, fog and quality from `stageParameters()` | committed; explained (2026-10-19); repro confirmed headless (`dev/repro/28-focus-overrides-stage`): stageParameters(clipNear = 45) -> actual 0; fogNear 0/fogFar 30 -> 50/100; quality "high" -> "medium"; updateStage() with the same values applies them (45; 0/30; high); no console errors. Decisions (user): stageParameters() wins (shortcuts after it, named keys put back); re-render reset yes. Fixed (2026-10-19): no setQuality/setFocus defaults in NGLVieweR(); renderValue applies them only when used. Failing tests first (test-NGLVieweR.R 2, test-browser-stage-state.R 5 fail before). Verified: 165 tests / 689 expectations pass, 0 skip; rcmdcheck = baseline (1 local time NOTE; a transient GitHub 502 URL NOTE once); repro: render gives 45; 0/30; high; /code-review: 8 findings, 6 addressed (comment, docs, guard, order test, NEWS), re-render after updateFocus() kept by design (NEWS), absolute-scale focus before load noted in Found during the work. Repro extended with sliders on user request; user checked it (2026-10-19). Committed and pushed | see `git log --grep "Fix #28"` |
 | 19 | #22 `colorByValue()`: NA gets the middle color when the domain ends are equal | committed; explained (2026-10-19); repro confirmed headless (`dev/repro/22-colorbyvalue-na`): one score + NA -> NGL colors residue 30 (NA) #ffffff instead of na_color; NaN same; two scores -> na_color (correct); no console errors. Fixed (2026-10-19, user go-ahead): equal ends use `(sign(value - domain[1]) + 1) / 2`, so NA/NaN stay NA (na_color) and, from /code-review, values outside the domain (incl. Inf) get the nearest end as documented. Failing tests first (test-colorByValue.R: 4 fail before). Verified: 167 tests / 694 expectations pass, 0 skip (one earlier run had 1 skip + 1 warning, not reproduced in 2 reruns: chromote start, see Found during the work); rcmdcheck = baseline; /code-review: 6 findings, out-of-domain + tests addressed, `ok` from pos kept (sign() carries NA). User checked repro (2026-10-19). Committed and pushed | see `git log --grep "Fix #22"` |
 | 20 | #25 `colorByValue()` accepts number strings and "transparent" as colors | deferred (2026-10-19, user: edge case, leave as is for 1.5.0); explained (2026-10-19); repro confirmed headless (repro app removed): c("1","2") -> #000000/#DF536B, "8" -> #9E9E9E, "transparent" -> #FFFFFF, all without error; no console errors | |
+| 21 | #29 `NGLVieweR.yaml` copies the whole htmlwidgets folder per dependency | committed; explained (2026-10-19); confirmed: `saveWidget(selfcontained = FALSE)` writes ngl.js (1.29 MB) twice, NGLVieweR.js 3x, NGLVieweR.yaml 2x (and a local .DS_Store); self-contained HTML (1.36 MB) and the CRAN tarball are not affected. User asked for the fix with extensive testing. Fixed (2026-10-19): `all_files: false` on both yaml dependencies (no files moved). Failing tests first (test-dependencies.R: 3 fail before; test-browser-static.R R Markdown: ngl.js written twice). Verified: 174 tests / 725 expectations pass, 0 skip (one earlier full run: known flaky test-browser-pdb-code.R:93, passed alone and in the rerun); rcmdcheck 0/0/1 (local time NOTE); INSTALLED package (tarball -> temp library): saveWidget lib folder = each script once, self-contained, R Markdown both modes, Quarto both modes all render 327 atoms, NGL 2.5.0, 0 errors; all 15 Shiny examples load, 0 console errors; pkgdown (scratch destination) reference + article: 18/18 viewers load, ngl.js once per page folder. /code-review: 7 findings on the tests (pandoc skip, htmltools/callr in Suggests, no %||%, binding all_files only checked for recent htmlwidgets, moved page checks errors) addressed; duplicated chromote helper in test-browser-static.R kept. Found: the system library has NGLVieweR 1.4.0, and pkgdown builds articles from the installed package -> install 1.5.0 before rebuilding the site (done 2026-10-19: devtools::install() to the user library). Committed and pushed | see `git log --grep "Fix #29"` |
 
 States: `todo` → `explained` → `observed` (user confirmed seeing it) → `fixed` → `verified` → `committed`.
 
@@ -1063,6 +1064,44 @@ visible result, not needed for 1.5.0. No code or tests changed.
 
 ---
 
+## Step 21 — #29 `NGLVieweR.yaml` copies the whole htmlwidgets folder per dependency
+
+Listed under "Found during the work" (Step 1); re-checked 2026-10-19.
+
+**Where.** `inst/htmlwidgets/NGLVieweR.yaml`: both dependencies (`NGLVieweR`
+= NGL.js 2.5.0, `helperFunctions` 1.0) have `src: htmlwidgets`, and
+htmltools' default `all_files = TRUE` copies the whole source folder.
+
+**What happens.** Every place that copies dependencies to disk
+(`saveWidget(selfcontained = FALSE)`, R Markdown/Quarto with
+`self_contained: false`, pkgdown) gets the whole `inst/htmlwidgets` folder
+twice: `ngl.js` (1.29 MB) twice, the binding `NGLVieweR.js` three times,
+the yaml twice. Self-contained output embeds only the listed scripts and is
+not affected (1.36 MB); the CRAN tarball has every file once. Shiny serves
+the folder without copying (not affected). (The older note that
+self-contained output is larger was wrong.)
+
+**Proposed fix.** `all_files: false` on both dependencies. htmlwidgets
+passes every yaml field to `htmltools::htmlDependency()` (htmltools >=
+0.3.6; htmlwidgets requires >= 0.5.7), and the binding dependency already
+uses `all_files = FALSE`. No file moves and no path changes, so script URLs
+stay the same. (Alternative: a separate folder per dependency; more files
+move, more risk.)
+
+**Tests.** Unit (test-dependencies.R): each dependency is listed with
+`all_files = FALSE` and its script exists; `saveWidget(selfcontained =
+FALSE)` writes each of ngl.js, helperFunctions.js and NGLVieweR.js exactly
+once and no yaml; self-contained HTML embeds NGL.js, the helpers and the
+binding. Browser (test-browser-static.R): saved widget renders (327 atoms)
+with `selfcontained` FALSE and TRUE; R Markdown `html_document` with
+`self_contained` true and false renders and loads the structure.
+Extra (manual, because the layout of an installed package differs from
+`load_all()`): install to a temporary library and repeat saveWidget (both
+modes) + Shiny example in Chrome; Quarto html; pkgdown reference page;
+tarball file list; full suite; rcmdcheck.
+
+---
+
 ## Found during the work
 
 (Add anything new discovered while fixing; do not fix it inside another bug's step.)
@@ -1219,7 +1258,6 @@ visible result, not needed for 1.5.0. No code or tests changed.
   `helperFunctions`) use `src: htmlwidgets`, i.e. the whole folder. A saved
   widget (`saveWidget(selfcontained = FALSE)`) therefore contains the folder
   twice, incl. `ngl.js` (~1.3 MB) twice and stray copies of `NGLVieweR.js`;
-  self-contained HTML and R Markdown output may be ~1.3 MB larger than
-  needed. Fix: `src: htmlwidgets/lib/NGL-2.4.0` etc. Found in Step 1.
+  self-contained output is NOT larger (checked 2026-10-19, see #29). Fix: `src: htmlwidgets/lib/NGL-2.4.0` etc. Found in Step 1.
 - `inst/examples/multiStructureSelection/app.R` has no final newline
   (cosmetic; `readLines()` warns). Found in Step 0.
