@@ -3,12 +3,17 @@
 
 ### Test environments
 - Local macOS (arm64), R 4.4.0
+- macOS (on GitHub Actions), R release
+- Windows (on GitHub Actions), R-devel
+- Ubuntu (on GitHub Actions), R-devel
+- Win-builder (devel), R Under development (2026-10-18 r90707 ucrt): Status OK
 
 ### R CMD check results
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes on win-builder and GitHub Actions.
 
-- checking for future file timestamps: unable to verify current time.
-  This comes from the local environment (time server), not the package.
+Locally there is 1 note: checking for future file timestamps: unable to
+verify current time. This comes from the local environment (time server),
+not the package.
 
 ### Submission comments
 - Updated the bundled 'NGL.js' library from 2.0.0 to 2.5.0. The copyright and
