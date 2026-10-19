@@ -1,6 +1,6 @@
 # NGLVieweR 1.5.0
 
-* `NGLVieweR` no longer re-exports `file_ext()` from 'tools', which was exported by accident. Use `tools::file_ext()` instead.
+* The re-export of `file_ext()` from 'tools' was added by accident and will be removed in a future release. Packages that use `file_ext()` through `import(NGLVieweR)` should import it from 'tools' instead (`importFrom(tools, file_ext)`) or call `tools::file_ext()`.
 * Fixed the Shiny examples in `?NGLVieweR` and `?NGLVieweR-shiny`: they used an input `input$backgroundColor` that the app does not define, and the first app named its ball+stick representation "cartoon".
 * A widget saved with its files in a separate folder (`htmlwidgets::saveWidget(selfcontained = FALSE)`, R Markdown or Quarto output that is not self-contained, pkgdown sites) no longer contains NGL.js (1.3 MB) twice and extra copies of the widget files. Self-contained output and Shiny apps were not affected.
 * Fixed `colorByValue()` when both ends of the domain are equal (e.g. when all given values are the same): residues with a missing value (`NA` or `NaN`) got the middle palette color instead of `na_color`, and values outside the domain (including `Inf`) got the middle color instead of the nearest end.

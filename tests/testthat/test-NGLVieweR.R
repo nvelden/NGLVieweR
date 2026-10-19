@@ -170,8 +170,11 @@ test_that("the residues input handler builds a data frame (#11)", {
   expect_equal(df$resno, c(1L, NA, 1L))
 })
 
-test_that("tools::file_ext() is not re-exported (#26)", {
+test_that("tools::file_ext() stays re-exported for reverse dependencies (#26)", {
+  # RiboCrypt calls file_ext() through import(NGLVieweR); keep the re-export
+  # until it imports file_ext() from tools.
   exports <- getNamespaceExports("NGLVieweR")
-  expect_false("file_ext" %in% exports)
+  expect_true("file_ext" %in% exports)
+  expect_identical(NGLVieweR::file_ext, tools::file_ext)
   expect_true("%>%" %in% exports)
 })

@@ -1,3 +1,8 @@
+#
+#' @importFrom tools file_ext
+#' @export
+tools::file_ext
+
 #'Create a NGLVieweR
 #'@description NGLVieweR can be used to visualize and interact with Protein Data
 #'Bank (PDB) and structural files in R and Shiny applications. It includes a set
