@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NGLVieweR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/nvelden/NGLVieweR/">
+  <a href="https://github.com/nvelden/NGLVieweR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
 
   </a>
@@ -78,14 +78,14 @@
 
 
 
-      </header><link href="NGLVieweR_files/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="NGLVieweR_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="NGLVieweR_files/NGLVieweR-2.0.0/./lib/NGL-2.0.0/ngl.js"></script><script src="NGLVieweR_files/helperFunctions-1/./lib/helperFunctions.js"></script><script src="NGLVieweR_files/NGLVieweR-binding-1.4.0/NGLVieweR.js"></script><div class="row">
+      </header><link href="NGLVieweR_files/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="NGLVieweR_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="NGLVieweR_files/NGLVieweR-2.5.0/./lib/NGL-2.5.0/ngl.js"></script><script src="NGLVieweR_files/helperFunctions-1/./lib/helperFunctions.js"></script><script src="NGLVieweR_files/NGLVieweR-binding-1.5.0/NGLVieweR.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>NGLVieweR</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/nvelden/NGLVieweR/blob/HEAD/vignettes/NGLVieweR.Rmd"><code>vignettes/NGLVieweR.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/nvelden/NGLVieweR/blob/HEAD/vignettes/NGLVieweR.Rmd" class="external-link"><code>vignettes/NGLVieweR.Rmd</code></a></small>
       <div class="hidden name"><code>NGLVieweR.Rmd</code></div>
 
     </div>
@@ -95,10 +95,9 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p><strong>NGLVieweR</strong> is available through GitHub</p>
+<p>Install the released version of <strong>NGLVieweR</strong> from <a href="https://CRAN.R-project.org/package=NGLVieweR" class="external-link">CRAN</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"nvelden/NGLVieweR"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"NGLVieweR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="loading-pdb-files">Loading PDB files<a class="anchor" aria-label="anchor" href="#loading-pdb-files"></a>
@@ -117,12 +116,12 @@ in a “cartoon” representation.</p>
 <p><strong>Note:</strong> Use mouse for selection (left-click),
 rotate/move (left/right-click hold) and zooming (scroll wheel).</p>
 <div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","addRepresentation":{"type":["cartoon"],"values":[[]]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"toggleSpin":false,"setFocus":0,"stageParameters":[]},"evals":[],"jsHooks":[]}</script><p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","fallback":"rcsb://7CID.cif","addRepresentation":{"type":["cartoon"],"values":[[]]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script><p>You can view a “basic” <strong>NGLVieweR</strong> Shiny application
 by running the below code. Use “API” for an example using API calls or
 any of the function names (e.g “addSelection”“) for function specific
 examples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nvelden.github.io/NGLVieweR/">NGLVieweR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/NGLVieweR_example.html">NGLVieweR_example</a></span><span class="op">(</span><span class="st">"basic"</span><span class="op">)</span> </span></code></pre></div>
 </div>
@@ -130,8 +129,10 @@ examples.</p>
 <h2 id="loading-other-structural-files">Loading other structural files<a class="anchor" aria-label="anchor" href="#loading-other-structural-files"></a>
 </h2>
 <p>This package has been developed and tested using PDB files but
-supports loading of any of the following structural files: .mmcif, .cif,
-.mcif, .ent, .pqr, .gro, .sdf, .sd, .mol2 and .mmtf.</p>
+supports loading of any of the following structural files: .pdb, .mmcif,
+.cif, .mcif, .ent, .pqr, .gro, .sdf, .sd and .mol2, also when compressed
+with gzip, bzip2 or xz (e.g. <code>1crn.cif.gz</code>). Binary formats
+such as MMTF are not supported.</p>
 <p>By default <strong>NGLVieweR</strong> guesses the file format from
 the file extension. Use the <code>format</code> parameter in case no or
 the wrong file extension is provided.</p>
@@ -168,7 +169,7 @@ the wrong file extension is provided.</p>
 <span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="va">benz</span>, format<span class="op">=</span><span class="st">"sdf"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span><span class="op">)</span></span></code></pre></div>
 <div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"structures":[{"file_ext":"sdf","data":"\n702\n  -OEChem-02271511112D\n  9  8  0     0  0  0  0  0  0999 V2000\n    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  1  9  1  0  0  0  0\n  2  3  1  0  0  0  0\n  2  4  1  0  0  0  0\n  2  5  1  0  0  0  0\n  3  6  1  0  0  0  0\n  3  7  1  0  0  0  0\n  3  8  1  0  0  0  0\nM  END\n> <ID>\n00001\n> <DESCRIPTION>\nSolvent produced by yeast-based fermentation of sugars.\n$$$$\n","type":"file","addRepresentation":{"type":["ball+stick"],"values":[[]]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"toggleSpin":false,"setFocus":0,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"structures":[{"file_ext":"sdf","data":"\n702\n  -OEChem-02271511112D\n  9  8  0     0  0  0  0  0  0999 V2000\n    0.5369    0.9749    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4030    0.4749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2690    0.9749    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8015    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0044    0.0000    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9590    1.5118    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8059    1.2849    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.5790    0.4380    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.6649    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  1  9  1  0  0  0  0\n  2  3  1  0  0  0  0\n  2  4  1  0  0  0  0\n  2  5  1  0  0  0  0\n  3  6  1  0  0  0  0\n  3  7  1  0  0  0  0\n  3  8  1  0  0  0  0\nM  END\n> <ID>\n00001\n> <DESCRIPTION>\nSolvent produced by yeast-based fermentation of sugars.\n$$$$\n","type":"file","fallback":null,"addRepresentation":{"type":["ball+stick"],"values":[[]]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="representations">Representations<a class="anchor" aria-label="anchor" href="#representations"></a>
@@ -177,9 +178,13 @@ the wrong file extension is provided.</p>
 “surface”, “ribbon”, or any other representation listed in the <a href="http://nglviewer.org/ngl/api/" class="external-link">NGL.js</a> manual under
 “StructureRepresentation”. Multiple representations of the same
 structure can be overlaid by chaining the <code><a href="../reference/addSelection.html">addSelection()</a></code>
-function. Also see the “structure” tab in the <a href="https://nvelden.github.io/shinyliveNGLVieweR/" class="external-link">demo</a>
-app for a list of possible representations.</p>
-<p><strong>Note:</strong> The demo can take 1-2 minutes to load on your first visit while the browser downloads and starts the WebAssembly runtime.</p>
+function. Also see the “structure” tab in the <a href="https://nvelden.github.io/shinyliveNGLVieweR/" class="external-link">demo</a> app for a
+list of possible representations.</p>
+<blockquote>
+<p><strong>Note:</strong> The demo can take 1-2 minutes to load on your
+first visit while the browser downloads and starts the WebAssembly
+runtime.</p>
+</blockquote>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span><span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -206,7 +211,51 @@ app for a list of possible representations.</p>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-36aa3d2a04d42bbc2145" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","addRepresentation":{"type":["cartoon","ball+stick","surface"],"values":[{"colorScheme":"residueindex"},{"sele":"233-248","colorValue":"red","colorScheme":"element"},{"colorValue":"white","opacity":0.1}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"toggleSpin":false,"setFocus":0,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","fallback":"rcsb://7CID.cif","addRepresentation":{"type":["cartoon","ball+stick","surface"],"values":[{"colorScheme":"residueindex"},{"sele":"233-248","colorValue":"red","colorScheme":"element"},{"colorValue":"white","opacity":0.1}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script><p><code><a href="../reference/addRepresentation.html">addRepresentation()</a></code> passes the type and
+<code>param</code> straight to NGL.js, so you are not limited to the
+styles above. Other types include “spacefill”, “licorice”, “hyperball”,
+“backbone”, “trace”, “tube”, “rope”, “rocket”, “point”, “axes”,
+“helixorient” and “unitcell”.</p>
+</div>
+<div class="section level2">
+<h2 id="assemblies">Assemblies<a class="anchor" aria-label="anchor" href="#assemblies"></a>
+</h2>
+<p>By default the asymmetric unit of a structure is shown. Use the
+<code>assembly</code> parameter to show a biological assembly (“BU1”,
+“BU2”, …), the unit cell (“UNITCELL”) or a 3x3x3 block of unit cells
+(“SUPERCELL”). Only assemblies defined in the structure file can be
+shown.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"1RUZ"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>assembly <span class="op">=</span> <span class="st">"BU1"</span>, colorScheme <span class="op">=</span> <span class="st">"chainid"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-febe03efa1a2d8d52a86" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-febe03efa1a2d8d52a86">{"x":{"structures":[{"file_ext":null,"data":"rcsb://1RUZ.pdb","type":"code","fallback":"rcsb://1RUZ.cif","addRepresentation":{"type":["cartoon"],"values":[{"assembly":"BU1","colorScheme":"chainid"}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="section level2">
+<h2 id="measurements">Measurements<a class="anchor" aria-label="anchor" href="#measurements"></a>
+</h2>
+<p>Distances, angles and dihedrals are drawn with the “distance”,
+“angle” and “dihedral” representation types. Give the atoms as a list of
+selections in <code>atomPair</code>, <code>atomTriple</code> or
+<code>atomQuad</code>. You can give several measurements at once. The
+values are only drawn in the viewer; they are not returned to R or
+Shiny.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"1CRN"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"distance"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>atomPair <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"1.CA"</span>, <span class="st">"20.CA"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"5.CA"</span>, <span class="st">"30.CA"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"angle"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>atomTriple <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"1.CA"</span>, <span class="st">"10.CA"</span>, <span class="st">"20.CA"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"dihedral"</span>,</span>
+<span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>atomQuad <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"1.CA"</span>, <span class="st">"10.CA"</span>, <span class="st">"20.CA"</span>, <span class="st">"30.CA"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-1fb4450895fe099f74a1" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-1fb4450895fe099f74a1">{"x":{"structures":[{"file_ext":null,"data":"rcsb://1CRN.pdb","type":"code","fallback":"rcsb://1CRN.cif","addRepresentation":{"type":["cartoon","distance","angle","dihedral"],"values":[[],{"atomPair":[["1.CA","20.CA"],["5.CA","30.CA"]]},{"atomTriple":[["1.CA","10.CA","20.CA"]]},{"atomQuad":[["1.CA","10.CA","20.CA","30.CA"]]}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="structures">Structures<a class="anchor" aria-label="anchor" href="#structures"></a>
@@ -217,7 +266,7 @@ in blue, while the second representation of the structure is represented
 in orange. Transformations such as <code><a href="../reference/setPosition.html">setPosition()</a></code>,
 <code><a href="../reference/setRotation.html">setRotation()</a></code>, and <code><a href="../reference/setScale.html">setScale()</a></code> apply to the
 second (most recently added) structure.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"1CRN"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addStructure.html">addStructure</a></span><span class="op">(</span><span class="st">"1CRN"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -225,8 +274,8 @@ second (most recently added) structure.</p>
 <span>  <span class="fu"><a href="../reference/setPosition.html">setPosition</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">20</span>, y <span class="op">=</span> <span class="fl">0</span>, z <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/setRotation.html">setRotation</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">0</span>, z <span class="op">=</span> <span class="fl">0</span>, degrees <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/setScale.html">setScale</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
-<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-febe03efa1a2d8d52a86" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-febe03efa1a2d8d52a86">{"x":{"structures":[{"file_ext":null,"data":"rcsb://1CRN.pdb","type":"code","addRepresentation":{"type":["cartoon"],"values":[{"color":"blue"}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]},{"file_ext":null,"data":"rcsb://1CRN.pdb","type":"code","addRepresentation":{"type":["cartoon"],"values":[{"color":"orange"}]},"setRock":false,"toggleRock":false,"setSpin":false,"setScale":0.5,"setRotation":{"x":2,"y":0,"z":0},"setPosition":{"x":20,"y":0,"z":0},"toggleSpin":false,"zoomMove":[]}],"superpose":[],"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"toggleSpin":false,"setFocus":0,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
+<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-10b3b7155e8045a1b2ad" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-10b3b7155e8045a1b2ad">{"x":{"structures":[{"file_ext":null,"data":"rcsb://1CRN.pdb","type":"code","fallback":"rcsb://1CRN.cif","addRepresentation":{"type":["cartoon"],"values":[{"color":"blue"}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]},{"file_ext":null,"data":"rcsb://1CRN.pdb","type":"code","fallback":"rcsb://1CRN.cif","addRepresentation":{"type":["cartoon"],"values":[{"color":"orange"}]},"setScale":0.5,"setRotation":{"x":2,"y":0,"z":0},"setPosition":{"x":20,"y":0,"z":0},"zoomMove":[]}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="superpose">Superpose<a class="anchor" aria-label="anchor" href="#superpose"></a>
@@ -235,8 +284,9 @@ second (most recently added) structure.</p>
 <code><a href="../reference/setSuperpose.html">setSuperpose()</a></code> function. It aligns the structures by
 specifying a reference structure (defaulting to the first one loaded)
 and defining the selections within each structure to be used for
-alignment.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+alignment. The reference structure stays in place; all other structures
+are moved onto it.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"1GZM"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="../reference/addStructure.html">addStructure</a></span><span class="op">(</span><span class="st">"1U19"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -247,8 +297,8 @@ alignment.</p>
 <span>     sele_target <span class="op">=</span> <span class="st">":A"</span>, </span>
 <span>     superpose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>     <span class="op">)</span></span></code></pre></div>
-<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-1fb4450895fe099f74a1" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-1fb4450895fe099f74a1">{"x":{"structures":[{"file_ext":null,"data":"rcsb://1GZM.pdb","type":"code","addRepresentation":{"type":["cartoon"],"values":[{"color":"blue"}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]},{"file_ext":null,"data":"rcsb://1U19.pdb","type":"code","addRepresentation":{"type":["cartoon"],"values":[{"color":"orange"}]},"setRock":false,"toggleRock":false,"setSpin":false,"setScale":1,"setRotation":[],"setPosition":[],"toggleSpin":false,"zoomMove":[]}],"superpose":{"superpose":true,"reference":1,"seleReference":":A","seleTarget":":A"},"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"toggleSpin":false,"setFocus":0,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
+<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-4018eef1a407a0df6b52" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-4018eef1a407a0df6b52">{"x":{"structures":[{"file_ext":null,"data":"rcsb://1GZM.pdb","type":"code","fallback":"rcsb://1GZM.cif","addRepresentation":{"type":["cartoon"],"values":[{"color":"blue"}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]},{"file_ext":null,"data":"rcsb://1U19.pdb","type":"code","fallback":"rcsb://1U19.cif","addRepresentation":{"type":["cartoon"],"values":[{"color":"orange"}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":{"superpose":true,"reference":1,"seleReference":":A","seleTarget":":A"},"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="stage">Stage<a class="anchor" aria-label="anchor" href="#stage"></a>
@@ -271,15 +321,52 @@ there are specific functions to set:</p>
 </ul>
 <p><strong>Note</strong>: Changes in background color are not visible in
 the RStudio viewer.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="st">"white"</span>, zoomSpeed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,</span>
 <span>    param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-10b3b7155e8045a1b2ad" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-10b3b7155e8045a1b2ad">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","addRepresentation":{"type":["cartoon"],"values":[{"name":"cartoon","colorScheme":"residueindex"}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":true,"toggleSpin":false,"setFocus":0,"stageParameters":{"backgroundColor":"white","zoomSpeed":1}},"evals":[],"jsHooks":[]}</script>
+<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-5b1b2f4ad92281566982" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-5b1b2f4ad92281566982">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","fallback":"rcsb://7CID.cif","addRepresentation":{"type":["cartoon"],"values":[{"name":"cartoon","colorScheme":"residueindex"}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setRock":false,"setSpin":true,"stageParameters":{"backgroundColor":"white","zoomSpeed":1}},"evals":[],"jsHooks":[]}</script><p><code><a href="../reference/stageParameters.html">stageParameters()</a></code> (and <code><a href="../reference/updateStage.html">updateStage()</a></code> in
+Shiny) accept any NGL.js stage parameter, including:</p>
+<ul>
+<li>
+<strong>Clipping</strong>: <code>clipNear</code>,
+<code>clipFar</code>, <code>clipDist</code>, <code>clipMode</code>
+(“scene” or “camera”) and <code>clipScale</code> (“relative” or
+“absolute”)</li>
+<li>
+<strong>Fog</strong>: <code>fogNear</code> and
+<code>fogFar</code>
+</li>
+<li>
+<strong>Lighting</strong>: <code>lightColor</code>,
+<code>lightIntensity</code>, <code>ambientColor</code> and
+<code>ambientIntensity</code>
+</li>
+<li>
+<strong>Camera</strong>: <code>cameraType</code> (“perspective”,
+“orthographic” or “stereo”), <code>cameraFov</code> and
+<code>cameraEyeSep</code>
+</li>
+<li>
+<strong>Mouse controls</strong>: <code>mousePreset</code>
+(“default”, “pymol”, “coot” or “astexviewer”)</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span></span>
+<span>    cameraType <span class="op">=</span> <span class="st">"orthographic"</span>,</span>
+<span>    mousePreset <span class="op">=</span> <span class="st">"pymol"</span>,</span>
+<span>    fogNear <span class="op">=</span> <span class="fl">40</span>,</span>
+<span>    fogFar <span class="op">=</span> <span class="fl">80</span>,</span>
+<span>    lightIntensity <span class="op">=</span> <span class="fl">1.5</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-25c3e940e6859592f801" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-25c3e940e6859592f801">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","fallback":"rcsb://7CID.cif","addRepresentation":{"type":["cartoon"],"values":[{"colorScheme":"residueindex"}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":{"cameraType":"orthographic","mousePreset":"pymol","fogNear":40,"fogFar":80,"lightIntensity":1.5}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="labels">Labels<a class="anchor" aria-label="anchor" href="#labels"></a>
@@ -287,9 +374,9 @@ the RStudio viewer.</p>
 <p>Labels can be added by setting the <code><a href="../reference/addRepresentation.html">addRepresentation()</a></code>
 type parameter to “label”. For a full list of of options, see the
 LabelRepresentationParameters section in the <a href="http://nglviewer.org/ngl/api/" class="external-link">NGL.js</a> manual. Also see the
-“label” tab in the <a href="https://nvelden.github.io/shinyliveNGLVieweR/" class="external-link">demo</a>
-app for possible label settings.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+“label” tab in the <a href="https://nvelden.github.io/shinyliveNGLVieweR/" class="external-link">demo</a> app for
+possible label settings.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -316,8 +403,8 @@ app for possible label settings.</p>
 <span>      <span class="co"># backgroundOpacity=0.5</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-4018eef1a407a0df6b52" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-4018eef1a407a0df6b52">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","fontFamiliy":"sans-serif","xOffset":1,"yOffset":0,"zOffset":0,"fixedSize":true,"radiusType":1,"radiusSize":1.5,"showBackground":false}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"toggleSpin":false,"setFocus":0,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
+<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-3f27c09be0c60bb52829" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-3f27c09be0c60bb52829">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","fallback":"rcsb://7CID.cif","addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","fontFamiliy":"sans-serif","xOffset":1,"yOffset":0,"zOffset":0,"fixedSize":true,"radiusType":1,"radiusSize":1.5,"showBackground":false}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":[]}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="transformation-functions">Transformation functions<a class="anchor" aria-label="anchor" href="#transformation-functions"></a>
@@ -358,7 +445,7 @@ position of the visualized structure:</p>
 </h2>
 <p>You can zoom into specific residues using the <code>ZoomMove()</code>
 function.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,</span>
@@ -387,8 +474,8 @@ function.</p>
 <span>    duration <span class="op">=</span> <span class="fl">0</span>, <span class="co"># animation time in ms</span></span>
 <span>    z_offSet <span class="op">=</span> <span class="op">-</span><span class="fl">20</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-5b1b2f4ad92281566982" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-5b1b2f4ad92281566982">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","xOffset":1,"fixedSize":true,"radiusType":1,"radiusSize":1.5}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":{"center":"20","zoom":"20","duration":0,"z_offSet":-20}}],"superpose":[],"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"toggleSpin":false,"setFocus":0,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
+<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-416566eb193bf50d04e6" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-416566eb193bf50d04e6">{"x":{"structures":[{"file_ext":null,"data":"rcsb://7CID.pdb","type":"code","fallback":"rcsb://7CID.cif","addRepresentation":{"type":["cartoon","ball+stick","label"],"values":[[],{"colorScheme":"element","colorValue":"yellow","sele":"20"},{"sele":"20","labelType":"format","labelFormat":"[%(resname)s]%(resno)s","labelGrouping":"residue","color":"white","xOffset":1,"fixedSize":true,"radiusType":1,"radiusSize":1.5}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":{"center":"20","zoom":"20","duration":0,"z_offSet":-20}}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
@@ -404,7 +491,7 @@ only shown between the residues and biotin
 <code>filterSele=list("23 or 27 or 43 or 45 or 128", "5001")</code>.
 This prevents the display of contacts between residues or water
 molecules.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"3RY2"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"ball+stick"</span>,</span>
@@ -468,8 +555,8 @@ molecules.</p>
 <span>      <span class="co"># lineOfSightDistFactor= 1</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-25c3e940e6859592f801" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-25c3e940e6859592f801">{"x":{"structures":[{"file_ext":null,"data":"rcsb://3RY2.pdb","type":"code","addRepresentation":{"type":["cartoon","ball+stick","ball+stick","contact"],"values":[[],{"name":"biotin","colorvalue":"grey","colorScheme":"element","sele":"5001"},{"name":"interacting","colorScheme":"element","colorValue":"green","sele":"23 or 27 or 43 or 45 or 128"},{"name":"contact","sele":"5001 or 23 or 27 or 43 or 45 or 128","filterSele":["23 or 27 or 45 or 128","5001"],"labelVisible":true,"labelFixedSize":false,"labelUnit":"angstrom","labelSize":2}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":{"center":"27:B","zoom":"27:B","duration":0,"z_offSet":-20}}],"superpose":[],"setQuality":"medium","setRock":false,"toggleRock":false,"setSpin":false,"toggleSpin":false,"setFocus":0,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
+<div class="NGLVieweR html-widget html-fill-item" id="htmlwidget-72cbf064100ce560a04c" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-72cbf064100ce560a04c">{"x":{"structures":[{"file_ext":null,"data":"rcsb://3RY2.pdb","type":"code","fallback":"rcsb://3RY2.cif","addRepresentation":{"type":["cartoon","ball+stick","ball+stick","contact"],"values":[[],{"name":"biotin","colorvalue":"grey","colorScheme":"element","sele":"5001"},{"name":"interacting","colorScheme":"element","colorValue":"green","sele":"23 or 27 or 43 or 45 or 128"},{"name":"contact","sele":"5001 or 23 or 27 or 43 or 45 or 128","filterSele":["23 or 27 or 45 or 128","5001"],"labelVisible":true,"labelFixedSize":false,"labelUnit":"angstrom","labelSize":2}]},"setScale":1,"setRotation":[],"setPosition":[],"zoomMove":{"center":"27:B","zoom":"27:B","duration":0,"z_offSet":-20}}],"superpose":[],"setRock":false,"setSpin":false,"stageParameters":[]},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="shiny">Shiny<a class="anchor" aria-label="anchor" href="#shiny"></a>
@@ -478,9 +565,9 @@ molecules.</p>
 functions enable you to visualize PDB files within Shiny applications.
 See the <code>NGLVieweR_example("basic")</code> and “API” for live
 examples.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nvelden.github.io/NGLVieweR/">NGLVieweR</a></span><span class="op">)</span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span><span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweROutput</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">output</span><span class="op">$</span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR</a></span><span class="op">(</span><span class="op">{</span></span>
@@ -517,9 +604,10 @@ widget after creation using specific “API” calls. You can for instance
 add or remove representations by referring to their name using the
 <code><a href="../reference/addSelection.html">addSelection()</a></code> or <code><a href="../reference/removeSelection.html">removeSelection()</a></code>
 functions.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nvelden.github.io/NGLVieweR/">NGLVieweR</a></span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/titlePanel.html" class="external-link">titlePanel</a></span><span class="op">(</span><span class="st">"Viewer with API inputs"</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html" class="external-link">sidebarLayout</a></span><span class="op">(</span></span>
@@ -535,33 +623,49 @@ functions.</p>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">output</span><span class="op">$</span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/NGLVieweR-shiny.html">renderNGLVieweR</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>    <span class="fu"><a href="../reference/NGLVieweR.html">NGLVieweR</a></span><span class="op">(</span><span class="st">"7CID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu"><a href="../reference/addRepresentation.html">addRepresentation</a></span><span class="op">(</span><span class="st">"cartoon"</span>,</span>
-<span>        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span></span>
+<span>                        param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"cartoon"</span>, colorScheme <span class="op">=</span> <span class="st">"residueindex"</span><span class="op">)</span></span>
 <span>      <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu"><a href="../reference/stageParameters.html">stageParameters</a></span><span class="op">(</span>backgroundColor <span class="op">=</span> <span class="va">input</span><span class="op">$</span><span class="va">backgroundColor</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu"><a href="../reference/setQuality.html">setQuality</a></span><span class="op">(</span><span class="st">"high"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu"><a href="../reference/setFocus.html">setFocus</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu"><a href="../reference/setSpin.html">setSpin</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">add</span>, <span class="op">{</span></span>
-<span>    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>      <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">type</span><span class="op">)</span>,</span>
-<span>        param <span class="op">=</span></span>
-<span>          <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>            name <span class="op">=</span> <span class="st">"sel1"</span>,</span>
-<span>            sele <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">selection</span><span class="op">)</span>,</span>
-<span>            colorValue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">color</span><span class="op">)</span></span>
-<span>          <span class="op">)</span></span>
-<span>      <span class="op">)</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">type</span><span class="op">)</span> <span class="op">==</span> <span class="st">"cartoon"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="co"># For cartoon, use the color parameter</span></span>
+<span>      <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>        <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">type</span><span class="op">)</span>,</span>
+<span>                     param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>                       name <span class="op">=</span> <span class="st">"sel1"</span>,</span>
+<span>                       sele <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">selection</span><span class="op">)</span>,</span>
+<span>                       color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">color</span><span class="op">)</span></span>
+<span>                     <span class="op">)</span></span>
+<span>        <span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>      <span class="co"># For other types, use colorValue</span></span>
+<span>      <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>        <span class="fu"><a href="../reference/addSelection.html">addSelection</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">type</span><span class="op">)</span>,</span>
+<span>                     param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>                       name <span class="op">=</span> <span class="st">"sel1"</span>,</span>
+<span>                       sele <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">selection</span><span class="op">)</span>,</span>
+<span>                       colorValue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/isolate.html" class="external-link">isolate</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">color</span><span class="op">)</span></span>
+<span>                     <span class="op">)</span></span>
+<span>        <span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">remove</span>, <span class="op">{</span></span>
 <span>    <span class="fu"><a href="../reference/NGLVieweR-shiny.html">NGLVieweR_proxy</a></span><span class="op">(</span><span class="st">"structure"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu"><a href="../reference/removeSelection.html">removeSelection</a></span><span class="op">(</span><span class="st">"sel1"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
 <img src="../reference/figures/API_shiny.PNG" alt="NGLVieweR API in Shiny"><div class="figcaption">NGLVieweR API in Shiny</div>
@@ -595,24 +699,48 @@ as inputs based on the NGLVieweR <code>outputID</code>. Suppose the
 be retrieved:</p>
 <ul>
 <li>input$structure_selection - Get details on the clicked residue.</li>
+<li>input$structure_residues - a data frame with one row per residue of
+every loaded structure, with the columns <code>structure</code> (number
+of the structure, counting from 1), <code>chain</code>,
+<code>resno</code>, <code>inscode</code> (insertion code),
+<code>resname</code> (three-letter name) and <code>letter</code>
+(one-letter code, <code>"X"</code> for water, ligands and other
+non-standard residues). It has the same shape for one or several
+structures,
+e.g. <code>subset(input$structure_residues, structure == 2)</code>.</li>
 <li>input$structure_sequence - will return the sequence of the PDB file
-as a character vector.</li>
+as a character vector (standard residues only). With several structures
+it is one string per structure instead; use <code>_residues</code>
+there.</li>
 <li>input$structure_resno - will return all the sequence numbers as a
-numeric vector.</li>
+numeric vector. With several structures it is one comma-separated string
+per structure; use <code>_residues</code> there.</li>
 <li>input$structure_chainname - will return the chainname of each amino
-acid as a character vector,</li>
+acid as a character vector. With several structures it is one joined
+string per structure; use <code>_residues</code> there.</li>
 <li>input$structure_rendering - will return <code>TRUE</code> if the
 widget is loading or <code>FALSE</code> when completed.</li>
-<li>input$structure_PDB - will return the PDB file as a text
-string.</li>
+<li>input$structure_PDB - will return the PDB file as a text string, one
+per structure. With <code><a href="../reference/setSuperpose.html">setSuperpose()</a></code> it has the superposed
+coordinates.</li>
 <li>input$structure_selAround - will return a list of atoms surrounding
 a clicked residue.</li>
+<li>input$structure_selectionStructure - the number (counting from 1) of
+the structure that was clicked. Pass it as <code>structure</code> to
+<code><a href="../reference/addSelection.html">addSelection()</a></code> or <code><a href="../reference/updateZoomMove.html">updateZoomMove()</a></code> to act on
+the clicked structure when several are loaded.</li>
+<li>input$structure_error - <code>NULL</code> when the structures
+loaded, otherwise a message saying which structure could not be loaded
+and why (e.g. a PDB code that does not exist, no network connection or a
+file in the wrong format). After a failed load the viewer is empty and
+the sequence, resno, chainname and PDB inputs are
+<code>NULL</code>.</li>
 </ul>
 <p>In the below example a label, all contacts and residues in proximity
 of the clicked residue are displayed.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nvelden/NGLVieweR">NGLVieweR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nvelden.github.io/NGLVieweR/">NGLVieweR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>

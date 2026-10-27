@@ -13,11 +13,10 @@ knitr::opts_chunk$set(tidy = FALSE, comment = "#>")
 
 ## Installation
 
-**NGLVieweR** is available through GitHub
+Install the released version of **NGLVieweR** from [CRAN](https://CRAN.R-project.org/package=NGLVieweR):
 
 ```{r eval=FALSE}
-install.packages("remotes")
-remotes::install_github("nvelden/NGLVieweR")
+install.packages("NGLVieweR")
 ```
 
 ## Loading PDB files

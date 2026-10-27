@@ -26,13 +26,6 @@ You can install the released version of **NGLVieweR** from [CRAN](https://CRAN.R
 install.packages("NGLVieweR")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
-
-``` {.r}
-install.packages("remotes")
-remotes::install_github("nvelden/NGLVieweR")
-```
-
 ## Basics
 
 You can load a PDB (or any other supported structural file) directly or use a PDB code of a structure on [RCSB.org](https://www.rcsb.org/). The below minimal example loads the PDB file and displays the structure in a "cartoon" representation.
